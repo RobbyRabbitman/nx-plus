@@ -6,9 +6,9 @@
   },
   "packageManager": "pnpm@9.4.0",
   "scripts": {},
-  "dependencies": {},
   "devDependencies": {
     "@nx/js": "19.3.2",
+    "@nx/plugin": "19.3.2",
     "@nx/workspace": "19.3.2",
     "nx": "19.3.2"
   }
