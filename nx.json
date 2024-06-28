@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "cli": {
+    "packageManager": "pnpm"
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": []
+  },
+  "nxCloudAccessToken": "NGU2YzEyMDItYTU4OC00YzViLTllNWEtNGY5ZjE3Y2U1Yjk0fHJlYWQtd3JpdGU="
+}
