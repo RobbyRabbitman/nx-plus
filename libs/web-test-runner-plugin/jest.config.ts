@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'web-test-runner',
+  displayName: 'web-test-runner-plugin',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],

@@ -1,0 +1,32 @@
+{
+  "name": "@robby-rabbitman/web-test-runner-plugin",
+  "version": "0.0.0",
+  "description": "Web Test Runner Plugin for Nx workspaces.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobbyRabbitman/nx-plus.git",
+    "directory": "libs/web-test-runner-plugin"
+  },
+  "keywords": [
+    "Nx",
+    "Web Test Runner",
+    "Monorepo",
+    "Nrwl",
+    "Plugin",
+    "Test",
+    "Web"
+  ],
+  "author": "Robby Rabbitman",
+  "homepage": "https://github.com/RobbyRabbitman/nx-plus",
+  "bugs": {
+    "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@nx/devkit": "^19.3.0"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}
