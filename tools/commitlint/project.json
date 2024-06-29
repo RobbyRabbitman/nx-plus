@@ -1,0 +1,21 @@
+{
+  "name": "tools-commitlint",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:tool"],
+  "targets": {
+    "exec": {
+      "command": "pnpm exec commitlint --config={projectRoot}/commitlint.config.ts --verbose",
+      "configurations": {
+        "last": {
+          "last": "true"
+        }
+      }
+    },
+    "test": {
+      "command": "bash commitlint.config.spec.bash",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}
