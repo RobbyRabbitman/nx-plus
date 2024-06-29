@@ -1,3 +1,11 @@
+## 0.2.1 (2024-06-29)
+
+
+### 🩹 Fixes
+
+- **web-test-runner:** export package.json ([e1cd9de](https://github.com/RobbyRabbitman/nx-plus/commit/e1cd9de))
+- **web-test-runner:** don't use package manager command ([fdf70a2](https://github.com/RobbyRabbitman/nx-plus/commit/fdf70a2))
+
 ## 0.2.0 (2024-06-29)
 
 This was a version bump only, there were no code changes.
