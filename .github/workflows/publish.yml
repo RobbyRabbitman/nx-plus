@@ -1,6 +1,7 @@
 name: publish
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -23,13 +24,19 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
+      - run: pnpm whoami && echo 'npm credentials are valid' || (echo 'npm credentials are invalid or have expired.' && exit 1)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+
       - uses: nrwl/nx-set-shas@v4
 
       - run: pnpm i
 
       - run: pnpm exec nx report
 
-      - run: pnpm exec nx release publish --dry-run
+      - run: pnpm exec nx release publish --dry-run=${{ env.DRY_RUN }}
         env:
+          DRY_RUN: true
+          # DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
