@@ -6,7 +6,13 @@
   "release": {
     "releaseTagPattern": "{version}",
     "version": {
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk"
+      }
+    },
+    "changelog": {
+      "automaticFromRef": true
     },
     "projects": ["packages/*"]
   },
