@@ -1,9 +1,8 @@
 name: publish
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
 
 jobs:
   main:
