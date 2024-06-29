@@ -37,6 +37,7 @@
   "typings": "./src/index.d.ts",
   "exports": {
     ".": "./src/index.js",
+    "./package.json": "./package.json",
     "./plugin": "./src/plugin.js"
   }
 }
