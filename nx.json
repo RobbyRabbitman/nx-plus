@@ -5,6 +5,7 @@
   },
   "release": {
     "releaseTagPattern": "{version}",
+    "git": { "commitMessage": "chore: release {version} 🚀" },
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {
