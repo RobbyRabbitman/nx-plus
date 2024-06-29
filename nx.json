@@ -4,6 +4,10 @@
     "packageManager": "pnpm"
   },
   "release": {
+    "releaseTagPattern": "{version}",
+    "version": {
+      "conventionalCommits": true
+    },
     "projects": ["packages/*"]
   },
   "namedInputs": {
