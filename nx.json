@@ -3,6 +3,9 @@
   "cli": {
     "packageManager": "pnpm"
   },
+  "release": {
+    "projects": ["packages/*"]
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": []

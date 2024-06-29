@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@robby-rabbitman/web-test-runner-plugin": [
-        "libs/web-test-runner/src/index.ts"
+        "packages/web-test-runner/src/index.ts"
       ]
     }
   },
