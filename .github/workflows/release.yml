@@ -28,5 +28,5 @@ jobs:
 
       - run: pnpm exec nx release --skip-publish
         env:
-          GIT_AUTHOR_NAME: robby-rabbitman/nx-plus release
+          GIT_AUTHOR_NAME: release
           GIT_AUTHOR_EMAIL: robby.rabbitman+nx-plus@gmail.com
