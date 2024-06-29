@@ -91,7 +91,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner-plugin', () => {
                 targets: {
                   test: {
                     command:
-                      'pnpm exec wtr --config=some/directory/web-test-runner.config.js',
+                      'web-test-runner --config=some/directory/web-test-runner.config.js',
                   },
                 },
               },
@@ -118,7 +118,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner-plugin', () => {
                 targets: {
                   test: {
                     command:
-                      'pnpm exec wtr --config=some/directory/web-test-runner.config.js',
+                      'web-test-runner --config=some/directory/web-test-runner.config.js',
                   },
                 },
               },
@@ -150,7 +150,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner-plugin', () => {
                 targets: {
                   'web-test-runner-test': {
                     command:
-                      'pnpm exec wtr --config=some/directory/web-test-runner.config.js',
+                      'web-test-runner --config=some/directory/web-test-runner.config.js',
                   },
                 },
               },

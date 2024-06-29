@@ -3,7 +3,6 @@ import {
   CreateNodesFunction,
   CreateNodesV2,
   createNodesFromFiles,
-  getPackageManagerCommand,
 } from '@nx/devkit';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -16,9 +15,7 @@ export type WebTestRunnerTargetPluginOptions = {
 const webTestRunnerConfigFileNameGlob =
   '**/@(web-test-runner|wtr).config.@(js|cjs|mjs)';
 
-const webTestRunnerCommand = 'wtr';
-
-const packageManagerCommand = getPackageManagerCommand();
+const webTestRunnerCommand = 'web-test-runner';
 
 const defaultTargetName = 'test';
 
@@ -57,7 +54,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
       [webTestRunnerConfigDirectory]: {
         targets: {
           [targetName]: {
-            command: `${packageManagerCommand.exec} ${webTestRunnerCommand} --config=${webTestRunnerConfigPath}`,
+            command: `${webTestRunnerCommand} --config=${webTestRunnerConfigPath}`,
           },
         },
       },
