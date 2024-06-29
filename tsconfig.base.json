@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@robby-rabbitman/web-test-runner": ["libs/web-test-runner/src/index.ts"],
+      "@robby-rabbitman/web-test-runner/plugin": [
+        "libs/web-test-runner/src/plugin.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
