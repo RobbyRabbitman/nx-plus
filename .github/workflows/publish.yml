@@ -27,8 +27,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
-      - uses: nrwl/nx-set-shas@v4
-
       - run: pnpm i
 
       - run: pnpm exec nx report
