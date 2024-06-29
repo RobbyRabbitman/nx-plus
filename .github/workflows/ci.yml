@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   push:
@@ -6,13 +6,12 @@ on:
       - main
   pull_request:
 
-permissions:
-  actions: read
-  contents: read
-
 jobs:
   main:
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,7 +19,7 @@ jobs:
 
       - run: corepack enable
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
           cache: 'pnpm'
@@ -30,6 +29,8 @@ jobs:
 
       - run: pnpm i
 
+      - run: pnpm exec nx report
+
       - if: github.event_name == 'push'
         run: pnpm exec nx run tools-commitlint:exec:last
 
@@ -37,3 +38,6 @@ jobs:
         run: nx run tools-commitlint:exec:last --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }}
 
       - run: pnpm exec nx affected -t lint test build
+
+      - if: github.event_name == 'push'
+        run: nx release --skip-publish

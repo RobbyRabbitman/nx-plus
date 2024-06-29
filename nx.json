@@ -12,13 +12,18 @@
       }
     },
     "changelog": {
-      "automaticFromRef": true
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "renderOptions": {
+          "authors": false
+        }
+      }
     },
     "projects": ["packages/*"]
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": []
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "plugins": [
     {
@@ -35,6 +40,12 @@
     }
   ],
   "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      },
+      "dependsOn": ["build"]
+    },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": ["^build"],
