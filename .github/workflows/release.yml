@@ -2,6 +2,14 @@ name: release
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: The version to use for the release.
+        default: ''
+      dry-run:
+        type: boolean
+        default: true
   push:
     branches:
       - 'main'
@@ -34,6 +42,8 @@ jobs:
 
       - run: pnpm exec nx report
 
-      - run: pnpm exec nx release --skip-publish
+      - run: pnpm exec nx release --skip-publish --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ github.event_name == 'push' || inputs.dry-run }}
+          VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
