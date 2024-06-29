@@ -2,6 +2,10 @@
   "name": "@robby-rabbitman/nx-plus-web-test-runner",
   "version": "0.1.2",
   "description": "Web Test Runner Generator for Nx workspaces.",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/RobbyRabbitman/nx-plus.git",
