@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "cli": "nx",
   "$id": "RobbyRabbitmanWebTestRunnerInit",
-  "title": "Initializes the @robby-rabbitman/web-test-runner in a nx workspace.",
-  "description": "Registers @robby-rabbitman/web-test-runner/plugin in the nx.json.",
+  "title": "Initializes the @robby-rabbitman/nx-plus-web-test-runner in a nx workspace.",
+  "description": "Registers @robby-rabbitman/nx-plus-web-test-runner/plugin in the nx.json.",
   "type": "object",
   "additionalProperties": false,
   "properties": {

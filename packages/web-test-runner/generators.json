@@ -4,7 +4,7 @@
     "init": {
       "factory": "./src/generators/init",
       "schema": "./src/generators/init.schema.json",
-      "description": "Registers @robby-rabbitman/web-test-runner/plugin in the nx.json.",
+      "description": "Registers @robby-rabbitman/nx-plus-web-test-runner/plugin in the nx.json.",
       "hidden": true
     }
   }

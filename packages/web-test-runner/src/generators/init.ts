@@ -7,7 +7,7 @@ import {
 } from '@nx/devkit';
 
 export const webTestRunnerPluginPath =
-  '@robby-rabbitman/web-test-runner/plugin';
+  '@robby-rabbitman/nx-plus-web-test-runner/plugin';
 
 export interface WebTestRunnerInitGeneratorSchema {
   testTarget?: string;
