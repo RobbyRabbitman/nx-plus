@@ -30,7 +30,7 @@ jobs:
 
       - run: pnpm exec nx report
 
-      - run: npx nx release publish --dry-run
+      - run: pnpm exec nx release publish --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

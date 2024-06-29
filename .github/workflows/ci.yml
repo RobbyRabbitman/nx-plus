@@ -40,4 +40,4 @@ jobs:
       - run: pnpm exec nx affected -t lint test build
 
       - if: github.event_name == 'push'
-        run: nx release --skip-publish
+        run: pnpm exec nx release --skip-publish
