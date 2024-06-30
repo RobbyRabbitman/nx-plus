@@ -8,15 +8,17 @@
   "additionalProperties": false,
   "properties": {
     "targetName": {
-      "description": "The name of the web-test-runner target",
+      "description": "The name of the Web Test Runner target.",
       "type": "string",
       "default": "test"
     },
     "skipFormat": {
+      "description": "Whether to skip formatting the updated files.",
       "type": "boolean",
       "default": false
     },
     "skipAddPlugin": {
+      "description": "Whether to skip adding the plugin.",
       "type": "boolean",
       "default": false
     }
