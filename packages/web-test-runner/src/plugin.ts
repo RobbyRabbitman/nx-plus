@@ -32,8 +32,8 @@ export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
 ];
 
 /**
- *
- * @param webTestRunnerConfigPath - relative to `context.workspaceRoot` e.g path/to/wtr.config.js
+ * @param webTestRunnerConfigPath - Relative to `context.workspaceRoot` e.g
+ *   path/to/wtr.config.js
  * @param options
  * @param context
  * @returns
@@ -63,10 +63,9 @@ const createWebTestRunnerTarget: CreateNodesFunction<
 };
 
 /**
- *
- * @param directory - relative to `context.workspaceRoot` e.g path/to/directory
+ * @param directory - Relative to `context.workspaceRoot` e.g path/to/directory
  * @param context
- * @returns whether the directory is considered a non root project.
+ * @returns Whether the directory is considered a non root project.
  */
 const isNonRootProject = (directory: string, context: CreateNodesContextV2) => {
   if (directory === '.') return false;
