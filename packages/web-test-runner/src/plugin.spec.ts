@@ -35,10 +35,10 @@ describe('@robby-rabbitman/nx-plus-web-test-runner-plugin', () => {
 
     return createNodesFn(
       Object.keys(directories).filter((file) =>
-        minimatch(file, createNodesGlob, { dot: true })
+        minimatch(file, createNodesGlob, { dot: true }),
       ),
       options,
-      context
+      context,
     );
   };
 

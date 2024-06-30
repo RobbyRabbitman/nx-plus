@@ -26,7 +26,7 @@ export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
       createWebTestRunnerTarget,
       webTestRunnerConfigPaths,
       options,
-      context
+      context,
     );
   },
 ];

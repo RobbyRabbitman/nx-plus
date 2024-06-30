@@ -1,6 +1,5 @@
 ## 0.2.1 (2024-06-29)
 
-
 ### 🩹 Fixes
 
 - **web-test-runner:** export package.json ([e1cd9de](https://github.com/RobbyRabbitman/nx-plus/commit/e1cd9de))
@@ -19,7 +18,6 @@ This was a version bump only, there were no code changes.
 This was a version bump only, there were no code changes.
 
 ## 0.1.0 (2024-06-29)
-
 
 ### 🚀 Features
 

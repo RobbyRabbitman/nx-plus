@@ -25,7 +25,7 @@ export const initGenerator: Generator<
     const hasPlugin = nxJson.plugins.some((pluginConfig) =>
       typeof pluginConfig === 'string'
         ? pluginConfig === webTestRunnerPluginPath
-        : pluginConfig.plugin === webTestRunnerPluginPath
+        : pluginConfig.plugin === webTestRunnerPluginPath,
     );
 
     if (!hasPlugin) {
@@ -42,11 +42,11 @@ export const initGenerator: Generator<
 export default initGenerator;
 
 const webTestRunnerPluginConfiguration = (
-  schema?: WebTestRunnerInitGeneratorSchema
+  schema?: WebTestRunnerInitGeneratorSchema,
 ) =>
   ({
     plugin: webTestRunnerPluginPath,
     options: {
       targetName: schema?.testTarget ?? 'test',
     },
-  } as ExpandedPluginConfiguration);
+  }) as ExpandedPluginConfiguration;
