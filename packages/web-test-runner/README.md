@@ -44,7 +44,7 @@ nx g @robby-rabbitman/nx-plus-web-test-runner:init
 
 ### `@robby-rabbitman/nx-plus-web-test-runner/plugin`
 
-Adds a _test_ target for projects that have a [Web Test Runner config](https://modern-web.dev/docs/test-runner/cli-and-configuration/#configuration-file) file in their root, the plugin infers a Web Test Runner with one of the following names. 
+Adds a _test_ target for projects that have a [Web Test Runner config](https://modern-web.dev/docs/test-runner/cli-and-configuration/#configuration-file) file in their root, the plugin infers a Web Test Runner with one of the following names.
 
 - `web-test-runner.config.js`
 - `web-test-runner.config.cjs`
@@ -52,7 +52,7 @@ Adds a _test_ target for projects that have a [Web Test Runner config](https://m
 - `wtr.config.js`
 - `wtr.config.cjs`
 - `wtr.config.mjs`
-  
+
 #### Options
 
 ```json
@@ -60,9 +60,9 @@ Adds a _test_ target for projects that have a [Web Test Runner config](https://m
 "plugins": [
     {
       "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugin",
-      "options": { 
+      "options": {
         // the name of the web test runner target => nx run {{project}}:test
-        "targetName": "test" 
+        "targetName": "test"
       }
     },
 ]

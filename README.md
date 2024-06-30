@@ -2,6 +2,6 @@
 
 # nx plus
 
-**Extending [Nx](https://nx.dev) with Plugins, Executors and Generators.** 
+**Extending [Nx](https://nx.dev) with Plugins, Executors and Generators.**
 
 - [`Web Test Runner`](packages/web-test-runner/README.md)
