@@ -4,7 +4,7 @@
 
 # nx-plus-web-test-runner
 
-[Nx](https://nx.dev) plugin to infer the [Web Test Runner](https://modern-web.dev/docs/test-runner/overview) in a workspace.
+[Nx](https://nx.dev) plugin to infer [Web Test Runner](https://modern-web.dev/docs/test-runner/overview) in a workspace.
 
 ## 🚀 Getting started
 
@@ -16,7 +16,7 @@ npm i -D @robby-rabbitman/nx-plus-web-test-runner
 nx g @robby-rabbitman/nx-plus-web-test-runner:init
 ```
 
-Projects with a Web Test Runner now have a `test` target.
+Projects with a Web Test Runner now have a _test_ target.
 
 ```sh
 nx run {{project}}:test
@@ -55,7 +55,7 @@ Adds a _test_ target for projects that have a [Web Test Runner config](https://m
 
 #### Options
 
-```json
+```json5
 // nx.json
 "plugins": [
     {
