@@ -38,6 +38,7 @@ jobs:
 
       - run: pnpm exec nx release publish --dry-run=${{ env.DRY_RUN }}
         env:
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && github.ref_type == 'tag' }}
+          # when it is not a tag (release) => dont publish
+          DRY_RUN: ${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

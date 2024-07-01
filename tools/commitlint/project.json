@@ -4,11 +4,11 @@
   "tags": ["scope:node", "type:tool"],
   "targets": {
     "exec": {
-      "command": "pnpm exec commitlint --config={projectRoot}/commitlint.config.ts --verbose",
-      "configurations": {
-        "last": {
-          "last": "true"
-        }
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo '{args.message}' | pnpm exec commitlint --config={projectRoot}/commitlint.config.ts",
+        "forwardAllArgs": true,
+        "message": ""
       }
     },
     "test": {
