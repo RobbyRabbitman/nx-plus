@@ -4,8 +4,7 @@ test() {
   local commit_message=$1
   local expected_status=$2
 
-  # TODO: invoke tools-commitlint:exec or ts tests
-  (echo "$commit_message" | pnpm exec commitlint --config=$(pwd)/commitlint.config.ts --quiet)
+  (pnpm exec nx run tools-commitlint:exec:message --value "$commit_message" >/dev/null 2>&1)
 
   local commitlint_status=$?
 
