@@ -29,8 +29,8 @@ jobs:
       - run: pnpm exec nx report
 
       - run: |
-          pnpm exec nx run tools-commitlint:exec:message --value ${{ github.event.pull_request.title }}
-          pnpm exec nx run tools-commitlint:exec --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }}
+          pnpm exec nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+          pnpm exec nx run tools-commitlint:exec --from "${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }}" --to "${{ github.event.pull_request.head.sha }}"
 
       - run: |
           pnpm exec nx format:check
