@@ -4,7 +4,7 @@ test() {
   local commit_message=$1
   local expected_status=$2
 
-  (pnpm exec nx run tools-commitlint:exec --message "$commit_message" >/dev/null 2>&1)
+  (pnpm exec nx run tools-commitlint:exec:message --value "$commit_message" >/dev/null 2>&1)
 
   local commitlint_status=$?
 
