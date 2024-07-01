@@ -10,7 +10,7 @@ export const webTestRunnerPluginPath =
   '@robby-rabbitman/nx-plus-web-test-runner/plugin';
 
 export interface WebTestRunnerInitGeneratorSchema {
-  testTarget?: string;
+  targetName?: string;
   skipAddPlugin?: boolean;
   skipFormat?: boolean;
 }
@@ -18,7 +18,14 @@ export interface WebTestRunnerInitGeneratorSchema {
 export const initGenerator: Generator<
   WebTestRunnerInitGeneratorSchema
 > = async (tree, schema) => {
-  if (!schema?.skipAddPlugin) {
+  const { skipAddPlugin, skipFormat, targetName } = {
+    skipAddPlugin: false,
+    skipFormat: false,
+    targetName: 'test',
+    ...schema,
+  } satisfies Required<WebTestRunnerInitGeneratorSchema>;
+
+  if (!skipAddPlugin) {
     const nxJson = readNxJson(tree);
     nxJson.plugins ??= [];
 
@@ -29,24 +36,22 @@ export const initGenerator: Generator<
     );
 
     if (!hasPlugin) {
-      nxJson.plugins.push(webTestRunnerPluginConfiguration(schema));
+      nxJson.plugins.push(webTestRunnerPluginConfiguration(targetName));
       updateNxJson(tree, nxJson);
     }
   }
 
-  if (!schema?.skipFormat) {
+  if (!skipFormat) {
     await formatFiles(tree);
   }
 };
 
 export default initGenerator;
 
-const webTestRunnerPluginConfiguration = (
-  schema?: WebTestRunnerInitGeneratorSchema,
-) =>
+const webTestRunnerPluginConfiguration = (targetName: string) =>
   ({
     plugin: webTestRunnerPluginPath,
     options: {
-      targetName: schema?.testTarget ?? 'test',
+      targetName,
     },
   }) as ExpandedPluginConfiguration;

@@ -7,7 +7,7 @@ jest.mock('node:fs', () => {
   return jest.requireActual('memfs').fs;
 });
 
-describe('@robby-rabbitman/nx-plus-web-test-runner-plugin', () => {
+describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const context = {
     nxJsonConfiguration: {
       targetDefaults: {

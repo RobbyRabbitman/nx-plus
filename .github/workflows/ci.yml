@@ -32,7 +32,7 @@ jobs:
       - run: pnpm exec nx report
 
       - if: github.event_name == 'pull_request'
-        run: nx run tools-commitlint:exec --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }}
+        run: pnpm exec nx run tools-commitlint:exec --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }}
 
       - run: |
           pnpm exec nx format:check
