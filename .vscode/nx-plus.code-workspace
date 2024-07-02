@@ -1,0 +1,46 @@
+{
+  "folders": [
+    {
+      "path": "../dist",
+      "name": "dist",
+    },
+    {
+      "path": "../coverage",
+      "name": "coverage",
+    },
+    {
+      "path": "../tools",
+      "name": "tools",
+    },
+    {
+      "path": "../packages",
+      "name": "packages",
+    },
+    {
+      "path": "../",
+      "name": "root",
+    },
+  ],
+  "settings": {
+    "eslint.validate": ["json"],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.ts": "$(capture).ts, $(capture).spec.ts",
+      "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.d.ts.map, ${capture}.spec.js",
+      "package.json": "pnpm-*, .npmrc",
+      ".eslintrc.json": ".eslint*",
+      "jest.config.ts": "jest.preset.*",
+      ".prettierrc": ".prettier*, .editorconfig",
+      "README*": "CHANGELOG*, DEVELOPER*",
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "liveServer.settings.multiRootWorkspaceName": "root",
+  },
+  "extensions": {
+    "recommendations": [
+      "nrwl.angular-console",
+      "esbenp.prettier-vscode",
+      "firsttris.vscode-jest-runner",
+    ],
+  },
+}
