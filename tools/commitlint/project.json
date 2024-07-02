@@ -4,15 +4,15 @@
   "tags": ["scope:node", "type:tool"],
   "targets": {
     "exec": {
-      "command": "pnpm exec commitlint --config={projectRoot}/commitlint.config.ts --verbose",
+      "command": "pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose",
       "configurations": {
         "message": {
-          "command": "echo '{args.value}' | pnpm exec commitlint --config={projectRoot}/commitlint.config.ts --verbose"
+          "command": "echo '{args.value}' | pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
         }
       }
     },
     "test": {
-      "command": "bash {projectRoot}/commitlint.config.spec.bash"
+      "command": "bash {projectRoot}/src/commitlint.config.spec.bash"
     }
   }
 }
