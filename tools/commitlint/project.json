@@ -12,10 +12,7 @@
       }
     },
     "test": {
-      "command": "bash commitlint.config.spec.bash",
-      "options": {
-        "cwd": "{projectRoot}"
-      }
+      "command": "bash {projectRoot}/commitlint.config.spec.bash"
     }
   }
 }
