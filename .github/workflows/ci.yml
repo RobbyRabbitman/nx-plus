@@ -38,4 +38,5 @@ jobs:
 
       - run: |
           pnpm exec nx format:check
-          pnpm exec nx affected -t lint test build e2e
+          pnpm exec nx affected -t lint test build
+          pnpm exec nx affected -t e2e --configuration local
