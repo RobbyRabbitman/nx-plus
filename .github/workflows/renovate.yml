@@ -2,6 +2,16 @@ name: renovate
 
 on:
   workflow_dispatch:
+    inputs:
+      log-level:
+        type: choice
+        default: DEBUG
+        options:
+          - DEBUG
+          - INFO
+          - WARN
+          - ERROR
+          - FATAL
   schedule:
     - cron: '0 2 * * *' # Run daily at 2 AM
 
@@ -38,4 +48,4 @@ jobs:
           # workflows: write
           # email addresses: read
           RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
-          LOG_LEVEL: debug
+          LOG_LEVEL: ${{ github.event_name == 'workflow_dispatch' && inputs.log-level || 'INFO' }}
