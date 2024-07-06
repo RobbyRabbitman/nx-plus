@@ -9,6 +9,10 @@
       "name": "coverage",
     },
     {
+      "path": "../.github",
+      "name": "github",
+    },
+    {
       "path": "../tools",
       "name": "tools",
     },
