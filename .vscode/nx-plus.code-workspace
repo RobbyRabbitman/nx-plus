@@ -17,6 +17,10 @@
       "path": "../tools",
     },
     {
+      "name": "libs",
+      "path": "../libs",
+    },
+    {
       "name": "packages",
       "path": "../packages",
     },

@@ -28,6 +28,7 @@
       "command": "pnpm exec ts-node {projectRoot}/src/run-e2e.cli.ts"
     },
     "test": {
+      "cache": true,
       "inputs": ["publishable"],
       "command": "pnpm exec nx run {projectName}:publish"
     }

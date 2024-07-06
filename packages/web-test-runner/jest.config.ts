@@ -1,13 +1,4 @@
-import { Config } from 'jest';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { jestConfig } from '../../libs/util/src/index';
 
-/* eslint-disable */
-export default {
-  displayName: 'web-test-runner',
-  preset: '../../jest.preset.js',
-  testPathIgnorePatterns: ['<rootDir>/e2e/'],
-  transform: {
-    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
-  },
-  moduleFileExtensions: ['ts', 'js'],
-  coverageDirectory: '../../coverage/packages/web-test-runner',
-} satisfies Config;
+export default jestConfig();
