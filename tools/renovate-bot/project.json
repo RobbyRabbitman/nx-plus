@@ -1,0 +1,34 @@
+{
+  "name": "tools-renovate-bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:tool"],
+  "targets": {
+    "test": {
+      "command": "pnpm --package renovate dlx renovate-config-validator --strict {projectRoot}/src/renovate.json"
+    },
+    "renovate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json pnpm dlx renovate"
+      },
+      "configurations": {
+        "ci": {
+          "env": {
+            "RENOVATE_PLATFORM": "github",
+            "RENOVATE_REPOSITORIES": "RobbyRabbitman/nx-plus",
+            "LOG_LEVEL": "debug"
+          }
+        },
+        "development": {
+          "env": {
+            "RENOVATE_PLATFORM": "local",
+            "RENOVATE_REPOSITORY_CACHE": "reset",
+            "RENOVATE_DRY_RUN": "full",
+            "LOG_LEVEL": "debug"
+          }
+        }
+      },
+      "defaultConfiguration": "ci"
+    }
+  }
+}
