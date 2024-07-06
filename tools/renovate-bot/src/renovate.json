@@ -30,6 +30,10 @@
   },
   "packageRules": [
     {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
       "matchPackagePatterns": ["^@robby-rabbitman/nx-plus-"],
       "enabled": false
