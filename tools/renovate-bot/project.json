@@ -12,13 +12,6 @@
         "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json pnpm dlx renovate"
       },
       "configurations": {
-        "ci": {
-          "env": {
-            "RENOVATE_PLATFORM": "github",
-            "RENOVATE_REPOSITORIES": "RobbyRabbitman/nx-plus",
-            "LOG_LEVEL": "debug"
-          }
-        },
         "development": {
           "env": {
             "RENOVATE_PLATFORM": "local",
