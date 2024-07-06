@@ -5,7 +5,9 @@
   },
   "release": {
     "releaseTagPattern": "{version}",
-    "git": { "commitMessage": "chore: release {version} 🚀" },
+    "git": {
+      "commitMessage": "chore: release {version} 🚀"
+    },
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {
@@ -21,11 +23,21 @@
         }
       }
     },
-    "projects": ["packages/*"]
+    "projects": ["packages/**/*"]
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
+    "publishable": ["{workspaceRoot}/packages/**/*"],
+    "jestGlobals": [
+      "{workspaceRoot}/jest.config.ts",
+      "{workspaceRoot}/jest.preset.js"
+    ],
+    "eslintGlobals": [
+      "{workspaceRoot}/.eslintrc.json",
+      "{workspaceRoot}/.eslintignore",
+      "{workspaceRoot}/eslint.config.js"
+    ]
   },
   "plugins": [
     {
@@ -38,15 +50,33 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "e2e"
+      },
+      "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/{projectRoot}"
+        "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
       },
       "dependsOn": ["build"]
+    },
+    "e2e": {
+      "configurations": {
+        "development": {
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+        },
+        "ci": {
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+        }
+      }
     },
     "@nx/js:tsc": {
       "cache": true,
@@ -55,19 +85,11 @@
     },
     "@nx/eslint:lint": {
       "cache": true,
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
+      "inputs": ["default", "eslintGlobals"]
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
-      "options": {
-        "passWithNoTests": true
-      },
+      "inputs": ["default", "^default", "jestGlobals"],
       "configurations": {
         "ci": {
           "ci": true,

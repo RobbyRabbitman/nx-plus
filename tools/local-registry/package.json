@@ -1,0 +1,15 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-local-registry",
+  "version": "0.0.0",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@nx/devkit": "^19.3.0"
+  },
+  "main": "./src/index.js",
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./publish-cli": "./src/publish.cli.js",
+    "./run-e2e-cli": "./src/run-e2e.cli.js"
+  }
+}

@@ -1,24 +1,32 @@
 {
   "folders": [
     {
-      "path": "../dist",
       "name": "dist",
+      "path": "../dist",
     },
     {
-      "path": "../coverage",
       "name": "coverage",
+      "path": "../coverage",
     },
     {
-      "path": "../tools",
+      "name": "github",
+      "path": "../.github",
+    },
+    {
       "name": "tools",
+      "path": "../tools",
     },
     {
-      "path": "../packages",
       "name": "packages",
+      "path": "../packages",
     },
     {
-      "path": "../",
+      "name": "e2e",
+      "path": "../e2e",
+    },
+    {
       "name": "root",
+      "path": "..",
     },
   ],
   "settings": {
