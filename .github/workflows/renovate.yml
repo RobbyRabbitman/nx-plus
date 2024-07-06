@@ -6,8 +6,6 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -23,9 +21,9 @@ jobs:
 
       - run: pnpm exec nx report
 
-      - run: pnpm exec nx tools-renovate-bot:renovate:ci
+      - run: pnpm exec nx run tools-renovate-bot:renovate:ci
         env:
           RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
-          RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
           LOG_LEVEL: debug
