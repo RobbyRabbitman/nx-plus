@@ -17,6 +17,10 @@
       "name": "packages",
     },
     {
+      "path": "../e2e",
+      "name": "e2e",
+    },
+    {
       "path": "../",
       "name": "root",
     },
@@ -41,6 +45,28 @@
       "nrwl.angular-console",
       "esbenp.prettier-vscode",
       "firsttris.vscode-jest-runner",
+    ],
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "web-test-runner-e2e:e2e",
+        "runtimeExecutable": "pnpm",
+        "runtimeArgs": [
+          "exec",
+          "nx",
+          "run",
+          "web-test-runner-e2e:e2e",
+          "--verbose",
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}",
+      },
     ],
   },
 }
