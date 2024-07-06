@@ -62,7 +62,7 @@
     "e2e": {
       "configurations": {
         "local": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName}"
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
         }
       }
     },

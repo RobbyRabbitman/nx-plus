@@ -7,6 +7,10 @@ import { runE2e } from './run-e2e';
       type: 'string',
       required: true,
     })
+    .option('e2eTarget', {
+      type: 'string',
+      required: true,
+    })
 
     .parseAsync();
 

@@ -4,8 +4,11 @@ import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-gra
 import { join } from 'path';
 import { publish } from './publish';
 
-export const runE2e = async (options: { e2eProjectName: string }) => {
-  const { e2eProjectName } = options;
+export const runE2e = async (options: {
+  e2eProjectName: string;
+  e2eTarget: string;
+}) => {
+  const { e2eProjectName, e2eTarget } = options;
 
   const e2eProject = readCachedProjectConfiguration(e2eProjectName);
 
@@ -22,7 +25,7 @@ export const runE2e = async (options: { e2eProjectName: string }) => {
 
   try {
     execSync(
-      `${getPackageManagerCommand().exec} nx run ${e2eProjectName}:e2e`,
+      `${getPackageManagerCommand().exec} nx run ${e2eProjectName}:${e2eTarget}`,
       { stdio: 'inherit', cwd: workspaceRoot },
     );
   } finally {
