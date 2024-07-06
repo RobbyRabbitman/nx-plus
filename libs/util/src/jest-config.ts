@@ -6,7 +6,7 @@ export const jestConfig = (config?: Partial<Config>): Config => {
   const workspaceRoot = process.env['NX_WORKSPACE_ROOT'];
 
   if (!projectName || !workspaceRoot) {
-    return;
+    return {};
   }
 
   const absoluteProjectRoot = process.cwd();
