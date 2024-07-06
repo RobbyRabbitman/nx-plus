@@ -15,7 +15,7 @@
   "automerge": true,
   "autoApprove": true,
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 0,
   "enabledManagers": ["npm"],
   "printConfig": true,
   "labels": ["renovate"],
@@ -24,6 +24,9 @@
     "description": "Remove all nested pnpm-lock.yaml files, because renovate calls 'pnpm install --recursive --lockfile-only --ignore-scripts --ignore-pnpmfile' and this will create nested pnpm-lock.yaml files. You could create a pnpm workspace and exclude the projects, but we want renovate to update the nested package.json feels like there should be a better way to do this...",
     "commands": ["find . -mindepth 2 -name 'pnpm-lock.yaml' -exec rm -f {} +"],
     "fileFilters": ["pnpm-lock.yaml"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true
   },
   "packageRules": [
     {
