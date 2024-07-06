@@ -25,7 +25,7 @@
       "@robby-rabbitman/nx-plus-web-test-runner/plugin": [
         "packages/web-test-runner/src/plugin.ts"
       ],
-      "@robby-rabbitman/util": ["libs/util/src/index.ts"]
+      "@robby-rabbitman/nx-plus-libs-util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
