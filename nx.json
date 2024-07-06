@@ -28,7 +28,16 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
-    "publishable": ["{workspaceRoot}/packages/**/*"]
+    "publishable": ["{workspaceRoot}/packages/**/*"],
+    "jestGlobals": [
+      "{workspaceRoot}/jest.config.ts",
+      "{workspaceRoot}/jest.preset.js"
+    ],
+    "eslintGlobals": [
+      "{workspaceRoot}/.eslintrc.json",
+      "{workspaceRoot}/.eslintignore",
+      "{workspaceRoot}/eslint.config.js"
+    ]
   },
   "plugins": [
     {
@@ -73,16 +82,11 @@
     },
     "@nx/eslint:lint": {
       "cache": true,
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
-      ]
+      "inputs": ["default", "eslintGlobals"]
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+      "inputs": ["default", "^default", "jestGlobals"],
       "configurations": {
         "ci": {
           "ci": true,
