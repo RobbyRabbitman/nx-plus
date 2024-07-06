@@ -15,7 +15,7 @@
   "automerge": true,
   "autoApprove": true,
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 5,
   "enabledManagers": ["npm"],
   "printConfig": true,
   "labels": ["renovate"],
