@@ -25,6 +25,9 @@
     "commands": ["find . -mindepth 2 -name 'pnpm-lock.yaml' -exec rm -f {} +"],
     "fileFilters": ["pnpm-lock.yaml"]
   },
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
