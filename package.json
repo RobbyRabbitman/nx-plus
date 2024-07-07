@@ -17,6 +17,7 @@
     "@nx/js": "19.4.0",
     "@nx/plugin": "19.4.0",
     "@nx/workspace": "19.4.0",
+    "@robby-rabbitman/nx-plus-libs-jest-util": "link:libs/jest-util",
     "@swc-node/register": "1.9.1",
     "@swc/cli": "0.3.12",
     "@swc/core": "1.5.7",

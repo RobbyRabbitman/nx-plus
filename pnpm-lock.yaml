@@ -43,6 +43,9 @@ devDependencies:
   '@nx/workspace':
     specifier: 19.4.0
     version: 19.4.0(@swc-node/register@1.9.1)(@swc/core@1.5.7)
+  '@robby-rabbitman/nx-plus-libs-jest-util':
+    specifier: link:libs/jest-util
+    version: link:libs/jest-util
   '@swc-node/register':
     specifier: 1.9.1
     version: 1.9.1(@swc/core@1.5.7)(@swc/types@0.1.9)(typescript@5.5.3)
