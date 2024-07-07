@@ -1,6 +1,6 @@
 [![NPM downloads per week](https://img.shields.io/npm/dw/%40robby-rabbitman%2Fnx-plus-web-test-runner?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-test-runner)
 [![NPM version](https://img.shields.io/npm/v/%40robby-rabbitman%2Fnx-plus-web-test-runner?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-test-runner)
-[![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/@nx/devkit?label=Nx&logo=nx&style=flat-square)](https://nx.dev)
+[![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/peer/%40nx%2Fdevkit?logo=nx&label=nx)](https://nx.dev)
 
 # nx-plus-web-test-runner
 
