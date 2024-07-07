@@ -16,12 +16,12 @@ export type RunTestPluginOptions = {
   /** The name of the test target this plugin will create. */
   targetName?: string;
   /** The test targets this plugin should wrap. */
-  targetRegex?: string;
+  targetRegex?: string | RegExp;
 };
 
 const nxProjectGlob = '**/project.json';
-const defaultTargetName = 'test';
-const defaultTargetRegex = '^test-';
+const defaultTargetName = 'run-test';
+const defaultTargetRegex = /^test(?:-.*)?$/;
 
 export const createNodesV2: CreateNodesV2<RunTestPluginOptions> = [
   nxProjectGlob,
@@ -37,14 +37,14 @@ export const createNodesV2: CreateNodesV2<RunTestPluginOptions> = [
 
 const createRunTestTarget: CreateNodesFunction<
   RunTestPluginOptions | undefined
-> = (webTestRunnerConfigPath, options, context) => {
+> = (nxProjectPath, options, context) => {
   const { targetName, targetRegex } = {
     targetName: defaultTargetName,
     targetRegex: defaultTargetRegex,
     ...options,
   } satisfies RunTestPluginOptions;
 
-  const projectRoot = dirname(webTestRunnerConfigPath);
+  const projectRoot = dirname(nxProjectPath);
 
   const projectJson = JSON.parse(
     readFileSync(join(context.workspaceRoot, projectRoot, 'project.json'), {
