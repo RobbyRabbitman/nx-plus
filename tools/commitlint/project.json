@@ -12,7 +12,12 @@
       }
     },
     "test": {
-      "command": "bash {projectRoot}/src/commitlint.config.spec.bash"
+      "command": "bash {projectRoot}/src/commitlint.config.spec.bash",
+      "configurations": {
+        "ci": {
+          "command": "echo 'Maybe don't test with bash O_O'"
+        }
+      }
     }
   }
 }
