@@ -1,0 +1,22 @@
+{
+  "name": "libs-jest-util",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:lib"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "commands": [
+          "rm -rf dist/{projectRoot}",
+          "mkdir -p dist/{projectRoot}",
+          "cp -r {projectRoot}/src dist/{projectRoot}/",
+          "cp {projectRoot}/package.json dist/{projectRoot}/"
+        ],
+        "parallel": false,
+        "forwardAllArgs": false
+      }
+    }
+  }
+}

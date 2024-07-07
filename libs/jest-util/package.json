@@ -1,0 +1,9 @@
+{
+  "name": "@robby-rabbitman/nx-plus-libs-jest-util",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "jest": "29.7.0"
+  },
+  "main": "./src/index.ts",
+  "typings": "./src/index.ts"
+}

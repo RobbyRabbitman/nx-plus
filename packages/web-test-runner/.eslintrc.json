@@ -17,7 +17,7 @@
               "memfs",
               "minimatch",
               "jest",
-              "@robby-rabbitman/nx-plus-libs-util"
+              "@robby-rabbitman/nx-plus-libs-jest-util"
             ]
           }
         ]
