@@ -1,4 +1,5 @@
 import {
+  CreateNodes,
   CreateNodesContextV2,
   CreateNodesFunction,
   CreateNodesV2,
@@ -18,6 +19,11 @@ const webTestRunnerConfigFileNameGlob =
 const webTestRunnerCommand = 'web-test-runner';
 
 const defaultTargetName = 'test';
+
+export const createNodes: CreateNodes<WebTestRunnerTargetPluginOptions> = [
+  webTestRunnerConfigFileNameGlob,
+  (...args) => createWebTestRunnerTarget(...args),
+];
 
 export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
   webTestRunnerConfigFileNameGlob,
