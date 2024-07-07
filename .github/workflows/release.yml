@@ -24,10 +24,15 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - uses: actions/create-github-app-token@v1
+        id: create-release-app-token
+        with:
+          app-id: 939073
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
       - run: |
           git config user.email "robby.rabbitman+nx-plus@gmail.com"
           git config user.name "release"
-          git remote set-url origin https://x-access-token/:${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}
 
       - run: corepack enable
 
@@ -43,6 +48,6 @@ jobs:
 
       - run: pnpm exec nx release --skip-publish --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
           VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
