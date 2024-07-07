@@ -13,7 +13,12 @@
         "@nx/dependency-checks": [
           "error",
           {
-            "ignoredDependencies": ["memfs", "minimatch", "jest"]
+            "ignoredDependencies": [
+              "memfs",
+              "minimatch",
+              "jest",
+              "@robby-rabbitman/nx-plus-libs-jest-util"
+            ]
           }
         ]
       }
