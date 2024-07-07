@@ -27,9 +27,9 @@
     "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
   },
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^19.3.0"
+    "@nx/devkit": "^17 || ^18 || ^19"
   },
   "generators": "./generators.json",
   "type": "commonjs",

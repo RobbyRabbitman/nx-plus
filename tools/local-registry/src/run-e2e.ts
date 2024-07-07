@@ -26,7 +26,7 @@ export const runE2e = async (options: {
   try {
     execSync(
       `${getPackageManagerCommand().exec} nx run ${e2eProjectName}:${e2eTarget}`,
-      { stdio: 'inherit', cwd: workspaceRoot },
+      { stdio: 'inherit', cwd: workspaceRoot, env: process.env },
     );
   } finally {
     stopLocalRegistry();

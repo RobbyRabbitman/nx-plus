@@ -1,15 +1,18 @@
 import { workspaceRoot } from '@nx/devkit';
 import { execSync } from 'node:child_process';
 import { mkdirSync, rmSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 
-export const createE2eWorkspace = (options: { e2eProjectName: string }) => {
-  const { e2eProjectName } = options;
+export const createE2eWorkspace = (options: {
+  e2eProjectName: string;
+  nxVersion: string;
+}) => {
+  const { e2eProjectName, nxVersion } = options;
 
   const e2eProject = readCachedProjectConfiguration(e2eProjectName);
 
-  const e2eWorkspaceRoot = join(
+  const e2eProjectRoot = join(
     workspaceRoot,
     'dist',
     'e2e-workspace',
@@ -17,7 +20,8 @@ export const createE2eWorkspace = (options: { e2eProjectName: string }) => {
   );
 
   return createWorkspace({
-    workspaceRoot: e2eWorkspaceRoot,
+    e2eProjectRoot,
+    nxVersion,
   });
 };
 
@@ -25,28 +29,36 @@ export const createE2eWorkspace = (options: { e2eProjectName: string }) => {
  * @param options
  * @returns Creates a nx workspace with npm
  */
-export const createWorkspace = (options: { workspaceRoot: string }) => {
-  const { workspaceRoot } = options;
+export const createWorkspace = (options: {
+  e2eProjectRoot: string;
+  nxVersion: string;
+}) => {
+  const { e2eProjectRoot, nxVersion } = options;
 
-  const workspaceName = workspaceRoot.split('/').pop();
+  const workspaceName = `${e2eProjectRoot.split('/').pop()}-${nxVersion}`;
+
+  const workspaceRoot = join(e2eProjectRoot, workspaceName);
 
   rmSync(workspaceRoot, {
     recursive: true,
     force: true,
   });
 
-  mkdirSync(dirname(workspaceRoot), {
+  mkdirSync(e2eProjectRoot, {
     recursive: true,
   });
 
   execSync(
-    `npx --yes create-nx-workspace@latest ${workspaceName} --preset apps --nxCloud skip --no-interactive`,
+    `npx --yes create-nx-workspace@${nxVersion} ${workspaceName} --preset apps --nxCloud skip --no-interactive`,
     {
-      cwd: dirname(workspaceRoot),
+      cwd: e2eProjectRoot,
       stdio: 'inherit',
       env: process.env,
     },
   );
 
-  return options;
+  return {
+    workspaceRoot,
+    nxVersion,
+  };
 };
