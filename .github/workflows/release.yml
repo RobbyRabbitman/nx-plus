@@ -27,6 +27,7 @@ jobs:
       - run: |
           git config user.email "robby.rabbitman+nx-plus@gmail.com"
           git config user.name "release"
+          git remote set-url origin https://x-access-token/:${{ secrets.RELEASE_TOKEN }}@github.com/${{ github.repository }}
 
       - run: corepack enable
 
