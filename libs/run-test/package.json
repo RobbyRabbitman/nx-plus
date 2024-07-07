@@ -1,0 +1,6 @@
+{
+  "name": "@robby-rabbitman/nx-plus-libs-run-test",
+  "version": "0.0.0",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}
