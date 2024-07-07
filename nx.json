@@ -49,7 +49,7 @@
     {
       "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "test"
+        "targetName": "test-jest"
       },
       "exclude": ["e2e/**/*"]
     },
@@ -82,6 +82,41 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "^default",
+        "eslintGlobals",
+        {
+          "externalDependencies": ["eslint"]
+        }
+      ]
+    },
+    "run-test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "pnpm exec nx show projects --withTarget test | grep -q '\\b{projectName}\\b' && pnpm exec nx run {projectName}:test || exit 0",
+          "pnpm exec nx show projects --withTarget test-jest | grep -q '\\b{projectName}\\b' && pnpm exec nx run {projectName}:test-jest || exit 0"
+        ]
+      }
+    },
+    "test-jest": {
+      "inputs": [
+        "default",
+        "^default",
+        "jestGlobals",
+        {
+          "externalDependencies": ["jest"]
+        }
+      ],
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "coverage": true
+        }
+      }
     }
   }
 }
