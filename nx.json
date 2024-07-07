@@ -6,7 +6,7 @@
   "release": {
     "releaseTagPattern": "{version}",
     "git": {
-      "commitMessage": "chore: release {version} 🚀"
+      "commitMessage": "chore: release {version} 🚀 [skip ci]"
     },
     "version": {
       "conventionalCommits": true,
