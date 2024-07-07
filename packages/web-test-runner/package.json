@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus-web-test-runner",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Web Test Runner Generator for Nx workspaces.",
   "private": false,
   "publishConfig": {

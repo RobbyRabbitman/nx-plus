@@ -1,3 +1,10 @@
+## 0.3.0 (2024-07-07)
+
+
+### 🚀 Features
+
+- **web-test-runner:** support nx 17 and 18 ([#26](https://github.com/RobbyRabbitman/nx-plus/pull/26))
+
 ## 0.2.3 (2024-07-01)
 
 This was a version bump only, there were no code changes.
