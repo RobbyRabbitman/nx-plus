@@ -59,6 +59,13 @@
         "targetName": "e2e"
       },
       "include": ["e2e/**/*"]
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-libs-run-test/plugin",
+      "options": {
+        "targetName": "run-test",
+        "targetRegex": "^test(?:-.*)?$"
+      }
     }
   ],
   "targetDefaults": {
@@ -92,15 +99,6 @@
           "externalDependencies": ["eslint"]
         }
       ]
-    },
-    "run-test": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "pnpm exec nx show projects --withTarget test | grep -q '\\b{projectName}\\b' && pnpm exec nx run {projectName}:test || exit 0",
-          "pnpm exec nx show projects --withTarget test-jest | grep -q '\\b{projectName}\\b' && pnpm exec nx run {projectName}:test-jest || exit 0"
-        ]
-      }
     },
     "test-jest": {
       "inputs": [

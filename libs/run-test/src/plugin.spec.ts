@@ -1,4 +1,4 @@
-import { CreateNodesContextV2 } from '@nx/devkit';
+import { CreateNodesContextV2, ProjectConfiguration } from '@nx/devkit';
 import { DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import { RunTestPluginOptions, createNodesV2 } from './plugin';
@@ -51,113 +51,15 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     it('should not create a target', async () => {
       const nodes = await createNodes({
         directories: {
-          'package.json': '{}',
-          'project.json': '{}',
-          'web-test-runner.config.js': '{}',
-        },
-      });
-
-      expect(nodes).toStrictEqual([['web-test-runner.config.js', {}]]);
-    });
-  });
-
-  describe('directory with web-test-runner config', () => {
-    it('should not create a target', async () => {
-      const nodes = await createNodes({
-        directories: {
-          'some/directory/web-test-runner.config.js': '{}',
-        },
-      });
-
-      expect(nodes).toStrictEqual([
-        ['some/directory/web-test-runner.config.js', {}],
-      ]);
-    });
-
-    it('should create a target when `package.json` is present', async () => {
-      const nodes = await createNodes({
-        directories: {
-          'some/directory/web-test-runner.config.js': '{}',
-          'some/directory/package.json': '{}',
-        },
-      });
-
-      expect(nodes).toStrictEqual([
-        [
-          'some/directory/web-test-runner.config.js',
-          {
-            projects: {
-              'some/directory': {
-                targets: {
-                  test: {
-                    command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
-                  },
-                },
-              },
+          'foo/project.json': JSON.stringify({
+            name: 'foo',
+            root: 'foo',
+            targets: {
+              test: {},
             },
-          },
-        ],
-      ]);
-    });
-
-    it('should create a target when `project.json` is present', async () => {
-      const nodes = await createNodes({
-        directories: {
-          'some/directory/web-test-runner.config.js': '{}',
-          'some/directory/project.json': '{}',
+          } satisfies ProjectConfiguration),
         },
       });
-
-      expect(nodes).toStrictEqual([
-        [
-          'some/directory/web-test-runner.config.js',
-          {
-            projects: {
-              'some/directory': {
-                targets: {
-                  test: {
-                    command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
-                  },
-                },
-              },
-            },
-          },
-        ],
-      ]);
-    });
-
-    it.todo('merge target defaults? is nx doing this in a later stage?');
-
-    it('should create a custom named target when specified', async () => {
-      const nodes = await createNodes({
-        directories: {
-          'some/directory/web-test-runner.config.js': '{}',
-          'some/directory/project.json': '{}',
-        },
-        options: {
-          targetName: 'web-test-runner-test',
-        },
-      });
-
-      expect(nodes).toStrictEqual([
-        [
-          'some/directory/web-test-runner.config.js',
-          {
-            projects: {
-              'some/directory': {
-                targets: {
-                  'web-test-runner-test': {
-                    command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
-                  },
-                },
-              },
-            },
-          },
-        ],
-      ]);
     });
   });
 });

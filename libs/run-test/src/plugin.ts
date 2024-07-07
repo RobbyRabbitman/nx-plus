@@ -4,9 +4,8 @@ import {
   ProjectConfiguration,
   createNodesFromFiles,
   getPackageManagerCommand,
-  readCachedProjectGraph,
-  readJsonFile,
 } from '@nx/devkit';
+import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
 const nxRunCommandsExecutor = 'nx:run-commands';
@@ -46,19 +45,24 @@ const createRunTestTarget: CreateNodesFunction<
 
   const projectRoot = dirname(webTestRunnerConfigPath);
 
-  const projectJson = readJsonFile<ProjectConfiguration>(
-    join(context.workspaceRoot, projectRoot, 'project.json'),
-  );
+  const project = JSON.parse(
+    readFileSync(join(context.workspaceRoot, projectRoot, 'project.json'), {
+      encoding: 'utf-8',
+    }),
+  ) as ProjectConfiguration;
 
-  const project = readCachedProjectGraph().nodes[projectJson.name];
-  const projectTargets = Object.keys(project.data.targets);
+  if (!project?.targets) {
+    return {};
+  }
+
+  const projectTargets = Object.keys(project.targets);
 
   const testTargets = projectTargets.filter((target) =>
     target.match(targetRegex),
   );
 
   if (testTargets.length === 0) {
-    return;
+    return {};
   }
 
   const commands = testTargets.map(

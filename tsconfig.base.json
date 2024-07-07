@@ -19,6 +19,10 @@
       "@robby-rabbitman/nx-plus-tools-local-registry": [
         "tools/local-registry/src/index.ts"
       ],
+      "@robby-rabbitman/nx-plus-libs-run-test": ["libs/run-test/src/index.ts"],
+      "@robby-rabbitman/nx-plus-libs-run-test/plugin": [
+        "libs/run-test/src/plugin.ts"
+      ],
       "@robby-rabbitman/nx-plus-web-test-runner": [
         "packages/web-test-runner/src/index.ts"
       ],
