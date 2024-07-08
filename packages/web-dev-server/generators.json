@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "generators": {
+    "init": {
+      "factory": "./src/generators/init",
+      "schema": "./src/generators/init.schema.json",
+      "description": "Registers @robby-rabbitman/nx-plus-web-dev-server/plugin in the nx.json.",
+      "hidden": true
+    }
+  }
+}
