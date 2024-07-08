@@ -7,7 +7,7 @@
       "command": "pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose",
       "configurations": {
         "message": {
-          "command": "echo '{args.value}' | pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
+          "command": "echo \"{args.value}\" | pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
         }
       }
     }
