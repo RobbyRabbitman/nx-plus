@@ -71,10 +71,10 @@
     "e2e-jest": {
       "configurations": {
         "development": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
         },
         "ci": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
         }
       }
     },
