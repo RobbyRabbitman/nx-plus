@@ -16,11 +16,6 @@
             "input": "{projectRoot}/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
-          },
-          {
-            "input": "{projectRoot}/src",
-            "glob": "**/*.d.ts",
-            "output": "./src"
           }
         ]
       }
