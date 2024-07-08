@@ -43,20 +43,20 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "lint"
+        "targetName": "lint-eslint"
       }
     },
     {
       "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "test"
+        "targetName": "test-jest"
       },
       "exclude": ["e2e/**/*"]
     },
     {
       "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "e2e"
+        "targetName": "e2e-jest"
       },
       "include": ["e2e/**/*"]
     }
@@ -68,13 +68,13 @@
       },
       "dependsOn": ["build"]
     },
-    "e2e": {
+    "e2e-jest": {
       "configurations": {
         "development": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
         },
         "ci": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
+          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
         }
       }
     },
@@ -83,17 +83,29 @@
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
     },
-    "@nx/eslint:lint": {
-      "cache": true,
-      "inputs": ["default", "eslintGlobals"]
+    "lint-eslint": {
+      "inputs": [
+        "default",
+        "^default",
+        "eslintGlobals",
+        {
+          "externalDependencies": ["eslint"]
+        }
+      ]
     },
-    "@nx/jest:jest": {
-      "cache": true,
-      "inputs": ["default", "^default", "jestGlobals"],
+    "test-jest": {
+      "inputs": [
+        "default",
+        "^default",
+        "jestGlobals",
+        {
+          "externalDependencies": ["jest"]
+        }
+      ],
       "configurations": {
         "ci": {
           "ci": true,
-          "codeCoverage": true
+          "coverage": true
         }
       }
     }

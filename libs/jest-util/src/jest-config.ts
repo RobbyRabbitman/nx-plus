@@ -27,6 +27,14 @@ export const jestConfig = (config?: Partial<Config>): Config => {
       ],
     },
     moduleFileExtensions: ['ts', 'js'],
+    coverageThreshold: {
+      global: {
+        branches: 95,
+        functions: 95,
+        lines: 95,
+        statements: 95,
+      },
+    },
     coverageDirectory: join(workspaceRoot, 'coverage', projectRoot),
     ...config,
   };
