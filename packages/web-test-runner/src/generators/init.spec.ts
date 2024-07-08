@@ -19,7 +19,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
   });
 
   describe('should not modify the nx.json when the plugin is already registered in the nx.json', () => {
-    it('when specified as string', () => {
+    it('when provided as string', () => {
       async () => {
         const tree = createTree();
 
@@ -44,7 +44,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       };
     });
 
-    it('when specified as object', () => {
+    it('when provided as object', () => {
       async () => {
         const tree = createTree();
 
