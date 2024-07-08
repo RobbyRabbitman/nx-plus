@@ -43,7 +43,7 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "lint"
+        "targetName": "lint-eslint"
       }
     },
     {
@@ -56,11 +56,10 @@
     {
       "plugin": "@nx/jest/plugin",
       "options": {
-        "targetName": "e2e"
+        "targetName": "e2e-jest"
       },
       "include": ["e2e/**/*"]
-    },
-    "@robby-rabbitman/nx-plus-libs-run-test/plugin"
+    }
   ],
   "targetDefaults": {
     "nx-release-publish": {
@@ -69,7 +68,7 @@
       },
       "dependsOn": ["build"]
     },
-    "e2e": {
+    "e2e-jest": {
       "configurations": {
         "development": {
           "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e"
@@ -84,7 +83,7 @@
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
     },
-    "lint": {
+    "lint-eslint": {
       "inputs": [
         "default",
         "^default",
