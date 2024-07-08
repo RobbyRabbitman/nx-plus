@@ -19,49 +19,45 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
   });
 
   describe('should not modify the nx.json when the plugin is already registered in the nx.json', () => {
-    it('when provided as string', () => {
-      async () => {
-        const tree = createTree();
+    it('when provided as string', async () => {
+      const tree = createTree();
 
-        updateNxJson(tree, {
-          plugins: ['@robby-rabbitman/nx-plus-web-dev-server/plugin'],
-        });
+      updateNxJson(tree, {
+        plugins: ['@robby-rabbitman/nx-plus-web-dev-server/plugin'],
+      });
 
-        const before = readNxJson(tree);
+      const before = readNxJson(tree);
 
-        await initGenerator(tree, {});
+      await initGenerator(tree, {});
 
-        const after = readNxJson(tree);
+      const after = readNxJson(tree);
 
-        expect(before).toEqual(after);
-      };
+      expect(before).toEqual(after);
     });
 
-    it('when provided as object', () => {
-      async () => {
-        const tree = createTree();
+    it('when provided as object', async () => {
+      const tree = createTree();
 
-        updateNxJson(tree, {
-          plugins: [
-            {
-              plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-              options: {
-                targetName:
-                  defaultOptions.targetName +
-                  'some prefix to ensure its not the default',
-              },
+      updateNxJson(tree, {
+        plugins: [
+          {
+            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
+            options: {
+              targetName:
+                defaultOptions.targetName +
+                'some prefix to ensure its not the default',
             },
-          ],
-        });
+          },
+        ],
+      });
 
-        const before = readNxJson(tree);
+      const before = readNxJson(tree);
 
-        await initGenerator(tree, {});
+      await initGenerator(tree, {});
 
-        const after = readNxJson(tree);
+      const after = readNxJson(tree);
 
-        expect(before).toEqual(after);
-      };
+      expect(before).toEqual(after);
     });
   });
 
