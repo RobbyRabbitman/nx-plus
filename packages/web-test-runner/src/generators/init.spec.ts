@@ -18,18 +18,63 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     formatFiles.mockClear();
   });
 
+  describe('should not modify the nx.json when the plugin is already registered in the nx.json', () => {
+    it('when specified as string', () => {
+      async () => {
+        const tree = createTree();
+
+        updateNxJson(tree, {
+          plugins: [
+            {
+              plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+              options: {
+                targetName: 'test1',
+              },
+            },
+          ],
+        });
+
+        const before = readNxJson(tree);
+
+        await initGenerator(tree, {});
+
+        const after = readNxJson(tree);
+
+        expect(before).toEqual(after);
+      };
+    });
+
+    it('when specified as object', () => {
+      async () => {
+        const tree = createTree();
+
+        updateNxJson(tree, {
+          plugins: [
+            {
+              plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+              options: {
+                targetName: 'test1',
+              },
+            },
+          ],
+        });
+
+        const before = readNxJson(tree);
+
+        await initGenerator(tree, {});
+
+        const after = readNxJson(tree);
+
+        expect(before).toEqual(after);
+      };
+    });
+  });
+
   it('should not modify the nx.json when the plugin is already registered in the nx.json', async () => {
     const tree = createTree();
 
     updateNxJson(tree, {
-      plugins: [
-        {
-          plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-          options: {
-            targetName: 'test1',
-          },
-        },
-      ],
+      plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
     });
 
     const before = readNxJson(tree);
