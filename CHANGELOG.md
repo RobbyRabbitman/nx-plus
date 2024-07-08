@@ -1,3 +1,11 @@
+## 0.3.2 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **tools-commitlint:** quote ([#38](https://github.com/RobbyRabbitman/nx-plus/pull/38))
+- **web-test-runner:** don't export the plugin in the main entry ([#37](https://github.com/RobbyRabbitman/nx-plus/pull/37))
+
 ## 0.3.1 (2024-07-07)
 
 This was a version bump only, there were no code changes.
