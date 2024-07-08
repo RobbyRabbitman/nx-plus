@@ -13,16 +13,23 @@ export type WebTestRunnerTargetPluginOptions = {
   targetName?: string;
 };
 
-const webTestRunnerConfigFileNameGlob =
+export const webTestRunnerConfigFileNameGlob =
   '**/@(web-test-runner|wtr).config.@(js|cjs|mjs)';
 
-const webTestRunnerCommand = 'web-test-runner';
+export const webTestRunnerCommand = 'web-test-runner';
 
-const defaultTargetName = 'test';
+export const defaultOptions = {
+  targetName: 'test',
+} satisfies Required<WebTestRunnerTargetPluginOptions>;
 
 export const createNodes: CreateNodes<WebTestRunnerTargetPluginOptions> = [
   webTestRunnerConfigFileNameGlob,
-  (...args) => createWebTestRunnerTarget(...args),
+  (webTestRunnerConfigPath, options, context) =>
+    createWebTestRunnerTarget(
+      webTestRunnerConfigPath,
+      { ...defaultOptions, ...options },
+      context,
+    ),
 ];
 
 export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
@@ -31,7 +38,7 @@ export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
     return createNodesFromFiles(
       createWebTestRunnerTarget,
       webTestRunnerConfigPaths,
-      options,
+      { ...defaultOptions, ...options },
       context,
     );
   },
@@ -39,21 +46,20 @@ export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginOptions> = [
 
 /**
  * @param webTestRunnerConfigPath - Relative to `context.workspaceRoot` e.g
- *   path/to/wtr.config.js
+ *   `path/to/web-test-runner.config.js`
  * @param options
  * @param context
  * @returns
  */
 const createWebTestRunnerTarget: CreateNodesFunction<
-  WebTestRunnerTargetPluginOptions | undefined
+  Required<WebTestRunnerTargetPluginOptions>
 > = (webTestRunnerConfigPath, options, context) => {
+  const { targetName } = options;
   const webTestRunnerConfigDirectory = dirname(webTestRunnerConfigPath);
 
   if (!isNonRootProject(webTestRunnerConfigDirectory, context)) {
     return {};
   }
-
-  const targetName = options?.targetName ?? defaultTargetName;
 
   return {
     projects: {
@@ -69,7 +75,8 @@ const createWebTestRunnerTarget: CreateNodesFunction<
 };
 
 /**
- * @param directory - Relative to `context.workspaceRoot` e.g path/to/directory
+ * @param directory - Relative to `context.workspaceRoot` e.g
+ *   `path/to/directory`
  * @param context
  * @returns Whether the directory is considered a non root project.
  */
