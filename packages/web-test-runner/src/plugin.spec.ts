@@ -5,6 +5,7 @@ import {
   WebTestRunnerTargetPluginOptions,
   createNodes,
   createNodesV2,
+  defaultOptions,
 } from './plugin';
 
 jest.mock('node:fs', () => {
@@ -15,8 +16,8 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const context = {
     nxJsonConfiguration: {
       targetDefaults: {
-        test: {
-          command: "echo 'I am the default target command'",
+        [defaultOptions.targetName]: {
+          command: `echo 'I am the default target of ${defaultOptions.targetName}'`,
         },
       },
       namedInputs: {

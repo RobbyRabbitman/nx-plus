@@ -1,5 +1,6 @@
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { defaultOptions } from '../plugin';
 import initGenerator from './init';
 
 jest.mock('@nx/devkit', () => ({
@@ -99,14 +100,18 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     it('should set the targetName option to the provided value', async () => {
       const tree = createTree();
 
+      const targetName = 'custom-test-target-name';
+
+      expect(targetName).not.toBe(defaultOptions.targetName);
+
       await initGenerator(tree, {
-        targetName: 'custom-test-target-name',
+        targetName,
       });
 
       expect(readNxJson(tree).plugins).toContainEqual({
         plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
         options: {
-          targetName: 'custom-test-target-name',
+          targetName,
         },
       });
     });
