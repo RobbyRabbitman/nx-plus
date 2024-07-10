@@ -1,4 +1,5 @@
 import { workspaceRoot } from '@nx/devkit';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import {
@@ -25,6 +26,7 @@ export function config(overrides?: Partial<UserConfig>) {
   const config = defineConfig({
     root: join(workspaceRoot, project.root),
     cacheDir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
+    plugins: [nxViteTsPaths()],
     test: {
       globals: true,
       typecheck: {
