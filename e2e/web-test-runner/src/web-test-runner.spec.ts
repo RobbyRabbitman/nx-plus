@@ -12,21 +12,24 @@ import { join } from 'node:path';
 // reference it via env or nx devkit?
 const nxVersions = ['^17', '^18', '^19'];
 
+beforeAll(async () => {
+  await setup();
+});
+
+afterAll(() => {
+  teardown();
+});
+
 for (const nxVersion of nxVersions) {
   describe(`@robby-rabbitman/nx-plus-web-test-runner with nx@${nxVersion}`, () => {
     let workspaceRoot = '';
 
-    beforeAll(async () => {
-      await setup();
+    beforeAll(() => {
       const workspace = createE2eWorkspace({
         e2eProjectName: 'web-test-runner-e2e',
         nxVersion,
       });
       workspaceRoot = workspace.workspaceRoot;
-    });
-
-    afterAll(() => {
-      teardown();
     });
 
     it('should install succesfully', () => {
