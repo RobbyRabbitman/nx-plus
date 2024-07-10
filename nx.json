@@ -29,10 +29,6 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "publishable": ["{workspaceRoot}/packages/**/*"],
-    "jestGlobals": [
-      "{workspaceRoot}/jest.config.ts",
-      "{workspaceRoot}/jest.preset.js"
-    ],
     "eslintGlobals": [
       "{workspaceRoot}/.eslintrc.json",
       "{workspaceRoot}/.eslintignore",
@@ -45,20 +41,6 @@
       "options": {
         "targetName": "lint-eslint"
       }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test-jest"
-      },
-      "exclude": ["e2e/**/*"]
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "e2e-jest"
-      },
-      "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
@@ -67,16 +49,6 @@
         "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
       },
       "dependsOn": ["build"]
-    },
-    "e2e-jest": {
-      "configurations": {
-        "development": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
-        },
-        "ci": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
-        }
-      }
     },
     "@nx/js:tsc": {
       "cache": true,
@@ -92,22 +64,6 @@
           "externalDependencies": ["eslint"]
         }
       ]
-    },
-    "test-jest": {
-      "inputs": [
-        "default",
-        "^default",
-        "jestGlobals",
-        {
-          "externalDependencies": ["jest"]
-        }
-      ],
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "coverage": true
-        }
-      }
     }
   }
 }

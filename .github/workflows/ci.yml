@@ -38,5 +38,5 @@ jobs:
 
       - run: |
           pnpm exec nx format:check
-          pnpm exec nx affected -t lint-eslint test test-jest build --configuration ci
-          pnpm exec nx affected -t e2e e2e-jest --configuration ci
+          pnpm exec nx affected -t lint-eslint test build --configuration ci
+          pnpm exec nx affected -t e2e --configuration ci
