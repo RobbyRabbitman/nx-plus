@@ -89,7 +89,8 @@
     "e2e-vite": {
       "configurations": {
         "ci": {
-          "run": true
+          "run": true,
+          "coverage": false
         }
       },
       "options": {
