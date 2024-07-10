@@ -18,21 +18,19 @@ const x = () => {
   }
 
   const config = defineConfig({
+    root: join(workspaceRoot, project.root),
+    cacheDir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
     test: {
       globals: true,
       typecheck: {
         enabled: true,
         tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
       },
-      cache: {
-        dir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
-      },
       environment: 'node',
       reporters: ['default'],
       coverage: {
         clean: true,
         reportsDirectory: join(workspaceRoot, 'coverage', project.root),
-        reporter: ['v8'],
       },
     },
   });
