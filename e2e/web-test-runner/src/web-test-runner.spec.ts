@@ -1,24 +1,12 @@
 import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import { createE2eWorkspace } from '@robby-rabbitman/nx-plus-tools-local-registry';
-import {
-  setup,
-  teardown,
-} from '@robby-rabbitman/nx-plus-tools-vite/local-registry-setup';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 
 // TODO: keep in sync with package.json of 'web-test-runner'
 // reference it via env or nx devkit?
 const nxVersions = ['^17', '^18', '^19'];
-
-beforeAll(async () => {
-  await setup();
-});
-
-afterAll(() => {
-  teardown();
-});
 
 for (const nxVersion of nxVersions) {
   describe(`@robby-rabbitman/nx-plus-web-test-runner with nx@${nxVersion}`, () => {
@@ -33,7 +21,7 @@ for (const nxVersion of nxVersions) {
     });
 
     it('should install succesfully', () => {
-      execSync(`npm i -D @robby-rabbitman/nx-plus-web-test-runner@e2e`, {
+      execSync(`npm i -D @robby-rabbitman/nx-plus-web-test-runner@local`, {
         cwd: workspaceRoot,
       });
       execSync('npm ls @robby-rabbitman/nx-plus-web-test-runner', {
