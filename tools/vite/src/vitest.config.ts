@@ -64,7 +64,7 @@ export function withLocalRegistry(overrides?: Partial<UserConfig>) {
     config({
       test: {
         globalSetup: [
-          '@robby-rabbitman/nx-plus-tools-vite/local-registry-setup',
+          join(workspaceRoot, 'tools/vite/src/local-registry.setup.ts'),
         ],
       },
     }),

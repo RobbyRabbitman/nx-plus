@@ -1,3 +1,3 @@
-import { config } from '../../tools/vite/src/';
+import { withLocalRegistry } from '../../tools/vite/src/';
 
-export default config();
+export default withLocalRegistry();
