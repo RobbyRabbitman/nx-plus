@@ -13,7 +13,12 @@
         "@nx/dependency-checks": [
           "error",
           {
-            "ignoredDependencies": ["memfs", "minimatch"]
+            "ignoredDependencies": [
+              "memfs",
+              "minimatch",
+              "vitest",
+              "@robby-rabbitman/nx-plus-tools-vite"
+            ]
           }
         ]
       }

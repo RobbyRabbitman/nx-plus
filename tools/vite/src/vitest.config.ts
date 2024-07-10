@@ -37,6 +37,7 @@ export function config(overrides?: Partial<UserConfig>) {
       reporters: ['default'],
       coverage: {
         clean: true,
+        include: [join(workspaceRoot, project.root, '**/*.ts')],
         exclude: [...coverageConfigDefaults.exclude, '**/index.ts'],
         thresholds: {
           branches: 95,
