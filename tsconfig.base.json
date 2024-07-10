@@ -19,6 +19,7 @@
       "@robby-rabbitman/nx-plus-tools-local-registry": [
         "tools/local-registry/src/index.ts"
       ],
+      "@robby-rabbitman/nx-plus-tools-vite": ["tools/vite/src/index.ts"],
       "@robby-rabbitman/nx-plus-web-test-runner": [
         "packages/web-test-runner/src/index.ts"
       ],
