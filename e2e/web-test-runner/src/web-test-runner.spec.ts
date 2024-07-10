@@ -1,6 +1,10 @@
 import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import { createE2eWorkspace } from '@robby-rabbitman/nx-plus-tools-local-registry';
+import {
+  setup,
+  teardown,
+} from '@robby-rabbitman/nx-plus-tools-vite/local-registry-setup';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 
@@ -13,11 +17,16 @@ for (const nxVersion of nxVersions) {
     let workspaceRoot = '';
 
     beforeAll(() => {
+      setup();
       const workspace = createE2eWorkspace({
         e2eProjectName: 'web-test-runner-e2e',
         nxVersion,
       });
       workspaceRoot = workspace.workspaceRoot;
+    });
+
+    afterAll(() => {
+      teardown();
     });
 
     it('should install succesfully', () => {
