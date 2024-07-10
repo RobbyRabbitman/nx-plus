@@ -34,7 +34,7 @@ export function config(overrides?: Partial<UserConfig>) {
         tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
       },
       environment: 'node',
-      reporters: ['default', 'hanging-process'],
+      reporters: ['default'],
       coverage: {
         clean: true,
         exclude: [...coverageConfigDefaults.exclude, '**/index.ts'],
