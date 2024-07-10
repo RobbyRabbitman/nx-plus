@@ -1,7 +1,7 @@
 import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
+import { Mock } from 'vitest';
 import initGenerator from './init';
 
 vi.mock('@nx/devkit', async () => {

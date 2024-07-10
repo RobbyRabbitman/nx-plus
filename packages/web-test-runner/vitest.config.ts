@@ -1,7 +1,7 @@
 import { workspaceRoot } from '@nx/devkit';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
-import { UserConfig } from 'vitest';
+import { defineConfig } from 'vitest/config';
 
 const x = () => {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
@@ -17,22 +17,24 @@ const x = () => {
     return {};
   }
 
-  const config = {
-    globals: true,
-    typecheck: {
-      enabled: true,
-      tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
+  const config = defineConfig({
+    test: {
+      globals: true,
+      typecheck: {
+        enabled: true,
+        tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
+      },
+      cache: {
+        dir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
+      },
+      environment: 'node',
+      reporters: ['default'],
+      coverage: {
+        reportsDirectory: join(workspaceRoot, 'coverage', project.root),
+        reporter: ['v8'],
+      },
     },
-    cache: {
-      dir: '../node_modules/.vitest/<project-root>',
-    },
-    environment: 'node',
-    reporters: ['default'],
-    coverage: {
-      reportsDirectory: join(workspaceRoot, 'coverage', project.root),
-      reporter: ['v8'],
-    },
-  } satisfies UserConfig;
+  });
 
   if (verbose) {
     console.warn(config);

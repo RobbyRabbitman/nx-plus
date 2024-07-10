@@ -59,12 +59,6 @@
         "targetName": "e2e-jest"
       },
       "include": ["e2e/**/*"]
-    },
-    {
-      "plugin": "@nx/vite/plugin",
-      "options": {
-        "testTargetName": "test-vite"
-      }
     }
   ],
   "targetDefaults": {
