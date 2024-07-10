@@ -30,6 +30,7 @@ const x = () => {
       environment: 'node',
       reporters: ['default'],
       coverage: {
+        clean: true,
         reportsDirectory: join(workspaceRoot, 'coverage', project.root),
         reporter: ['v8'],
       },
