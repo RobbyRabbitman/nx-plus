@@ -11,6 +11,7 @@ import { join, resolve } from 'node:path';
 import { releasePublish, releaseVersion } from 'nx/release';
 
 export const localRegistryTarget = 'tools-local-registry:serve';
+export const publishTarget = 'tools-local-registry:publish';
 
 /**
  * Publishes this workspace to a local registry.
