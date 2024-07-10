@@ -1,7 +1,7 @@
 import { workspaceRoot } from '@nx/devkit';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
-import { defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
 const x = () => {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
@@ -30,6 +30,13 @@ const x = () => {
       reporters: ['default'],
       coverage: {
         clean: true,
+        exclude: [...coverageConfigDefaults.exclude, '**/index.ts'],
+        thresholds: {
+          branches: 95,
+          functions: 95,
+          lines: 95,
+          statements: 95,
+        },
         reportsDirectory: join(workspaceRoot, 'coverage', project.root),
       },
     },
