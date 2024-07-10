@@ -24,6 +24,12 @@
           }
         ]
       }
+    },
+    "vitest": {
+      "command": "vitest",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
     }
   }
 }
