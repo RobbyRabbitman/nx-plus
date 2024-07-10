@@ -32,7 +32,8 @@ export async function setup() {
 }
 
 export function teardown() {
-  if (global.stopLocalRegistry) {
-    global.stopLocalRegistry();
+  if (!global.stopLocalRegistry) {
+    throw new Error('Local registry stop callback expected to be defined O_O');
   }
+  global.stopLocalRegistry();
 }
