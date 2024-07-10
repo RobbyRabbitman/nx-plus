@@ -29,40 +29,6 @@ export async function setup() {
   });
 
   global.stopLocalRegistry = stopLocalRegistry;
-
-  // const args = [
-  //   'exec',
-  //   'nx',
-  //   'run',
-  //   publishTarget,
-  //   `--tag=local`,
-  //   `--specifier=0.0.0-local`,
-  //   `--storage='${join(
-  //     workspaceRoot,
-  //     'dist',
-  //     'vite-local-registry-storage',
-  //     project.root,
-  //   )}'`,
-  //   `--stopLocalRegistry=false`,
-  //   `--clearStorage=true`,
-  //   `--verbose=${verbose}`,
-  // ];
-
-  // const localRegistry = spawn('pnpm', args, {
-  //   cwd: workspaceRoot,
-  //   stdio: 'inherit',
-  //   env: process.env,
-  // });
-
-  // localRegistry.on('error', (err) => {
-  //   console.error('Failed to start local registry process.', err);
-  // });
-
-  // localRegistry.on('close', (code) => {
-  //   console.log(`Local registry process exited with code ${code}`);
-  // });
-
-  // global.stopLocalRegistry = () => localRegistry.kill();
 }
 
 export function teardown() {

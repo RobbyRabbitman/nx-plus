@@ -77,6 +77,10 @@
           "coverage": true,
           "run": true
         }
+      },
+      "options": {
+        "config": "{projectRoot}/vitest.config.mts",
+        "cwd": "{workspaceRoot}"
       }
     }
   }
