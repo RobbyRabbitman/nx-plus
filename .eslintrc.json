@@ -9,7 +9,7 @@
       "rules": {}
     },
     {
-      "files": ["*.ts"],
+      "files": ["*.ts", "*.mts"],
       "rules": {
         "@nx/enforce-module-boundaries": [
           "error",
@@ -27,7 +27,7 @@
       }
     },
     {
-      "files": ["*.ts"],
+      "files": ["*.ts", "*.mts"],
       "extends": ["plugin:@nx/typescript"],
       "rules": {}
     },
