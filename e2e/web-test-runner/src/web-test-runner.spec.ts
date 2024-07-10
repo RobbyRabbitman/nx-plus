@@ -16,8 +16,8 @@ for (const nxVersion of nxVersions) {
   describe(`@robby-rabbitman/nx-plus-web-test-runner with nx@${nxVersion}`, () => {
     let workspaceRoot = '';
 
-    beforeAll(() => {
-      setup();
+    beforeAll(async () => {
+      await setup();
       const workspace = createE2eWorkspace({
         e2eProjectName: 'web-test-runner-e2e',
         nxVersion,
