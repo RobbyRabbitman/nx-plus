@@ -41,6 +41,12 @@
       "options": {
         "targetName": "lint-eslint"
       }
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test-vite"
+      }
     }
   ],
   "targetDefaults": {
@@ -64,6 +70,14 @@
           "externalDependencies": ["eslint"]
         }
       ]
+    },
+    "test-vite": {
+      "configurations": {
+        "ci": {
+          "coverage": true,
+          "run": true
+        }
+      }
     }
   }
 }
