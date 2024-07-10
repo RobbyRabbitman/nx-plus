@@ -9,7 +9,6 @@
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
-    "./publish-cli": "./src/publish.cli.js",
-    "./run-e2e-cli": "./src/run-e2e.cli.js"
+    "./publish-cli": "./src/publish.cli.js"
   }
 }

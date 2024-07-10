@@ -58,3 +58,16 @@ export function config(overrides?: Partial<UserConfig>) {
 
   return mergedConfig;
 }
+
+export function withLocalRegistry(overrides?: Partial<UserConfig>) {
+  return mergeConfig(
+    config({
+      test: {
+        globalSetup: [
+          '@robby-rabbitman/nx-plus-tools-vite/local-registry-setup',
+        ],
+      },
+    }),
+    overrides ?? {},
+  );
+}
