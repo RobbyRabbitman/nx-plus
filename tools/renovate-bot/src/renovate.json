@@ -64,12 +64,6 @@
       "matchPackagePatterns": ["^@nx/", "^nx$"]
     },
     {
-      "description": "Groups all 'jest' packages together",
-      "groupName": "jest",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^jest$", "^jest-"]
-    },
-    {
       "description": "Groups all 'swc' packages together",
       "groupName": "swc",
       "matchManagers": ["npm"],
