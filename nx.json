@@ -29,10 +29,6 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "publishable": ["{workspaceRoot}/packages/**/*"],
-    "jestGlobals": [
-      "{workspaceRoot}/jest.config.ts",
-      "{workspaceRoot}/jest.preset.js"
-    ],
     "eslintGlobals": [
       "{workspaceRoot}/.eslintrc.json",
       "{workspaceRoot}/.eslintignore",
@@ -47,16 +43,16 @@
       }
     },
     {
-      "plugin": "@nx/jest/plugin",
+      "plugin": "@nx/vite/plugin",
       "options": {
-        "targetName": "test-jest"
+        "testTargetName": "test-vite"
       },
       "exclude": ["e2e/**/*"]
     },
     {
-      "plugin": "@nx/jest/plugin",
+      "plugin": "@nx/vite/plugin",
       "options": {
-        "targetName": "e2e-jest"
+        "testTargetName": "e2e-vite"
       },
       "include": ["e2e/**/*"]
     }
@@ -67,16 +63,6 @@
         "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
       },
       "dependsOn": ["build"]
-    },
-    "e2e-jest": {
-      "configurations": {
-        "development": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
-        },
-        "ci": {
-          "command": "pnpm exec nx run tools-local-registry:run-e2e --e2eProjectName {projectName} --e2eTarget e2e-jest"
-        }
-      }
     },
     "@nx/js:tsc": {
       "cache": true,
@@ -93,20 +79,23 @@
         }
       ]
     },
-    "test-jest": {
-      "inputs": [
-        "default",
-        "^default",
-        "jestGlobals",
-        {
-          "externalDependencies": ["jest"]
-        }
-      ],
+    "test-vite": {
       "configurations": {
         "ci": {
-          "ci": true,
-          "coverage": true
+          "run": true
         }
+      }
+    },
+    "e2e-vite": {
+      "configurations": {
+        "ci": {
+          "run": true,
+          "coverage": false
+        }
+      },
+      "options": {
+        "config": "{projectRoot}/vitest.config.mts",
+        "cwd": "{workspaceRoot}"
       }
     }
   }

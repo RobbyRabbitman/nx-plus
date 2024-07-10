@@ -20,38 +20,43 @@ export const createE2eWorkspace = (options: {
   );
 
   return createWorkspace({
-    e2eProjectRoot,
+    projectRoot: e2eProjectRoot,
     nxVersion,
   });
 };
 
 /**
  * @param options
- * @returns Creates a nx workspace with npm
+ * @returns Creates a nx workspace with the provided version, uses npm.
  */
 export const createWorkspace = (options: {
-  e2eProjectRoot: string;
+  /**
+   * The project root, e.g the current project which executes e2e tests
+   * `e2e/path/to/project`
+   */
+  projectRoot: string;
+  /** The nx version to use, must be a valid npm version identifier */
   nxVersion: string;
 }) => {
-  const { e2eProjectRoot, nxVersion } = options;
+  const { projectRoot, nxVersion } = options;
 
-  const workspaceName = `${e2eProjectRoot.split('/').pop()}-${nxVersion}`;
+  const workspaceName = `${projectRoot.split('/').pop()}-${nxVersion}`;
 
-  const workspaceRoot = join(e2eProjectRoot, workspaceName);
+  const workspaceRoot = join(projectRoot, workspaceName);
 
   rmSync(workspaceRoot, {
     recursive: true,
     force: true,
   });
 
-  mkdirSync(e2eProjectRoot, {
+  mkdirSync(projectRoot, {
     recursive: true,
   });
 
   execSync(
     `npx --yes create-nx-workspace@${nxVersion} ${workspaceName} --preset apps --nxCloud skip --no-interactive`,
     {
-      cwd: e2eProjectRoot,
+      cwd: projectRoot,
       stdio: 'inherit',
       env: process.env,
     },

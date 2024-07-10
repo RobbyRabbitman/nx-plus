@@ -21,11 +21,10 @@
       }
     },
     "publish": {
+      "cache": true,
       "inputs": ["publishable"],
+      "outputs": ["{workspaceRoot}/{projectRoot}/storage"],
       "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts --localRegistryTarget '{projectName}:serve' --storage {projectRoot}/storage"
-    },
-    "run-e2e": {
-      "command": "pnpm exec ts-node {projectRoot}/src/run-e2e.cli.ts"
     },
     "test": {
       "cache": true,

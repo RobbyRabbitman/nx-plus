@@ -7,9 +7,7 @@ import {
   createNodesV2,
 } from './plugin';
 
-jest.mock('node:fs', () => {
-  return jest.requireActual('memfs').fs;
-});
+vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
 
 describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const context = {
@@ -28,7 +26,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
 
   afterEach(() => {
     vol.reset();
-    jest.resetModules();
+    vi.resetModules();
   });
 
   describe('createNodes', () => {

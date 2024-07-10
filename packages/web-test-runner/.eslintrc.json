@@ -16,8 +16,8 @@
             "ignoredDependencies": [
               "memfs",
               "minimatch",
-              "jest",
-              "@robby-rabbitman/nx-plus-libs-jest-util"
+              "vitest",
+              "@robby-rabbitman/nx-plus-tools-vite"
             ]
           }
         ]
