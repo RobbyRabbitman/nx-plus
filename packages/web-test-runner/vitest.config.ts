@@ -5,25 +5,24 @@ import { UserConfig } from 'vitest';
 
 const x = () => {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
+  const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
 
   if (!projectName) {
-    // throw new Error(
-    //   'NX_TASK_TARGET_PROJECT is not defined. Running a Nx command?',
-    // );
     return {};
   }
 
   const project = readCachedProjectConfiguration(projectName);
 
   if (!project) {
-    // throw new Error(
-    //   'NX_TASK_TARGET_PROJECT is not defined. Running a Nx command?',
-    // );
     return {};
   }
 
   const config = {
     globals: true,
+    typecheck: {
+      enabled: true,
+      tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
+    },
     cache: {
       dir: '../node_modules/.vitest/<project-root>',
     },
@@ -35,7 +34,9 @@ const x = () => {
     },
   } satisfies UserConfig;
 
-  console.warn(config);
+  if (verbose) {
+    console.warn(config);
+  }
 
   return config;
 };
