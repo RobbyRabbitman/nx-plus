@@ -23,6 +23,7 @@
       "@robby-rabbitman/nx-plus-tools-vite/local-registry-setup": [
         "tools/vite/src/local-registry.setup.ts"
       ],
+      "@robby-rabbitman/nx-plus-libs-e2e-util": ["libs/e2e-util/src/index.ts"],
       "@robby-rabbitman/nx-plus-web-test-runner": [
         "packages/web-test-runner/src/index.ts"
       ],

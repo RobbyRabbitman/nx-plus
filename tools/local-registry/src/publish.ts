@@ -20,6 +20,9 @@ export const publishTarget = 'tools-local-registry:publish';
  * - No git commits done
  * - When `projects` is empty, all projects are published
  * - When `projects` is not empty, only the specified projects are published
+ *
+ * TODO: This function fails, if not executed from root of the workspace,
+ * because apparently the tspaths are not resolved correctly.
  */
 export async function publish(options: {
   specifier: string;

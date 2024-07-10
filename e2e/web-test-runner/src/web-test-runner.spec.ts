@@ -1,6 +1,6 @@
 import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
-import { createE2eWorkspace } from '@robby-rabbitman/nx-plus-tools-local-registry';
+import { createE2eWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 
