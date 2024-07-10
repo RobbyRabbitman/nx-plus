@@ -21,7 +21,9 @@
       }
     },
     "publish": {
+      "cache": true,
       "inputs": ["publishable"],
+      "outputs": ["{workspaceRoot}/{projectRoot}/storage"],
       "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts --localRegistryTarget '{projectName}:serve' --storage {projectRoot}/storage"
     },
     "test": {
