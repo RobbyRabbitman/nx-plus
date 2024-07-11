@@ -1,20 +1,24 @@
+import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Mock } from 'vitest';
 import initGenerator, { defaultOptions } from './init';
 
-jest.mock('@nx/devkit', () => ({
-  ...jest.requireActual('@nx/devkit'),
-  formatFiles: jest.fn(),
-}));
-
-const formatFiles = jest.requireMock('@nx/devkit').formatFiles;
+vi.mock('@nx/devkit', async () => {
+  const module = await vi.importActual('@nx/devkit');
+  return {
+    ...module,
+    formatFiles: vi.fn(),
+  };
+});
 
 describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
+  const formatFiles = devkit.formatFiles as Mock;
   const createTree = () =>
     createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
   beforeEach(() => {
-    console.warn = jest.fn();
+    console.warn = vi.fn();
     formatFiles.mockClear();
   });
 
