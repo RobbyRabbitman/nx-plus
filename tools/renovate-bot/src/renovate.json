@@ -63,12 +63,6 @@
       "groupName": "nx",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@nx/", "^nx$"]
-    },
-    {
-      "description": "Groups all 'swc' packages together",
-      "groupName": "swc",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^@swc-", "^swc/"]
     }
   ]
 }
