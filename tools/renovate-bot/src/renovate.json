@@ -9,7 +9,6 @@
     ":semanticCommitTypeAll(chore)",
     ":semanticCommitScopeDisabled"
   ],
-  "ignorePaths": ["*/**/package.json"],
   "onboarding": false,
   "requireConfig": "ignored",
   "dependencyDashboard": true,
@@ -35,6 +34,11 @@
     {
       "matchUpdateTypes": ["major"],
       "automerge": false
+    },
+    {
+      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here",
+      "matchFileNames": ["*/**/package.json"],
+      "enabled": false
     },
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
