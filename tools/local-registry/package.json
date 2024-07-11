@@ -1,15 +1,18 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-local-registry",
   "version": "0.0.0",
-  "dependencies": {
-    "tslib": "^2.3.0",
-    "@nx/devkit": "^19.3.0"
+  "peerDependencies": {
+    "tslib": "2.6.3",
+    "@nx/devkit": "19.4.1",
+    "yargs": "17.7.2",
+    "@nx/js": "19.4.1",
+    "nx": "19.4.1"
   },
   "main": "./src/index.js",
   "type": "commonjs",
   "exports": {
+    ".": "./src/index.js",
     "./package.json": "./package.json",
-    "./publish-cli": "./src/publish.cli.js",
-    "./run-e2e-cli": "./src/run-e2e.cli.js"
+    "./publish-cli": "./src/publish.cli.js"
   }
 }

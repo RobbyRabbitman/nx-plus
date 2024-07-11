@@ -59,3 +59,4 @@ jobs:
           GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
           VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

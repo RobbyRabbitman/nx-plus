@@ -34,6 +34,7 @@
     },
   ],
   "settings": {
+    "terminal.integrated.cwd": "${workspaceFolder}",
     "eslint.validate": ["json"],
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
@@ -41,7 +42,6 @@
       "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.d.ts.map, ${capture}.spec.js",
       "package.json": "pnpm-*, .npmrc",
       ".eslintrc.json": ".eslint*",
-      "jest.config.ts": "jest.preset.*",
       ".prettierrc": ".prettier*, .editorconfig",
       "README*": "CHANGELOG*, DEVELOPER*",
     },
@@ -49,10 +49,6 @@
     "liveServer.settings.multiRootWorkspaceName": "root",
   },
   "extensions": {
-    "recommendations": [
-      "nrwl.angular-console",
-      "esbenp.prettier-vscode",
-      "firsttris.vscode-jest-runner",
-    ],
+    "recommendations": ["nrwl.angular-console", "esbenp.prettier-vscode"],
   },
 }
