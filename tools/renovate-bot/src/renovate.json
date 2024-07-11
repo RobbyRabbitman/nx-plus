@@ -19,11 +19,11 @@
   "enabledManagers": ["npm"],
   "printConfig": true,
   "labels": ["renovate"],
-  "allowedPostUpgradeCommands": ["^pnpm"],
+  "allowedPostUpgradeCommands": ["^(pnpm|echo)"],
   "postUpgradeTasks": {
     "description": "Renovate ignores nested package jsons. Use eslint to align dependencies in projects package.json when the root package.json changed.",
     "commands": [
-      "pnpm exec nx reset",
+      "echo 'Install node_modules when missing in order to run eslint'; dir='node_modules'; [ -d \"$dir\" ] && find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l || pnpm i --frozen-lockfile",
       "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'"
     ],
     "fileFilters": ["pnpm-lock.yaml"]
