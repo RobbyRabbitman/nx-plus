@@ -48,7 +48,7 @@ export async function publish(options: {
   const graph = readCachedProjectGraph();
 
   /** When invoked, stops the registry. */
-  let stopLocalRegistryFn = (() => {}) satisfies Awaited<
+  let stopLocalRegistryFn = (() => undefined) satisfies Awaited<
     ReturnType<typeof startLocalRegistry>
   >;
 

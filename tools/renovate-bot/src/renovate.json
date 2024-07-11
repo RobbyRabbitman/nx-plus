@@ -9,6 +9,7 @@
     ":semanticCommitTypeAll(chore)",
     ":semanticCommitScopeDisabled"
   ],
+  "ignorePaths": ["*/**/package.json"],
   "onboarding": false,
   "requireConfig": "ignored",
   "dependencyDashboard": true,
@@ -19,10 +20,12 @@
   "enabledManagers": ["npm"],
   "printConfig": true,
   "labels": ["renovate"],
-  "allowedPostUpgradeCommands": ["^(pnpm|find)"],
+  "allowedPostUpgradeCommands": ["^pnpm"],
   "postUpgradeTasks": {
-    "description": "Remove all nested pnpm-lock.yaml files, because renovate calls 'pnpm install --recursive --lockfile-only --ignore-scripts --ignore-pnpmfile' and this will create nested pnpm-lock.yaml files. You could create a pnpm workspace and exclude the projects, but we want renovate to update the nested package.json feels like there should be a better way to do this...",
-    "commands": ["find . -mindepth 2 -name 'pnpm-lock.yaml' -exec rm -f {} +"],
+    "description": "Renovate ignores nested package jsons. Use eslint to align dependencies in projects package.json when the root package.json changed.",
+    "commands": [
+      "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'"
+    ],
     "fileFilters": ["pnpm-lock.yaml"]
   },
   "lockFileMaintenance": {
@@ -44,7 +47,6 @@
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@commitlint/"]
     },
-
     {
       "description": "Groups all 'prettier' packages together",
       "groupName": "prettier",
@@ -62,12 +64,6 @@
       "groupName": "nx",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@nx/", "^nx$"]
-    },
-    {
-      "description": "Groups all 'swc' packages together",
-      "groupName": "swc",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^@swc-", "^swc/"]
     }
   ]
 }
