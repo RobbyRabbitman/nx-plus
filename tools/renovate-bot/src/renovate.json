@@ -10,7 +10,6 @@
     ":semanticCommitScopeDisabled"
   ],
   "onboarding": false,
-  "ignorePaths": ["*/**/package.json"],
   "requireConfig": "ignored",
   "dependencyDashboard": true,
   "automerge": true,
@@ -41,12 +40,6 @@
     {
       "matchUpdateTypes": ["major"],
       "automerge": false
-    },
-    {
-      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here. Idk, does not seem to work aswell O_O",
-      "matchFileNames": ["*/**/package.json"],
-      "matchManagers": ["npm"],
-      "enabled": false
     },
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
