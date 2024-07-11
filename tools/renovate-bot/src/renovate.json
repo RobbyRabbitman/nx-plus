@@ -18,6 +18,9 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "enabledManagers": ["npm"],
+  "npm": {
+    "ignorePaths": ["*/**/package.json"]
+  },
   "printConfig": true,
   "labels": ["renovate"],
   "allowedPostUpgradeCommands": ["^(pnpm|echo|git)"],
@@ -41,6 +44,7 @@
     {
       "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here. Idk, does not seem to work aswell O_O",
       "matchFileNames": ["*/**/package.json"],
+      "matchManagers": ["npm"],
       "enabled": false
     },
     {
