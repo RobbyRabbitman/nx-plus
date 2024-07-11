@@ -21,7 +21,7 @@ for (const nxVersion of nxVersions) {
     });
 
     it('should install succesfully', () => {
-      execSync(`npm i -D @robby-rabbitman/nx-plus-web-dev-server@e2e`, {
+      execSync(`npm i -D @robby-rabbitman/nx-plus-web-dev-server@local`, {
         cwd: workspaceRoot,
       });
       execSync('npm ls @robby-rabbitman/nx-plus-web-dev-server', {
