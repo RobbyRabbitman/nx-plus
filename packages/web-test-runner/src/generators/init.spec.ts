@@ -28,16 +28,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       const tree = createTree();
 
       updateNxJson(tree, {
-        plugins: [
-          {
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-            options: {
-              targetName:
-                defaultOptions.targetName +
-                'some prefix to ensure its not the default',
-            },
-          },
-        ],
+        plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
       });
 
       const before = readNxJson(tree);
@@ -92,7 +83,8 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     it('should set the targetName option to the provided value', async () => {
       const tree = createTree();
 
-      const targetName = 'custom-test-target-name';
+      const targetName =
+        defaultOptions.targetName + 'some prefix to ensure its not the default';
 
       expect(targetName).not.toBe(defaultOptions.targetName);
 
