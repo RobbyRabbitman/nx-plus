@@ -5,6 +5,7 @@ import {
   WebTestRunnerTargetPluginOptions,
   createNodes,
   createNodesV2,
+  defaultOptions,
 } from './plugin';
 
 vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
@@ -13,8 +14,8 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const context = {
     nxJsonConfiguration: {
       targetDefaults: {
-        test: {
-          command: "echo 'I am the default target command'",
+        [defaultOptions.targetName]: {
+          command: `echo 'I am the default target of ${defaultOptions.targetName}'`,
         },
       },
       namedInputs: {

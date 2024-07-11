@@ -46,7 +46,7 @@
       "README*": "CHANGELOG*, DEVELOPER*",
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "liveServer.settings.multiRootWorkspaceName": "root",
+    "liveServer.settings.multiRootWorkspaceName": "coverage",
   },
   "extensions": {
     "recommendations": ["nrwl.angular-console", "esbenp.prettier-vscode"],

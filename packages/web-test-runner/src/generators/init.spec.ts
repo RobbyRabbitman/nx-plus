@@ -2,6 +2,7 @@ import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Mock } from 'vitest';
+import { defaultOptions } from '../plugin';
 import initGenerator from './init';
 
 vi.mock('@nx/devkit', async () => {
@@ -23,71 +24,46 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
   });
 
   describe('should not modify the nx.json when the plugin is already registered in the nx.json', () => {
-    it('when provided as string', () => {
-      async () => {
-        const tree = createTree();
+    it('when provided as string', async () => {
+      const tree = createTree();
 
-        updateNxJson(tree, {
-          plugins: [
-            {
-              plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-              options: {
-                targetName: 'test1',
-              },
+      updateNxJson(tree, {
+        plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
+      });
+
+      const before = readNxJson(tree);
+
+      await initGenerator(tree, {});
+
+      const after = readNxJson(tree);
+
+      expect(before).toEqual(after);
+    });
+
+    it('when provided as object', async () => {
+      const tree = createTree();
+
+      updateNxJson(tree, {
+        plugins: [
+          {
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            options: {
+              targetName:
+                defaultOptions.targetName +
+                'some prefix to ensure its not the default',
             },
-          ],
-        });
+          },
+        ],
+      });
 
-        const before = readNxJson(tree);
+      const before = readNxJson(tree);
 
-        await initGenerator(tree, {});
+      await initGenerator(tree, {});
 
-        const after = readNxJson(tree);
+      const after = readNxJson(tree);
 
-        expect(before).toEqual(after);
-      };
+      expect(before).toEqual(after);
     });
-
-    it('when provided as object', () => {
-      async () => {
-        const tree = createTree();
-
-        updateNxJson(tree, {
-          plugins: [
-            {
-              plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-              options: {
-                targetName: 'test1',
-              },
-            },
-          ],
-        });
-
-        const before = readNxJson(tree);
-
-        await initGenerator(tree, {});
-
-        const after = readNxJson(tree);
-
-        expect(before).toEqual(after);
-      };
-    });
-  });
-
-  it('should not modify the nx.json when the plugin is already registered in the nx.json', async () => {
-    const tree = createTree();
-
-    updateNxJson(tree, {
-      plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
-    });
-
-    const before = readNxJson(tree);
-
-    await initGenerator(tree, {});
-
-    const after = readNxJson(tree);
-
-    expect(before).toEqual(after);
   });
 
   it('should register the plugin in the nx.json when the plugin is not registered in the nx.json', async () => {
@@ -107,14 +83,19 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     it('should set the targetName option to the provided value', async () => {
       const tree = createTree();
 
+      const targetName =
+        defaultOptions.targetName + 'some prefix to ensure its not the default';
+
+      expect(targetName).not.toBe(defaultOptions.targetName);
+
       await initGenerator(tree, {
-        targetName: 'custom-test-target-name',
+        targetName,
       });
 
       expect(readNxJson(tree).plugins).toContainEqual({
         plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
         options: {
-          targetName: 'custom-test-target-name',
+          targetName,
         },
       });
     });
