@@ -1,3 +1,10 @@
+## 0.4.0 (2024-07-11)
+
+
+### 🚀 Features
+
+- **web-dev-server:** add plugin and init generator ([#39](https://github.com/RobbyRabbitman/nx-plus/pull/39))
+
 ## 0.3.2 (2024-07-08)
 
 
