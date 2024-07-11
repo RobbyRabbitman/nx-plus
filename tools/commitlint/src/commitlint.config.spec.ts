@@ -1,7 +1,7 @@
 import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
 import { execSync } from 'child_process';
 
-describe.skip('commitlint config', () => {
+describe('commitlint config', () => {
   const runCommitlint = (commitMessage: string) =>
     execSync(
       `${getPackageManagerCommand().exec} nx run tools-commitlint:exec:message --value '${commitMessage}'`,
