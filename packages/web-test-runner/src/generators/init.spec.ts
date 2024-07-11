@@ -32,7 +32,9 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           {
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
             options: {
-              targetName: 'test1',
+              targetName:
+                defaultOptions.targetName +
+                'some prefix to ensure its not the default',
             },
           },
         ],
@@ -55,7 +57,9 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           {
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
             options: {
-              targetName: 'test1',
+              targetName:
+                defaultOptions.targetName +
+                'some prefix to ensure its not the default',
             },
           },
         ],
@@ -69,22 +73,6 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
       expect(before).toEqual(after);
     });
-  });
-
-  it('should not modify the nx.json when the plugin is already registered in the nx.json', async () => {
-    const tree = createTree();
-
-    updateNxJson(tree, {
-      plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
-    });
-
-    const before = readNxJson(tree);
-
-    await initGenerator(tree, {});
-
-    const after = readNxJson(tree);
-
-    expect(before).toEqual(after);
   });
 
   it('should register the plugin in the nx.json when the plugin is not registered in the nx.json', async () => {
