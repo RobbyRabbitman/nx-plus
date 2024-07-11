@@ -10,6 +10,7 @@
     ":semanticCommitScopeDisabled"
   ],
   "onboarding": false,
+  "ignorePaths": ["*/**/package.json"],
   "requireConfig": "ignored",
   "dependencyDashboard": true,
   "automerge": true,
