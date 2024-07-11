@@ -42,6 +42,11 @@
       "automerge": false
     },
     {
+      "description": "When renovate changes packages, better have a look O_O",
+      "matchFileNames": ["packages/**/*"],
+      "automerge": false
+    },
+    {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
       "matchPackagePatterns": ["^@robby-rabbitman/nx-plus-"],
       "enabled": false
