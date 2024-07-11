@@ -45,7 +45,6 @@
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@commitlint/"]
     },
-
     {
       "description": "Groups all 'prettier' packages together",
       "groupName": "prettier",
