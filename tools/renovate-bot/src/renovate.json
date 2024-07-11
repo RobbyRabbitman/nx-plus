@@ -9,8 +9,8 @@
     ":semanticCommitTypeAll(chore)",
     ":semanticCommitScopeDisabled"
   ],
-  "ignorePaths": ["*/**/package.json"],
   "onboarding": false,
+  "ignorePaths": ["*/**/package.json"],
   "requireConfig": "ignored",
   "dependencyDashboard": true,
   "automerge": true,
@@ -20,11 +20,13 @@
   "enabledManagers": ["npm"],
   "printConfig": true,
   "labels": ["renovate"],
-  "allowedPostUpgradeCommands": ["^pnpm"],
+  "allowedPostUpgradeCommands": ["^(pnpm|echo|git)"],
   "postUpgradeTasks": {
     "description": "Renovate ignores nested package jsons. Use eslint to align dependencies in projects package.json when the root package.json changed.",
     "commands": [
-      "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'"
+      "echo 'Install node_modules when missing in order to run eslint'; dir='node_modules'; [ -d \"$dir\" ] && find \"$dir\" -mindepth 1 -maxdepth 1 -type d | wc -l || pnpm i --frozen-lockfile",
+      "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'",
+      "git status"
     ],
     "fileFilters": ["pnpm-lock.yaml"]
   },
@@ -37,30 +39,23 @@
       "automerge": false
     },
     {
+      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here. Idk, does not seem to work aswell O_O",
+      "matchFileNames": ["*/**/package.json"],
+      "enabled": false
+    },
+    {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
       "matchPackagePatterns": ["^@robby-rabbitman/nx-plus-"],
       "enabled": false
     },
     {
-      "description": "Groups all '@commitlint' packages together",
-      "groupName": "commitlint",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^@commitlint/"]
-    },
-    {
-      "description": "Groups all 'prettier' packages together",
+      "description": "Groups all 'prettier' packages together. Remove me when there is a group preset",
       "groupName": "prettier",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^prettier$", "^prettier-"]
     },
     {
-      "description": "Groups all 'eslint' packages together",
-      "groupName": "eslint",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"]
-    },
-    {
-      "description": "Groups all 'nx' packages together",
+      "description": "Groups all 'nx' packages together. Remove me when there is a group preset",
       "groupName": "nx",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@nx/", "^nx$"]
