@@ -38,7 +38,7 @@
       "automerge": false
     },
     {
-      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here",
+      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here. Idk, does not seem to work aswell O_O",
       "matchFileNames": ["*/**/package.json"],
       "enabled": false
     },
