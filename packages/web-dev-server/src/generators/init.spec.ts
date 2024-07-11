@@ -2,8 +2,7 @@ import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Mock } from 'vitest';
-import { defaultOptions } from '../plugin';
-import initGenerator from './init';
+import initGenerator, { defaultOptions } from './init';
 
 vi.mock('@nx/devkit', async () => {
   const module = await vi.importActual('@nx/devkit');
@@ -13,7 +12,7 @@ vi.mock('@nx/devkit', async () => {
   };
 });
 
-describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
+describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
   const formatFiles = devkit.formatFiles as Mock;
   const createTree = () =>
     createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
@@ -28,7 +27,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       const tree = createTree();
 
       updateNxJson(tree, {
-        plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
+        plugins: ['@robby-rabbitman/nx-plus-web-dev-server/plugin'],
       });
 
       const before = readNxJson(tree);
@@ -46,7 +45,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       updateNxJson(tree, {
         plugins: [
           {
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
             options: {
               targetName:
                 defaultOptions.targetName +
@@ -72,9 +71,9 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     await initGenerator(tree, {});
 
     expect(readNxJson(tree).plugins).toContainEqual({
-      plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+      plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
       options: {
-        targetName: 'test',
+        targetName: 'serve',
       },
     });
   });
@@ -83,7 +82,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     it('should set the targetName option to the provided value', async () => {
       const tree = createTree();
 
-      const targetName = 'web-test-runner';
+      const targetName = 'web-dev-server';
 
       expect(targetName).not.toBe(defaultOptions.targetName);
 
@@ -92,7 +91,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       });
 
       expect(readNxJson(tree).plugins).toContainEqual({
-        plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+        plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
         options: {
           targetName,
         },
@@ -129,9 +128,9 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       });
 
       expect(readNxJson(tree).plugins).toContainEqual({
-        plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+        plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
         options: {
-          targetName: 'test',
+          targetName: 'serve',
         },
       });
     });

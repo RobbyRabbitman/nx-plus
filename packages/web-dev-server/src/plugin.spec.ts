@@ -2,7 +2,7 @@ import { CreateNodesContextV2 } from '@nx/devkit';
 import { DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
-  WebTestRunnerTargetPluginOptions,
+  WebDevServerTargetPluginOptions,
   createNodes,
   createNodesV2,
   defaultOptions,
@@ -10,7 +10,7 @@ import {
 
 vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
 
-describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
+describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
   const context = {
     nxJsonConfiguration: {
       targetDefaults: {
@@ -22,7 +22,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
         default: ['{projectRoot}/**/*'],
       },
     },
-    workspaceRoot: 'tmp/web-test-runner',
+    workspaceRoot: 'tmp/web-dev-server',
   } satisfies CreateNodesContextV2;
 
   afterEach(() => {
@@ -38,7 +38,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       options,
     }: {
       directories: DirectoryJSON;
-      options?: WebTestRunnerTargetPluginOptions;
+      options?: WebDevServerTargetPluginOptions;
     }) => {
       vol.fromJSON(directories, context.workspaceRoot);
 
@@ -51,13 +51,13 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       );
     };
 
-    describe('workspace root with web-test-runner config', () => {
+    describe('workspace root with web-dev-server config', () => {
       it('should not create a target', () => {
         const nodes = runCreateNodes({
           directories: {
             'package.json': '{}',
             'project.json': '{}',
-            'web-test-runner.config.js': '{}',
+            'web-dev-server.config.js': '{}',
           },
         });
 
@@ -65,11 +65,11 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       });
     });
 
-    describe('directory with web-test-runner config', () => {
+    describe('directory with web-dev-server config', () => {
       it('should not create a target', () => {
         const nodes = runCreateNodes({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
           },
         });
 
@@ -79,7 +79,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       it('should create a target when `package.json` is present', () => {
         const nodes = runCreateNodes({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/package.json': '{}',
           },
         });
@@ -89,9 +89,9 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
             projects: {
               'some/directory': {
                 targets: {
-                  test: {
+                  serve: {
                     command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
+                      'web-dev-server --config=some/directory/web-dev-server.config.js',
                   },
                 },
               },
@@ -103,7 +103,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       it('should create a target when `project.json` is present', () => {
         const nodes = runCreateNodes({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/project.json': '{}',
           },
         });
@@ -113,9 +113,9 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
             projects: {
               'some/directory': {
                 targets: {
-                  test: {
+                  serve: {
                     command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
+                      'web-dev-server --config=some/directory/web-dev-server.config.js',
                   },
                 },
               },
@@ -129,11 +129,11 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       it('should create a custom named target when specified', () => {
         const nodes = runCreateNodes({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/project.json': '{}',
           },
           options: {
-            targetName: 'web-test-runner-test',
+            targetName: 'web-dev-server',
           },
         });
 
@@ -142,9 +142,9 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
             projects: {
               'some/directory': {
                 targets: {
-                  'web-test-runner-test': {
+                  'web-dev-server': {
                     command:
-                      'web-test-runner --config=some/directory/web-test-runner.config.js',
+                      'web-dev-server --config=some/directory/web-dev-server.config.js',
                   },
                 },
               },
@@ -163,7 +163,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       options,
     }: {
       directories: DirectoryJSON;
-      options?: WebTestRunnerTargetPluginOptions;
+      options?: WebDevServerTargetPluginOptions;
     }) => {
       vol.fromJSON(directories, context.workspaceRoot);
 
@@ -176,51 +176,51 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       );
     };
 
-    describe('workspace root with web-test-runner config', () => {
+    describe('workspace root with web-dev-server config', () => {
       it('should not create a target', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
             'package.json': '{}',
             'project.json': '{}',
-            'web-test-runner.config.js': '{}',
+            'web-dev-server.config.js': '{}',
           },
         });
 
-        expect(nodes).toEqual([['web-test-runner.config.js', {}]]);
+        expect(nodes).toEqual([['web-dev-server.config.js', {}]]);
       });
     });
 
-    describe('directory with web-test-runner config', () => {
+    describe('directory with web-dev-server config', () => {
       it('should not create a target', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
           },
         });
 
         expect(nodes).toEqual([
-          ['some/directory/web-test-runner.config.js', {}],
+          ['some/directory/web-dev-server.config.js', {}],
         ]);
       });
 
       it('should create a target when `package.json` is present', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/package.json': '{}',
           },
         });
 
         expect(nodes).toEqual([
           [
-            'some/directory/web-test-runner.config.js',
+            'some/directory/web-dev-server.config.js',
             {
               projects: {
                 'some/directory': {
                   targets: {
-                    test: {
+                    serve: {
                       command:
-                        'web-test-runner --config=some/directory/web-test-runner.config.js',
+                        'web-dev-server --config=some/directory/web-dev-server.config.js',
                     },
                   },
                 },
@@ -233,21 +233,21 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       it('should create a target when `project.json` is present', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/project.json': '{}',
           },
         });
 
         expect(nodes).toEqual([
           [
-            'some/directory/web-test-runner.config.js',
+            'some/directory/web-dev-server.config.js',
             {
               projects: {
                 'some/directory': {
                   targets: {
-                    test: {
+                    serve: {
                       command:
-                        'web-test-runner --config=some/directory/web-test-runner.config.js',
+                        'web-dev-server --config=some/directory/web-dev-server.config.js',
                     },
                   },
                 },
@@ -262,24 +262,24 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       it('should create a custom named target when specified', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
-            'some/directory/web-test-runner.config.js': '{}',
+            'some/directory/web-dev-server.config.js': '{}',
             'some/directory/project.json': '{}',
           },
           options: {
-            targetName: 'web-test-runner-test',
+            targetName: 'web-dev-server',
           },
         });
 
         expect(nodes).toEqual([
           [
-            'some/directory/web-test-runner.config.js',
+            'some/directory/web-dev-server.config.js',
             {
               projects: {
                 'some/directory': {
                   targets: {
-                    'web-test-runner-test': {
+                    'web-dev-server': {
                       command:
-                        'web-test-runner --config=some/directory/web-test-runner.config.js',
+                        'web-dev-server --config=some/directory/web-dev-server.config.js',
                     },
                   },
                 },
