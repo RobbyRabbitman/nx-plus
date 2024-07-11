@@ -22,7 +22,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
         default: ['{projectRoot}/**/*'],
       },
     },
-    workspaceRoot: 'tmp/web-dev-server-plugin',
+    workspaceRoot: 'tmp/web-dev-server',
   } satisfies CreateNodesContextV2;
 
   afterEach(() => {

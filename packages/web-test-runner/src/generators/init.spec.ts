@@ -83,8 +83,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
     it('should set the targetName option to the provided value', async () => {
       const tree = createTree();
 
-      const targetName =
-        defaultOptions.targetName + 'some prefix to ensure its not the default';
+      const targetName = 'web-test-runner';
 
       expect(targetName).not.toBe(defaultOptions.targetName);
 

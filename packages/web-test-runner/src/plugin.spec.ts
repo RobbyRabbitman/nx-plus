@@ -15,14 +15,14 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     nxJsonConfiguration: {
       targetDefaults: {
         [defaultOptions.targetName]: {
-          command: `echo 'I am the default target of ${defaultOptions.targetName}'`,
+          command: `echo 'I am the default command of ${defaultOptions.targetName}'`,
         },
       },
       namedInputs: {
         default: ['{projectRoot}/**/*'],
       },
     },
-    workspaceRoot: 'tmp/web-test-runner-plugin',
+    workspaceRoot: 'tmp/web-test-runner',
   } satisfies CreateNodesContextV2;
 
   afterEach(() => {
