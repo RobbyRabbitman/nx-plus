@@ -23,6 +23,7 @@
   "postUpgradeTasks": {
     "description": "Renovate ignores nested package jsons. Use eslint to align dependencies in projects package.json when the root package.json changed.",
     "commands": [
+      "pnpm exec nx reset",
       "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'"
     ],
     "fileFilters": ["pnpm-lock.yaml"]
