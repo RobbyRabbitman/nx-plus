@@ -10,7 +10,6 @@
     ":semanticCommitScopeDisabled"
   ],
   "onboarding": false,
-  "ignorePaths": ["*/**/package.json"],
   "requireConfig": "ignored",
   "dependencyDashboard": true,
   "automerge": true,
@@ -18,6 +17,9 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "enabledManagers": ["npm"],
+  "npm": {
+    "ignorePaths": ["*/**/package.json"]
+  },
   "printConfig": true,
   "labels": ["renovate"],
   "allowedPostUpgradeCommands": ["^(pnpm|echo|git)"],
@@ -28,7 +30,8 @@
       "pnpm exec nx run-many -t lint-eslint --fix --rule '{\"@nx/dependency-checks\": \"error\"}'",
       "git status"
     ],
-    "fileFilters": ["pnpm-lock.yaml"]
+    "executionMode": "branch",
+    "fileFilters": ["**/package.json"]
   },
   "lockFileMaintenance": {
     "enabled": true
@@ -39,9 +42,9 @@
       "automerge": false
     },
     {
-      "description": "'ignorePaths' seem to get overridding by the default config, so we disable them here. Idk, does not seem to work aswell O_O",
-      "matchFileNames": ["*/**/package.json"],
-      "enabled": false
+      "description": "When renovate changes packages, better have a look O_O",
+      "matchFileNames": ["packages/**/*"],
+      "automerge": false
     },
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
