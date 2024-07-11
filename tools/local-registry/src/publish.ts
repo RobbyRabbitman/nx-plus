@@ -11,6 +11,7 @@ import { join, resolve } from 'node:path';
 import { releasePublish, releaseVersion } from 'nx/release';
 
 export const localRegistryTarget = 'tools-local-registry:serve';
+export const publishTarget = 'tools-local-registry:publish';
 
 /**
  * Publishes this workspace to a local registry.
@@ -19,6 +20,9 @@ export const localRegistryTarget = 'tools-local-registry:serve';
  * - No git commits done
  * - When `projects` is empty, all projects are published
  * - When `projects` is not empty, only the specified projects are published
+ *
+ * TODO: This function fails, if not executed from root of the workspace,
+ * because apparently the tspaths are not resolved correctly.
  */
 export async function publish(options: {
   specifier: string;
@@ -44,7 +48,7 @@ export async function publish(options: {
   const graph = readCachedProjectGraph();
 
   /** When invoked, stops the registry. */
-  let stopLocalRegistryFn = (() => {}) satisfies Awaited<
+  let stopLocalRegistryFn = (() => undefined) satisfies Awaited<
     ReturnType<typeof startLocalRegistry>
   >;
 

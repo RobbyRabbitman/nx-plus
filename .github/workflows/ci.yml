@@ -38,5 +38,7 @@ jobs:
 
       - run: |
           pnpm exec nx format:check
-          pnpm exec nx affected -t lint-eslint test test-jest build --configuration ci
-          pnpm exec nx affected -t e2e e2e-jest --configuration ci --parallel 1
+          pnpm exec nx affected -t lint-eslint test test-vite build --configuration ci
+          pnpm exec nx affected -t e2e e2e-vite --configuration ci
+        env:
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

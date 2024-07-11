@@ -29,9 +29,9 @@ import { localRegistryTarget, publish } from './publish';
       string: true,
       default: [],
     })
-    .option('install', {
+    .option('stopLocalRegistry', {
       type: 'boolean',
-      default: false,
+      default: true,
     })
     .option('localRegistryTarget', {
       type: 'string',
@@ -41,7 +41,6 @@ import { localRegistryTarget, publish } from './publish';
 
   const { publishStatus } = await publish({
     ...options,
-    stopLocalRegistry: true,
   });
   process.exit(publishStatus);
 })();

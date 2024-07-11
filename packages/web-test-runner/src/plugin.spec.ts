@@ -5,18 +5,17 @@ import {
   WebTestRunnerTargetPluginOptions,
   createNodes,
   createNodesV2,
+  defaultOptions,
 } from './plugin';
 
-jest.mock('node:fs', () => {
-  return jest.requireActual('memfs').fs;
-});
+vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
 
 describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const context = {
     nxJsonConfiguration: {
       targetDefaults: {
-        test: {
-          command: "echo 'I am the default target command'",
+        [defaultOptions.targetName]: {
+          command: `echo 'I am the default target of ${defaultOptions.targetName}'`,
         },
       },
       namedInputs: {
@@ -28,7 +27,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
 
   afterEach(() => {
     vol.reset();
-    jest.resetModules();
+    vi.resetModules();
   });
 
   describe('createNodes', () => {
