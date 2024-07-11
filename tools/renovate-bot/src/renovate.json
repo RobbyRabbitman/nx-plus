@@ -49,25 +49,13 @@
       "enabled": false
     },
     {
-      "description": "Groups all '@commitlint' packages together",
-      "groupName": "commitlint",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^@commitlint/"]
-    },
-    {
-      "description": "Groups all 'prettier' packages together",
+      "description": "Groups all 'prettier' packages together. Remove me when there is a group preset",
       "groupName": "prettier",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^prettier$", "^prettier-"]
     },
     {
-      "description": "Groups all 'eslint' packages together",
-      "groupName": "eslint",
-      "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"]
-    },
-    {
-      "description": "Groups all 'nx' packages together",
+      "description": "Groups all 'nx' packages together. Remove me when there is a group preset",
       "groupName": "nx",
       "matchManagers": ["npm"],
       "matchPackagePatterns": ["^@nx/", "^nx$"]
