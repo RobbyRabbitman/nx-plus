@@ -30,10 +30,12 @@
   "license": "MIT",
   "peerDependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "@web/dev-server": "^0.4.6"
+    "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "generators": "./generators.json",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "exports": {
     ".": "./src/index.js",
     "./package.json": "./package.json",
