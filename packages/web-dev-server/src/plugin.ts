@@ -3,14 +3,21 @@ import {
   CreateNodesContextV2,
   CreateNodesFunction,
   CreateNodesV2,
+  TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
+import { DevServerCliArgs } from '@web/dev-server/src/config/readCliArgs';
 import { existsSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
+import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 
 export type WebDevServerTargetPluginOptions = {
   /** The name of the web-dev-server target. */
   targetName?: string;
+  /** The configuration of the web-dev-server target. */
+  targetConfig?: TargetConfiguration<
+    Partial<RunCommandsOptions> & DevServerCliArgs
+  >;
 };
 
 export const webDevServerConfigFileNameGlob =
@@ -18,18 +25,10 @@ export const webDevServerConfigFileNameGlob =
 
 export const webDevServerCommand = 'web-dev-server';
 
-export const defaultOptions = {
-  targetName: 'serve',
-} satisfies Required<WebDevServerTargetPluginOptions>;
-
 export const createNodes: CreateNodes<WebDevServerTargetPluginOptions> = [
   webDevServerConfigFileNameGlob,
   (webDevServerConfigPath, options, context) =>
-    createWebDevServerTarget(
-      webDevServerConfigPath,
-      { ...defaultOptions, ...options },
-      context,
-    ),
+    createWebDevServerTarget(webDevServerConfigPath, options, context),
 ];
 
 export const createNodesV2: CreateNodesV2<WebDevServerTargetPluginOptions> = [
@@ -38,7 +37,7 @@ export const createNodesV2: CreateNodesV2<WebDevServerTargetPluginOptions> = [
     return createNodesFromFiles(
       createWebDevServerTarget,
       webDevServerConfigPaths,
-      { ...defaultOptions, ...options },
+      options,
       context,
     );
   },
@@ -52,23 +51,41 @@ export const createNodesV2: CreateNodesV2<WebDevServerTargetPluginOptions> = [
  * @returns
  */
 const createWebDevServerTarget: CreateNodesFunction<
-  Required<WebDevServerTargetPluginOptions>
+  WebDevServerTargetPluginOptions
 > = (webDevServerConfigPath, options, context) => {
-  const { targetName } = options;
+  const { targetName, targetConfig } = {
+    targetName: 'serve',
+    targetConfig: {},
+    ...options,
+  } satisfies Required<WebDevServerTargetPluginOptions>;
 
+  const webDevServerConfigFileName = basename(webDevServerConfigPath);
   const webDevServerConfigDirectory = dirname(webDevServerConfigPath);
 
   if (!isNonRootProject(webDevServerConfigDirectory, context)) {
     return {};
   }
 
+  const webDevServerConfig = {
+    config: webDevServerConfigFileName,
+    watch: true,
+  } satisfies DevServerCliArgs;
+
+  const inferredTargetConfig = {
+    command: webDevServerCommand,
+    ...targetConfig,
+    options: {
+      ...webDevServerConfig,
+      cwd: '{projectRoot}',
+      ...targetConfig.options,
+    },
+  } satisfies WebDevServerTargetPluginOptions['targetConfig'];
+
   return {
     projects: {
       [webDevServerConfigDirectory]: {
         targets: {
-          [targetName]: {
-            command: `${webDevServerCommand} --config=${webDevServerConfigPath}`,
-          },
+          [targetName]: inferredTargetConfig,
         },
       },
     },
@@ -76,7 +93,8 @@ const createWebDevServerTarget: CreateNodesFunction<
 };
 
 /**
- * @param directory - Relative to `context.workspaceRoot` e.g path/to/directory
+ * @param directory - Relative to `context.workspaceRoot` e.g
+ *   'path/to/directory'
  * @param context
  * @returns Whether the directory is considered a non root project.
  */
