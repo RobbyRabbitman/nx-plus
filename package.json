@@ -41,7 +41,6 @@
     "verdaccio": "5.31.1",
     "vite": "5.3.3",
     "vitest": "1.6.0",
-    "web-dev-server": "3.0.27",
     "yargs": "17.7.2"
   },
   "dependencies": {

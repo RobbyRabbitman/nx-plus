@@ -6,10 +6,28 @@ import {
   TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
-import { DevServerCliArgs } from '@web/dev-server/src/config/readCliArgs';
+import { DevServerConfig } from '@web/dev-server';
 import { existsSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
+
+// copy pasta from '@web/dev-server/src/config/readCliArgs'
+// maybe its exported in the future
+export interface DevServerCliArgs
+  extends Partial<
+    Pick<
+      DevServerConfig,
+      | 'rootDir'
+      | 'open'
+      | 'appIndex'
+      | 'preserveSymlinks'
+      | 'nodeResolve'
+      | 'watch'
+      | 'esbuildTarget'
+    >
+  > {
+  config?: string;
+}
 
 export type WebDevServerTargetPluginOptions = {
   /** The name of the web-dev-server target. */

@@ -117,9 +117,6 @@ importers:
       vitest:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.14.10)(@vitest/ui@1.6.0)
-      web-dev-server:
-        specifier: 3.0.27
-        version: 3.0.27
       yargs:
         specifier: 17.7.2
         version: 17.7.2
@@ -9991,13 +9988,6 @@ packages:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
     dependencies:
       defaults: 1.0.4
-
-  /web-dev-server@3.0.27:
-    resolution: {integrity: sha512-fCT9qe/Txp0KugkvbJ4LiFnUgaX6Brvkm+BiDRBX394kyQ5iCOBzFMikMaIUf4A4SczA/Ea3m40J13XGQfeoBw==}
-    dependencies:
-      mime-db: 1.52.0
-      tslib: 2.6.3
-    dev: true
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
