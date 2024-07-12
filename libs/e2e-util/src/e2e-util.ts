@@ -6,9 +6,10 @@ import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-gra
 
 export const createE2eWorkspace = (options: {
   e2eProjectName: string;
+  workspaceName: string;
   nxVersion: string;
 }) => {
-  const { e2eProjectName, nxVersion } = options;
+  const { e2eProjectName, nxVersion, workspaceName } = options;
 
   const e2eProject = readCachedProjectConfiguration(e2eProjectName);
 
@@ -21,6 +22,7 @@ export const createE2eWorkspace = (options: {
 
   return createWorkspace({
     projectRoot: e2eProjectRoot,
+    workspaceName,
     nxVersion,
   });
 };
@@ -35,12 +37,12 @@ export const createWorkspace = (options: {
    * `e2e/path/to/project`
    */
   projectRoot: string;
+  /** The name of the workspace e.g. 'my-nx-workspace' */
+  workspaceName: string;
   /** The nx version to use, must be a valid npm version identifier */
   nxVersion: string;
 }) => {
-  const { projectRoot, nxVersion } = options;
-
-  const workspaceName = `${projectRoot.split('/').pop()}-${nxVersion}`;
+  const { projectRoot, nxVersion, workspaceName } = options;
 
   const workspaceRoot = join(projectRoot, workspaceName);
 
