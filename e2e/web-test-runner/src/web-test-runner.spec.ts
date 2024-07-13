@@ -15,6 +15,7 @@ for (const nxVersion of nxVersions) {
     beforeAll(() => {
       const workspace = createE2eWorkspace({
         e2eProjectName: 'web-test-runner-e2e',
+        workspaceName: `web-dev-server-e2e--${Date.now()}`,
         nxVersion,
       });
       workspaceRoot = workspace.workspaceRoot;
