@@ -1,6 +1,6 @@
 import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
-import { createE2eWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execUntil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
@@ -20,12 +20,11 @@ for (const { nxVersion, e2eProject, peerDependencies } of versionMatrix) {
     let workspaceRoot = '';
 
     beforeAll(() => {
-      const workspace = createE2eWorkspace({
+      workspaceRoot = createE2eNxWorkspace({
         e2eProjectName: 'web-dev-server-e2e',
-        workspaceName: `web-dev-server-e2e--${Date.now()}`,
-        nxVersion,
+        e2eNxWorkspaceName: `web-dev-server-e2e--${Date.now()}`,
+        e2eNxVersion: nxVersion,
       });
-      workspaceRoot = workspace.workspaceRoot;
     });
 
     it('should install succesfully', () => {
