@@ -6,7 +6,8 @@ import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-gra
 
 /**
  * Creates a nx workspace in
- * `dist/e2e-workspace/{projectRoot}/{nxWorkspaceName}`
+ * `dist/e2e-workspace/{projectRoot}/{nxWorkspaceName}` with
+ * `create-nx-workspace`.
  *
  * - {projectRoot} <=> the path to the project root of the project identified by
  *   `e2eProjectName` relative to _this_ nx workspace root e.g.
@@ -26,8 +27,15 @@ export const createE2eNxWorkspace = (options: {
   e2eNxWorkspaceName: string;
   /** The version of the new nx workspace. */
   e2eNxVersion: string;
+  /** Additional arguments for `create-nx-workspace`. */
+  createNxWorkspaceArgs: string;
 }) => {
-  const { e2eProjectName, e2eNxVersion, e2eNxWorkspaceName } = options;
+  const {
+    e2eProjectName,
+    e2eNxVersion,
+    e2eNxWorkspaceName,
+    createNxWorkspaceArgs,
+  } = options;
 
   const e2eProject = readCachedProjectConfiguration(e2eProjectName);
 
@@ -39,6 +47,7 @@ export const createE2eNxWorkspace = (options: {
     cwd: e2eNxWorkspacesOfProject,
     nxWorkspaceName: e2eNxWorkspaceName,
     nxVersion: e2eNxVersion,
+    args: createNxWorkspaceArgs,
   });
 };
 
@@ -70,6 +79,7 @@ export const createNxWorkspace = (options: {
   // make sure there is no directory.
   rmSync(nxWorkspaceRoot, {
     recursive: true,
+    force: true,
   });
 
   // make the current working directory exists.
@@ -81,7 +91,7 @@ export const createNxWorkspace = (options: {
   execSync(
     `npx --yes create-nx-workspace@${nxVersion} ${nxWorkspaceName} --nxCloud skip --no-interactive ${args}`,
     {
-      cwd: nxWorkspaceRoot,
+      cwd,
       stdio: 'inherit',
     },
   );

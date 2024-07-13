@@ -24,6 +24,7 @@ for (const { nxVersion, e2eProject, peerDependencies } of versionMatrix) {
         e2eProjectName: 'web-dev-server-e2e',
         e2eNxWorkspaceName: `web-dev-server-e2e--${Date.now()}`,
         e2eNxVersion: nxVersion,
+        createNxWorkspaceArgs: '--preset apps',
       });
     });
 
