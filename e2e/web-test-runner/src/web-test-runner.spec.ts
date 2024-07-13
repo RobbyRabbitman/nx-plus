@@ -17,6 +17,7 @@ for (const nxVersion of nxVersions) {
         e2eProjectName: 'web-test-runner-e2e',
         e2eNxWorkspaceName: `web-dev-server-e2e--${Date.now()}`,
         e2eNxVersion: nxVersion,
+        createNxWorkspaceArgs: '--preset apps',
       });
     });
 

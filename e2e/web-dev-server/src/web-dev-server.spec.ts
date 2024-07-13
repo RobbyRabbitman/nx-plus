@@ -1,21 +1,26 @@
 import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
-import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import {
+  createE2eNxWorkspace,
+  createVersionMatrix,
+} from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execUntil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { createVersionPermutations } from './util';
 
-const versionMatrix = createVersionPermutations({
-  nxVersions: ['^17', '^18', '^19'],
-  e2eProject: '@robby-rabbitman/nx-plus-web-dev-server@local',
+const versionMatrix = createVersionMatrix({
+  name: '@robby-rabbitman/nx-plus-web-dev-server@local',
   peerDependencies: {
+    nx: ['^17', '^18', '^19'],
     '@web/dev-server': ['^0.4.6'],
   },
 });
 
-for (const { nxVersion, e2eProject, peerDependencies } of versionMatrix) {
+for (const {
+  name: e2eProject,
+  peerDependencies: { nx: nxVersion, ...peerDependencies },
+} of versionMatrix) {
   describe(`${e2eProject} with nx@${nxVersion}`, () => {
     let workspaceRoot = '';
 
