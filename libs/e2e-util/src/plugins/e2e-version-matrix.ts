@@ -3,8 +3,10 @@ import {
   CreateNodesFunction,
   CreateNodesV2,
   readJsonFile,
+  TargetConfiguration,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
+import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 import { dirname, join } from 'path';
 import {
   createVersionMatrix,
@@ -16,6 +18,7 @@ export type E2eVersionMatrixTargetPluginOptions = {
   targetName?: string;
   peerDependencyEnvPrefix?: string;
   configurationPrefix?: string;
+  configurationConfig?: TargetConfiguration<Partial<RunCommandsOptions>>;
 };
 
 const e2eVersionMatrixConfigGlob = '**/e2e-version-matrix.config.json';
@@ -36,10 +39,16 @@ export const createNodesV2: CreateNodesV2<E2eVersionMatrixTargetPluginOptions> =
 const addE2eVersionMatrix: CreateNodesFunction<
   E2eVersionMatrixTargetPluginOptions
 > = (e2eVersionMatrixConfigPath, options, context) => {
-  const { targetName, peerDependencyEnvPrefix, configurationPrefix } = {
+  const {
+    targetName,
+    peerDependencyEnvPrefix,
+    configurationPrefix,
+    configurationConfig,
+  } = {
     targetName: 'e2e',
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
     configurationPrefix: 'version-matrix',
+    configurationConfig: {},
     ...options,
   } satisfies Required<E2eVersionMatrixTargetPluginOptions>;
 
@@ -76,12 +85,16 @@ const addE2eVersionMatrix: CreateNodesFunction<
   const createConfiguration = ({
     peerDependencies,
   }: E2eProjectWithNxPermutation) => ({
-    env: Object.fromEntries(
-      Object.entries(peerDependencies).map(([name, version]) => [
-        `${peerDependencyEnvPrefix}${name}`,
-        version,
-      ]),
-    ),
+    ...configurationConfig,
+    env: {
+      ...Object.fromEntries(
+        Object.entries(peerDependencies).map(([name, version]) => [
+          `${peerDependencyEnvPrefix}${name}`,
+          version,
+        ]),
+      ),
+      ...configurationConfig['env'],
+    },
   });
 
   const configurations = Object.fromEntries(
