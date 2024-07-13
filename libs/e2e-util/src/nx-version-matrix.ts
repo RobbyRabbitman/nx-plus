@@ -6,7 +6,7 @@ export interface E2eProjectWithNx {
   };
 }
 
-interface E2eProjectWithNxPermutation {
+export interface E2eProjectWithNxPermutation {
   name: string;
   peerDependencies: {
     nx: string;
