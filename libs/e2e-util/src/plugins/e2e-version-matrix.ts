@@ -180,7 +180,7 @@ function runManyConfigurations({
 }: {
   project: string;
   target: string;
-  configurations: Iterable<string>;
+  configurations: string[];
 }) {
   const createCommand = (configuration: string) => {
     const targetWithConfiguration = targetToTargetString({
@@ -193,7 +193,7 @@ function runManyConfigurations({
     } satisfies RunCommandsOptions['commands'][0];
   };
 
-  const commands = [...configurations].map(createCommand);
+  const commands = configurations.map(createCommand);
 
   return {
     executor: 'nx:run-commands',
