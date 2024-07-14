@@ -1,5 +1,4 @@
 import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
-
 import { execSync } from 'child_process';
 import { rmSync } from 'fs';
 import { join } from 'path';
