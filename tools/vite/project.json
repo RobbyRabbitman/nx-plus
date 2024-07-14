@@ -11,9 +11,6 @@
         "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json"
       }
-    },
-    "e2e": {
-      "command": "ts-node {projectRoot}/src/e2e.cli.ts"
     }
   }
 }

@@ -35,6 +35,9 @@
           "command": "echo 'Im disabled in ci'"
         }
       }
+    },
+    "e2e": {
+      "command": "ts-node {projectRoot}/src/e2e.cli.ts"
     }
   }
 }
