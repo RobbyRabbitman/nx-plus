@@ -19,7 +19,7 @@ import {
   VersionMatrixItem,
 } from '../version-matrix';
 
-export type E2eVersionMatrixTargetPluginOptions = {
+export type E2eVersionMatrixPluginOptions = {
   e2eTargetName?: string;
   e2eVersionMatrixTargetName?: string;
   peerDependencyEnvPrefix?: string;
@@ -30,25 +30,24 @@ export type E2eVersionMatrixTargetPluginOptions = {
 const e2eVersionMatrixConfigFileName = 'e2e-version-matrix.config.json';
 const e2eVersionMatrixConfigGlob = `**/${e2eVersionMatrixConfigFileName}`;
 
-export const createNodesV2: CreateNodesV2<E2eVersionMatrixTargetPluginOptions> =
-  [
-    e2eVersionMatrixConfigGlob,
-    (e2eVersionMatrixConfigPath, options, context) => {
-      return createNodesFromFiles(
-        addE2eVersionMatrix,
-        e2eVersionMatrixConfigPath,
-        options,
-        context,
-      );
-    },
-  ];
+export const createNodesV2: CreateNodesV2<E2eVersionMatrixPluginOptions> = [
+  e2eVersionMatrixConfigGlob,
+  (e2eVersionMatrixConfigPath, options, context) => {
+    return createNodesFromFiles(
+      addE2eVersionMatrix,
+      e2eVersionMatrixConfigPath,
+      options,
+      context,
+    );
+  },
+];
 
 /**
  * TODO: maybe we can use the `peerDependencies` of the package.json as is and
  * find a logic to extract the _wanted_ versions.
  */
 const addE2eVersionMatrix: CreateNodesFunction<
-  E2eVersionMatrixTargetPluginOptions
+  E2eVersionMatrixPluginOptions
 > = (e2eVersionMatrixConfigPath, options, context) => {
   const {
     e2eVersionMatrixTargetName,
@@ -63,7 +62,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
     configurationPrefix: 'version-matrix',
     configurationConfig: {},
     ...options,
-  } satisfies Required<E2eVersionMatrixTargetPluginOptions>;
+  } satisfies Required<E2eVersionMatrixPluginOptions>;
 
   const maybeProjectRoot = dirname(e2eVersionMatrixConfigPath);
 
