@@ -235,7 +235,7 @@ export function readE2eProject({
      */
     e2eWorkspaceName: `${Date.now()}${configuration}`
       .replace(/[^a-z0-9]/gi, '')
-      .substring(0, 256),
+      .substring(0, 255),
     /** The package the e2e test targets. */
     e2ePackage: {
       name: e2eVersionMatrixConfig.name,
