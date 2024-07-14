@@ -2,6 +2,7 @@ import {
   createNodesFromFiles,
   CreateNodesFunction,
   CreateNodesV2,
+  getPackageManagerCommand,
   readJsonFile,
   TargetConfiguration,
   targetToTargetString,
@@ -157,6 +158,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
   };
 };
 
+/** @returns The project of the current e2e target. */
 export function readE2eProject({
   peerDependencyEnvPrefix,
 }: {
@@ -179,12 +181,17 @@ export function readE2eProject({
       envVar.replace(peerDependencyEnvPrefix, ''),
       process.env[envVar],
     ]),
-  ) as VersionMatrixItem['peerDependencies'];
+  );
 
   return {
-    e2eNxWorkspaceName: `${Date.now()}${configuration}`
+    /**
+     * A _safe_ folder name, which can be used as a _workspace_ for the e2e
+     * test.
+     */
+    e2eWorkspaceName: `${Date.now()}${configuration}`
       .replace(/[^a-z0-9]/gi, '')
       .substring(0, 255),
+    /** The package the e2e test targets. */
     e2ePackage: {
       name: e2eVersionMatrixConfig.name,
       version: e2eVersionMatrixConfig.version,
@@ -193,19 +200,21 @@ export function readE2eProject({
   };
 }
 
-export function installE2eProject({
+/** Installs a package including its peer dependencies. */
+export function installProject({
   workspaceRoot,
+  packageManagerCommand,
   package: { name, version, peerDependencies },
 }: {
   workspaceRoot: string;
+  packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
   package: VersionMatrixItem;
 }) {
-  execSync(`npm i -D ${name}@${version}`, {
-    cwd: workspaceRoot,
-  });
-
   execSync(
-    `npm i -D ${Object.entries(peerDependencies)
+    `${packageManagerCommand.addDev} ${Object.entries({
+      ...peerDependencies,
+      [name]: version,
+    })
       .map((dep_version) => dep_version.join('@'))
       .join(' ')}`,
     {

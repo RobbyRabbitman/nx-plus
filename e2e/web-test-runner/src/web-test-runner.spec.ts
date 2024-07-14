@@ -1,15 +1,21 @@
-import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
+import {
+  getPackageManagerCommand,
+  NxJsonConfiguration,
+  ProjectConfiguration,
+} from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
   createE2eNxWorkspace,
-  installE2eProject,
+  installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 
 describe(`@robby-rabbitman/nx-plus-web-test-runner`, () => {
-  const { e2eNxWorkspaceName, e2ePackage } = readE2eProject({
+  const npm = getPackageManagerCommand('npm');
+
+  const { e2eWorkspaceName, e2ePackage } = readE2eProject({
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
   });
 
@@ -19,15 +25,16 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner`, () => {
 
   const workspaceRoot = createE2eNxWorkspace({
     e2eProjectName: 'web-test-runner-e2e',
-    e2eNxWorkspaceName,
+    e2eNxWorkspaceName: e2eWorkspaceName,
     e2eNxVersion: e2ePackage.peerDependencies.nx,
     createNxWorkspaceArgs: '--preset apps',
   });
 
   it('should install succesfully', () => {
-    installE2eProject({
+    installProject({
       package: e2ePackage,
       workspaceRoot,
+      packageManagerCommand: npm,
     });
   });
 
