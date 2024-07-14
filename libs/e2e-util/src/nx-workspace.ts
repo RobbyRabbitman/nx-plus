@@ -88,8 +88,9 @@ export const createNxWorkspace = (options: {
   });
 
   // always npx?
+  // TODO: NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@18
   execSync(
-    `npx --yes create-nx-workspace@${nxVersion} ${nxWorkspaceName} --nxCloud skip --no-interactive ${args}`,
+    `NX_ISOLATE_PLUGINS=false npx --yes create-nx-workspace@${nxVersion} ${nxWorkspaceName} --nxCloud skip --no-interactive ${args}`,
     {
       cwd,
       stdio: 'inherit',

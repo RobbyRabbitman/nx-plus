@@ -43,8 +43,8 @@ async function main() {
     const packageManagerCommand = getPackageManagerCommand();
 
     execSync(
-      `NX_ISOLATE_PLUGINS=true ${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite --exclude tools-local-registry`,
-      { cwd: workspaceRoot, stdio: 'inherit', env: process.env },
+      `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite --exclude tools-local-registry`,
+      { cwd: workspaceRoot, stdio: 'inherit' },
     );
   } catch (error) {
     console.error(error);
