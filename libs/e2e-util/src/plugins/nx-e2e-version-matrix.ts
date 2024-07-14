@@ -115,14 +115,16 @@ const addE2eVersionMatrix: CreateNodesFunction<
   );
 
   const e2eVersionMatrixTarget = () => {
-    const runE2eTarget = (configuration: string) =>
-      ({
-        command: `nx run ${targetToTargetString({
-          project: '{projectName}',
-          target: e2eTargetName,
-          configuration,
-        })}`,
-      }) satisfies RunCommandsOptions['commands'][0];
+    const runE2eTarget = (configuration: string) => {
+      const e2eTarget = targetToTargetString({
+        project: '{projectName}',
+        target: e2eTargetName,
+        configuration,
+      });
+      return {
+        command: `nx run ${e2eTarget}`,
+      } satisfies RunCommandsOptions['commands'][0];
+    };
 
     const commands = Object.keys(configurations).map(runE2eTarget);
 
@@ -130,7 +132,6 @@ const addE2eVersionMatrix: CreateNodesFunction<
       executor: 'nx:run-commands',
       options: {
         commands,
-        parallel: false,
       },
     } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
   };
