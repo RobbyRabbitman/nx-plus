@@ -13,8 +13,7 @@
       }
     },
     "e2e": {
-      "command": "node dist/{project}/src/e2e.cli",
-      "dependsOn": ["build"]
+      "command": "ts-node {projectRoot}/src/e2e.cli.ts"
     }
   }
 }
