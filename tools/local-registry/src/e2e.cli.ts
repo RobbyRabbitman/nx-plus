@@ -23,6 +23,7 @@ async function main() {
 
     execSync(
       `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite`,
+      { cwd: workspaceRoot, stdio: 'inherit', env: process.env },
     );
   } catch (error) {
     console.error(error);
@@ -33,4 +34,4 @@ async function main() {
   process.exit();
 }
 
-main().catch(console.error);
+main().catch((e) => console.error(e));
