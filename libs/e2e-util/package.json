@@ -5,9 +5,5 @@
     "@nx/devkit": "19.4.2",
     "nx": "19.4.2",
     "tslib": "2.6.3"
-  },
-  "exports": {
-    ".": "./src/index.js",
-    "./plugin/e2e-version-matrix": "./src/plugin/e2e-version-matrix.js"
   }
 }
