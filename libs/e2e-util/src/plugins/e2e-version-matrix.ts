@@ -67,7 +67,10 @@ const addE2eVersionMatrix: CreateNodesFunction<
   const maybeProjectRoot = dirname(e2eVersionMatrixConfigPath);
 
   if (
-    !existsSync(join(context.workspaceRoot, maybeProjectRoot, 'project.json'))
+    !existsSync(
+      join(context.workspaceRoot, maybeProjectRoot, 'project.json'),
+    ) &&
+    !existsSync(join(context.workspaceRoot, maybeProjectRoot, 'package.json'))
   ) {
     return {};
   }
