@@ -8,6 +8,7 @@ import {
 import { existsSync } from 'fs';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 import { dirname, join } from 'path';
+import { E2eVersionMatrixTargetExecutorSchema } from '../executors/e2e-version-matrix';
 import {
   createVersionMatrix,
   E2eProjectWithNx,
@@ -15,7 +16,8 @@ import {
 } from '../nx-version-matrix';
 
 export type E2eVersionMatrixTargetPluginOptions = {
-  targetName?: string;
+  e2eTargetName?: string;
+  e2eVersionMatrixTargetName?: string;
   peerDependencyEnvPrefix?: string;
   configurationPrefix?: string;
   configurationConfig?: TargetConfiguration<Partial<RunCommandsOptions>>;
@@ -40,12 +42,14 @@ const addE2eVersionMatrix: CreateNodesFunction<
   E2eVersionMatrixTargetPluginOptions
 > = (e2eVersionMatrixConfigPath, options, context) => {
   const {
-    targetName,
+    e2eVersionMatrixTargetName,
+    e2eTargetName,
     peerDependencyEnvPrefix,
     configurationPrefix,
     configurationConfig,
   } = {
-    targetName: 'e2e',
+    e2eVersionMatrixTargetName: 'e2e-version-matrix',
+    e2eTargetName: 'e2e',
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
     configurationPrefix: 'version-matrix',
     configurationConfig: {},
@@ -108,9 +112,17 @@ const addE2eVersionMatrix: CreateNodesFunction<
     projects: {
       [projectRoot]: {
         targets: {
-          [targetName]: {
+          [e2eTargetName]: {
             configurations,
           },
+          [e2eVersionMatrixTargetName]: {
+            executor:
+              '@robby-rabbitman/nx-plus-libs-e2e-util:e2e-version-matrix',
+            options: {
+              e2eTargetConfigurationPrefix: configurationPrefix,
+              e2eTargetName,
+            },
+          } satisfies TargetConfiguration<E2eVersionMatrixTargetExecutorSchema>,
         },
       },
     },

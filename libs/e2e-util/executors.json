@@ -1,0 +1,7 @@
+{
+  "executors": {
+    "e2e-version-matrix": {
+      "implementation": "./src/executors/e2e-version-matrix"
+    }
+  }
+}
