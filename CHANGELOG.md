@@ -1,3 +1,10 @@
+## 0.5.0 (2024-07-14)
+
+
+### 🚀 Features
+
+- **web-dev-server:** configure target via plugin ([#61](https://github.com/RobbyRabbitman/nx-plus/pull/61))
+
 ## 0.4.0 (2024-07-11)
 
 
