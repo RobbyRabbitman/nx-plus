@@ -84,16 +84,16 @@ const createWebDevServerTarget: CreateNodesFunction<
     return {};
   }
 
-  const webDevServerConfig = {
+  const webDevServerConfiguration = {
     config: webDevServerConfigFileName,
     watch: true,
   } satisfies DevServerCliArgs;
 
-  const inferredTargetConfig = {
+  const webDevServerTargetConfiguration = {
     command: webDevServerCommand,
     ...targetConfig,
     options: {
-      ...webDevServerConfig,
+      ...webDevServerConfiguration,
       cwd: '{projectRoot}',
       ...targetConfig.options,
     },
@@ -103,7 +103,7 @@ const createWebDevServerTarget: CreateNodesFunction<
     projects: {
       [webDevServerConfigDirectory]: {
         targets: {
-          [targetName]: inferredTargetConfig,
+          [targetName]: webDevServerTargetConfiguration,
         },
       },
     },
