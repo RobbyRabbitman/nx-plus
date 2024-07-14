@@ -59,19 +59,25 @@ const addE2eVersionMatrix: CreateNodesFunction<
   const maybeProjectRoot = dirname(e2eVersionMatrixConfigPath);
 
   if (
-    !existsSync(
-      join(context.workspaceRoot, maybeProjectRoot, 'project.json'),
-    ) &&
-    !existsSync(join(context.workspaceRoot, maybeProjectRoot, 'package.json'))
+    !existsSync(join(context.workspaceRoot, maybeProjectRoot, 'project.json'))
   ) {
     return {};
   }
 
   const projectRoot = maybeProjectRoot;
 
-  const e2eVersionMatrixConfig = readJsonFile<E2eProjectWithNx>(
-    e2eVersionMatrixConfigPath,
-  );
+  let maybeE2eVersionMatrixConfig: E2eProjectWithNx;
+
+  try {
+    maybeE2eVersionMatrixConfig = readJsonFile<E2eProjectWithNx>(
+      e2eVersionMatrixConfigPath,
+    );
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+
+  const e2eVersionMatrixConfig = maybeE2eVersionMatrixConfig;
 
   const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
 
@@ -109,7 +115,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
   );
 
   const e2eVersionMatrixTarget = () => {
-    const buildCommand = (configuration: string) =>
+    const runE2eTarget = (configuration: string) =>
       ({
         command: `nx run ${targetToTargetString({
           project: '{projectName}',
@@ -118,7 +124,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
         })}`,
       }) satisfies RunCommandsOptions['commands'][0];
 
-    const commands = Object.keys(configurations).map(buildCommand);
+    const commands = Object.keys(configurations).map(runE2eTarget);
 
     return {
       executor: 'nx:run-commands',

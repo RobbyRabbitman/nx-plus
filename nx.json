@@ -99,12 +99,6 @@
       }
     },
     "e2e-vite": {
-      "configurations": {
-        "ci": {
-          "run": true,
-          "coverage": false
-        }
-      },
       "options": {
         "config": "{projectRoot}/vitest.config.mts",
         "cwd": "{workspaceRoot}"
