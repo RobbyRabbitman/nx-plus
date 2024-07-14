@@ -1,0 +1,8 @@
+{
+  "name": "@robby-rabbitman/nx-plus-web-dev-server",
+  "version": "local",
+  "peerDependencies": {
+    "nx": ["^17", "^18", "^19"],
+    "@web/dev-server": ["^0.4.6"]
+  }
+}

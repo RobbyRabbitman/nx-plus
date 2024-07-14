@@ -59,4 +59,4 @@ const webDevServerPluginConfiguration = (targetName: string) =>
     options: {
       targetName,
     },
-  }) satisfies ExpandedPluginConfiguration;
+  }) satisfies ExpandedPluginConfiguration<WebDevServerInitGeneratorSchema>;

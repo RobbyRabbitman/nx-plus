@@ -17,6 +17,12 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@robby-rabbitman/nx-plus-libs-e2e-util": ["libs/e2e-util/src/index.ts"],
+      "@robby-rabbitman/nx-plus-libs-e2e-util/plugin/e2e-version-matrix": [
+        "libs/e2e-util/src/plugin/e2e-version-matrix.ts"
+      ],
+      "@robby-rabbitman/nx-plus-libs-node-util": [
+        "libs/node-util/src/index.ts"
+      ],
       "@robby-rabbitman/nx-plus-tools-local-registry": [
         "tools/local-registry/src/index.ts"
       ],

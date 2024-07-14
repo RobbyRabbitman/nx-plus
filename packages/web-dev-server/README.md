@@ -1,10 +1,13 @@
 [![NPM downloads per week](https://img.shields.io/npm/dw/%40robby-rabbitman%2Fnx-plus-web-dev-server?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-dev-server)
 [![NPM version](https://img.shields.io/npm/v/%40robby-rabbitman%2Fnx-plus-web-dev-server?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-dev-server)
 [![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-dev-server/peer/%40nx%2Fdevkit?logo=nx&label=nx)](https://nx.dev)
+[![@web/dev-server peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-dev-server/peer/%40web%2Fdev-server?label=%40web%2Fdev-server)](https://modern-web.dev/docs/dev-server/overview)
 
 # nx-plus-web-dev-server
 
 [Nx](https://nx.dev) plugin to infer [Web Dev Server](https://modern-web.dev/docs/dev-server/overview) in a workspace.
+
+**Note** that `@web/dev-server` has not released a `1.0.0` yet.
 
 ## 🚀 Getting started
 
@@ -62,8 +65,16 @@ Adds a _serve_ target for projects that have a [Web Dev Server config](https://m
       "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugin",
       "options": {
         // the name of the web dev server target => nx run {{project}}:serve
-        "targetName": "serve"
+        "targetName": "serve",
+        // the default configuration of the web dev server targets infered by this plugin
+        "targetConfig": {
+          "options":{
+            "node-resolve": true
+          }
+        }
       }
     },
 ]
 ```
+
+`targetConfig` is different from [targetDefaults](https://nx.dev/reference/nx-json#target-defaults) since it applies only to the inferred targets and not _every_ target.

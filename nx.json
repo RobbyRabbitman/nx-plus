@@ -55,6 +55,18 @@
         "testTargetName": "e2e-vite"
       },
       "include": ["e2e/**/*"]
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-libs-e2e-util/plugin/e2e-version-matrix",
+      "options": {
+        "e2eVersionMatrixTargetName": "e2e-version-matrix-vite",
+        "e2eTargetName": "e2e-vite",
+        "configurationConfig": {
+          "run": true,
+          "coverage": false
+        }
+      },
+      "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
@@ -87,12 +99,6 @@
       }
     },
     "e2e-vite": {
-      "configurations": {
-        "ci": {
-          "run": true,
-          "coverage": false
-        }
-      },
       "options": {
         "config": "{projectRoot}/vitest.config.mts",
         "cwd": "{workspaceRoot}"
