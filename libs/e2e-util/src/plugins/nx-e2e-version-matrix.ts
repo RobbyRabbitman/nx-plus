@@ -159,7 +159,7 @@ export function readPeerDependencies({
     ]),
   ) as E2eProjectWithNxPermutation['peerDependencies'];
 
-  if (!('nx ' in peerDependencies)) {
+  if (!('nx' in peerDependencies)) {
     throw new Error('nx not in peer dependencies!');
   }
 
