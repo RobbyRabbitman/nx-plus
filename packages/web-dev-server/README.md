@@ -65,8 +65,16 @@ Adds a _serve_ target for projects that have a [Web Dev Server config](https://m
       "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugin",
       "options": {
         // the name of the web dev server target => nx run {{project}}:serve
-        "targetName": "serve"
+        "targetName": "serve",
+        // the default configuration of the web dev server targets infered by this plugin
+        "targetConfig": {
+          "options":{
+            "node-resolve": true
+          }
+        }
       }
     },
 ]
 ```
+
+`targetConfig` is different from [targetDefaults](https://nx.dev/reference/nx-json#target-defaults) since it applies only to the inferred targets and not _every_ target.
