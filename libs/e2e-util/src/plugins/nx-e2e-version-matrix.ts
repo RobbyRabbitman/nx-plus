@@ -5,9 +5,11 @@ import {
   readJsonFile,
   TargetConfiguration,
   targetToTargetString,
+  workspaceRoot,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
+import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { dirname, join } from 'path';
 import {
   createVersionMatrix,
@@ -150,13 +152,20 @@ const addE2eVersionMatrix: CreateNodesFunction<
   };
 };
 
-export function readPeerDependencies({
+export function readE2eProject({
   peerDependencyEnvPrefix,
 }: {
   peerDependencyEnvPrefix: string;
 }) {
-  const peerDependencyEnvVars = Object.keys(process.env).filter((x) =>
-    x.startsWith(peerDependencyEnvPrefix),
+  const peerDependencyEnvVars = Object.keys(process.env).filter((envVar) =>
+    envVar.startsWith(peerDependencyEnvPrefix),
+  );
+
+  const projectName = process.env['NX_TASK_TARGET_PROJECT'];
+  const configuration = process.env['NX_TASK_TARGET_CONFIGURATION'];
+  const project = readCachedProjectConfiguration(projectName);
+  const e2eVersionMatrixConfig = readJsonFile<E2eProjectWithNx>(
+    join(workspaceRoot, project.root, 'e2e-version-matrix.config.json'),
   );
 
   const peerDependencies = Object.fromEntries(
@@ -170,5 +179,14 @@ export function readPeerDependencies({
     throw new Error('nx not in peer dependencies!');
   }
 
-  return peerDependencies;
+  return {
+    e2eNxWorkspaceName: `${Date.now()}-${configuration.replace(
+      /[^a-z0-9]/gi,
+      '_',
+    )}`.substring(0, 255),
+    e2eProject: {
+      name: e2eVersionMatrixConfig.name,
+      peerDependencies,
+    } satisfies E2eProjectWithNxPermutation,
+  };
 }

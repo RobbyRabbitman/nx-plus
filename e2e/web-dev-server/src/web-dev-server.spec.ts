@@ -2,7 +2,7 @@ import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
   createE2eNxWorkspace,
-  readPeerDependencies,
+  readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execUntil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { execSync } from 'node:child_process';
@@ -10,13 +10,18 @@ import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 describe(`@robby-rabbitman/nx-plus-web-dev-server`, () => {
-  const { nx: nxVersion, ...peerDependencies } = readPeerDependencies({
+  const {
+    e2eNxWorkspaceName,
+    e2eProject: {
+      peerDependencies: { nx: nxVersion, ...peerDependencies },
+    },
+  } = readE2eProject({
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
   });
 
   const workspaceRoot = createE2eNxWorkspace({
     e2eProjectName: 'web-dev-server-e2e',
-    e2eNxWorkspaceName: `web-dev-server-e2e--${Date.now()}`,
+    e2eNxWorkspaceName,
     e2eNxVersion: nxVersion,
     createNxWorkspaceArgs: '--preset apps',
   });

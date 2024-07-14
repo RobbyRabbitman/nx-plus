@@ -1,6 +1,7 @@
 import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
 
 import { execSync } from 'child_process';
+import { rmSync } from 'fs';
 import { join } from 'path';
 import { localRegistryTarget, publish } from './publish';
 
@@ -19,6 +20,11 @@ async function main() {
   });
 
   try {
+    rmSync(join(workspaceRoot, 'dist', 'e2e-workspace'), {
+      force: true,
+      recursive: true,
+    });
+
     const packageManagerCommand = getPackageManagerCommand();
 
     execSync(
