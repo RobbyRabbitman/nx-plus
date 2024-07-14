@@ -180,10 +180,9 @@ export function readE2eProject({
   }
 
   return {
-    e2eNxWorkspaceName: `${Date.now()}-${configuration.replace(
-      /[^a-z0-9]/gi,
-      '_',
-    )}`.substring(0, 255),
+    e2eNxWorkspaceName: `${Date.now()}${configuration}`
+      .replace(/[^a-z0-9]/gi, '')
+      .substring(0, 255),
     e2eProject: {
       name: e2eVersionMatrixConfig.name,
       peerDependencies,
