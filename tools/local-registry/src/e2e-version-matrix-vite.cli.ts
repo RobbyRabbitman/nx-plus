@@ -7,6 +7,10 @@ import { localRegistryTarget, publish } from './publish';
 async function main() {
   const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
 
+  if (verbose) {
+    console.log('start registry and publish workspace');
+  }
+
   const { stopLocalRegistry } = await publish({
     clearStorage: true,
     stopLocalRegistry: false,
@@ -18,11 +22,23 @@ async function main() {
     localRegistryTarget,
   });
 
+  if (verbose) {
+    console.log('published workspace');
+  }
+
   try {
+    if (verbose) {
+      console.log('remove dist/e2e-workspace');
+    }
+
     rmSync(join(workspaceRoot, 'dist', 'e2e-workspace'), {
       force: true,
       recursive: true,
     });
+
+    if (verbose) {
+      console.log('remove dist/e2e-workspace done');
+    }
 
     const packageManagerCommand = getPackageManagerCommand();
 
