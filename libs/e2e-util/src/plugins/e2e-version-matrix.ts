@@ -4,6 +4,7 @@ import {
   CreateNodesV2,
   readJsonFile,
   TargetConfiguration,
+  targetToTargetString,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
@@ -120,7 +121,10 @@ const addE2eVersionMatrix: CreateNodesFunction<
               '@robby-rabbitman/nx-plus-libs-e2e-util:e2e-version-matrix',
             options: {
               e2eTargetConfigurationPrefix: configurationPrefix,
-              e2eTargetName,
+              e2eTargetName: targetToTargetString({
+                project: '{projectName}',
+                target: e2eTargetName,
+              }),
             },
           } satisfies TargetConfiguration<E2eVersionMatrixTargetExecutorSchema>,
         },
