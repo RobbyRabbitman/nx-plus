@@ -28,7 +28,7 @@ async function main() {
     const packageManagerCommand = getPackageManagerCommand();
 
     execSync(
-      `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite`,
+      `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite --exclude tools-local-registry`,
       { cwd: workspaceRoot, stdio: 'inherit', env: process.env },
     );
   } catch (error) {
