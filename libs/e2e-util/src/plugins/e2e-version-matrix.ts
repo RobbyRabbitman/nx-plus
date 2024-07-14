@@ -7,6 +7,7 @@ import {
   targetToTargetString,
   workspaceRoot,
 } from '@nx/devkit';
+import { execSync } from 'child_process';
 import { existsSync } from 'fs';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
@@ -194,4 +195,25 @@ export function readE2eProject({
       peerDependencies,
     } satisfies VersionMatrixItem,
   };
+}
+
+export function installE2eProject({
+  workspaceRoot,
+  package: { name, version, peerDependencies },
+}: {
+  workspaceRoot: string;
+  package: VersionMatrixItem;
+}) {
+  execSync(`npm i -D ${name}@${version}`, {
+    cwd: workspaceRoot,
+  });
+
+  execSync(
+    `npm i -D ${Object.entries(peerDependencies)
+      .map((dep_version) => dep_version.join('@'))
+      .join(' ')}`,
+    {
+      cwd: workspaceRoot,
+    },
+  );
 }

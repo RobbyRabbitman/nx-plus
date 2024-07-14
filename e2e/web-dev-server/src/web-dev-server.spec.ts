@@ -2,6 +2,7 @@ import { NxJsonConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
   createE2eNxWorkspace,
+  installE2eProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execUntil } from '@robby-rabbitman/nx-plus-libs-node-util';
@@ -10,41 +11,26 @@ import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 describe(`@robby-rabbitman/nx-plus-web-dev-server`, () => {
-  const {
-    e2eNxWorkspaceName,
-    e2ePackage: {
-      name,
-      version,
-      peerDependencies: { nx: nxVersion, ...peerDependencies },
-    },
-  } = readE2eProject({
+  const { e2eNxWorkspaceName, e2ePackage } = readE2eProject({
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
   });
 
-  if (!nxVersion) {
+  if (!e2ePackage.peerDependencies['nx']) {
     throw new Error('nx not in peer dependencies!');
   }
 
   const workspaceRoot = createE2eNxWorkspace({
     e2eProjectName: 'web-dev-server-e2e',
     e2eNxWorkspaceName,
-    e2eNxVersion: nxVersion,
+    e2eNxVersion: e2ePackage.peerDependencies.nx,
     createNxWorkspaceArgs: '--preset apps',
   });
 
   it('should install succesfully', () => {
-    execSync(`npm i -D ${name}@${version}`, {
-      cwd: workspaceRoot,
+    installE2eProject({
+      package: e2ePackage,
+      workspaceRoot,
     });
-
-    execSync(
-      `npm i -D ${Object.entries(peerDependencies)
-        .map((dep_version) => dep_version.join('@'))
-        .join(' ')}`,
-      {
-        cwd: workspaceRoot,
-      },
-    );
   });
 
   it("should add the plugin '@robby-rabbitman/nx-plus-web-dev-server/plugin'", () => {
