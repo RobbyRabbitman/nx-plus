@@ -12,12 +12,18 @@ import { join } from 'node:path';
 describe(`@robby-rabbitman/nx-plus-web-dev-server`, () => {
   const {
     e2eNxWorkspaceName,
-    e2eProject: {
+    e2ePackage: {
+      name,
+      version,
       peerDependencies: { nx: nxVersion, ...peerDependencies },
     },
   } = readE2eProject({
     peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
   });
+
+  if (!nxVersion) {
+    throw new Error('nx not in peer dependencies!');
+  }
 
   const workspaceRoot = createE2eNxWorkspace({
     e2eProjectName: 'web-dev-server-e2e',
@@ -27,7 +33,7 @@ describe(`@robby-rabbitman/nx-plus-web-dev-server`, () => {
   });
 
   it('should install succesfully', () => {
-    execSync(`npm i -D @robby-rabbitman/nx-plus-web-dev-server@local`, {
+    execSync(`npm i -D ${name}@${version}`, {
       cwd: workspaceRoot,
     });
 

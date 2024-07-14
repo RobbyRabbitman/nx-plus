@@ -13,9 +13,9 @@ import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-gra
 import { dirname, join } from 'path';
 import {
   createVersionMatrix,
-  E2eProjectWithNx,
-  E2eProjectWithNxPermutation,
-} from '../nx-version-matrix';
+  VersionMatrixConfig,
+  VersionMatrixItem,
+} from '../version-matrix';
 
 export type E2eVersionMatrixTargetPluginOptions = {
   e2eTargetName?: string;
@@ -25,7 +25,8 @@ export type E2eVersionMatrixTargetPluginOptions = {
   configurationConfig?: TargetConfiguration<Partial<RunCommandsOptions>>;
 };
 
-const e2eVersionMatrixConfigGlob = '**/e2e-version-matrix.config.json';
+const e2eVersionMatrixConfigFileName = 'e2e-version-matrix.config.json';
+const e2eVersionMatrixConfigGlob = `**/${e2eVersionMatrixConfigFileName}`;
 
 export const createNodesV2: CreateNodesV2<E2eVersionMatrixTargetPluginOptions> =
   [
@@ -68,10 +69,10 @@ const addE2eVersionMatrix: CreateNodesFunction<
 
   const projectRoot = maybeProjectRoot;
 
-  let maybeE2eVersionMatrixConfig: E2eProjectWithNx;
+  let maybeE2eVersionMatrixConfig: VersionMatrixConfig;
 
   try {
-    maybeE2eVersionMatrixConfig = readJsonFile<E2eProjectWithNx>(
+    maybeE2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
       e2eVersionMatrixConfigPath,
     );
   } catch (error) {
@@ -79,13 +80,18 @@ const addE2eVersionMatrix: CreateNodesFunction<
     return {};
   }
 
+  /**
+   * TODO: maybe we can use the `peerDependencies` of the package.json as is and
+   * find a logic to extract the _wanted_ versions. Or specify a strategy to
+   * create the version map.
+   */
   const e2eVersionMatrixConfig = maybeE2eVersionMatrixConfig;
 
   const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
 
   const getConfigurationName = ({
     peerDependencies: { nx, ...peerDependencies },
-  }: E2eProjectWithNxPermutation) =>
+  }: VersionMatrixItem) =>
     [
       configurationPrefix,
       `nx@${nx}`,
@@ -94,9 +100,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
       ),
     ].join('---');
 
-  const createConfiguration = ({
-    peerDependencies,
-  }: E2eProjectWithNxPermutation) => ({
+  const createConfiguration = ({ peerDependencies }: VersionMatrixItem) => ({
     ...configurationConfig,
     env: {
       ...Object.fromEntries(
@@ -164,8 +168,9 @@ export function readE2eProject({
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
   const configuration = process.env['NX_TASK_TARGET_CONFIGURATION'];
   const project = readCachedProjectConfiguration(projectName);
-  const e2eVersionMatrixConfig = readJsonFile<E2eProjectWithNx>(
-    join(workspaceRoot, project.root, 'e2e-version-matrix.config.json'),
+
+  const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
+    join(workspaceRoot, project.root, e2eVersionMatrixConfigFileName),
   );
 
   const peerDependencies = Object.fromEntries(
@@ -173,7 +178,7 @@ export function readE2eProject({
       envVar.replace(peerDependencyEnvPrefix, ''),
       process.env[envVar],
     ]),
-  ) as E2eProjectWithNxPermutation['peerDependencies'];
+  ) as VersionMatrixItem['peerDependencies'];
 
   if (!('nx' in peerDependencies)) {
     throw new Error('nx not in peer dependencies!');
@@ -183,9 +188,10 @@ export function readE2eProject({
     e2eNxWorkspaceName: `${Date.now()}${configuration}`
       .replace(/[^a-z0-9]/gi, '')
       .substring(0, 255),
-    e2eProject: {
+    e2ePackage: {
       name: e2eVersionMatrixConfig.name,
+      version: e2eVersionMatrixConfig.version,
       peerDependencies,
-    } satisfies E2eProjectWithNxPermutation,
+    } satisfies VersionMatrixItem,
   };
 }

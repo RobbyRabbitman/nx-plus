@@ -1,4 +1,4 @@
-export * from './nx-version-matrix';
 export * from './nx-workspace';
+export * from './version-matrix';
 // TODO remove me when local plugins can be added via secondary entry points
-export * from './plugins/nx-e2e-version-matrix';
+export * from './plugins/e2e-version-matrix';
