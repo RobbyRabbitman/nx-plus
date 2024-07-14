@@ -13,6 +13,7 @@
   "exports": {
     ".": "./src/index.js",
     "./package.json": "./package.json",
-    "./publish-cli": "./src/publish.cli.js"
+    "./publish-cli": "./src/publish.cli.js",
+    "./e2e-version-matrix-vite-cli": "./src/e2e-version-matrix-vite.cli.js"
   }
 }
