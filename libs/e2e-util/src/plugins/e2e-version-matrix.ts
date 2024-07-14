@@ -193,7 +193,7 @@ function runManyConfigurations({
     } satisfies RunCommandsOptions['commands'][0];
   };
 
-  const commands = Object.keys(configurations).map(createCommand);
+  const commands = [...configurations].map(createCommand);
 
   return {
     executor: 'nx:run-commands',
