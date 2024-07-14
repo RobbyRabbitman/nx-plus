@@ -36,8 +36,8 @@
         }
       }
     },
-    "e2e": {
-      "command": "ts-node {projectRoot}/src/e2e.cli.ts"
+    "nx-e2e-version-matrix-vite": {
+      "command": "ts-node {projectRoot}/src/nx-e2e-version-matrix-vite.cli.ts"
     }
   }
 }
