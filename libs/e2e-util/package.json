@@ -8,6 +8,6 @@
   },
   "exports": {
     ".": "./src/index.js",
-    "./plugin/e2e-version-matrix": "./src/plugin/e2e-version-matrix.js"
+    "./plugin/nx-e2e-version-matrix": "./src/plugin/nx-e2e-version-matrix.js"
   }
 }

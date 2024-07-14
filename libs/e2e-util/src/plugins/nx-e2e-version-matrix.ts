@@ -124,6 +124,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
       executor: 'nx:run-commands',
       options: {
         commands,
+        parallel: false,
       },
     } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
   };
@@ -141,3 +142,26 @@ const addE2eVersionMatrix: CreateNodesFunction<
     },
   };
 };
+
+export function readPeerDependencies({
+  peerDependencyEnvPrefix,
+}: {
+  peerDependencyEnvPrefix: string;
+}) {
+  const peerDependencyEnvVars = Object.keys(process.env).filter((x) =>
+    x.startsWith(peerDependencyEnvPrefix),
+  );
+
+  const peerDependencies = Object.fromEntries(
+    peerDependencyEnvVars.map((envVar) => [
+      envVar.replace(peerDependencyEnvPrefix, ''),
+      process.env[envVar],
+    ]),
+  ) as E2eProjectWithNxPermutation['peerDependencies'];
+
+  if (!('nx ' in peerDependencies)) {
+    throw new Error('nx not in peer dependencies!');
+  }
+
+  return peerDependencies;
+}
