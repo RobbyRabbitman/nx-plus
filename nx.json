@@ -59,7 +59,7 @@
     {
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-util/plugin/e2e-version-matrix",
       "options": {
-        "e2eVersionMatrixTargetName": "e2e-vite-version-matrix",
+        "e2eVersionMatrixTargetName": "e2e-version-matrix-vite",
         "e2eTargetName": "e2e-vite",
         "configurationConfig": {
           "run": true,

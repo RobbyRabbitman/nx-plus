@@ -9,7 +9,6 @@ import {
 import { existsSync } from 'fs';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 import { dirname, join } from 'path';
-import { E2eVersionMatrixTargetExecutorSchema } from '../executors/e2e-version-matrix';
 import {
   createVersionMatrix,
   E2eProjectWithNx,
@@ -109,6 +108,26 @@ const addE2eVersionMatrix: CreateNodesFunction<
     ]),
   );
 
+  const e2eVersionMatrixTarget = () => {
+    const buildCommand = (configuration: string) =>
+      ({
+        command: `nx run ${targetToTargetString({
+          project: '{projectName}',
+          target: e2eTargetName,
+          configuration,
+        })}`,
+      }) satisfies RunCommandsOptions['commands'][0];
+
+    const commands = Object.keys(configurations).map(buildCommand);
+
+    return {
+      executor: 'nx:run-commands',
+      options: {
+        commands,
+      },
+    } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
+  };
+
   return {
     projects: {
       [projectRoot]: {
@@ -116,17 +135,7 @@ const addE2eVersionMatrix: CreateNodesFunction<
           [e2eTargetName]: {
             configurations,
           },
-          [e2eVersionMatrixTargetName]: {
-            executor:
-              '@robby-rabbitman/nx-plus-libs-e2e-util:e2e-version-matrix',
-            options: {
-              e2eTargetConfigurationPrefix: configurationPrefix,
-              e2eTargetName: targetToTargetString({
-                project: '{projectName}',
-                target: e2eTargetName,
-              }),
-            },
-          } satisfies TargetConfiguration<E2eVersionMatrixTargetExecutorSchema>,
+          [e2eVersionMatrixTargetName]: e2eVersionMatrixTarget(),
         },
       },
     },
