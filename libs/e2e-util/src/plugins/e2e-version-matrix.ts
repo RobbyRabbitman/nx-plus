@@ -181,10 +181,6 @@ export function readE2eProject({
     ]),
   ) as VersionMatrixItem['peerDependencies'];
 
-  if (!('nx' in peerDependencies)) {
-    throw new Error('nx not in peer dependencies!');
-  }
-
   return {
     e2eNxWorkspaceName: `${Date.now()}${configuration}`
       .replace(/[^a-z0-9]/gi, '')
