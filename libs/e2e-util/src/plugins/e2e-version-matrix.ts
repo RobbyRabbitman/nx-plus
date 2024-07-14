@@ -43,6 +43,10 @@ export const createNodesV2: CreateNodesV2<E2eVersionMatrixTargetPluginOptions> =
     },
   ];
 
+/**
+ * TODO: maybe we can use the `peerDependencies` of the package.json as is and
+ * find a logic to extract the _wanted_ versions.
+ */
 const addE2eVersionMatrix: CreateNodesFunction<
   E2eVersionMatrixTargetPluginOptions
 > = (e2eVersionMatrixConfigPath, options, context) => {
@@ -82,27 +86,74 @@ const addE2eVersionMatrix: CreateNodesFunction<
     return {};
   }
 
-  /**
-   * TODO: maybe we can use the `peerDependencies` of the package.json as is and
-   * find a logic to extract the _wanted_ versions. Or specify a strategy to
-   * create the version map.
-   */
   const e2eVersionMatrixConfig = maybeE2eVersionMatrixConfig;
 
   const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
 
-  const getConfigurationName = ({
-    peerDependencies: { nx, ...peerDependencies },
-  }: VersionMatrixItem) =>
-    [
-      configurationPrefix,
-      `nx@${nx}`,
-      ...Object.entries(peerDependencies).map((name_version) =>
-        name_version.join('@'),
-      ),
-    ].join('---');
+  const configurations = Object.fromEntries(
+    e2eVersionMatrix.map((permutation) => [
+      getConfigurationName({ permutation, configurationPrefix }),
+      createConfiguration({
+        permutation,
+        configurationConfig,
+        peerDependencyEnvPrefix,
+      }),
+    ]),
+  );
 
-  const createConfiguration = ({ peerDependencies }: VersionMatrixItem) => ({
+  const e2eVersionMatrixTarget = runManyConfigurations({
+    configurations: Object.keys(configurations),
+    project: '{projectName}',
+    target: e2eTargetName,
+  });
+
+  return {
+    projects: {
+      [projectRoot]: {
+        targets: {
+          [e2eTargetName]: {
+            configurations,
+          },
+          [e2eVersionMatrixTargetName]: e2eVersionMatrixTarget,
+        },
+      },
+    },
+  };
+};
+
+/** @returns A configuration name based on the given permutation. */
+function getConfigurationName({
+  permutation: { peerDependencies },
+  configurationPrefix,
+}: {
+  permutation: VersionMatrixItem;
+  configurationPrefix: string;
+}) {
+  return [
+    configurationPrefix,
+    ...Object.entries(peerDependencies).map((name_version) =>
+      name_version.join('@'),
+    ),
+  ].join('---');
+}
+
+/**
+ * - For every peer dependency there is a env var =>
+ *   {peerDependencyEnvPrefix}{peerDependency}={version}
+ *
+ * @returns A configuration for the given permutation.
+ */
+function createConfiguration({
+  peerDependencyEnvPrefix,
+  configurationConfig,
+  permutation: { peerDependencies },
+}: {
+  /** Addtional config. */
+  configurationConfig: TargetConfiguration<Partial<RunCommandsOptions>>;
+  permutation: VersionMatrixItem;
+  peerDependencyEnvPrefix: string;
+}) {
+  return {
     ...configurationConfig,
     env: {
       ...Object.fromEntries(
@@ -113,50 +164,42 @@ const addE2eVersionMatrix: CreateNodesFunction<
       ),
       ...configurationConfig['env'],
     },
-  });
-
-  const configurations = Object.fromEntries(
-    e2eVersionMatrix.map((permutation) => [
-      getConfigurationName(permutation),
-      createConfiguration(permutation),
-    ]),
-  );
-
-  const e2eVersionMatrixTarget = () => {
-    const runE2eTarget = (configuration: string) => {
-      const e2eTarget = targetToTargetString({
-        project: '{projectName}',
-        target: e2eTargetName,
-        configuration,
-      });
-      return {
-        command: `nx run ${e2eTarget}`,
-      } satisfies RunCommandsOptions['commands'][0];
-    };
-
-    const commands = Object.keys(configurations).map(runE2eTarget);
-
-    return {
-      executor: 'nx:run-commands',
-      options: {
-        commands,
-      },
-    } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
   };
+}
+
+/**
+ * Runs the given `target` of the `project` with every configuration in
+ * parallel.
+ */
+function runManyConfigurations({
+  configurations,
+  target,
+  project,
+}: {
+  project: string;
+  target: string;
+  configurations: Iterable<string>;
+}) {
+  const createCommand = (configuration: string) => {
+    const targetWithConfiguration = targetToTargetString({
+      project,
+      target,
+      configuration,
+    });
+    return {
+      command: `nx run ${targetWithConfiguration}`,
+    } satisfies RunCommandsOptions['commands'][0];
+  };
+
+  const commands = Object.keys(configurations).map(createCommand);
 
   return {
-    projects: {
-      [projectRoot]: {
-        targets: {
-          [e2eTargetName]: {
-            configurations,
-          },
-          [e2eVersionMatrixTargetName]: e2eVersionMatrixTarget(),
-        },
-      },
+    executor: 'nx:run-commands',
+    options: {
+      commands,
     },
-  };
-};
+  } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
+}
 
 /** @returns The project of the current e2e target. */
 export function readE2eProject({
