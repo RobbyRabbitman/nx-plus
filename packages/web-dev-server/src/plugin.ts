@@ -91,11 +91,18 @@ const createWebDevServerTarget: CreateNodesFunction<
 > = (webDevServerConfigPath, schema, context) => {
   const defaultServeTargetName = 'serve';
 
-  const { serveTargetName, serveTargetConfig } = {
+  const options = {
     serveTargetName: defaultServeTargetName,
     serveTargetConfig: {},
     ...schema,
   } satisfies WebDevServerTargetPluginOptions;
+
+  // make sure `serveTargetName` is not an empty string
+  if (options.serveTargetName === '') {
+    options.serveTargetName = defaultServeTargetName;
+  }
+
+  const { serveTargetName, serveTargetConfig } = options;
 
   const webDevServerConfigFileName = basename(webDevServerConfigPath);
   const maybeWebDevServerProjectRoot = dirname(webDevServerConfigPath);
