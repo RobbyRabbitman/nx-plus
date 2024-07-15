@@ -53,7 +53,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
     };
 
     describe('with a web-dev-server config in the workspace root', () => {
-      it('should not create a target', async () => {
+      it('should not modify the project graph', async () => {
         const nodes = await runCreateNodes({
           directories: {
             'package.json': '{}',
