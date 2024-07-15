@@ -6,6 +6,7 @@ import {
   updateNxJson,
 } from '@nx/devkit';
 
+// TODO: import the package.json and read the name? :D
 export const WEB_DEV_SERVER_PLUGIN_NAME =
   '@robby-rabbitman/nx-plus-web-dev-server/plugin';
 

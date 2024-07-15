@@ -3,7 +3,7 @@
   "cli": "nx",
   "$id": "RobbyRabbitmanNxPlusWebDevServerInit",
   "title": "Initializes '@robby-rabbitman/nx-plus-web-dev-server' in a nx workspace.",
-  "description": "Registers @robby-rabbitman/nx-plus-web-dev-server/plugin in the nx.json.",
+  "description": "Registers '@robby-rabbitman/nx-plus-web-dev-server/plugin' in the 'nx.json'.",
   "type": "object",
   "properties": {
     "serveTargetName": {
