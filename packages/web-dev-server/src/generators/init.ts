@@ -16,8 +16,10 @@ export interface WebDevServerInitGeneratorSchema {
    * 'web-dev-server'.
    */
   serveTargetName?: string;
+
   /** Whether to skip adding the plugin. */
   skipAddPlugin?: boolean;
+
   /** Whether to skip formatting the updated files. */
   skipFormat?: boolean;
 }

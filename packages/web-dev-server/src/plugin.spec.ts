@@ -2,7 +2,7 @@ import { CreateNodesContextV2 } from '@nx/devkit';
 import { DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
-  WebDevServerTargetPluginOptions,
+  WebDevServerTargetPluginSchema,
   createNodes,
   createNodesV2,
 } from './plugin';
@@ -37,7 +37,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       options,
     }: {
       directories: DirectoryJSON;
-      options?: WebDevServerTargetPluginOptions;
+      options?: WebDevServerTargetPluginSchema;
     }) => {
       vol.fromJSON(directories, context.workspaceRoot);
 
@@ -114,7 +114,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
           const targetConfig = nodes[0].projects['some/directory'].targets[
             'serve'
-          ] as WebDevServerTargetPluginOptions['targetConfig'];
+          ] as WebDevServerTargetPluginSchema['targetConfig'];
 
           expect(targetConfig.options.watch).toEqual(true);
         });
@@ -129,7 +129,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
           const targetConfig = nodes[0].projects['some/directory'].targets[
             'serve'
-          ] as WebDevServerTargetPluginOptions['targetConfig'];
+          ] as WebDevServerTargetPluginSchema['targetConfig'];
 
           expect(targetConfig.options.cwd).toEqual('{projectRoot}');
           expect(targetConfig.options.config).toEqual(
@@ -172,7 +172,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
         const targetConfig = nodes[0].projects['some/directory'].targets[
           'serve'
-        ] as WebDevServerTargetPluginOptions['targetConfig'];
+        ] as WebDevServerTargetPluginSchema['targetConfig'];
 
         expect(targetConfig.dependsOn).toEqual(['pre-serve']);
         expect(targetConfig.options.watch).toEqual(false);
@@ -188,7 +188,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       options,
     }: {
       directories: DirectoryJSON;
-      options?: WebDevServerTargetPluginOptions;
+      options?: WebDevServerTargetPluginSchema;
     }) => {
       vol.fromJSON(directories, context.workspaceRoot);
 
@@ -265,7 +265,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
           const targetConfig = nodes[0][1].projects['some/directory'].targets[
             'serve'
-          ] as WebDevServerTargetPluginOptions['targetConfig'];
+          ] as WebDevServerTargetPluginSchema['targetConfig'];
 
           expect(targetConfig.options.watch).toEqual(true);
         });
@@ -280,7 +280,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
           const targetConfig = nodes[0][1].projects['some/directory'].targets[
             'serve'
-          ] as WebDevServerTargetPluginOptions['targetConfig'];
+          ] as WebDevServerTargetPluginSchema['targetConfig'];
 
           expect(targetConfig.options.cwd).toEqual('{projectRoot}');
           expect(targetConfig.options.config).toEqual(
@@ -323,7 +323,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
 
         const targetConfig = nodes[0][1].projects['some/directory'].targets[
           'serve'
-        ] as WebDevServerTargetPluginOptions['targetConfig'];
+        ] as WebDevServerTargetPluginSchema['targetConfig'];
 
         expect(targetConfig.dependsOn).toEqual(['pre-serve']);
         expect(targetConfig.options.watch).toEqual(false);
