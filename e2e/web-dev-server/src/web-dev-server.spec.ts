@@ -81,15 +81,13 @@ describe(`@robby-rabbitman/nx-plus-web-dev-server`, () => {
       }),
     ) as ProjectConfiguration;
 
-    expect(project.targets).toContainEqual({
-      serve: expect.objectContaining({
-        executor: 'nx:run-commands',
-        options: {
-          command: 'web-dev-server',
-          config: 'web-dev-server.config.mjs',
-          cwd: 'some-project',
-        },
-      }),
+    expect(project.targets.serve).toMatchObject({
+      executor: 'nx:run-commands',
+      options: {
+        command: 'web-dev-server',
+        config: 'web-dev-server.config.mjs',
+        cwd: 'some-project',
+      },
     });
   });
 
