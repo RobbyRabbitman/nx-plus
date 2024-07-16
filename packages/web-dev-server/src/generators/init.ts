@@ -10,6 +10,7 @@ import {
 export const WEB_DEV_SERVER_PLUGIN_NAME =
   '@robby-rabbitman/nx-plus-web-dev-server/plugin';
 
+// TODO: can this type be generated from the schema.json or the json imported and then inferred in order to be synced?
 export interface WebDevServerInitGeneratorSchema {
   /**
    * The name of the `web-dev-server` serve target e.g. 'serve' or

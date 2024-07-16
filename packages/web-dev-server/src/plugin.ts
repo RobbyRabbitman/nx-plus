@@ -32,7 +32,7 @@ export type WebDevServerTargetConfiguration = TargetConfiguration<
   Partial<RunCommandsOptions> & DevServerCliArgs
 >;
 
-// TODO: can this type be generated from the schema.json or the json imported and then inferred in order to be synced
+// TODO: can this type be generated from the schema.json or the json imported and then inferred in order to be synced?
 export type WebDevServerTargetPluginSchema = {
   /**
    * The name of the `web-dev-server` serve target e.g. `'serve'` or
