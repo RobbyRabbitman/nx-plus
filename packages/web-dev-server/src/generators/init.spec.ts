@@ -135,29 +135,29 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
     describe('skipFormatFiles', () => {
       it('should format when the value is not provided', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
         expect(formatFiles).not.toHaveBeenCalled();
 
-        await initGenerator(tree, {});
+        await initGenerator(workspace, {});
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should format when the provided value is `false`', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
         expect(formatFiles).not.toHaveBeenCalled();
 
-        await initGenerator(tree, { skipFormat: false });
+        await initGenerator(workspace, { skipFormat: false });
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should not format when the provided value is `true`', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
-        await initGenerator(tree, { skipFormat: true });
+        await initGenerator(workspace, { skipFormat: true });
 
         expect(formatFiles).not.toHaveBeenCalled();
       });
@@ -165,11 +165,11 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
     describe('skipAddPlugin', () => {
       it('should add the plugin to `nx.json` when the value is not provided', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
-        await initGenerator(tree, {});
+        await initGenerator(workspace, {});
 
-        expect(readNxJson(tree).plugins).toContainEqual(
+        expect(readNxJson(workspace).plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
           }),
@@ -177,13 +177,13 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       });
 
       it('should add the plugin to `nx.json` when the provided value is `false`', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
-        await initGenerator(tree, {
+        await initGenerator(workspace, {
           skipAddPlugin: false,
         });
 
-        expect(readNxJson(tree).plugins).toContainEqual(
+        expect(readNxJson(workspace).plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
           }),
@@ -191,19 +191,19 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       });
 
       it('should not add the plugin to `nx.json` when the provided value is `true`', async () => {
-        const tree = createWorkspace();
+        const workspace = createWorkspace();
 
-        expect(readNxJson(tree).plugins ?? []).not.toContainEqual(
+        expect(readNxJson(workspace).plugins ?? []).not.toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
           }),
         );
 
-        await initGenerator(tree, {
+        await initGenerator(workspace, {
           skipAddPlugin: true,
         });
 
-        expect(readNxJson(tree).plugins ?? []).not.toContainEqual(
+        expect(readNxJson(workspace).plugins ?? []).not.toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
           }),
