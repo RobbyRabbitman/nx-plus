@@ -3,6 +3,7 @@ import { execSync } from 'node:child_process';
 import { mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph'; // this not public api?
+import { coerce, major } from 'semver';
 
 /**
  * Creates a nx workspace in
@@ -87,10 +88,12 @@ export const createNxWorkspace = (options: {
     recursive: true,
   });
 
+  const nxIsolatePlugins = major(coerce(nxVersion)) >= 19;
+
   // always npx?
-  // TODO: NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@18
+  // TODO: NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@<=18
   execSync(
-    `NX_ISOLATE_PLUGINS=false npx --yes create-nx-workspace@${nxVersion} ${nxWorkspaceName} --nxCloud skip --no-interactive ${args}`,
+    `NX_ISOLATE_PLUGINS=${nxIsolatePlugins} npx --yes create-nx-workspace@${nxVersion} ${nxWorkspaceName} --nxCloud skip --no-interactive ${args}`,
     {
       cwd,
       stdio: 'inherit',

@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@nx/devkit": "19.4.3",
     "nx": "19.4.3",
-    "tslib": "2.6.3"
+    "tslib": "2.6.3",
+    "semver": "7.6.2"
   },
   "exports": {
     ".": "./src/index.js",
