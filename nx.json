@@ -41,6 +41,15 @@
   },
   "plugins": [
     {
+      "plugin": "@robby-rabbitman/nx-plus-libs-typescript/tsc-plugin",
+      "options": {
+        "tscTargetConfig": {
+          "inputs": ["default", "^default", "typescriptGlobals"]
+        }
+      },
+      "exclude": ["libs-typescript"]
+    },
+    {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint-eslint"
@@ -71,15 +80,6 @@
         }
       },
       "include": ["e2e/**/*"]
-    },
-    {
-      "plugin": "@robby-rabbitman/nx-plus-libs-typescript/tsc-plugin",
-      "options": {
-        "tscTargetConfig": {
-          "inputs": ["default", "^default", "typescriptGlobals"]
-        }
-      },
-      "exclude": ["libs-typescript"]
     }
   ],
   "targetDefaults": {
