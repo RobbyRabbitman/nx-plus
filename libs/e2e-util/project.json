@@ -1,7 +1,7 @@
 {
   "name": "libs-e2e-util",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:lib"],
+  "tags": ["scope:node", "type:util"],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
