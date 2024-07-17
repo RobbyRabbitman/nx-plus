@@ -1,7 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-web-dev-server",
   "version": "0.5.0",
-  "description": "Web Dev Server Plugin for Nx workspaces.",
+  "description": "Web Dev Server plugin for Nx workspaces.",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,6 @@
     "@web/dev-server": "^0.4.6"
   },
   "generators": "./generators.json",
-  "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "exports": {

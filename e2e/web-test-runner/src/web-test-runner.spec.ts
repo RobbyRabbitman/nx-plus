@@ -9,7 +9,10 @@ import {
   installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import { WebTestRunnerTargetPluginSchema } from '@robby-rabbitman/nx-plus-web-test-runner/plugin';
+import { TestRunnerConfig } from '@web/test-runner';
 import { execSync } from 'node:child_process';
+import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 describe(`@robby-rabbitman/nx-plus-web-test-runner`, () => {
@@ -50,39 +53,90 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner`, () => {
     expect(nxJson.plugins).toContainEqual({
       plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
       options: {
-        targetName: 'test',
-      },
+        testTargetName: 'test',
+      } satisfies WebTestRunnerTargetPluginSchema,
     });
   });
 
   it('should infer the Web Test Runner', () => {
     execSync(
-      'nx generate @nx/js:library --name=some-js-project --linter=none --projectNameAndRootFormat=as-provided --unitTestRunner=none --no-interactive',
+      'nx generate @nx/js:library --name=some-project --linter=none --projectNameAndRootFormat=as-provided --unitTestRunner=none --no-interactive',
       {
         cwd: workspaceRoot,
       },
     );
 
-    execSync('touch some-js-project/web-test-runner.config.js', {
-      cwd: workspaceRoot,
-    });
+    const webTestRunnerConfiguration = {
+      files: '**/*.spec.js',
+      nodeResolve: true,
+      watch: false,
+    } satisfies TestRunnerConfig;
+
+    writeFileSync(
+      join(workspaceRoot, 'some-project/web-test-runner.config.mjs'),
+      `export default ${JSON.stringify(webTestRunnerConfiguration, null, 2)};`,
+    );
 
     const project = JSON.parse(
-      execSync('nx show project some-js-project --json', {
+      execSync('nx show project some-project --json', {
         cwd: workspaceRoot,
         encoding: 'utf-8',
       }),
     ) as ProjectConfiguration;
 
-    const testTarget = project.targets['test'];
-
-    expect(testTarget).toEqual({
-      configurations: {},
+    expect(project.targets.test).toMatchObject({
       executor: 'nx:run-commands',
       options: {
-        command:
-          'web-test-runner --config=some-js-project/web-test-runner.config.js',
+        command: 'web-test-runner',
+        config: 'web-test-runner.config.mjs',
+        cwd: 'some-project',
       },
     });
+  });
+
+  it('should run the Web Test Runner', () => {
+    rmSync(join(workspaceRoot, 'some-project/src'), {
+      recursive: true,
+      force: true,
+    });
+
+    execSync(`${npm.addDev} @esm-bundle/chai`, {
+      cwd: workspaceRoot,
+    });
+
+    writeFileSync(
+      join(workspaceRoot, 'some-project/some-test.spec.js'),
+      `
+      import { expect } from '@esm-bundle/chai';
+
+      it('1 + 2 should be 3', () => {
+        expect(1 + 2).to.equal(3);
+      });
+      `,
+    );
+
+    expect(() =>
+      execSync('nx run some-project:test', {
+        cwd: workspaceRoot,
+      }),
+    ).not.throw();
+
+    writeFileSync(
+      join(workspaceRoot, 'some-project/some-test-that-fails.spec.js'),
+      `
+      import { expect } from '@esm-bundle/chai';
+
+      it('1 + 2 should be 3', () => {
+        throw new Error("whoops O_O");
+        expect(1 + 2).to.equal(3);
+      });
+      `,
+    );
+
+    expect(() =>
+      execSync('nx run some-project:test', {
+        cwd: workspaceRoot,
+      }),
+    ).toThrow();
   });
 });

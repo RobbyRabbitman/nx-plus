@@ -12,6 +12,7 @@ import { basename, dirname, join } from 'node:path';
 import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
 
 // TODO: copy pasta from '@web/dev-server/src/config/readCliArgs', remove this type if its exported from their public api
+// import { DevServerCliArgs } from '@web/dev-server';
 export interface DevServerCliArgs
   extends Partial<
     Pick<
@@ -32,7 +33,6 @@ export type WebDevServerTargetConfiguration = TargetConfiguration<
   Partial<RunCommandsOptions> & DevServerCliArgs
 >;
 
-// TODO: can this type be generated from the schema.json or the json imported and then inferred in order to be synced?
 export type WebDevServerTargetPluginSchema = {
   /**
    * The name of the `web-dev-server` serve target e.g. `'serve'` or

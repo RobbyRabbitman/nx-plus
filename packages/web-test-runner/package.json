@@ -1,7 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-web-test-runner",
   "version": "0.5.0",
-  "description": "Web Test Runner Generator for Nx workspaces.",
+  "description": "Web Test Runner plugin for Nx workspaces.",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -17,6 +17,7 @@
     "Plugin",
     "Monorepo",
     "Nrwl",
+    "Modern Web",
     "Generator",
     "Test",
     "Web"
@@ -29,10 +30,10 @@
   "license": "MIT",
   "peerDependencies": {
     "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@web/test-runner": "^0.18.2"
   },
   "generators": "./generators.json",
-  "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "exports": {
