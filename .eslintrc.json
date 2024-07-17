@@ -17,9 +17,35 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
+              // types
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "type:lib",
+                "onlyDependOnLibsWithTags": [
+                  "type:lib",
+                  "type:tool",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util", "type:tool"]
+              },
+              {
+                "sourceTag": "type:tool",
+                "onlyDependOnLibsWithTags": ["type:util", "type:tool"]
+              },
+              // scopes ('env' better tag name?)
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:node",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:node"]
+              },
+              {
+                "sourceTag": "scope:web",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:web"]
               }
             ]
           }
