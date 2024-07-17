@@ -17,6 +17,7 @@
               "memfs",
               "minimatch",
               "vitest",
+              "nx",
               "@robby-rabbitman/nx-plus-tools-vite"
             ]
           }

@@ -103,11 +103,14 @@ const addE2eVersionMatrix: CreateNodesFunction<
     ]),
   );
 
-  const e2eVersionMatrixTarget = runManyConfigurations({
-    configurations: Object.keys(configurations),
-    project: '{projectName}',
-    target: e2eTargetName,
-  });
+  const e2eVersionMatrixTarget = {
+    ...runManyConfigurations({
+      configurations: Object.keys(configurations),
+      project: '{projectName}',
+      target: e2eTargetName,
+    }),
+    inputs: ['^default', 'default'],
+  } satisfies TargetConfiguration<Partial<RunCommandsOptions>>;
 
   return {
     projects: {

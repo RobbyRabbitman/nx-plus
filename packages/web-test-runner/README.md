@@ -1,10 +1,13 @@
 [![NPM downloads per week](https://img.shields.io/npm/dw/%40robby-rabbitman%2Fnx-plus-web-test-runner?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-test-runner)
 [![NPM version](https://img.shields.io/npm/v/%40robby-rabbitman%2Fnx-plus-web-test-runner?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-test-runner)
 [![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/peer/%40nx%2Fdevkit?logo=nx&label=nx)](https://nx.dev)
+[![@web/test-runner peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/peer/%40web%2Ftest-runner?label=%40web%2Ftest-runner)](https://modern-web.dev/docs/test-runner/overview)
 
 # nx-plus-web-test-runner
 
 [Nx](https://nx.dev) plugin to infer [Web Test Runner](https://modern-web.dev/docs/test-runner/overview) in a workspace.
+
+**Note** that `@web/test-runner` has not released a `1.0.0` yet.
 
 ## 🚀 Getting started
 
@@ -62,8 +65,16 @@ Adds a _test_ target for projects that have a [Web Test Runner config](https://m
       "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugin",
       "options": {
         // the name of the web test runner target => nx run {{project}}:test
-        "targetName": "test"
+        "testTargetName": "test",
+        // the default configuration of the web test runner targets inferred by this plugin
+        "testTargetConfig": {
+          "options":{
+            "node-resolve": true
+          }
+        }
       }
     },
 ]
 ```
+
+`testTargetConfig` is different from [targetDefaults](https://nx.dev/reference/nx-json#target-defaults) since it applies only to the inferred targets and not _every_ target.
