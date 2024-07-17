@@ -1,1 +1,2 @@
-export * from './vitest.config';
+export * from './vitest-local-registry';
+export * from './vitest-node-typescript';
