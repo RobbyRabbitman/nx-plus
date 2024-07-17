@@ -1,7 +1,7 @@
 import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
 import { execSync } from 'child_process';
 
-describe('commitlint config', () => {
+describe('commits of `@robby-rabbitman/nx-plus`', () => {
   const runCommitlint = (commitMessage: string) =>
     execSync(
       `${getPackageManagerCommand().exec} nx run tools-commitlint:exec:message --value '${commitMessage}'`,
@@ -11,26 +11,36 @@ describe('commitlint config', () => {
       },
     );
 
-  const commitMessage_expectToPass = {
-    'not_a_valid_type: add documentation': false,
-    'docs(not-a-valid-scope): add documentation': false,
-    'docs(tools-commitlint): add documentation': true,
-    'docs: add documentation': true,
-  };
+  it('must follow conventional commit format', () => {
+    const validTypes = [
+      'build',
+      'ci',
+      'chore',
+      'docs',
+      'feat',
+      'fix',
+      'perf',
+      'refactor',
+      'revert',
+      'style',
+      'test',
+    ];
 
-  for (const [commitMessage, expectToPass] of Object.entries(
-    commitMessage_expectToPass,
-  )) {
-    it(commitMessage, () => {
-      let actualPass = true;
+    for (const type of validTypes) {
+      const commitMessage = `${type}: some message`;
+      expect(() => runCommitlint(commitMessage)).not.toThrow();
+    }
 
-      try {
-        runCommitlint(commitMessage);
-      } catch {
-        actualPass = false;
-      }
+    expect(() => runCommitlint('not-a-valid-type: some message')).toThrow();
+  });
 
-      expect(actualPass).toBe(expectToPass);
-    });
-  }
+  it('scoped commits must reference projects of this workspace', () => {
+    expect(() =>
+      runCommitlint('feat(tools-commitlint): supa dupa feature'),
+    ).not.toThrow();
+
+    expect(() =>
+      runCommitlint('feat(not-a-project-of-nx-plus): supa dupa feature'),
+    ).toThrow();
+  });
 });
