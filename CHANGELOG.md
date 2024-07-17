@@ -1,3 +1,10 @@
+## 0.6.0 (2024-07-17)
+
+
+### 🚀 Features
+
+- **web-test-runner:** add testTargetConfig, rename targetName to testTargetName ([#74](https://github.com/RobbyRabbitman/nx-plus/pull/74))
+
 ## 0.5.0 (2024-07-14)
 
 
