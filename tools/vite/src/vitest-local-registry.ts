@@ -5,6 +5,20 @@ import {
 } from '@robby-rabbitman/nx-plus-tools-local-registry';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
+import { mergeConfig, UserConfig } from 'vitest/config';
+
+export function localRegistry(overrides?: Partial<UserConfig>) {
+  return mergeConfig(
+    {
+      test: {
+        globalSetup: [
+          join(workspaceRoot, 'tools/vite/src/vitest-local-registry.ts'),
+        ],
+      },
+    },
+    overrides ?? {},
+  );
+}
 
 export async function setup() {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];

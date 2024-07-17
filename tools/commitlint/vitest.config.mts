@@ -1,7 +1,7 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { config } from '../../tools/vite/src/';
+import { nodeTypescript } from '../vite/src/vitest-node-typescript';
 
-export default config({
+export default nodeTypescript({
   test: {
     coverage: {
       enabled: false,

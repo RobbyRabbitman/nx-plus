@@ -9,7 +9,15 @@ import {
   UserConfig,
 } from 'vitest/config';
 
-export function config(overrides?: Partial<UserConfig>) {
+/**
+ * Vitest config for a nx project:
+ *
+ * - Cache
+ * - Ts paths via `nxViteTsPaths` plugin
+ * - Test files typechecking
+ * - Coverage
+ */
+export function nodeTypescript(overrides?: Partial<UserConfig>) {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
   const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
 
@@ -58,17 +66,4 @@ export function config(overrides?: Partial<UserConfig>) {
   }
 
   return mergedConfig;
-}
-
-export function withLocalRegistry(overrides?: Partial<UserConfig>) {
-  return mergeConfig(
-    config({
-      test: {
-        globalSetup: [
-          join(workspaceRoot, 'tools/vite/src/local-registry.setup.ts'),
-        ],
-      },
-    }),
-    overrides ?? {},
-  );
 }

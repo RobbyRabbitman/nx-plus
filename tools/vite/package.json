@@ -10,9 +10,5 @@
     "@nx/vite": "19.4.3"
   },
   "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
-  "exports": {
-    ".": "./src/index.js",
-    "./e2e-cli": "./src/e2e.cli.js"
-  }
+  "typings": "./src/index.d.ts"
 }
