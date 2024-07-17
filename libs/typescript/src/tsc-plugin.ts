@@ -88,7 +88,7 @@ const createTscTarget: CreateNodesFunction<TscPluginSchema | undefined> = (
   const tscConfiguration = {
     outputPath: 'dist/{projectRoot}',
     main: '{projectRoot}/src/index.ts',
-    tsConfig: `{projectRoot}/${resolvedTsConfigPath}`,
+    tsConfig: resolvedTsConfigPath,
   };
 
   const tscTargetConfiguration = {
