@@ -62,30 +62,30 @@ const createTscTarget: CreateNodesFunction<TscPluginSchema | undefined> = (
 
   const { tscTargetName, tsConfigSuffix, tscTargetConfig } = options;
 
-  const maybeTscProjectRoot = dirname(tsConfigPath);
+  const maybeTsProjectRoot = dirname(tsConfigPath);
 
   // 1.
-  if (!isNonRootProject(maybeTscProjectRoot, context)) {
+  if (!isNonRootProject(maybeTsProjectRoot, context)) {
     return {};
   }
-  const tscProjectRoot = maybeTscProjectRoot;
+  const tsProjectRoot = maybeTsProjectRoot;
 
   // 2.
-  const maybeResolvedTsConfig = join(
-    tscProjectRoot,
+  const maybeResolvedTsConfigPath = join(
+    tsProjectRoot,
     `tsconfig.${tsConfigSuffix}.json`,
   );
 
-  const isTsConfig = existsSync(maybeResolvedTsConfig);
+  const tsConfigPathExists = existsSync(maybeResolvedTsConfigPath);
 
-  if (!isTsConfig) {
+  if (!tsConfigPathExists) {
     return {};
   }
 
-  const resolvedTsConfigPath = maybeResolvedTsConfig;
+  const resolvedTsConfigPath = maybeResolvedTsConfigPath;
 
   // 3.
-  const tscConfiguration = {
+  const tscCliConfiguration = {
     outputPath: 'dist/{projectRoot}',
     main: '{projectRoot}/src/index.ts',
     tsConfig: resolvedTsConfigPath,
@@ -99,14 +99,14 @@ const createTscTarget: CreateNodesFunction<TscPluginSchema | undefined> = (
     outputs: ['{options.outputPath}'],
     ...tscTargetConfig,
     options: {
-      ...tscConfiguration,
+      ...tscCliConfiguration,
       ...tscTargetConfig.options,
     },
   } satisfies TscTargetConfiguration;
 
   return {
     projects: {
-      [tscProjectRoot]: {
+      [tsProjectRoot]: {
         targets: {
           [tscTargetName]: tscTargetConfiguration,
         },
