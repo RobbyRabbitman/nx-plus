@@ -1,0 +1,13 @@
+{
+  "name": "@robby-rabbitman/nx-plus-libs-typescript",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "@nx/devkit": "19.4.3",
+    "tslib": "2.6.3"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./tsc-plugin": "./src/tsc-plugin.js"
+  }
+}

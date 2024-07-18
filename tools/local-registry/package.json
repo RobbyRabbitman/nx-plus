@@ -9,7 +9,6 @@
     "nx": "19.4.3"
   },
   "main": "./src/index.js",
-  "type": "commonjs",
   "exports": {
     ".": "./src/index.js",
     "./package.json": "./package.json",
