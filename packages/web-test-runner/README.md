@@ -39,11 +39,11 @@ nx g @robby-rabbitman/nx-plus-web-test-runner:init
 
 #### Options
 
-| Option          | Type    | Default | Description                                   |
-| --------------- | ------- | ------- | --------------------------------------------- |
-| target-name     | string  | 'test'  | The name of the Web Test Runner target.       |
-| skip-format     | boolean | false   | Whether to skip formatting the updated files. |
-| skip-add-plugin | boolean | false   | Whether to skip adding the plugin.            |
+| Option           | Type    | Default | Description                                   |
+| ---------------- | ------- | ------- | --------------------------------------------- |
+| test-target-name | string  | 'test'  | The name of the Web Test Runner target.       |
+| skip-format      | boolean | false   | Whether to skip formatting the updated files. |
+| skip-add-plugin  | boolean | false   | Whether to skip adding the plugin.            |
 
 ### `@robby-rabbitman/nx-plus-web-test-runner/plugin`
 

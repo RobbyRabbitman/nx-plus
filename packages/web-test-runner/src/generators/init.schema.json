@@ -6,7 +6,7 @@
   "description": "Registers '@robby-rabbitman/nx-plus-web-test-runner/plugin' in the 'nx.json'.",
   "type": "object",
   "properties": {
-    "targetName": {
+    "testTargetName": {
       "description": "The name of the Web Test Runner test target.",
       "examples": ["test", "web-test-runner"],
       "type": "string",
