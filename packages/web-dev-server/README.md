@@ -39,11 +39,11 @@ nx g @robby-rabbitman/nx-plus-web-dev-server:init
 
 #### Options
 
-| Option          | Type    | Default | Description                                   |
-| --------------- | ------- | ------- | --------------------------------------------- |
-| target-name     | string  | 'serve' | The name of the Web Dev Server target.        |
-| skip-format     | boolean | false   | Whether to skip formatting the updated files. |
-| skip-add-plugin | boolean | false   | Whether to skip adding the plugin.            |
+| Option            | Type    | Default | Description                                   |
+| ----------------- | ------- | ------- | --------------------------------------------- |
+| serve-target-name | string  | 'serve' | The name of the Web Dev Server target.        |
+| skip-format       | boolean | false   | Whether to skip formatting the updated files. |
+| skip-add-plugin   | boolean | false   | Whether to skip adding the plugin.            |
 
 ### `@robby-rabbitman/nx-plus-web-dev-server/plugin`
 
