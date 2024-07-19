@@ -9,7 +9,10 @@ describe('vitest local registry config', () => {
     const registry = 'http://localhost:4321/';
 
     for (const expectedPackage of expectedToBePublished) {
-      execSync(`npm view ${expectedPackage} --registry ${registry}`);
+      expect(() => execSync(`npm view ${expectedPackage}@local `)).toThrow();
+      expect(() =>
+        execSync(`npm view ${expectedPackage}@local --registry ${registry}`),
+      ).not.toThrow();
     }
   });
 });
