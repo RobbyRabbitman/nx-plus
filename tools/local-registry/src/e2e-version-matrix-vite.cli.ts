@@ -41,16 +41,6 @@ async function main() {
       console.log('remove dist/e2e-workspace done');
     }
 
-    const packageManagerCommand = getPackageManagerCommand();
-
-    execSync(
-      `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite --exclude tools-local-registry`,
-      { cwd: workspaceRoot, stdio: 'inherit' },
-    );
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  } finally {
     // import { removePortsLockFile } from '@robby-rabbitman/nx-plus-libs-e2e-util';
     // removePortsLockFile();
     rmSync(
@@ -62,6 +52,17 @@ async function main() {
       ),
       { force: true },
     );
+
+    const packageManagerCommand = getPackageManagerCommand();
+
+    execSync(
+      `${packageManagerCommand.exec} nx affected -t e2e-version-matrix-vite --exclude tools-local-registry`,
+      { cwd: workspaceRoot, stdio: 'inherit' },
+    );
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  } finally {
     stopLocalRegistry();
   }
   process.exit();
