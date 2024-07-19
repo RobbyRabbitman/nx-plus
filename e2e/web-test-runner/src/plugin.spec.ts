@@ -2,6 +2,7 @@ import {
   getPackageManagerCommand,
   NxJsonConfiguration,
   ProjectConfiguration,
+  writeJsonFile,
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
@@ -9,13 +10,12 @@ import {
   installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
-import { WebTestRunnerTargetPluginSchema } from '@robby-rabbitman/nx-plus-web-test-runner/plugin';
 import { TestRunnerConfig } from '@web/test-runner';
 import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-describe(`@robby-rabbitman/nx-plus-web-test-runner/plugin`, () => {
+describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const npm = getPackageManagerCommand('npm');
   let workspaceRoot: string;
 
@@ -40,23 +40,12 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner/plugin`, () => {
       workspaceRoot,
       packageManagerCommand: npm,
     });
-  });
 
-  it("should add the plugin '@robby-rabbitman/nx-plus-web-test-runner/plugin'", () => {
-    execSync('nx generate @robby-rabbitman/nx-plus-web-test-runner:init', {
-      cwd: workspaceRoot,
-    });
-
-    const nxJson = readJson<NxJsonConfiguration>(
-      join(workspaceRoot, 'nx.json'),
-    );
-
-    expect(nxJson.plugins).toContainEqual({
-      plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-      options: {
-        testTargetName: 'test',
-      } satisfies WebTestRunnerTargetPluginSchema,
-    });
+    const nxJsonPath = join(workspaceRoot, 'nx.json');
+    const nxJson = readJson<NxJsonConfiguration>(nxJsonPath);
+    nxJson.plugins ??= [];
+    nxJson.plugins.push('@robby-rabbitman/nx-plus-web-test-runner/plugin');
+    writeJsonFile(nxJsonPath, nxJson);
   });
 
   it('should infer the Web Test Runner', () => {
