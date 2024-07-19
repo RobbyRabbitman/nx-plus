@@ -1,5 +1,17 @@
 {
   "name": "tools-vite",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:tool"]
+  "tags": ["scope:node", "type:tool"],
+  "targets": {
+    "test-vite": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "vitest --config vitest-local-registry.config.mts",
+          "vitest --config vitest-node-typescript.config.mts"
+        ],
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
 }
