@@ -1,6 +1,7 @@
 import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { rmSync } from 'fs';
+import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import { localRegistryTarget, publish } from './publish';
 
@@ -50,6 +51,17 @@ async function main() {
     console.error(error);
     process.exit(1);
   } finally {
+    // import { removePortsLockFile } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+    // removePortsLockFile();
+    rmSync(
+      join(
+        workspaceRoot,
+        readCachedProjectConfiguration('libs-e2e-util').root,
+        'tmp',
+        'ports.json',
+      ),
+      { force: true },
+    );
     stopLocalRegistry();
   }
   process.exit();

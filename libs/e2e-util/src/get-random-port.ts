@@ -16,8 +16,8 @@ export const PORTS_FILE_PATH = join(
  * Removes the ports lockfile. It does **not** check, whether these ports are
  * actually in use.
  */
-export function clearPortsLockFile() {
-  rmSync(PORTS_FILE_PATH);
+export function removePortsLockFile() {
+  rmSync(PORTS_FILE_PATH, { force: true });
 }
 
 /**
