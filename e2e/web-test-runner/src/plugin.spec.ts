@@ -6,11 +6,13 @@ import {
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
-  createE2eNxWorkspace,
-  getRandomPort,
   installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import {
+  createE2eNxWorkspace,
+  getRandomPort,
+} from '@robby-rabbitman/nx-plus-libs-e2e-util/main';
 import { TestRunnerConfig } from '@web/test-runner';
 import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
