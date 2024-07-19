@@ -1,5 +1,6 @@
 import { readJsonFile, workspaceRoot, writeJsonFile } from '@nx/devkit';
 import { getRandomPort as getRandomPortUtil } from '@robby-rabbitman/nx-plus-libs-node-util';
+import { rmSync } from 'fs';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import { lock } from 'proper-lockfile';
@@ -11,6 +12,20 @@ export const PORTS_FILE_PATH = join(
   'ports.json',
 );
 
+/**
+ * Removes the ports lockfile. It does **not** check, whether these ports are
+ * actually in use.
+ */
+export function clearPortsLockFile() {
+  rmSync(PORTS_FILE_PATH);
+}
+
+/**
+ * The function uses a lock file, so e2e tests can run in parallel. After a e2e
+ * test, the lock file should be removed.
+ *
+ * @returns A random unused port.
+ */
 export async function getRandomPort() {
   const portsFileLock = await lock(PORTS_FILE_PATH);
 
