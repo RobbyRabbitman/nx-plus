@@ -36,18 +36,18 @@
     ],
     "typescriptGlobals": [
       "{workspaceRoot}/tsconfig.base.config",
-      "{workspaceRoot}/libs/typescript/**/*"
+      "{workspaceRoot}/tools/typescript/**/*"
     ]
   },
   "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-libs-typescript/tsc-plugin",
+      "plugin": "@robby-rabbitman/nx-plus-tools-typescript/tsc-plugin",
       "options": {
         "tscTargetConfig": {
           "inputs": ["default", "^default", "typescriptGlobals"]
         }
       },
-      "exclude": ["libs-typescript"]
+      "exclude": ["tools-typescript"]
     },
     {
       "plugin": "@nx/eslint/plugin",
