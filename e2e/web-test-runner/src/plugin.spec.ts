@@ -15,25 +15,26 @@ import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-describe(`@robby-rabbitman/nx-plus-web-test-runner`, () => {
+describe(`@robby-rabbitman/nx-plus-web-test-runner/plugin`, () => {
   const npm = getPackageManagerCommand('npm');
+  let workspaceRoot: string;
 
-  const { e2eWorkspaceName, e2ePackage } = readE2eProject({
-    peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
-  });
+  beforeAll(() => {
+    const { e2eWorkspaceName, e2ePackage } = readE2eProject({
+      peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
+    });
 
-  if (!e2ePackage.peerDependencies['nx']) {
-    throw new Error('nx not in peer dependencies!');
-  }
+    if (!e2ePackage.peerDependencies['nx']) {
+      throw new Error('nx not in peer dependencies!');
+    }
 
-  const workspaceRoot = createE2eNxWorkspace({
-    e2eProjectName: 'web-test-runner-e2e',
-    e2eNxWorkspaceName: e2eWorkspaceName,
-    e2eNxVersion: e2ePackage.peerDependencies.nx,
-    createNxWorkspaceArgs: '--preset apps',
-  });
+    workspaceRoot = createE2eNxWorkspace({
+      e2eProjectName: 'web-test-runner-e2e',
+      e2eNxWorkspaceName: `plugin${e2eWorkspaceName}`,
+      e2eNxVersion: e2ePackage.peerDependencies.nx,
+      createNxWorkspaceArgs: '--preset apps',
+    });
 
-  it('should install succesfully', () => {
     installProject({
       package: e2ePackage,
       workspaceRoot,

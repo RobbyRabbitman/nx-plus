@@ -119,4 +119,97 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
       }),
     );
   });
+
+  describe('schema', () => {
+    describe('testTargetName', () => {
+      it('should use the provided value', () => {
+        const testTargetName = 'web-test-runner';
+
+        const { nxJson } = runInitGenerator({ schema: { testTargetName } });
+
+        expect(nxJson.plugins).toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            options: {
+              testTargetName,
+            } satisfies WebTestRunnerInitGeneratorSchema,
+          }),
+        );
+      });
+
+      it('should fall back to `test` when the provided value is an empty string', () => {
+        const testTargetName = '';
+
+        const { nxJson } = runInitGenerator({ schema: { testTargetName } });
+
+        expect(nxJson.plugins).toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            options: {
+              testTargetName: 'test',
+            } satisfies WebTestRunnerInitGeneratorSchema,
+          }),
+        );
+      });
+
+      it('should fall back to `test` when the value is not provided', () => {
+        const { nxJson } = runInitGenerator({ schema: {} });
+
+        expect(nxJson.plugins).toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            options: {
+              testTargetName: 'test',
+            } satisfies WebTestRunnerInitGeneratorSchema,
+          }),
+        );
+      });
+    });
+
+    describe.todo('skipFormatFiles');
+
+    describe('skipAddPlugin', () => {
+      it('should add the plugin to `nx.json` when the value is not provided', () => {
+        const { nxJson } = runInitGenerator({ schema: {} });
+
+        expect(nxJson.plugins).toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+          }),
+        );
+      });
+
+      it('should add the plugin to `nx.json` when the provided value is `false`', () => {
+        const { nxJson } = runInitGenerator({
+          schema: { skipAddPlugin: false },
+        });
+
+        expect(nxJson.plugins).toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+          }),
+        );
+      });
+
+      it('should not add the plugin to `nx.json` when the provided value is `true`', () => {
+        expect(
+          nxJsonSnapShotAfterCreateE2eNxWorkspace.plugins ?? [],
+        ).not.toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+          }),
+        );
+
+        const { nxJson } = runInitGenerator({
+          schema: { skipAddPlugin: true },
+        });
+
+        expect(nxJson.plugins ?? []).not.toContainEqual(
+          expect.objectContaining({
+            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+          }),
+        );
+      });
+    });
+  });
 });

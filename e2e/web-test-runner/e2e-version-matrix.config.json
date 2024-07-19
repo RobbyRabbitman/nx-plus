@@ -2,6 +2,7 @@
   "name": "@robby-rabbitman/nx-plus-web-test-runner",
   "version": "local",
   "peerDependencies": {
-    "nx": ["^17", "^18", "^19"]
+    "nx": ["^17", "^18", "^19"],
+    "@web/test-runner": ["^0.18.2"]
   }
 }
