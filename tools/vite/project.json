@@ -5,13 +5,17 @@
   "targets": {
     "build": { "executor": "nx:noop" },
     "test-vite": {
-      "executor": "nx:noop",
-      "dependsOn": ["test-vite--*"]
+      "command": "nx run-many",
+      "options": {
+        "run": true,
+        "targets": "test-vite-local-registry,test-vite-node-typescript",
+        "projects": "{projectName}"
+      }
     },
-    "test-vite--local-registry": {
+    "test-vite-local-registry": {
       "command": "vitest --config {projectRoot}/vitest-local-registry.config.mts"
     },
-    "test-vite--node-typescript": {
+    "test-vite-node-typescript": {
       "command": "vitest --config {projectRoot}/vitest-node-typescript.config.mts"
     }
   }
