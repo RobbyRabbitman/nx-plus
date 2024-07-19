@@ -1,11 +1,8 @@
 import { workspaceRoot } from '@nx/devkit';
-import {
-  localRegistryTarget,
-  publish,
-} from '@robby-rabbitman/nx-plus-tools-local-registry';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import { mergeConfig, UserConfig } from 'vitest/config';
+import { localRegistryTarget, publish } from '../../local-registry';
 
 export function localRegistry(overrides?: Partial<UserConfig>) {
   return mergeConfig(

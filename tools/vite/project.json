@@ -3,15 +3,16 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:tool"],
   "targets": {
+    "build": { "executor": "nx:noop" },
     "test-vite": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "vitest --config vitest-local-registry.config.mts",
-          "vitest --config vitest-node-typescript.config.mts"
-        ],
-        "cwd": "{projectRoot}"
-      }
+      "executor": "nx:noop",
+      "dependsOn": ["test-vite--*"]
+    },
+    "test-vite--local-registry": {
+      "command": "vitest --config {projectRoot}/vitest-local-registry.config.mts"
+    },
+    "test-vite--node-typescript": {
+      "command": "vitest --config {projectRoot}/vitest-node-typescript.config.mts"
     }
   }
 }
