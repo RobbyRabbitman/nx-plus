@@ -1,7 +1,7 @@
 {
-  "name": "libs-typescript",
+  "name": "tools-typescript",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:lib"],
+  "tags": ["scope:node", "type:tool"],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",

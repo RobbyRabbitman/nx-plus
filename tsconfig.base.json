@@ -23,11 +23,11 @@
       "@robby-rabbitman/nx-plus-libs-node-util": [
         "libs/node-util/src/index.ts"
       ],
-      "@robby-rabbitman/nx-plus-libs-typescript": [
-        "libs/typescript/src/index.ts"
+      "@robby-rabbitman/nx-plus-tools-typescript": [
+        "tools/typescript/src/index.ts"
       ],
-      "@robby-rabbitman/nx-plus-libs-typescript/tsc-plugin": [
-        "libs/typescript/src/tsc-plugin.ts"
+      "@robby-rabbitman/nx-plus-tools-typescript/tsc-plugin": [
+        "tools/typescript/src/tsc-plugin.ts"
       ],
       "@robby-rabbitman/nx-plus-tools-local-registry": [
         "tools/local-registry/src/index.ts"
