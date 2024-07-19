@@ -6,18 +6,20 @@ describe('vitest local registry config', () => {
       '@robby-rabbitman/nx-plus-web-test-runner',
       '@robby-rabbitman/nx-plus-web-dev-server',
     ];
+
+    // TODO add port to local registry publish script
     const localRegistry = 'http://localhost:4321/';
-    const npmjsOrgRegsitry = 'https://registry.npmjs.org/';
+    const npmJsOrgRegsitry = 'https://registry.npmjs.org/';
 
     for (const expectedPackage of expectedToBePublished) {
       expect(() =>
         execSync(
-          `npm view ${expectedPackage}@local --registry ${npmjsOrgRegsitry}`,
+          `pnpm view ${expectedPackage}@local --registry ${npmJsOrgRegsitry}`,
         ),
       ).toThrow();
       expect(() =>
         execSync(
-          `npm view ${expectedPackage}@local --registry ${localRegistry}`,
+          `pnpm view ${expectedPackage}@local --registry ${localRegistry}`,
         ),
       ).not.toThrow();
     }
