@@ -1,3 +1,10 @@
+## 0.6.1 (2024-07-19)
+
+
+### 🩹 Fixes
+
+- **web-test-runner:** correct 'testTargetName' in init schema ([#81](https://github.com/RobbyRabbitman/nx-plus/pull/81))
+
 ## 0.6.0 (2024-07-17)
 
 
