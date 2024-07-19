@@ -1,8 +1,8 @@
 import { readJsonFile, workspaceRoot, writeJsonFile } from '@nx/devkit';
 import { getRandomPort as getRandomPortUtil } from '@robby-rabbitman/nx-plus-libs-node-util';
-import { rmSync } from 'fs';
+import { existsSync, mkdirSync, rmSync } from 'fs';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
-import { join } from 'path';
+import { dirname, join } from 'path';
 import { lock } from 'proper-lockfile';
 
 export const PORTS_FILE_PATH = join(
@@ -27,7 +27,12 @@ export function removePortsLockFile() {
  * @returns A random unused port.
  */
 export async function getRandomPort() {
-  const portsFileLock = await lock(PORTS_FILE_PATH);
+  if (!existsSync(PORTS_FILE_PATH)) {
+    mkdirSync(dirname(PORTS_FILE_PATH), { recursive: true });
+    writeJsonFile(PORTS_FILE_PATH, []);
+  }
+
+  const portsFileLock = await lock(PORTS_FILE_PATH, {});
 
   const ports = readJsonFile<number[]>(PORTS_FILE_PATH);
 
@@ -41,6 +46,7 @@ export async function getRandomPort() {
   }
 
   ports.push(port);
+
   writeJsonFile(PORTS_FILE_PATH, ports);
 
   portsFileLock();
