@@ -1,7 +1,7 @@
 import { readJsonFile, workspaceRoot, writeJsonFile } from '@nx/devkit';
 import { existsSync, mkdirSync } from 'fs';
 import { dirname, join } from 'path';
-import { lock } from 'proper-lockfile';
+import { check, lock } from 'proper-lockfile';
 import { mergeConfig, UserConfig } from 'vitest/config';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { localRegistryTarget, publish } from '../../local-registry';
@@ -93,6 +93,13 @@ async function getSetupCount() {
   const setupCountDir = dirname(setupCountPath);
 
   mkdirSync(setupCountDir, { recursive: true });
+
+  if (
+    existsSync(join(setupCountDir, 'setup.lock')) &&
+    !(await check(join(setupCountDir, 'setup.lock')))
+  ) {
+    writeJsonFile(setupCountPath, { setupCount: 0 });
+  }
 
   verboseLogging('Requesting lock');
   const setupCountLock = await lock(setupCountDir, {
