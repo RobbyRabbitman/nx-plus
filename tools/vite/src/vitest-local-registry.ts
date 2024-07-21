@@ -9,9 +9,7 @@ import { localRegistryTarget, publish } from '../../local-registry';
 const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
 
 function verboseLogging(...args: Parameters<(typeof console)['log']>) {
-  if (verbose) {
-    console.log(...args);
-  }
+  console.log(...args);
 }
 
 export function localRegistry(overrides?: Partial<UserConfig>) {
@@ -35,6 +33,8 @@ export async function setup() {
 
     if (setupCount.count === 1) {
       await startLocalRegistry();
+    } else {
+      verboseLogging('Local registry already started');
     }
   } finally {
     setupCount.removeLock();
@@ -59,6 +59,7 @@ export async function teardown() {
 }
 
 async function startLocalRegistry() {
+  verboseLogging('Start local registry');
   const { stopLocalRegistry } = await publish({
     clearStorage: true,
     stopLocalRegistry: false,
@@ -75,6 +76,7 @@ async function startLocalRegistry() {
 
 function stopLocalRegistry() {
   if (global.stopLocalRegistry) {
+    verboseLogging('Stop local registry');
     global.stopLocalRegistry();
   }
 }
@@ -88,13 +90,18 @@ async function getSetupCount() {
     'setup-count',
   );
 
-  const lockFileExists = existsSync(setupCountPath);
+  const setupCountDir = dirname(setupCountPath);
 
-  if (!lockFileExists) {
-    mkdirSync(dirname(setupCountPath), { recursive: true });
-  }
+  mkdirSync(setupCountDir, { recursive: true });
 
-  const setupCountLock = await lock(setupCountPath, { realpath: false });
+  verboseLogging('Requesting lock');
+  const setupCountLock = await lock(setupCountDir, {
+    lockfilePath: join(setupCountDir, 'setup.lock'),
+    retries: {
+      forever: true,
+    },
+  });
+  verboseLogging('Apply lock');
   let hasLock = true;
 
   const removeSetupCountLock = () => {
@@ -104,13 +111,9 @@ async function getSetupCount() {
   };
 
   try {
-    if (!existsSync(setupCountPath)) {
-      writeJsonFile(setupCountPath, { setupCount: 0 });
-    }
+    const lockFileExists = existsSync(setupCountPath);
 
-    const lockFile = readJsonFile(setupCountPath);
-
-    if (typeof lockFile !== 'object') {
+    if (!lockFileExists) {
       writeJsonFile(setupCountPath, { setupCount: 0 });
     }
 
@@ -134,7 +137,9 @@ async function getSetupCount() {
       }
       if (hasLock) {
         console.log(`Decrement ${setupCount}`);
-        writeJsonFile(setupCountPath, { setupCount: --setupCount });
+        writeJsonFile(setupCountPath, {
+          setupCount: Math.max(0, --setupCount),
+        });
         console.log(`Decremented to ${setupCount}`);
       }
     };
