@@ -76,7 +76,8 @@
         "e2eTargetName": "e2e-vite",
         "configurationConfig": {
           "run": true,
-          "coverage": false
+          "coverage": false,
+          "fileParallelism": false
         }
       },
       "include": ["e2e/**/*"]
