@@ -32,7 +32,9 @@ export async function getRandomPort() {
     writeJsonFile(PORTS_FILE_PATH, []);
   }
 
-  const portsFileLock = await lock(PORTS_FILE_PATH, {});
+  const portsFileLock = await lock(PORTS_FILE_PATH, {
+    retries: 100,
+  });
 
   const ports = readJsonFile<number[]>(PORTS_FILE_PATH);
 
