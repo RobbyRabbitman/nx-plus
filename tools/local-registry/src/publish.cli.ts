@@ -42,5 +42,8 @@ import { localRegistryTarget, publish } from './publish';
   const { publishStatus } = await publish({
     ...options,
   });
-  process.exit(publishStatus);
+
+  if (options.stopLocalRegistry) {
+    process.exit(publishStatus);
+  }
 })();

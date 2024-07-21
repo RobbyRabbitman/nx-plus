@@ -17,7 +17,7 @@
       "outputs": ["{options.storage}"],
       "command": "ts-node {projectRoot}/src/publish.cli.ts",
       "options": {
-        "storage": "{workspaceRoot}/{projectRoot}/storage"
+        "storage": "{projectRoot}/storage"
       }
     },
     "test": {
