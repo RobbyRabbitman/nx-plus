@@ -5,10 +5,10 @@ import {
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
-  createE2eNxWorkspace,
   installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util/main';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { WebTestRunnerInitGeneratorSchema } from 'packages/web-test-runner/src/generators/init';

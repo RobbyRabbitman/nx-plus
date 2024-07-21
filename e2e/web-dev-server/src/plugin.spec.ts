@@ -6,10 +6,13 @@ import {
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
 import {
-  createE2eNxWorkspace,
   installProject,
   readE2eProject,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import {
+  createE2eNxWorkspace,
+  getRandomPort,
+} from '@robby-rabbitman/nx-plus-libs-e2e-util/main';
 import { execUntil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { DevServerConfig } from '@web/dev-server';
 import { execSync } from 'node:child_process';
@@ -49,7 +52,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
     writeJsonFile(nxJsonPath, nxJson);
   });
 
-  it('should infer the Web Dev Server', () => {
+  it('should infer the Web Dev Server', async () => {
     execSync(
       'nx generate @nx/js:library --name=some-project --linter=none --projectNameAndRootFormat=as-provided --unitTestRunner=none --no-interactive',
       {
@@ -57,7 +60,9 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       },
     );
 
-    const webDevServerConfiguration = {} satisfies DevServerConfig;
+    const webDevServerConfiguration = {
+      port: await getRandomPort(),
+    } satisfies DevServerConfig;
 
     writeFileSync(
       join(workspaceRoot, 'some-project/web-dev-server.config.mjs'),
