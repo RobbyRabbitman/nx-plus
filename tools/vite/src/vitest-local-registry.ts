@@ -1,10 +1,18 @@
-import { workspaceRoot } from '@nx/devkit';
-import { mkdirSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { checkSync, lock } from 'proper-lockfile';
+import { readJsonFile, workspaceRoot, writeJsonFile } from '@nx/devkit';
+import { existsSync, mkdirSync } from 'fs';
+import { dirname, join } from 'path';
+import { lock } from 'proper-lockfile';
 import { mergeConfig, UserConfig } from 'vitest/config';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { localRegistryTarget, publish } from '../../local-registry';
+
+const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
+
+function verboseLogging(...args: Parameters<(typeof console)['log']>) {
+  if (verbose) {
+    console.log(...args);
+  }
+}
 
 export function localRegistry(overrides?: Partial<UserConfig>) {
   return mergeConfig(
@@ -58,7 +66,7 @@ async function startLocalRegistry() {
     specifier: '0.0.0-local',
     storage: join(workspaceRoot, 'tmp', 'vitest-local-registry', 'storages'),
     projects: [],
-    verbose: process.env['NX_VERBOSE_LOGGING'] === 'true',
+    verbose: false,
     localRegistryTarget,
   });
 
@@ -72,45 +80,62 @@ function stopLocalRegistry() {
 }
 
 async function getSetupCount() {
-  const setupCountDir = join(workspaceRoot, 'tmp');
-
   const setupCountPath = join(
-    setupCountDir,
+    workspaceRoot,
+    'tmp',
     'tools-vite',
     'vitest-local-registry',
     'setup-count',
   );
 
-  if (!checkSync(setupCountDir)) {
-    mkdirSync(setupCountDir, { recursive: true });
+  const lockFileExists = existsSync(setupCountPath);
+
+  if (!lockFileExists) {
+    mkdirSync(dirname(setupCountPath), { recursive: true });
   }
 
   const setupCountLock = await lock(setupCountPath, { realpath: false });
   let hasLock = true;
 
   const removeSetupCountLock = () => {
+    verboseLogging('Remove lock');
     hasLock = false;
     setupCountLock();
   };
 
   try {
-    if (!checkSync(setupCountPath)) {
-      writeFileSync(setupCountPath, '0');
+    if (!existsSync(setupCountPath)) {
+      writeJsonFile(setupCountPath, { setupCount: 0 });
     }
 
-    let setupCount = Number(
-      readFileSync(setupCountPath, { encoding: 'utf-8' }),
-    );
+    const lockFile = readJsonFile(setupCountPath);
+
+    if (typeof lockFile !== 'object') {
+      writeJsonFile(setupCountPath, { setupCount: 0 });
+    }
+
+    let setupCount = readJsonFile(setupCountPath).setupCount;
+    verboseLogging('Setup count', setupCount);
 
     const incrementSetupCount = () => {
+      if (verbose) {
+        console.log(`Trying to increment ${setupCount}`);
+      }
       if (hasLock) {
-        writeFileSync(setupCountPath, String(setupCount++));
+        console.log(`Increment ${setupCount}`);
+        writeJsonFile(setupCountPath, { setupCount: ++setupCount });
+        console.log(`Incremented to ${setupCount}`);
       }
     };
 
     const decrementSetupCount = () => {
+      if (verbose) {
+        console.log(`Trying to decrement ${setupCount}`);
+      }
       if (hasLock) {
-        writeFileSync(setupCountPath, String(setupCount--));
+        console.log(`Decrement ${setupCount}`);
+        writeJsonFile(setupCountPath, { setupCount: --setupCount });
+        console.log(`Decremented to ${setupCount}`);
       }
     };
 
@@ -122,8 +147,8 @@ async function getSetupCount() {
       decrement: decrementSetupCount,
       removeLock: removeSetupCountLock,
     };
-  } catch (errror) {
+  } catch (error) {
     removeSetupCountLock();
-    throw errror;
+    throw error;
   }
 }
