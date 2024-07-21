@@ -81,6 +81,10 @@ async function getSetupCount() {
     'setup-count',
   );
 
+  if (!checkSync(setupCountDir)) {
+    mkdirSync(setupCountDir, { recursive: true });
+  }
+
   const setupCountLock = await lock(setupCountPath, { realpath: false });
   let hasLock = true;
 
@@ -91,7 +95,6 @@ async function getSetupCount() {
 
   try {
     if (!checkSync(setupCountPath)) {
-      mkdirSync(setupCountDir, { recursive: true });
       writeFileSync(setupCountPath, '0');
     }
 
