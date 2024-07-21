@@ -14,18 +14,16 @@
     "publish": {
       "cache": true,
       "inputs": ["publishable"],
-      "outputs": ["{workspaceRoot}/{projectRoot}/storage"],
-      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts --localRegistryTarget '{projectName}:serve' --storage {projectRoot}/storage"
+      "outputs": ["{options.storage}"],
+      "command": "ts-node {projectRoot}/src/publish.cli.ts",
+      "options": {
+        "storage": "{workspaceRoot}/{projectRoot}/storage"
+      }
     },
     "test": {
       "cache": true,
       "inputs": ["publishable"],
-      "command": "pnpm exec nx run {projectName}:publish",
-      "configurations": {
-        "ci": {
-          "command": "echo 'Im disabled in ci'"
-        }
-      }
+      "dependsOn": ["publish"]
     },
     "e2e-version-matrix-vite": {
       "command": "ts-node {projectRoot}/src/e2e-version-matrix-vite.cli.ts"
