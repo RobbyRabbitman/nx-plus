@@ -4,6 +4,7 @@ import { mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph'; // this not public api?
 import { coerce, major } from 'semver';
+import { v4 } from 'uuid';
 
 /**
  * Creates a nx workspace in
@@ -101,4 +102,9 @@ export const createNxWorkspace = (options: {
   );
 
   return nxWorkspaceRoot;
+};
+
+/** @returns A unique nx workspace name. */
+export const generateNxWorkspaceName = ({ name }: { name?: string }) => {
+  return `${v4()}${name ?? ''}`.replace(/[^a-z0-9]/gi, '').substring(0, 255);
 };

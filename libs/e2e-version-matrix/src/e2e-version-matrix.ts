@@ -1,4 +1,5 @@
 import {
+  CreateNodesContextV2,
   createNodesFromFiles,
   CreateNodesFunction,
   CreateNodesV2,
@@ -7,6 +8,7 @@ import {
   TargetConfiguration,
   workspaceRoot,
 } from '@nx/devkit';
+import { generateNxWorkspaceName } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
@@ -15,7 +17,7 @@ import {
   createVersionMatrix,
   VersionMatrixConfig,
   VersionMatrixItem,
-} from '../version-matrix';
+} from './version-matrix';
 
 export type E2eVersionMatrixPluginSchema =
   Partial<E2eVersionMatrixPluginOptions>;
@@ -23,7 +25,6 @@ export type E2eVersionMatrixPluginSchema =
 export type E2eVersionMatrixPluginOptions = {
   targetPrefix: string;
   targetConfiguration: TargetConfiguration;
-  peerDependencyEnvPrefix: string;
 };
 
 const e2eVersionMatrixConfigFileName = 'e2e-version-matrix.config.json';
@@ -49,110 +50,148 @@ export const createNodesV2: CreateNodesV2<E2eVersionMatrixPluginSchema> = [
  */
 const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
   e2eVersionMatrixConfigPath,
-  options,
+  schema,
   context,
 ) => {
-  const { peerDependencyEnvPrefix, targetPrefix, targetConfiguration } = {
-    peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
-    targetPrefix: 'version-matrix',
-    targetConfiguration: {},
-    ...options,
-  } satisfies E2eVersionMatrixPluginOptions;
-
-  const maybeProjectRoot = dirname(e2eVersionMatrixConfigPath);
-
-  if (
-    !existsSync(
-      join(context.workspaceRoot, maybeProjectRoot, 'project.json'),
-    ) &&
-    !existsSync(join(context.workspaceRoot, maybeProjectRoot, 'package.json'))
-  ) {
-    return {};
-  }
-
-  const projectRoot = maybeProjectRoot;
-
-  let maybeE2eVersionMatrixConfig: VersionMatrixConfig;
-
   try {
-    maybeE2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
+    const options = {
+      targetPrefix: 'version-matrix',
+      targetConfiguration: {},
+      ...schema,
+    } satisfies E2eVersionMatrixPluginOptions;
+
+    const { projectRoot } = addE2eVersionMatrix__assertIsProject({
       e2eVersionMatrixConfigPath,
-    );
+      options,
+      context,
+    });
+
+    const { e2eVersionMatrixConfig } =
+      addE2eVersionMatrix__getE2eVersionMatrixConfig({
+        e2eVersionMatrixConfigPath,
+        options,
+        context,
+      });
+
+    const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
+
+    const { e2eVersionTargets } = addE2eVersionMatrix__createTargets({
+      e2eVersionMatrixConfigPath,
+      options,
+      context,
+      e2eVersionMatrix,
+      peerDependencyEnvPrefix: E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX,
+    });
+
+    return {
+      projects: {
+        [projectRoot]: {
+          targets: e2eVersionTargets,
+        },
+      },
+    };
   } catch (error) {
-    console.error(error);
     return {};
   }
-
-  const e2eVersionMatrixConfig = maybeE2eVersionMatrixConfig;
-
-  const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
-
-  const e2eVersionTargets = createTargets({
-    e2eVersionMatrix,
-    targetPrefix,
-    targetConfiguration,
-    peerDependencyEnvPrefix,
-  });
-
-  return {
-    projects: {
-      [projectRoot]: {
-        targets: e2eVersionTargets,
-      },
-    },
-  };
 };
 
-function createTargets({
-  e2eVersionMatrix,
-  targetPrefix,
-  targetConfiguration,
-  peerDependencyEnvPrefix,
+function addE2eVersionMatrix__assertIsProject({
+  e2eVersionMatrixConfigPath,
+  context,
 }: {
+  e2eVersionMatrixConfigPath: string;
+  options: E2eVersionMatrixPluginOptions;
+  context: CreateNodesContextV2;
+}) {
+  const maybeProjectRoot = dirname(e2eVersionMatrixConfigPath);
+
+  const isProject =
+    existsSync(join(context.workspaceRoot, maybeProjectRoot, 'project.json')) ||
+    existsSync(join(context.workspaceRoot, maybeProjectRoot, 'package.json'));
+
+  if (!isProject) {
+    throw new Error(`Not a project: ${maybeProjectRoot}`);
+  }
+
+  return { projectRoot: maybeProjectRoot };
+}
+
+function addE2eVersionMatrix__getE2eVersionMatrixConfig({
+  e2eVersionMatrixConfigPath,
+}: {
+  e2eVersionMatrixConfigPath: string;
+  options: E2eVersionMatrixPluginOptions;
+  context: CreateNodesContextV2;
+}) {
+  const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
+    e2eVersionMatrixConfigPath,
+  );
+
+  return { e2eVersionMatrixConfig };
+}
+
+function addE2eVersionMatrix__createTargets({
+  e2eVersionMatrix,
+  peerDependencyEnvPrefix,
+  options,
+  e2eVersionMatrixConfigPath,
+  context,
+}: {
+  e2eVersionMatrixConfigPath: string;
+  options: E2eVersionMatrixPluginOptions;
+  context: CreateNodesContextV2;
   e2eVersionMatrix: VersionMatrixItem[];
-  targetPrefix: string;
-  targetConfiguration: TargetConfiguration;
   peerDependencyEnvPrefix: string;
 }) {
-  return Object.fromEntries(
+  const e2eVersionTargets = Object.fromEntries(
     e2eVersionMatrix.map((permutation) => [
-      createTargetName({ permutation, targetPrefix }),
-      createTargetConfiguration({
+      addE2eVersionMatrix__createTargetName({
+        e2eVersionMatrixConfigPath,
+        options,
+        context,
         permutation,
-        targetConfiguration,
+        targetPrefix: options.targetPrefix,
+      }),
+      addE2eVersionMatrix__createTargetConfiguration({
+        e2eVersionMatrixConfigPath,
+        options,
+        context,
+        permutation,
+        targetConfiguration: options.targetConfiguration,
         peerDependencyEnvPrefix,
       }),
     ]),
   );
+
+  return { e2eVersionTargets };
 }
 
-/** @returns A target name based on the given permutation. */
-function createTargetName({
-  permutation: { peerDependencies },
+function addE2eVersionMatrix__createTargetName({
+  permutation,
   targetPrefix,
 }: {
+  e2eVersionMatrixConfigPath: string;
+  options: E2eVersionMatrixPluginOptions;
+  context: CreateNodesContextV2;
   permutation: VersionMatrixItem;
   targetPrefix: string;
 }) {
   return [
     targetPrefix,
-    ...Object.entries(peerDependencies).map((name_version) =>
+    ...Object.entries(permutation.peerDependencies).map((name_version) =>
       name_version.join('@'),
     ),
   ].join('---');
 }
 
-/**
- * - For every peer dependency there is a env var =>
- *   {peerDependencyEnvPrefix}{peerDependency}={version}
- *
- * @returns A configuration for the given permutation.
- */
-function createTargetConfiguration({
+function addE2eVersionMatrix__createTargetConfiguration({
   peerDependencyEnvPrefix,
   targetConfiguration,
-  permutation: { peerDependencies },
+  permutation,
 }: {
+  e2eVersionMatrixConfigPath: string;
+  options: E2eVersionMatrixPluginOptions;
+  context: CreateNodesContextV2;
   targetConfiguration: TargetConfiguration;
   permutation: VersionMatrixItem;
   peerDependencyEnvPrefix: string;
@@ -163,10 +202,9 @@ function createTargetConfiguration({
       ...targetConfiguration.options,
       env: {
         ...Object.fromEntries(
-          Object.entries(peerDependencies).map(([name, version]) => [
-            `${peerDependencyEnvPrefix}${name}`,
-            version,
-          ]),
+          Object.entries(permutation.peerDependencies).map(
+            ([name, version]) => [`${peerDependencyEnvPrefix}${name}`, version],
+          ),
         ),
         [E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX]:
           peerDependencyEnvPrefix,
@@ -176,31 +214,37 @@ function createTargetConfiguration({
   };
 }
 
+function assertIsE2eVersionMatrix() {
+  if (!isE2eVersionMatrix()) {
+    throw new Error('Running an e2e version matrix test?');
+  }
+}
+
+export const isE2eVersionMatrix = () => {
+  return E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX in process.env;
+};
+
 export function getPeerDependencyEnvPrefix() {
+  assertIsE2eVersionMatrix();
+
   const peerDependencyEnvPrefix =
     process.env[E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX];
-
-  if (!peerDependencyEnvPrefix) {
-    throw new Error(
-      `E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX not set! Running an e2e version matrix test?`,
-    );
-  }
 
   return peerDependencyEnvPrefix;
 }
 
 /** @returns The project of the current e2e target. */
-export function readE2eProject({
-  peerDependencyEnvPrefix,
-}: {
-  peerDependencyEnvPrefix: string;
-}) {
+export function getE2eVersionMatrixProject() {
+  assertIsE2eVersionMatrix();
+
+  const peerDependencyEnvPrefix = getPeerDependencyEnvPrefix();
+
   const peerDependencyEnvVars = Object.keys(process.env).filter((envVar) =>
     envVar.startsWith(peerDependencyEnvPrefix),
   );
 
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
-  const configuration = process.env['NX_TASK_TARGET_CONFIGURATION'];
+  const targetName = process.env['NX_TASK_TARGET_TARGET'];
   const project = readCachedProjectConfiguration(projectName);
 
   const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
@@ -219,9 +263,9 @@ export function readE2eProject({
      * A _safe_ folder name, which can be used as a _workspace_ for the e2e
      * test.
      */
-    e2eWorkspaceName: `${Date.now()}${configuration}`
-      .replace(/[^a-z0-9]/gi, '')
-      .substring(0, 255),
+    e2eWorkspaceName: generateNxWorkspaceName({
+      name: targetName,
+    }),
     /** The package the e2e test targets. */
     e2ePackage: {
       name: e2eVersionMatrixConfig.name,
@@ -232,7 +276,7 @@ export function readE2eProject({
 }
 
 /** Installs a package including its peer dependencies. */
-export function installProject({
+export function installE2eVersionMatrixProject({
   workspaceRoot,
   packageManagerCommand,
   package: { name, version, peerDependencies },
