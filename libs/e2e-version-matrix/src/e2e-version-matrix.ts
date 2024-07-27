@@ -29,6 +29,15 @@ export type E2eVersionMatrixPluginOptions = {
 
 const e2eVersionMatrixConfigFileName = 'e2e-version-matrix.config.json';
 const e2eVersionMatrixConfigGlob = `**/${e2eVersionMatrixConfigFileName}`;
+/**
+ * The environment variable, that represents the prefix for the peer
+ * dependencies environment variables.
+ *
+ * @example
+ *   E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX=version-matrix
+ *   version-matrix_@nx/devkit=13.0.0
+ *   version-matrix_@nx/devkit=13.0.0
+ */
 const E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX =
   'E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX';
 
@@ -196,6 +205,8 @@ function addE2eVersionMatrix__createTargetConfiguration({
   permutation: VersionMatrixItem;
   peerDependencyEnvPrefix: string;
 }) {
+  const peerDependencPrefix = 'E2E_VERSION_MATRIX_PEER_DEPENDENCY_';
+
   return {
     ...targetConfiguration,
     options: {
@@ -203,11 +214,10 @@ function addE2eVersionMatrix__createTargetConfiguration({
       env: {
         ...Object.fromEntries(
           Object.entries(permutation.peerDependencies).map(
-            ([name, version]) => [`${peerDependencyEnvPrefix}${name}`, version],
+            ([name, version]) => [`${peerDependencPrefix}${name}`, version],
           ),
         ),
-        [E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX]:
-          peerDependencyEnvPrefix,
+        [E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX]: peerDependencPrefix,
         ...targetConfiguration.options['env'],
       },
     },
@@ -239,8 +249,10 @@ export function getE2eVersionMatrixProject() {
 
   const peerDependencyEnvPrefix = getPeerDependencyEnvPrefix();
 
-  const peerDependencyEnvVars = Object.keys(process.env).filter((envVar) =>
-    envVar.startsWith(peerDependencyEnvPrefix),
+  const peerDependencyEnvVars = Object.keys(process.env).filter(
+    (envVar) =>
+      envVar.startsWith(peerDependencyEnvPrefix) &&
+      envVar !== E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX,
   );
 
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
