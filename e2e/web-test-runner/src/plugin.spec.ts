@@ -5,11 +5,11 @@ import {
   writeJsonFile,
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
+import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import {
-  createE2eNxWorkspace,
-  installProject,
-  readE2eProject,
-} from '@robby-rabbitman/nx-plus-libs-e2e-util';
+  getE2eVersionMatrixProject,
+  installE2eVersionMatrixProject,
+} from '@robby-rabbitman/nx-plus-libs-e2e-version-matrix';
 import { TestRunnerConfig } from '@web/test-runner';
 import { execSync } from 'node:child_process';
 import { rmSync, writeFileSync } from 'node:fs';
@@ -20,9 +20,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   let workspaceRoot: string;
 
   beforeAll(() => {
-    const { e2eWorkspaceName, e2ePackage } = readE2eProject({
-      peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
-    });
+    const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
@@ -35,7 +33,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       createNxWorkspaceArgs: '--preset apps',
     });
 
-    installProject({
+    installE2eVersionMatrixProject({
       package: e2ePackage,
       workspaceRoot,
       packageManagerCommand: npm,
