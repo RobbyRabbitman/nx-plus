@@ -46,7 +46,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     writeJsonFile(nxJsonPath, nxJson);
   });
 
-  it('should infer the Web Test Runner', () => {
+  it('should infer the Web Test Runner', async () => {
     execSync(
       'nx generate @nx/js:library --name=some-project --linter=none --projectNameAndRootFormat=as-provided --unitTestRunner=none --no-interactive',
       {
@@ -58,6 +58,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       files: '**/*.spec.js',
       nodeResolve: true,
       watch: false,
+      port: await getRandomPort(),
     } satisfies TestRunnerConfig;
 
     writeFileSync(

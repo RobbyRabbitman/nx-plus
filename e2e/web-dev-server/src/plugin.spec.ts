@@ -47,7 +47,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
     writeJsonFile(nxJsonPath, nxJson);
   });
 
-  it('should infer the Web Dev Server', () => {
+  it('should infer the Web Dev Server', async () => {
     execSync(
       'nx generate @nx/js:library --name=some-project --linter=none --projectNameAndRootFormat=as-provided --unitTestRunner=none --no-interactive',
       {
@@ -55,7 +55,9 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       },
     );
 
-    const webDevServerConfiguration = {} satisfies DevServerConfig;
+    const webDevServerConfiguration = {
+      port: await getRandomPort(),
+    } satisfies DevServerConfig;
 
     writeFileSync(
       join(workspaceRoot, 'some-project/web-dev-server.config.mjs'),

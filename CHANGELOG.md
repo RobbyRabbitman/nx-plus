@@ -1,3 +1,10 @@
+## 0.6.2 (2024-07-21)
+
+
+### 🩹 Fixes
+
+- get random port in e2e tests ([#86](https://github.com/RobbyRabbitman/nx-plus/pull/86))
+
 ## 0.6.1 (2024-07-19)
 
 
