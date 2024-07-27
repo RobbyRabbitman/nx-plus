@@ -5,8 +5,10 @@
     "@nx/devkit": "19.5.1",
     "nx": "19.5.1",
     "tslib": "2.6.3",
-    "semver": "7.6.2",
-    "uuid": "10.0.0"
+    "semver": "7.6.3",
+    "uuid": "10.0.0",
+    "@robby-rabbitman/nx-plus-libs-node-util": "0.0.0",
+    "proper-lockfile": "4.1.2"
   },
   "main": "./src/index.js"
 }
