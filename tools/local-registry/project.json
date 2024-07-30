@@ -23,12 +23,9 @@
       "command": "pnpm exec nx run {projectName}:publish",
       "configurations": {
         "ci": {
-          "command": "echo 'Im disabled in ci'"
+          "command": "echo 'Im disabled in ci, TODO'"
         }
       }
-    },
-    "e2e-version-matrix-vite": {
-      "command": "ts-node {projectRoot}/src/e2e-version-matrix-vite.cli.ts"
     }
   }
 }
