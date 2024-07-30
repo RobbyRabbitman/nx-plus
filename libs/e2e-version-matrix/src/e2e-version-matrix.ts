@@ -8,8 +8,8 @@ import {
   TargetConfiguration,
   workspaceRoot,
 } from '@nx/devkit';
-import { generateNxWorkspaceName } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import { execSync } from 'child_process';
+import { randomUUID } from 'crypto';
 import { existsSync } from 'fs';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { dirname, join } from 'path';
@@ -309,3 +309,10 @@ export function installE2eVersionMatrixProject({
     },
   );
 }
+
+/** @returns A unique nx workspace name. */
+export const generateNxWorkspaceName = ({ name }: { name?: string }) => {
+  return `${randomUUID()}${name ?? ''}`
+    .replace(/[^a-z0-9]/gi, '')
+    .substring(0, 255);
+};
