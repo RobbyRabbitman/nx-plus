@@ -212,21 +212,30 @@ function addE2eVersionMatrix__createTargetConfiguration({
 }) {
   const peerDependencPrefix = 'E2E_VERSION_MATRIX_PEER_DEPENDENCY_';
 
+  const e2eVersionMatrixTargetEnv = {
+    ...Object.fromEntries(
+      Object.entries(permutation.peerDependencies).map(([name, version]) => [
+        `${peerDependencPrefix}${name}`,
+        version,
+      ]),
+    ),
+    [peerDependencyEnvPrefix]: peerDependencPrefix,
+  };
+
   return {
     ...targetConfiguration,
+    inputs: [
+      ...targetConfiguration.inputs,
+      ...Object.keys(e2eVersionMatrixTargetEnv).map((env) => ({ env })),
+    ],
     options: {
       ...targetConfiguration.options,
       env: {
-        ...Object.fromEntries(
-          Object.entries(permutation.peerDependencies).map(
-            ([name, version]) => [`${peerDependencPrefix}${name}`, version],
-          ),
-        ),
-        [peerDependencyEnvPrefix]: peerDependencPrefix,
+        ...e2eVersionMatrixTargetEnv,
         ...targetConfiguration.options['env'],
       },
     },
-  };
+  } satisfies TargetConfiguration;
 }
 
 function assertIsE2eVersionMatrix() {

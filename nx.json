@@ -73,11 +73,18 @@
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix",
       "options": {
         "targetConfiguration": {
-          "command": "nx run {projectName}:e2e-vite",
+          "cache": true,
+          "command": "nx run {projectName}:e2e-vite --skip-nx-cache",
           "options": {
             "run": true,
             "coverage": false
-          }
+          },
+          "inputs": [
+            "default",
+            "^default",
+            { "externalDependencies": ["vitest"] },
+            { "env": "CI" }
+          ]
         },
         "targetPrefix": "e2e-vite"
       },
