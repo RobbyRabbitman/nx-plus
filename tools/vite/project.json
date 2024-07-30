@@ -4,6 +4,9 @@
   "tags": ["scope:node", "type:tool"],
   "targets": {
     "build": { "executor": "nx:noop" },
+    "nx-release-publish": {
+      "executor": "nx:noop"
+    },
     "test-vite": {
       "command": "nx run-many",
       "options": {
