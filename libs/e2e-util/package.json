@@ -10,5 +10,6 @@
     "@robby-rabbitman/nx-plus-libs-node-util": "0.0.0",
     "proper-lockfile": "4.1.2"
   },
+  "type": "commonjs",
   "main": "./src/index.js"
 }
