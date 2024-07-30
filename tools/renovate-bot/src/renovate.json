@@ -17,9 +17,7 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
   "enabledManagers": ["npm"],
-  "npm": {
-    "ignorePaths": ["*/**/package.json"]
-  },
+  "npm": { "ignorePaths": ["*/**/package.json"] },
   "printConfig": true,
   "labels": ["renovate"],
   "allowedPostUpgradeCommands": ["^(pnpm|echo|git)"],
@@ -33,14 +31,9 @@
     "executionMode": "branch",
     "fileFilters": ["**/package.json"]
   },
-  "lockFileMaintenance": {
-    "enabled": true
-  },
+  "lockFileMaintenance": { "enabled": true },
   "packageRules": [
-    {
-      "matchUpdateTypes": ["major"],
-      "automerge": false
-    },
+    { "matchUpdateTypes": ["major"], "automerge": false },
     {
       "description": "When renovate changes packages, better have a look O_O",
       "matchFileNames": ["packages/**/*"],
@@ -48,20 +41,20 @@
     },
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
-      "matchPackagePatterns": ["^@robby-rabbitman/nx-plus-"],
-      "enabled": false
+      "enabled": false,
+      "matchPackageNames": ["/^@robby-rabbitman/nx-plus-/"]
     },
     {
       "description": "Groups all 'prettier' packages together. Remove me when there is a group preset",
       "groupName": "prettier",
       "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^prettier$", "^prettier-"]
+      "matchPackageNames": ["/^prettier$/", "/^prettier-/"]
     },
     {
       "description": "Groups all 'nx' packages together. Remove me when there is a group preset",
       "groupName": "nx",
       "matchManagers": ["npm"],
-      "matchPackagePatterns": ["^@nx/", "^nx$"]
+      "matchPackageNames": ["/^@nx//", "/^nx$/"]
     }
   ]
 }
