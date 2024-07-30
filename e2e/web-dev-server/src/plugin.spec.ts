@@ -5,7 +5,10 @@ import {
   writeJsonFile,
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
-import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
+import {
+  createE2eNxWorkspace,
+  getRandomPort,
+} from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import {
   getE2eVersionMatrixProject,
   installE2eVersionMatrixProject,
