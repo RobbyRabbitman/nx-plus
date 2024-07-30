@@ -19,7 +19,7 @@
     "@nx/workspace": "19.4.4",
     "@swc-node/register": "1.10.9",
     "@swc/cli": "0.4.0",
-    "@swc/core": "1.7.0",
+    "@swc/core": "1.7.2",
     "@swc/helpers": "0.5.12",
     "@types/node": "20.14.11",
     "@types/proper-lockfile": "4.1.4",
