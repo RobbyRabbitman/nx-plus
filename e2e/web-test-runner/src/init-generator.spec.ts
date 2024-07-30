@@ -4,11 +4,11 @@ import {
   writeJsonFile,
 } from '@nx/devkit';
 import { readJson } from '@nx/plugin/testing';
+import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import {
-  installProject,
-  readE2eProject,
-} from '@robby-rabbitman/nx-plus-libs-e2e-util';
-import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-libs-e2e-util/main';
+  getE2eVersionMatrixProject,
+  installE2eVersionMatrixProject,
+} from '@robby-rabbitman/nx-plus-libs-e2e-version-matrix';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { WebTestRunnerInitGeneratorSchema } from 'packages/web-test-runner/src/generators/init';
@@ -19,9 +19,7 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
   let nxJsonSnapShotAfterCreateE2eNxWorkspace: NxJsonConfiguration;
 
   beforeAll(() => {
-    const { e2eWorkspaceName, e2ePackage } = readE2eProject({
-      peerDependencyEnvPrefix: 'E2E_PEER_DEPENDENCY_',
-    });
+    const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
@@ -38,7 +36,7 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
       join(workspaceRoot, 'nx.json'),
     );
 
-    installProject({
+    installE2eVersionMatrixProject({
       package: e2ePackage,
       workspaceRoot,
       packageManagerCommand: npm,

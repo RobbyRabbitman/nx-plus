@@ -53,3 +53,25 @@ export async function getRandomPort() {
 
   return port;
 }
+
+export async function releasePort(port: number) {
+  if (!existsSync(PORTS_FILE_PATH)) {
+    return;
+  }
+
+  const portsFileLock = await lock(PORTS_FILE_PATH);
+
+  const ports = readJsonFile<number[]>(PORTS_FILE_PATH);
+
+  const portIndex = ports.indexOf(port);
+
+  if (portIndex === -1) {
+    return;
+  }
+
+  ports.splice(portIndex, 1);
+
+  writeJsonFile(PORTS_FILE_PATH, ports);
+
+  portsFileLock();
+}

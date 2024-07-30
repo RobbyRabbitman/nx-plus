@@ -1,4 +1,4 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { nodeTypescript } from '../../tools/vite/src/vitest-node-typescript';
+import { localRegistry, nodeTypescript } from '../../tools/vite/src';
 
-export default nodeTypescript();
+export default nodeTypescript(localRegistry());
