@@ -217,7 +217,7 @@ function addE2eVersionMatrix__createTargetConfiguration({
             ([name, version]) => [`${peerDependencPrefix}${name}`, version],
           ),
         ),
-        [E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX]: peerDependencPrefix,
+        [peerDependencyEnvPrefix]: peerDependencPrefix,
         ...targetConfiguration.options['env'],
       },
     },
