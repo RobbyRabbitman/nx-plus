@@ -94,8 +94,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       memfs:
-        specifier: 4.9.3
-        version: 4.9.3
+        specifier: 4.9.4
+        version: 4.9.4
       minimatch:
         specifier: 10.0.1
         version: 10.0.1
@@ -3917,8 +3917,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  memfs@4.9.3:
-    resolution: {integrity: sha512-bsYSSnirtYTWi1+OPMFb0M048evMKyUYe0EbtuGQgq6BVQM1g1W8/KIUJCCvjgI/El0j6Q4WsmMiBwLUBSw8LA==}
+  memfs@4.9.4:
+    resolution: {integrity: sha512-Xlj8b2rU11nM6+KU6wC7cuWcHQhVINWCUgdPS4Ar9nPxLaOya3RghqK7ALyDW2QtGebYAYs6uEdEVnwPVT942A==}
     engines: {node: '>= 4.0.0'}
 
   meow@12.1.1:
@@ -10371,7 +10371,7 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  memfs@4.9.3:
+  memfs@4.9.4:
     dependencies:
       '@jsonjoy.com/json-pack': 1.0.4(tslib@2.6.3)
       '@jsonjoy.com/util': 1.2.0(tslib@2.6.3)
