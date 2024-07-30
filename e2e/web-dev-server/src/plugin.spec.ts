@@ -8,6 +8,7 @@ import { readJson } from '@nx/plugin/testing';
 import {
   createE2eNxWorkspace,
   getRandomPort,
+  releasePort,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import {
   getE2eVersionMatrixProject,
@@ -58,9 +59,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       },
     );
 
-    const webDevServerConfiguration = {
-      port: await getRandomPort(),
-    } satisfies DevServerConfig;
+    const webDevServerConfiguration = {} satisfies DevServerConfig;
 
     writeFileSync(
       join(workspaceRoot, 'some-project/web-dev-server.config.mjs'),
@@ -95,12 +94,27 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       'hi, not valid html but w/e O_O',
     );
 
-    await execUntil(
-      'nx run some-project:serve',
-      (log) => log.includes('Web Dev Server started...'),
-      {
-        cwd: workspaceRoot,
-      },
-    );
+    const port = await getRandomPort();
+
+    try {
+      const webDevServerConfiguration = {
+        port,
+      } satisfies DevServerConfig;
+
+      writeFileSync(
+        join(workspaceRoot, 'some-project/web-dev-server.config.mjs'),
+        `export default ${JSON.stringify(webDevServerConfiguration, null, 2)};`,
+      );
+
+      await execUntil(
+        'nx run some-project:serve',
+        (log) => log.includes('Web Dev Server started...'),
+        {
+          cwd: workspaceRoot,
+        },
+      );
+    } finally {
+      releasePort(port);
+    }
   });
 });
