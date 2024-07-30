@@ -95,7 +95,12 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
     return {
       projects: {
         [projectRoot]: {
-          targets: e2eVersionTargets,
+          targets: {
+            ...e2eVersionTargets,
+            [`${options.targetPrefix}-version-matrix`]: {
+              dependsOn: Object.keys(e2eVersionTargets),
+            },
+          },
         },
       },
     };
