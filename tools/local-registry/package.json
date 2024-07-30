@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "peerDependencies": {
     "tslib": "2.6.3",
-    "@nx/devkit": "19.4.4",
+    "@nx/devkit": "19.5.1",
     "yargs": "17.7.2",
-    "@nx/js": "19.4.4",
-    "nx": "19.4.4"
+    "@nx/js": "19.5.1",
+    "nx": "19.5.1"
   },
   "main": "./src/index.js",
   "exports": {

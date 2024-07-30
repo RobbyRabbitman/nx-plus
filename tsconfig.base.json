@@ -33,9 +33,6 @@
         "tools/typescript/src/tsc-plugin.ts"
       ],
       "@robby-rabbitman/nx-plus-tools-vite": ["tools/vite/src/index.ts"],
-      "@robby-rabbitman/nx-plus-tools-vite/local-registry-setup": [
-        "tools/vite/src/local-registry.setup.ts"
-      ],
       "@robby-rabbitman/nx-plus-web-dev-server": [
         "packages/web-dev-server/src/index.ts"
       ],
