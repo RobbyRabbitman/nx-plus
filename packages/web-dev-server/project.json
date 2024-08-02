@@ -19,6 +19,9 @@
           }
         ]
       }
+    },
+    "nx-release-publish": {
+      "dependsOn": ["build"]
     }
   }
 }

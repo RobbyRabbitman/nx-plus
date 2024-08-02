@@ -24,9 +24,6 @@
       "cache": true,
       "inputs": ["publishable"],
       "dependsOn": ["publish"]
-    },
-    "e2e-version-matrix-vite": {
-      "command": "ts-node {projectRoot}/src/e2e-version-matrix-vite.cli.ts"
     }
   }
 }

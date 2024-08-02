@@ -1,6 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-libs-node-util",
   "version": "0.0.0",
+  "type": "commonjs",
   "peerDependencies": {
     "tslib": "2.6.3"
   }

@@ -39,6 +39,6 @@ jobs:
       - run: |
           pnpm exec nx format:check
           pnpm exec nx affected -t lint-eslint test test-vite build --configuration ci
-          pnpm exec nx run tools-local-registry:e2e-version-matrix-vite
+          pnpm exec nx affected -t e2e-vite-version-matrix --configuration ci --parallel 1
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
