@@ -14,13 +14,22 @@
     "publish": {
       "cache": true,
       "inputs": ["publishable"],
-      "outputs": ["{workspaceRoot}/{projectRoot}/storage"],
-      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts --localRegistryTarget '{projectName}:serve' --storage {projectRoot}/storage"
+      "outputs": ["{options.storage}"],
+      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts",
+      "options": {
+        "localRegistryTarget": "{projectName}:serve",
+        "storage": "{projectRoot}/storage"
+      }
     },
     "test": {
       "cache": true,
       "inputs": ["publishable"],
-      "command": "pnpm exec nx run {projectName}:publish"
+      "outputs": ["{options.storage}"],
+      "command": "pnpm exec nx run {projectName}:publish",
+      "options": {
+        "clear": true,
+        "storage": "{projectRoot}/tmp/storage"
+      }
     }
   }
 }
