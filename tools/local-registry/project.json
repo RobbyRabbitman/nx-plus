@@ -20,12 +20,7 @@
     "test": {
       "cache": true,
       "inputs": ["publishable"],
-      "command": "pnpm exec nx run {projectName}:publish",
-      "configurations": {
-        "ci": {
-          "command": "echo 'Im disabled in ci, TODO'"
-        }
-      }
+      "command": "pnpm exec nx run {projectName}:publish"
     }
   }
 }
