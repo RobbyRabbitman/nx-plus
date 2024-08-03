@@ -14,17 +14,22 @@
     "publish": {
       "cache": true,
       "inputs": ["publishable"],
-      "outputs": ["{workspaceRoot}/{projectRoot}/storage"],
-      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts --localRegistryTarget '{projectName}:serve' --storage {projectRoot}/storage"
+      "outputs": ["{options.storage}"],
+      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts",
+      "options": {
+        "localRegistryTarget": "{projectName}:serve",
+        "storage": "{projectRoot}/storage"
+      }
     },
     "test": {
+      "parallelism": false,
       "cache": true,
       "inputs": ["publishable"],
+      "outputs": ["{options.storage}"],
       "command": "pnpm exec nx run {projectName}:publish",
-      "configurations": {
-        "ci": {
-          "command": "echo 'Im disabled in ci, TODO'"
-        }
+      "options": {
+        "clear": true,
+        "storage": "{projectRoot}/tmp/storage"
       }
     }
   }
