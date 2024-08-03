@@ -8,12 +8,7 @@
       "executor": "nx:noop"
     },
     "test-vite": {
-      "command": "nx run-many",
-      "options": {
-        "run": true,
-        "targets": "test-vite-local-registry,test-vite-node-typescript",
-        "projects": "{projectName}"
-      }
+      "dependsOn": ["test-vite-*"]
     },
     "test-vite-local-registry": {
       "command": "vitest --config {projectRoot}/vitest-local-registry.config.mts",
