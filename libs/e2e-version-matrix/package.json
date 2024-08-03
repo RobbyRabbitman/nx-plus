@@ -2,8 +2,8 @@
   "name": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix",
   "version": "0.0.0",
   "peerDependencies": {
-    "@nx/devkit": "19.5.3",
-    "nx": "19.5.3",
+    "@nx/devkit": "19.5.4",
+    "nx": "19.5.4",
     "tslib": "2.6.3"
   },
   "type": "commonjs",
