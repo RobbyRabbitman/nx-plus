@@ -22,6 +22,7 @@
       }
     },
     "test": {
+      "parallelism": false,
       "cache": true,
       "inputs": ["publishable"],
       "outputs": ["{options.storage}"],
