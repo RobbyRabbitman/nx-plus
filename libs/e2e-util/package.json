@@ -8,6 +8,5 @@
     "semver": "7.6.3",
     "@robby-rabbitman/nx-plus-libs-node-util": "0.0.0",
     "proper-lockfile": "4.1.2"
-  },
-  "main": "./src/index.js"
+  }
 }
