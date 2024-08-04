@@ -74,6 +74,7 @@
       "options": {
         "targetConfiguration": {
           "cache": true,
+          "parallelism": false,
           "command": "nx run {projectName}:e2e-vite --skip-nx-cache",
           "options": {
             "run": true,
@@ -117,7 +118,7 @@
         }
       ]
     },
-    "test-vite": {
+    "test-vite*": {
       "configurations": {
         "ci": {
           "run": true

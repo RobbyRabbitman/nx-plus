@@ -7,7 +7,5 @@
     "vitest": "1.6.0",
     "@robby-rabbitman/nx-plus-tools-local-registry": "0.0.0",
     "@nx/vite": "19.5.4"
-  },
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts"
+  }
 }

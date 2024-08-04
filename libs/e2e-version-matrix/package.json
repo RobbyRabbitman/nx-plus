@@ -5,7 +5,5 @@
     "@nx/devkit": "19.5.4",
     "nx": "19.5.4",
     "tslib": "2.6.3"
-  },
-  "type": "commonjs",
-  "main": "./src/index.js"
+  }
 }
