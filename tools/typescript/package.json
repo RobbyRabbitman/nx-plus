@@ -5,7 +5,6 @@
     "@nx/devkit": "19.5.4",
     "tslib": "2.6.3"
   },
-  "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./tsc-plugin": "./src/tsc-plugin.js"
