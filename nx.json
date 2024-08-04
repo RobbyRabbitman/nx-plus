@@ -118,7 +118,7 @@
         }
       ]
     },
-    "test-vite": {
+    "test-vite*": {
       "configurations": {
         "ci": {
           "run": true
