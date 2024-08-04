@@ -7,10 +7,7 @@
       "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate-config-validator --strict"
     },
     "renovate": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate"
-      },
+      "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate",
       "configurations": {
         "ci": {},
         "development": {
