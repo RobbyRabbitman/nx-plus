@@ -1,0 +1,5 @@
+{
+  "name": "tools-eslint",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:shared", "type:tool"]
+}

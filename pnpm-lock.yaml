@@ -27,6 +27,9 @@ importers:
       '@commitlint/types':
         specifier: 19.0.3
         version: 19.0.3
+      '@eslint/eslintrc':
+        specifier: 2.1.4
+        version: 2.1.4
       '@nx/eslint':
         specifier: 19.5.4
         version: 19.5.4(@babel/traverse@7.25.3)(@swc-node/register@1.10.9(@swc/core@1.7.3(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.7.3(@swc/helpers@0.5.12))(@types/node@20.14.13)(@zkochan/js-yaml@0.0.7)(eslint@8.57.0)(nx@19.5.4(@swc-node/register@1.10.9(@swc/core@1.7.3(@swc/helpers@0.5.12))(@swc/types@0.1.12)(typescript@5.5.4))(@swc/core@1.7.3(@swc/helpers@0.5.12)))(verdaccio@5.32.0(typanion@3.14.0))
@@ -57,6 +60,9 @@ importers:
       '@swc/helpers':
         specifier: 0.5.12
         version: 0.5.12
+      '@types/eslint':
+        specifier: 9.6.0
+        version: 9.6.0
       '@types/node':
         specifier: 20.14.13
         version: 20.14.13
@@ -1648,6 +1654,9 @@ packages:
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
 
+  '@types/eslint@9.6.0':
+    resolution: {integrity: sha512-gi6WQJ7cHRgZxtkQEoyHMppPjq9Kxo5Tjn2prSKDSmZrCz8TZ3jSRCeTJm+WoM+oB0WG37bRqLzaaU3q7JypGg==}
+
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
@@ -1677,6 +1686,9 @@ packages:
 
   '@types/istanbul-reports@3.0.4':
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
+
+  '@types/json-schema@7.0.15':
+    resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
   '@types/keygrip@1.0.6':
     resolution: {integrity: sha512-lZuNAY9xeJt7Bx4t4dx0rYCDqGPW8RXhQZK1td7d4H6E9zYbLoOtjBvfwdTKpsyxQI/2jv+armjX/RW+ZNpXOQ==}
@@ -7488,6 +7500,11 @@ snapshots:
     dependencies:
       '@types/ms': 0.7.34
 
+  '@types/eslint@9.6.0':
+    dependencies:
+      '@types/estree': 1.0.5
+      '@types/json-schema': 7.0.15
+
   '@types/estree@1.0.5': {}
 
   '@types/express-serve-static-core@4.19.5':
@@ -7523,6 +7540,8 @@ snapshots:
   '@types/istanbul-reports@3.0.4':
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
+
+  '@types/json-schema@7.0.15': {}
 
   '@types/keygrip@1.0.6': {}
 
