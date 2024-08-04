@@ -1,5 +1,6 @@
-import { workspaceRoot } from '@nx/devkit';
+import { logger, workspaceRoot } from '@nx/devkit';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { getNxEnvVar } from '@robby-rabbitman/nx-plus-libs-nx-util';
 import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import {
@@ -18,8 +19,7 @@ import {
  * - Coverage
  */
 export function nodeTypescript(overrides?: Partial<UserConfig>) {
-  const projectName = process.env['NX_TASK_TARGET_PROJECT'];
-  const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
+  const projectName = getNxEnvVar('NX_TASK_TARGET_PROJECT');
 
   if (!projectName) {
     return {};
@@ -61,9 +61,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
 
   const mergedConfig = mergeConfig(config as UserConfig, overrides ?? {});
 
-  if (verbose) {
-    console.log(mergedConfig);
-  }
+  logger.verbose(mergedConfig);
 
   return mergedConfig;
 }

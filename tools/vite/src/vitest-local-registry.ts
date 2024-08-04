@@ -3,6 +3,7 @@ import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-gra
 import { join } from 'path';
 import { mergeConfig, UserConfig } from 'vitest/config';
 // eslint-disable-next-line @nx/enforce-module-boundaries
+import { getNxEnvVar } from '@robby-rabbitman/nx-plus-libs-nx-util';
 import { localRegistryTarget, publish } from '../../local-registry';
 
 export function localRegistry(overrides?: Partial<UserConfig>) {
@@ -19,8 +20,8 @@ export function localRegistry(overrides?: Partial<UserConfig>) {
 }
 
 export async function setup() {
-  const projectName = process.env['NX_TASK_TARGET_PROJECT'];
-  const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
+  const projectName = getNxEnvVar('NX_TASK_TARGET_PROJECT');
+  const verbose = getNxEnvVar('NX_VERBOSE_LOGGING') === 'true';
 
   const project = readCachedProjectConfiguration(projectName);
 

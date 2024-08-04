@@ -1,0 +1,7 @@
+{
+  "name": "@robby-rabbitman/nx-plus-libs-nx-util",
+  "version": "0.0.0",
+  "peerDependencies": {},
+  "type": "commonjs",
+  "main": "./src/index.js"
+}

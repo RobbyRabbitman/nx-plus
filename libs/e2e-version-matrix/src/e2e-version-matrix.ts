@@ -8,6 +8,7 @@ import {
   TargetConfiguration,
   workspaceRoot,
 } from '@nx/devkit';
+import { getNxEnvVar } from '@robby-rabbitman/nx-plus-libs-nx-util';
 import { execSync } from 'child_process';
 import { randomUUID } from 'crypto';
 import { existsSync } from 'fs';
@@ -269,8 +270,8 @@ export function getE2eVersionMatrixProject() {
       envVar !== E2E_VERSION_MATRIX_PEER_DEPENDENCY_ENV_PREFIX,
   );
 
-  const projectName = process.env['NX_TASK_TARGET_PROJECT'];
-  const targetName = process.env['NX_TASK_TARGET_TARGET'];
+  const projectName = getNxEnvVar('NX_TASK_TARGET_PROJECT');
+  const targetName = getNxEnvVar('NX_TASK_TARGET_TARGET');
   const project = readCachedProjectConfiguration(projectName);
 
   const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
