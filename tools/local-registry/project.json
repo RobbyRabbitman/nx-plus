@@ -19,7 +19,7 @@
       "options": {
         "project": "{projectRoot}/tsconfig.lib.json",
         "localRegistryTarget": "{projectName}:serve",
-        "storage": "{projectRoot}/storage"
+        "storage": "{projectRoot}/tmp/storage/{options.port}"
       }
     },
     "test": {
