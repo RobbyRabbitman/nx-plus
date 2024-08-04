@@ -82,8 +82,12 @@
           "inputs": [
             "default",
             "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
+            {
+              "externalDependencies": ["vitest"]
+            },
+            {
+              "env": "CI"
+            }
           ]
         },
         "targetPrefix": "e2e-vite"
