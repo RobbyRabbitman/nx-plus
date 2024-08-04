@@ -8,7 +8,7 @@
       "options": {
         "port": 4321,
         "config": "{projectRoot}/src/config.yml",
-        "storage": "{projectRoot}/tmp/storage/{options.port}"
+        "storage": "{projectRoot}/tmp/storage"
       }
     },
     "publish": {
@@ -19,7 +19,7 @@
       "options": {
         "project": "{projectRoot}/tsconfig.lib.json",
         "localRegistryTarget": "{projectName}:serve",
-        "storage": "{projectRoot}/tmp/storage/{options.port}"
+        "storage": "{projectRoot}/tmp/storage"
       }
     },
     "test": {
@@ -30,7 +30,7 @@
       "command": "pnpm exec nx run {projectName}:publish",
       "options": {
         "clear": true,
-        "storage": "{projectRoot}/tmp/storage/test"
+        "storage": "{projectRoot}/tmp/storage-test"
       }
     }
   }
