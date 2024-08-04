@@ -4,14 +4,14 @@
   "tags": ["scope:node", "type:tool"],
   "targets": {
     "test": {
-      "command": "pnpm --package renovate dlx renovate-config-validator --strict {projectRoot}/src/renovate.json"
+      "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate-config-validator --strict"
     },
     "renovate": {
-      "executor": "nx:run-commands",
       "options": {
-        "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json pnpm dlx renovate"
+        "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.jsonx renovate"
       },
       "configurations": {
+        "ci": {},
         "development": {
           "env": {
             "RENOVATE_PLATFORM": "local",
