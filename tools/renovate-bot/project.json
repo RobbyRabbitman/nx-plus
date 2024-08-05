@@ -4,10 +4,23 @@
   "tags": ["scope:node", "type:tool"],
   "targets": {
     "test": {
-      "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate-config-validator --strict"
+      "inputs": [
+        "default",
+        "^default",
+        { "externalDependencies": ["renovate"] },
+        { "env": "RENOVATE_CONFIG_FILE" }
+      ],
+      "cache": true,
+      "command": "renovate-config-validator --strict",
+      "options": {
+        "env": { "RENOVATE_CONFIG_FILE": "{projectRoot}/src/renovate.json" }
+      }
     },
     "renovate": {
-      "command": "RENOVATE_CONFIG_FILE={projectRoot}/src/renovate.json renovate",
+      "command": "renovate",
+      "options": {
+        "env": { "RENOVATE_CONFIG_FILE": "{projectRoot}/src/renovate.json" }
+      },
       "configurations": {
         "ci": {},
         "development": {
