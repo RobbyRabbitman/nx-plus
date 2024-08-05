@@ -15,6 +15,9 @@
     "lib": ["ES2022"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    // TODO: local nx plugins observation:
+    // - ts paths cannot use wild cards
+    // - ts paths are ignored
     "paths": {
       "@robby-rabbitman/nx-plus-*": ["packages/*/src/index.ts"],
       "@robby-rabbitman/nx-plus-e2e-*": ["e2e/*/src/index.ts"],
