@@ -1,5 +1,5 @@
 {
-  "name": "@robby-rabbitman/nx-plus-tools-typescript",
+  "name": "@robby-rabbitman/nx-plus-tools-tsc",
   "version": "0.0.0",
   "peerDependencies": {
     "@nx/devkit": "19.5.4",
