@@ -41,13 +41,13 @@
   },
   "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-tools-typescript/tsc-plugin",
+      "plugin": "@robby-rabbitman/nx-plus-tools-tsc",
       "options": {
         "tscTargetConfig": {
           "inputs": ["default", "^default", "typescriptGlobals"]
         }
       },
-      "exclude": ["tools-typescript"]
+      "exclude": ["tools-tsc"]
     },
     {
       "plugin": "@nx/eslint/plugin",
