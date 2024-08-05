@@ -39,7 +39,11 @@ jobs:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
       - run: |
-          pnpm nx format:check
-          pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix --configuration ci
+          pnpm nx-cloud record -- nx format:check
+          pnpm nx affected -t lint-eslint --configuration ci
+          pnpm nx affected -t test --configuration ci
+          pnpm nx affected -t test-vite --configuration ci
+          pnpm nx affected -t build --configuration ci
+          pnpm nx affected -t e2e-vite-version-matrix --configuration ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
