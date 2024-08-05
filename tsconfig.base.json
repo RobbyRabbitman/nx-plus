@@ -15,18 +15,15 @@
     "lib": ["ES2022"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    // TODO: local nx plugins observation:
-    // - ts paths cannot use wild cards
-    // - ts paths are ignored
     "paths": {
       "@robby-rabbitman/nx-plus-*": ["packages/*/src/index.ts"],
       "@robby-rabbitman/nx-plus-e2e-*": ["e2e/*/src/index.ts"],
       "@robby-rabbitman/nx-plus-libs-*": ["libs/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-libs-e2e-version-matrix": [
+      "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin": [
         "libs/e2e-version-matrix/src/index.ts"
       ],
       "@robby-rabbitman/nx-plus-tools-*": ["tools/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-tools-tsc": ["tools/tsc/src/index.ts"]
+      "@robby-rabbitman/nx-plus-tools-tsc/plugin": ["tools/tsc/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
