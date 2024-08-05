@@ -4,4 +4,9 @@ const nxConfig = require('./nx.config');
 const tsConfig = require('./ts.config');
 
 /** @type {import('eslint').Linter.Config[]} */
-module.exports = [...nxConfig, ...jsConfig, ...tsConfig];
+module.exports = [
+  { ignores: ['**/tmp'] },
+  ...nxConfig,
+  ...jsConfig,
+  ...tsConfig,
+];
