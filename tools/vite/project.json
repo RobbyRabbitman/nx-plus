@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:tool"],
   "targets": {
-    "build": { "executor": "nx:noop" },
+    "build": { "executor": "nx:noop", "inputs": [], "cache": true },
     "nx-release-publish": {
       "executor": "nx:noop"
     },
