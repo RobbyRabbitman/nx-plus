@@ -26,7 +26,7 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
-      - run: npx nx-cloud start-ci-run --distribute-on='8 linux-medium-js' --stop-agents-after=e2e-vite-version-matrix
+      - run: pnpx nx-cloud start-ci-run --distribute-on='8 linux-medium-js' --stop-agents-after=e2e-vite-version-matrix
 
       - uses: nrwl/nx-set-shas@v4
 
@@ -37,11 +37,11 @@ jobs:
       - run: pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
 
       - run: |
-          pnpm nx-cloud record -- nx format:check
-          pnpm nx-cloud record -- nx affected -t lint-eslint --configuration ci
-          pnpm nx-cloud record -- nx affected -t test --configuration ci
-          pnpm nx-cloud record -- nx affected -t test-vite --configuration ci
-          pnpm nx-cloud record -- nx affected -t build --configuration ci
-          pnpm nx-cloud record -- nx affected -t e2e-vite-version-matrix --configuration ci
+          pnpm nx format:check
+          pnpm nx affected -t lint-eslint --configuration ci
+          pnpm nx affected -t test --configuration ci
+          pnpm nx affected -t test-vite --configuration ci
+          pnpm nx affected -t build --configuration ci
+          pnpm nx affected -t e2e-vite-version-matrix --configuration ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
