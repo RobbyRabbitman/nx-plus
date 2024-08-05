@@ -94,7 +94,17 @@
         { "externalDependencies": ["eslint"] }
       ]
     },
-    "test-vite*": { "configurations": { "ci": { "run": true } } },
+    "test-vite*": {
+      "inputs": [
+        "default",
+        "^default",
+        { "externalDependencies": ["vitest"] },
+        { "env": "CI" }
+      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "cache": true,
+      "configurations": { "ci": { "run": true } }
+    },
     "e2e-vite": {
       "options": {
         "config": "{projectRoot}/vitest.config.mts",

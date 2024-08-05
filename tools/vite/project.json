@@ -11,11 +11,17 @@
       "dependsOn": ["test-vite-*"]
     },
     "test-vite-local-registry": {
-      "command": "vitest --config {projectRoot}/vitest-local-registry.config.mts",
-      "parallelism": false
+      "command": "vitest",
+      "parallelism": false,
+      "options": {
+        "config": "{projectRoot}/vitest-local-registry.config.mts"
+      }
     },
     "test-vite-node-typescript": {
-      "command": "vitest --config {projectRoot}/vitest-node-typescript.config.mts"
+      "command": "vitest",
+      "options": {
+        "config": "{projectRoot}/vitest-node-typescript.config.mts"
+      }
     }
   }
 }
