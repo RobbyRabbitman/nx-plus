@@ -35,6 +35,8 @@ jobs:
       - run: pnpm nx report
 
       - run: pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
       - run: |
           pnpm nx format:check
