@@ -26,7 +26,7 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
-      - run: pnpx nx-cloud start-ci-run --distribute-on='3 linux-medium-js' --stop-agents-after=e2e-vite-version-matrix
+      - run: pnpx nx-cloud start-ci-run --distribute-on='3 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
 
       - uses: nrwl/nx-set-shas@v4
 
