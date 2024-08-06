@@ -22,11 +22,7 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "publishable": ["{workspaceRoot}/packages/**/*"],
-    "eslintGlobals": [
-      "{workspaceRoot}/.eslintrc.json",
-      "{workspaceRoot}/.eslintignore",
-      "{workspaceRoot}/eslint.config.js"
-    ],
+    "eslintGlobals": ["{workspaceRoot}/tools/eslint/**/*"],
     "typescriptGlobals": [
       "{workspaceRoot}/tsconfig.base.config",
       "{workspaceRoot}/tools/typescript/**/*"
@@ -95,12 +91,7 @@
       "inputs": ["default", "^default"]
     },
     "lint-eslint": {
-      "inputs": [
-        "default",
-        "^default",
-        "eslintGlobals",
-        { "externalDependencies": ["eslint"] }
-      ]
+      "inputs": ["default", "^default", "eslintGlobals"]
     },
     "test-vite*": {
       "inputs": [
