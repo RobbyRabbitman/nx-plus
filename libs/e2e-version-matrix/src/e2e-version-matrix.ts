@@ -25,6 +25,7 @@ export type E2eVersionMatrixPluginSchema =
 export type E2eVersionMatrixPluginOptions = {
   targetPrefix: string;
   targetConfiguration: TargetConfiguration;
+  matrixTargetConfiguration: TargetConfiguration;
 };
 
 const e2eVersionMatrixConfigFileName = 'e2e-version-matrix.config.json';
@@ -66,6 +67,7 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
     const options = {
       targetPrefix: 'version-matrix',
       targetConfiguration: {},
+      matrixTargetConfiguration: {},
       ...schema,
     } satisfies E2eVersionMatrixPluginOptions;
 
@@ -98,7 +100,19 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
           targets: {
             ...e2eVersionTargets,
             [`${options.targetPrefix}-version-matrix`]: {
-              dependsOn: Object.keys(e2eVersionTargets),
+              ...options.matrixTargetConfiguration,
+              inputs: [
+                {
+                  externalDependencies: Object.keys(
+                    e2eVersionMatrixConfig.peerDependencies,
+                  ),
+                },
+                ...(options.matrixTargetConfiguration.inputs ?? []),
+              ],
+              dependsOn: [
+                ...Object.keys(e2eVersionTargets),
+                ...(options.matrixTargetConfiguration.dependsOn ?? []),
+              ],
             },
           },
         },
@@ -225,8 +239,9 @@ function addE2eVersionMatrix__createTargetConfiguration({
   return {
     ...targetConfiguration,
     inputs: [
-      ...targetConfiguration.inputs,
+      { externalDependencies: Object.keys(permutation.peerDependencies) },
       ...Object.keys(e2eVersionMatrixTargetEnv).map((env) => ({ env })),
+      ...targetConfiguration.inputs,
     ],
     options: {
       ...targetConfiguration.options,
