@@ -26,18 +26,20 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
+      - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
+
       - uses: nrwl/nx-set-shas@v4
 
       - run: pnpm i
 
-      - run: pnpm exec nx report
+      - run: pnpm nx report
+
+      - run: pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
       - run: |
-          pnpm exec nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
-        # pnpm exec nx run tools-commitlint:exec --from "${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }}" --to "${{ github.event.pull_request.head.sha }}"
-
-      - run: |
-          pnpm exec nx format:check
-          pnpm exec nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix --configuration ci
+          pnpm nx format:check
+          pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix --configuration ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

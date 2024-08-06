@@ -1,26 +1,19 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "cli": {
-    "packageManager": "pnpm"
-  },
+  "nxCloudAccessToken": "Y2VlNzVkMTMtMTk5Yy00Y2MxLWE3OGQtNjEwNDNkZWU5OGI4fHJlYWQtd3JpdGU=",
+  "cli": { "packageManager": "pnpm" },
   "release": {
     "releaseTagPattern": "{version}",
-    "git": {
-      "commitMessage": "chore: release {version} 🚀 [skip ci]"
-    },
+    "git": { "commitMessage": "chore: release {version} 🚀 [skip ci]" },
     "version": {
       "conventionalCommits": true,
-      "generatorOptions": {
-        "fallbackCurrentVersionResolver": "disk"
-      }
+      "generatorOptions": { "fallbackCurrentVersionResolver": "disk" }
     },
     "changelog": {
       "automaticFromRef": true,
       "workspaceChangelog": {
         "createRelease": "github",
-        "renderOptions": {
-          "authors": false
-        }
+        "renderOptions": { "authors": false }
       }
     },
     "projects": ["packages/**/*"]
@@ -47,56 +40,49 @@
     },
     {
       "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint-eslint"
-      }
+      "options": { "targetName": "lint-eslint" }
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": {
-        "testTargetName": "test-vite"
-      },
+      "options": { "testTargetName": "test-vite" },
       "exclude": ["e2e/**/*"]
-    },
-    {
-      "plugin": "@nx/vite/plugin",
-      "options": {
-        "testTargetName": "e2e-vite"
-      },
-      "include": ["e2e/**/*"]
     },
     {
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
       "options": {
+        "targetPrefix": "e2e-vite",
         "targetConfiguration": {
           "cache": true,
           "parallelism": false,
-          "command": "nx run {projectName}:e2e-vite --skip-nx-cache",
+          "command": "vitest",
           "options": {
             "run": true,
-            "coverage": false
+            "coverage": false,
+            "config": "{projectRoot}/vitest.config.mts"
           },
           "inputs": [
             "default",
             "^default",
-            {
-              "externalDependencies": ["vitest"]
-            },
-            {
-              "env": "CI"
-            }
+            { "externalDependencies": ["vitest"] },
+            { "env": "CI" }
           ]
         },
-        "targetPrefix": "e2e-vite"
+        "matrixTargetConfiguration": {
+          "cache": true,
+          "inputs": [
+            "default",
+            "^default",
+            { "externalDependencies": ["vitest"] },
+            { "env": "CI" }
+          ]
+        }
       },
       "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "options": {
-        "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
-      },
+      "options": { "packageRoot": "{workspaceRoot}/dist/{projectRoot}" },
       "dependsOn": ["build"]
     },
     "@nx/js:tsc": {
@@ -108,13 +94,18 @@
       "inputs": ["default", "^default", "eslintGlobals"]
     },
     "test-vite*": {
-      "configurations": {
-        "ci": {
-          "run": true
-        }
-      }
+      "inputs": [
+        "default",
+        "^default",
+        { "externalDependencies": ["vitest"] },
+        { "env": "CI" }
+      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "cache": true,
+      "configurations": { "ci": { "run": true } }
     },
     "e2e-vite": {
+      "inputs": ["default", "^default"],
       "options": {
         "config": "{projectRoot}/vitest.config.mts",
         "cwd": "{workspaceRoot}"
