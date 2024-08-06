@@ -39,7 +39,7 @@ jobs:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
 
       - run: |
-          pnpm nx-cloud record -- nx format:check
+          pnpm nx format:check
           pnpm nx affected -t lint-eslint --configuration ci
           pnpm nx affected -t test --configuration ci
           pnpm nx affected -t test-vite --configuration ci
