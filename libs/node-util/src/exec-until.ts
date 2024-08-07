@@ -11,7 +11,6 @@ import { ChildProcess, exec, ExecOptions } from 'child_process';
  */
 export function execUntil(
   command: string,
-  /** @param output - Stdout or stderr. */
   predicate: (stdoutOrStderr: string) => boolean,
   options?: ExecOptions,
 ): Promise<ChildProcess> {
