@@ -1,9 +1,17 @@
 import { ChildProcess, exec, ExecOptions } from 'child_process';
 
+/**
+ * Wraps `exec` in a promise which resolves when the stdout or stderr matches a
+ * given predicate. When the process exits without a match, the promise is
+ * rejected.
+ *
+ * Inputs and outputs are `utf-8` encoded by default.
+ *
+ * @see {@link exec}
+ */
 export function execUntil(
   command: string,
-  /** @param output - Stdout or stderr. */
-  predicate: (output: string) => boolean,
+  predicate: (stdoutOrStderr: string) => boolean,
   options?: ExecOptions,
 ): Promise<ChildProcess> {
   const process = exec(command, { encoding: 'utf-8', ...options });
@@ -18,6 +26,7 @@ export function execUntil(
       if (!predicateMatched && predicate(output)) {
         predicateMatched = true;
 
+        // predicate is matched => kill process
         if (!process.killed) {
           process.kill();
         }
@@ -30,6 +39,7 @@ export function execUntil(
     process.stderr?.on('data', callPredicateOnDataEvent);
 
     process.on('exit', (code) => {
+      // idk about timings, but lets check the match flag
       if (predicateMatched) {
         resolve(process);
       }
