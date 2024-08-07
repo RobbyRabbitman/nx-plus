@@ -2,6 +2,8 @@
   "name": "@robby-rabbitman/nx-plus-libs-node-util",
   "version": "0.0.0",
   "peerDependencies": {
-    "tslib": "2.6.3"
+    "tslib": "2.6.3",
+    "@robby-rabbitman/nx-plus-tools-vite": "0.0.0",
+    "vitest": "1.6.0"
   }
 }
