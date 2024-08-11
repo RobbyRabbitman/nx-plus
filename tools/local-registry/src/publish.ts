@@ -20,9 +20,6 @@ export const publishTarget = 'tools-local-registry:publish';
  * - No git commits done
  * - When `projects` is empty, all projects are published
  * - When `projects` is not empty, only the specified projects are published
- *
- * TODO: This function fails, if not executed from root of the workspace,
- * because apparently the tspaths are not resolved correctly.
  */
 export async function publish(options: {
   specifier: string;
@@ -127,8 +124,6 @@ export async function publish(options: {
     stopLocalRegistryFn();
     throw error;
   } finally {
-    // TODO: maybe don't revert changes with git, but rather save the state before and restore it
-
     // revert nx.json changes due to `nx release version` when `projects` are provided, since we set `projectsRelationship` to `independent`
     if (projects.length > 0) {
       execSync(`git checkout HEAD^ -- ${nxJsonPath}`);
