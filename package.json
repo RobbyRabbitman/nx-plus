@@ -5,7 +5,9 @@
     "node": "20.16.0"
   },
   "packageManager": "pnpm@9.7.0",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "nx build tools-vite && nx build tools-local-registry"
+  },
   "devDependencies": {
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
@@ -54,5 +56,9 @@
   "dependencies": {
     "@nx/devkit": "19.5.7",
     "tslib": "2.6.3"
+  },
+  "optionalDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vite": "file:./dist/tools/vite",
+    "@robby-rabbitman/nx-plus-tools-local-registry": "file:./dist/tools/local-registry"
   }
 }
