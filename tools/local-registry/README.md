@@ -15,7 +15,7 @@ Sets up a local registry for this repository, so that `nx release` can be invoke
   - useful for parallel e2e targets
   - [sidecar task](https://github.com/nrwl/nx/discussions/23273)
 
-Targets depending on _a_ local registry cannot run in parallel because there might be other tasks depending on _a_ local registry. `@nx/js:verdaccio` sets in the global `.npmrc` the registry to the local registry instance: `registry=http://localhost:{port}/`, npm cannot handle multiple registries for 1 scope. When a second local registry is started, a different unused port is used and `@nx/js:verdaccio` sets `registry=http://localhost:{other-port}/`.
+Targets depending on _a_ local registry cannot run in parallel because there might be other tasks depending on _a_ local registry. `@nx/js:verdaccio` sets in the global `.npmrc` the registry to the local registry instance: `registry=http://localhost:{port}/`, npm cannot handle multiple registries for 1 scope. When a second local registry is started, a different unused port is used and `@nx/js:verdaccio` sets `registry=http://localhost:{other-port}/`. Maybe tasks depending on _this_ local registry must _know_ the registry e.g. reading a environment variable.
 
 ### Refactor
 
