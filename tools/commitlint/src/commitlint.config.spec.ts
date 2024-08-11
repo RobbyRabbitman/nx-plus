@@ -1,4 +1,8 @@
-import { getPackageManagerCommand, workspaceRoot } from '@nx/devkit';
+import {
+  getPackageManagerCommand,
+  readCachedProjectGraph,
+  workspaceRoot,
+} from '@nx/devkit';
 import { execSync } from 'child_process';
 
 describe('commits of `@robby-rabbitman/nx-plus`', () => {
@@ -7,11 +11,10 @@ describe('commits of `@robby-rabbitman/nx-plus`', () => {
       `${getPackageManagerCommand().exec} nx run tools-commitlint:exec:message --value '${commitMessage}'`,
       {
         cwd: workspaceRoot,
-        stdio: 'ignore',
       },
     );
 
-  it('must follow conventional commit format', () => {
+  it('should follow conventional format', () => {
     const validTypes = [
       'build',
       'ci',
@@ -34,10 +37,14 @@ describe('commits of `@robby-rabbitman/nx-plus`', () => {
     expect(() => runCommitlint('not-a-valid-type: some message')).toThrow();
   });
 
-  it('scoped commits must reference projects of this workspace', () => {
-    expect(() =>
-      runCommitlint('feat(tools-commitlint): supa dupa feature'),
-    ).not.toThrow();
+  it('should reference projects of this workspace when scoped', () => {
+    const projects = Object.keys(readCachedProjectGraph().nodes);
+
+    for (const project of projects) {
+      expect(() =>
+        runCommitlint(`feat(${project}): supa dupa feature`),
+      ).not.toThrow();
+    }
 
     expect(() =>
       runCommitlint('feat(not-a-project-of-nx-plus): supa dupa feature'),

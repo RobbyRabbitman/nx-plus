@@ -15,7 +15,7 @@
       "cache": true,
       "inputs": ["publishable"],
       "outputs": ["{options.storage}"],
-      "command": "pnpm exec ts-node {projectRoot}/src/publish.cli.ts",
+      "command": "ts-node {projectRoot}/src/publish.cli.ts",
       "options": {
         "project": "{projectRoot}/tsconfig.lib.json",
         "localRegistryTarget": "{projectName}:serve",
@@ -27,7 +27,7 @@
       "cache": true,
       "inputs": ["publishable"],
       "outputs": ["{options.storage}"],
-      "command": "pnpm exec nx run {projectName}:publish",
+      "command": "nx run {projectName}:publish",
       "options": {
         "clear": true,
         "storage": "{projectRoot}/tmp/storage-test"
