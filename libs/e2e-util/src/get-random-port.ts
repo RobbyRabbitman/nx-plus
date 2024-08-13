@@ -15,7 +15,10 @@ import { lock } from 'proper-lockfile';
  *
  * @see {@link releasePort}
  */
-export async function getRandomPort(options?: { maxRetries?: number }) {
+export async function getRandomPort(options?: {
+  maxRetries?: number;
+  portsFilePath?: string;
+}) {
   const maxRetries = Math.max(options?.maxRetries ?? 100, 1);
 
   let port: number;
@@ -35,7 +38,7 @@ export async function getRandomPort(options?: { maxRetries?: number }) {
     }
 
     return [...ports, port];
-  });
+  }, options);
 
   return port;
 }
@@ -48,10 +51,11 @@ export const PORTS_FILE_PATH = join(
   'ports.json',
 );
 
-export async function getPorts() {
+export async function getPorts(options?: { portsFilePath?: string }) {
+  const portsFilePath = options?.portsFilePath ?? PORTS_FILE_PATH;
   try {
     const ports = JSON.parse(
-      await readFile(PORTS_FILE_PATH, 'utf-8'),
+      await readFile(portsFilePath, 'utf-8'),
     ) as number[];
     return ports;
   } catch {
@@ -60,9 +64,11 @@ export async function getPorts() {
 }
 
 export async function setPorts(
-  writeFn: (currentPorts: number[]) => number[] | Promise<number[]>,
+  updateFn: (currentPorts: number[]) => number[] | Promise<number[]>,
+  options?: { portsFilePath?: string },
 ) {
-  const portsFileDir = dirname(PORTS_FILE_PATH);
+  const portsFilePath = options?.portsFilePath ?? PORTS_FILE_PATH;
+  const portsFileDir = dirname(portsFilePath);
   const portsFileDirExists = existsSync(portsFileDir);
 
   if (!portsFileDirExists) {
@@ -76,9 +82,9 @@ export async function setPorts(
   logger.verbose('Acquired ports file lock');
 
   try {
-    const currentPorts = await getPorts();
-    const ports = await writeFn(currentPorts);
-    await writeFile(PORTS_FILE_PATH, JSON.stringify(ports));
+    const currentPorts = await getPorts(options);
+    const ports = await updateFn(currentPorts);
+    await writeFile(portsFilePath, JSON.stringify(ports));
   } finally {
     logger.verbose('Released ports file lock');
     await portsFileLock();
@@ -86,8 +92,11 @@ export async function setPorts(
 }
 
 /** @see {@link getRandomPort} */
-export async function releasePort(port: number) {
-  await setPorts((ports) => ports.filter((x) => x !== port));
+export async function releasePort(
+  port: number,
+  options?: { portsFilePath?: string },
+) {
+  await setPorts((ports) => ports.filter((x) => x !== port), options);
 }
 
 /**
@@ -95,6 +104,6 @@ export async function releasePort(port: number) {
  * previously locked. It does **not** check, whether these ports were actually
  * in use.
  */
-export async function releaseAllPorts() {
-  await setPorts(() => []);
+export async function releaseAllPorts(options?: { portsFilePath?: string }) {
+  await setPorts(() => [], options);
 }
