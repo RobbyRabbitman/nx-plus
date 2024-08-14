@@ -57,11 +57,11 @@ export const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
   // TODO: apparently NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@<=18
   const isolatePlugins = major(coerce(version)) >= 19;
 
+  // TODO: always npx?
   const cmd = `NX_ISOLATE_PLUGINS=${isolatePlugins} npx --yes create-nx-workspace@${version} ${name} --nxCloud skip --no-interactive ${args}`;
 
   logger.verbose(cmd);
 
-  // TODO: always npx?
   await promisify(exec)(cmd, {
     cwd,
   });

@@ -1,7 +1,6 @@
 import { logger, workspaceRoot } from '@nx/devkit';
 import { getRandomPort as getRandomPortUtil } from '@robby-rabbitman/nx-plus-libs-node-util';
-import { existsSync, mkdirSync } from 'fs';
-import { readFile, writeFile } from 'fs/promises';
+import { access, mkdir, readFile, writeFile } from 'fs/promises';
 import { readCachedProjectGraph } from 'nx/src/project-graph/project-graph';
 import { dirname, join } from 'path';
 import { lock } from 'proper-lockfile';
@@ -69,10 +68,12 @@ export async function setPorts(
 ) {
   const portsFilePath = options?.portsFilePath ?? PORTS_FILE_PATH;
   const portsFileDir = dirname(portsFilePath);
-  const portsFileDirExists = existsSync(portsFileDir);
+  const portsFileDirExists = await access(portsFileDir)
+    .then(() => true)
+    .catch(() => false);
 
   if (!portsFileDirExists) {
-    mkdirSync(portsFileDir, { recursive: true });
+    await mkdir(portsFileDir, { recursive: true });
   }
 
   const portsFileLock = await lock(portsFileDir, {
