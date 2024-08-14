@@ -1,4 +1,4 @@
-import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
+import { logger, readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import { exec } from 'child_process';
 import { mkdir, rm } from 'fs/promises';
 import { join } from 'path';
@@ -40,6 +40,8 @@ export const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
 
   const workspaceRoot = join(cwd, name);
 
+  logger.verbose(`Creating nx workspace in ${workspaceRoot}`);
+
   if (clear) {
     await rm(workspaceRoot, {
       recursive: true,
@@ -55,13 +57,14 @@ export const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
   // TODO: apparently NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@<=18
   const isolatePlugins = major(coerce(version)) >= 19;
 
+  const cmd = `NX_ISOLATE_PLUGINS=${isolatePlugins} npx --yes create-nx-workspace@${version} ${name} --nxCloud skip --no-interactive ${args}`;
+
+  logger.verbose(cmd);
+
   // TODO: always npx?
-  await promisify(exec)(
-    `NX_ISOLATE_PLUGINS=${isolatePlugins} npx --yes create-nx-workspace@${version} ${name} --nxCloud skip --no-interactive ${args}`,
-    {
-      cwd,
-    },
-  );
+  await promisify(exec)(cmd, {
+    cwd,
+  });
 
   return workspaceRoot;
 };
