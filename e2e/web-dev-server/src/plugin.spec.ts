@@ -114,7 +114,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
         },
       );
     } finally {
-      releasePort(port);
+      await releasePort(port);
     }
   });
 });
