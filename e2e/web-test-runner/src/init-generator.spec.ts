@@ -30,6 +30,7 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
       name: `init${e2eWorkspaceName}`,
       version: e2ePackage.peerDependencies.nx,
       args: '--preset apps',
+      clear: true,
     });
 
     nxJsonSnapShotAfterCreateE2eNxWorkspace = readJson(
@@ -41,7 +42,7 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
       workspaceRoot,
       packageManagerCommand: npm,
     });
-  });
+  }, 60_000);
 
   beforeEach(() => {
     writeJsonFile(

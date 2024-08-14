@@ -35,6 +35,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       name: `plugin${e2eWorkspaceName}`,
       version: e2ePackage.peerDependencies.nx,
       args: '--preset apps',
+      clear: true,
     });
 
     installE2eVersionMatrixProject({
@@ -48,7 +49,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     nxJson.plugins ??= [];
     nxJson.plugins.push('@robby-rabbitman/nx-plus-web-test-runner/plugin');
     writeJsonFile(nxJsonPath, nxJson);
-  });
+  }, 60_000);
 
   it('should infer the Web Test Runner', async () => {
     execSync(

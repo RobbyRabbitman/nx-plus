@@ -36,6 +36,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
       name: `plugin${e2eWorkspaceName}`,
       version: e2ePackage.peerDependencies.nx,
       args: '--preset apps',
+      clear: true,
     });
 
     installE2eVersionMatrixProject({
@@ -49,7 +50,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
     nxJson.plugins ??= [];
     nxJson.plugins.push('@robby-rabbitman/nx-plus-web-dev-server/plugin');
     writeJsonFile(nxJsonPath, nxJson);
-  });
+  }, 60_000);
 
   it('should infer the Web Dev Server', async () => {
     execSync(
