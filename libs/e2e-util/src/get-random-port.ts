@@ -2,7 +2,7 @@ import { logger, workspaceRoot } from '@nx/devkit';
 import { getRandomPort as getRandomPortUtil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { existsSync, mkdirSync } from 'fs';
 import { readFile, writeFile } from 'fs/promises';
-import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
+import { readCachedProjectGraph } from 'nx/src/project-graph/project-graph';
 import { dirname, join } from 'path';
 import { lock } from 'proper-lockfile';
 
@@ -45,7 +45,7 @@ export async function getRandomPort(options?: {
 
 export const PORTS_FILE_PATH = join(
   workspaceRoot,
-  readCachedProjectConfiguration('libs-e2e-util').root,
+  readCachedProjectGraph().nodes['libs-e2e-util'].data.root,
   'tmp',
   'ports',
   'ports.json',
@@ -103,6 +103,8 @@ export async function releasePort(
  * Releases all ports - new e2e targets could now get a port assigned that was
  * previously locked. It does **not** check, whether these ports were actually
  * in use.
+ *
+ * @see {@link getRandomPort}
  */
 export async function releaseAllPorts(options?: { portsFilePath?: string }) {
   await setPorts(() => [], options);
