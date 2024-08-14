@@ -22,18 +22,18 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const npm = getPackageManagerCommand('npm');
   let workspaceRoot: string;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
     }
 
-    workspaceRoot = createE2eNxWorkspace({
-      e2eProjectName: 'web-test-runner-e2e',
-      e2eNxWorkspaceName: `plugin${e2eWorkspaceName}`,
-      e2eNxVersion: e2ePackage.peerDependencies.nx,
-      createNxWorkspaceArgs: '--preset apps',
+    workspaceRoot = await createE2eNxWorkspace({
+      projectName: 'web-test-runner-e2e',
+      name: `plugin${e2eWorkspaceName}`,
+      version: e2ePackage.peerDependencies.nx,
+      args: '--preset apps',
     });
 
     installE2eVersionMatrixProject({

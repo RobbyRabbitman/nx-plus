@@ -18,18 +18,18 @@ describe(`@robby-rabbitman/nx-plus-web-test-runner:init`, () => {
   let workspaceRoot: string;
   let nxJsonSnapShotAfterCreateE2eNxWorkspace: NxJsonConfiguration;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
     }
 
-    workspaceRoot = createE2eNxWorkspace({
-      e2eProjectName: 'web-test-runner-e2e',
-      e2eNxWorkspaceName: `init${e2eWorkspaceName}`,
-      e2eNxVersion: e2ePackage.peerDependencies.nx,
-      createNxWorkspaceArgs: '--preset apps',
+    workspaceRoot = await createE2eNxWorkspace({
+      projectName: 'web-test-runner-e2e',
+      name: `init${e2eWorkspaceName}`,
+      version: e2ePackage.peerDependencies.nx,
+      args: '--preset apps',
     });
 
     nxJsonSnapShotAfterCreateE2eNxWorkspace = readJson(
