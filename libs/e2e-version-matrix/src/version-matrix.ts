@@ -1,3 +1,5 @@
+import { logger } from '@nx/devkit';
+
 export interface VersionMatrixConfig {
   /** The package name e.g. `my-lib`. */
   name: string;
@@ -56,9 +58,7 @@ export function createVersionMatrix(config: VersionMatrixConfig) {
       }) satisfies VersionMatrixItem,
   );
 
-  if (process.env['NX_VERBOSE_LOGGING'] === 'true') {
-    console.log(versionMatrix);
-  }
+  logger.verbose(versionMatrix);
 
   return versionMatrix;
 }
