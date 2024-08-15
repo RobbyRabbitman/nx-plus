@@ -3,14 +3,15 @@ import {
   CreateNodesFunction,
   CreateNodesV2,
   getPackageManagerCommand,
+  logger,
+  readCachedProjectGraph,
   readJsonFile,
   TargetConfiguration,
   workspaceRoot,
 } from '@nx/devkit';
 import { execSync } from 'child_process';
 import { randomUUID } from 'crypto';
-import { existsSync } from 'fs';
-import { readCachedProjectGraph } from 'nx/src/project-graph/project-graph';
+import { existsSync, readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import {
   createVersionMatrix,
@@ -69,7 +70,10 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
     });
 
     const e2eVersionMatrixConfig = getE2eVersionMatrixConfig({
-      e2eVersionMatrixConfigPath,
+      e2eVersionMatrixConfigPath: join(
+        context.workspaceRoot,
+        e2eVersionMatrixConfigPath,
+      ),
     });
 
     const e2eVersionMatrix = createVersionMatrix(e2eVersionMatrixConfig);
@@ -107,6 +111,7 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
       },
     };
   } catch (error) {
+    logger.error(error);
     return {};
   }
 };
@@ -148,9 +153,9 @@ function getE2eVersionMatrixConfig({
 }: {
   e2eVersionMatrixConfigPath: string;
 }) {
-  const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
-    e2eVersionMatrixConfigPath,
-  );
+  const e2eVersionMatrixConfig = JSON.parse(
+    readFileSync(e2eVersionMatrixConfigPath, 'utf-8'),
+  ) as VersionMatrixConfig;
 
   return e2eVersionMatrixConfig;
 }
