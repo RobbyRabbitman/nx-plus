@@ -50,10 +50,6 @@ export const createNodesV2: CreateNodesV2<E2eVersionMatrixPluginSchema> = [
   },
 ];
 
-/**
- * TODO: maybe we can use the `peerDependencies` of the package.json as is and
- * find a logic to extract the _wanted_ versions.
- */
 const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
   e2eVersionMatrixConfigPath,
   schema,
