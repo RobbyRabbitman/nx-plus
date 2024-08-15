@@ -267,7 +267,7 @@ export function getE2eVersionMatrixProject() {
 
   const peerDependencies = Object.fromEntries(
     peerDependencyEnvVars.map((envVar) => [
-      envVar.replace(peerDependencyEnvPrefix, ''),
+      envVar.replace(`${peerDependencyEnvPrefix}_`, ''),
       process.env[envVar],
     ]),
   );
