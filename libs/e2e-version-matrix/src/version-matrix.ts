@@ -20,7 +20,7 @@ export interface VersionMatrixConfig {
   };
 }
 
-export interface VersionMatrixItem {
+export interface VersionMatrixPermutation {
   /** The package name e.g. `my-lib`. */
   name: string;
   /** The version of the package e.g. `local`. */
@@ -55,7 +55,7 @@ export function createVersionMatrix(config: VersionMatrixConfig) {
         name,
         version,
         peerDependencies: peerDependencyPermutation,
-      }) satisfies VersionMatrixItem,
+      }) satisfies VersionMatrixPermutation,
   );
 
   logger.verbose(versionMatrix);
