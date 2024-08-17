@@ -5,7 +5,6 @@ import {
   getPackageManagerCommand,
   logger,
   readCachedProjectGraph,
-  readJsonFile,
   TargetConfiguration,
   workspaceRoot,
 } from '@nx/devkit';
@@ -36,8 +35,8 @@ const e2eVersionMatrixConfigGlob = `**/${e2eVersionMatrixConfigFileName}`;
  * The prefix of the environment variables used by the e2e version matrix
  * plugin.
  */
-const E2E_VERSION_MATRIX_PLUGIN_ENV_PREFIX = 'E2E_VERSION_MATRIX_PLUGIN';
-const E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX = `${E2E_VERSION_MATRIX_PLUGIN_ENV_PREFIX}_PEER_DEPENDENCY`;
+export const E2E_VERSION_MATRIX_PLUGIN_ENV_PREFIX = 'E2E_VERSION_MATRIX_PLUGIN';
+export const E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX = `${E2E_VERSION_MATRIX_PLUGIN_ENV_PREFIX}_PEER_DEPENDENCY`;
 
 export const createNodesV2: CreateNodesV2<E2eVersionMatrixPluginSchema> = [
   e2eVersionMatrixConfigGlob,
@@ -238,26 +237,27 @@ function createE2eVersionMatrixTargetConfiguration({
 
 /** @returns The project of the current e2e target. */
 export function getE2eVersionMatrixProject() {
-  const peerDependencyEnvPrefix =
-    E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX;
+  const peerDependencyEnvPrefix = `${E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX}_`;
 
-  const peerDependencyEnvVars = Object.keys(process.env).filter(
-    (envVar) =>
-      envVar.startsWith(peerDependencyEnvPrefix) &&
-      envVar !== E2E_VERSION_MATRIX_PLUGIN_ENV_PREFIX,
+  const peerDependencyEnvVars = Object.keys(process.env).filter((envVar) =>
+    envVar.startsWith(peerDependencyEnvPrefix),
   );
 
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
   const targetName = process.env['NX_TASK_TARGET_TARGET'];
   const project = readCachedProjectGraph().nodes[projectName].data;
 
-  const e2eVersionMatrixConfig = readJsonFile<VersionMatrixConfig>(
-    join(workspaceRoot, project.root, e2eVersionMatrixConfigFileName),
-  );
+  const e2eVersionMatrixConfig = getE2eVersionMatrixConfig({
+    e2eVersionMatrixConfigPath: join(
+      workspaceRoot,
+      project.root,
+      e2eVersionMatrixConfigFileName,
+    ),
+  });
 
   const peerDependencies = Object.fromEntries(
     peerDependencyEnvVars.map((envVar) => [
-      envVar.replace(`${peerDependencyEnvPrefix}_`, ''),
+      envVar.replace(peerDependencyEnvPrefix, ''),
       process.env[envVar],
     ]),
   );
@@ -268,7 +268,7 @@ export function getE2eVersionMatrixProject() {
      * test.
      */
     e2eWorkspaceName: generateWorkspaceName({
-      name: targetName,
+      name: [targetName, Object.entries(peerDependencies)].flat().join('-'),
     }),
     /** The package of the e2e test target. */
     e2ePackage: {
@@ -304,7 +304,7 @@ export function installE2eVersionMatrixProject({
 }
 
 function generateWorkspaceName({ name }: { name?: string }) {
-  return `${randomUUID()}${name ?? ''}`
-    .replace(/[^a-z0-9]/gi, '')
+  return `${randomUUID()}-${name ?? ''}`
+    .replace(/[^a-z0-9-]/gi, '')
     .substring(0, 255);
 }

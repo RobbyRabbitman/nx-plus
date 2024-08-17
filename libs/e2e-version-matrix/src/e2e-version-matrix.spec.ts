@@ -1,10 +1,18 @@
-import { CreateNodesContextV2, ProjectConfiguration } from '@nx/devkit';
+import {
+  CreateNodesContextV2,
+  ProjectConfiguration,
+  readCachedProjectGraph,
+  workspaceRoot,
+} from '@nx/devkit';
 import { DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { join } from 'path';
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import {
   createNodesV2,
+  E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX,
   E2eVersionMatrixPluginSchema,
+  getE2eVersionMatrixProject,
 } from './e2e-version-matrix';
 import { VersionMatrixConfig } from './version-matrix';
 
@@ -12,6 +20,15 @@ vi.mock('fs', async () => {
   const { fs } = await vi.importActual<typeof import('memfs')>('memfs');
 
   return fs;
+});
+
+vi.mock('@nx/devkit', async (actualModule) => {
+  const devkit = await actualModule<typeof import('@nx/devkit')>();
+
+  return {
+    ...devkit,
+    readCachedProjectGraph: vi.fn(),
+  };
 });
 
 describe('e2e version matrix', () => {
@@ -510,6 +527,86 @@ describe('e2e version matrix', () => {
             ],
           ]);
         });
+      });
+    });
+  });
+
+  describe('getE2eVersionMatrixProject', async () => {
+    beforeEach(() => {
+      const versionMatrixConfig = {
+        name: 'some-project',
+        version: 'local',
+        peerDependencies: {
+          foo: ['1', '2'],
+          bar: ['2'],
+        },
+      } satisfies VersionMatrixConfig;
+
+      vol.fromJSON({
+        [join(workspaceRoot, 'some/project/e2e-version-matrix.config.json')]:
+          JSON.stringify(versionMatrixConfig),
+      });
+
+      vi.stubEnv('NX_TASK_TARGET_PROJECT', 'some-project');
+      vi.stubEnv('NX_TASK_TARGET_TARGET', 'some-target');
+
+      (readCachedProjectGraph as Mock).mockReturnValue({
+        dependencies: {},
+        nodes: {
+          'some-project': {
+            name: 'some-project',
+            type: 'lib',
+            data: {
+              root: 'some/project',
+            },
+          },
+        },
+      });
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
+    it('should return the project of the current target', async () => {
+      vi.stubEnv(
+        `${E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX}_foo`,
+        '1',
+      );
+      vi.stubEnv(
+        `${E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX}_bar`,
+        '2',
+      );
+      expect(getE2eVersionMatrixProject()).toEqual({
+        e2ePackage: {
+          name: 'some-project',
+          version: 'local',
+          peerDependencies: {
+            foo: '1',
+            bar: '2',
+          },
+        },
+        e2eWorkspaceName: expect.stringMatching(/some-target-bar2-foo1/),
+      });
+
+      vi.stubEnv(
+        `${E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX}_foo`,
+        '2',
+      );
+      vi.stubEnv(
+        `${E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX}_bar`,
+        '2',
+      );
+      expect(getE2eVersionMatrixProject()).toEqual({
+        e2ePackage: {
+          name: 'some-project',
+          version: 'local',
+          peerDependencies: {
+            foo: '2',
+            bar: '2',
+          },
+        },
+        e2eWorkspaceName: expect.stringMatching(/some-target-bar2-foo2/),
       });
     });
   });
