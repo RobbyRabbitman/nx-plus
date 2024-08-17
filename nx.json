@@ -50,7 +50,7 @@
     {
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
       "options": {
-        "targetPrefix": "e2e-vite",
+        "targetName": "e2e-vite",
         "targetConfiguration": {
           "cache": true,
           "inputs": [

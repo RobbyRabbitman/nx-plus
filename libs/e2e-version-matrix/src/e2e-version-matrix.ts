@@ -23,7 +23,7 @@ export type E2eVersionMatrixPluginSchema =
   Partial<E2eVersionMatrixPluginOptions>;
 
 export type E2eVersionMatrixPluginOptions = {
-  targetPrefix: string;
+  targetName: string;
   targetConfiguration: TargetConfiguration;
   permutationTargetPrefix: string;
   permutationTargetConfiguration: TargetConfiguration;
@@ -61,7 +61,7 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
       permutationTargetConfiguration,
       permutationTargetPrefix,
       targetConfiguration,
-      targetPrefix,
+      targetName,
     } = schemaToOptions({ schema });
 
     const projectRoot = assertIsProject({
@@ -100,12 +100,11 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
             // add the permutation targets
             ...permutationTargets,
             // add the version matrix target
-            [createE2eVersionMatrixTargetName({ targetPrefix })]:
-              createE2eVersionMatrixTargetConfiguration({
-                targetConfiguration,
-                versionMatrixConfig: e2eVersionMatrixConfig,
-                permutationTargetNames: Object.keys(permutationTargets),
-              }),
+            [targetName]: createE2eVersionMatrixTargetConfiguration({
+              targetConfiguration,
+              versionMatrixConfig: e2eVersionMatrixConfig,
+              permutationTargetNames: Object.keys(permutationTargets),
+            }),
           },
         },
       },
@@ -118,7 +117,7 @@ const addE2eVersionMatrix: CreateNodesFunction<E2eVersionMatrixPluginSchema> = (
 
 function schemaToOptions({ schema }: { schema: E2eVersionMatrixPluginSchema }) {
   const options = {
-    targetPrefix: 'e2e-version-matrix',
+    targetName: 'e2e-version-matrix',
     targetConfiguration: {},
     permutationTargetPrefix: 'e2e-version-matrix-permutation',
     permutationTargetConfiguration: {},
@@ -210,16 +209,6 @@ function createE2eVersionMatrixPermutationTargetConfiguration({
       },
     },
   } satisfies TargetConfiguration;
-}
-
-function createE2eVersionMatrixTargetName({
-  targetPrefix,
-}: {
-  targetPrefix: string;
-}) {
-  const targetName = `${targetPrefix}-version-matrix`;
-
-  return targetName;
 }
 
 function createE2eVersionMatrixTargetConfiguration({
