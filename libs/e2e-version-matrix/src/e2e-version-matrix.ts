@@ -289,18 +289,19 @@ export function installE2eVersionMatrixProject({
   packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
   package: VersionMatrixPermutation;
 }) {
-  execSync(
-    `${packageManagerCommand.addDev} ${Object.entries({
-      ...peerDependencies,
-      [name]: version,
-    })
-      .map(([dependency, version]) => `${dependency}@${version}`)
-      .join(' ')}`,
-    {
-      cwd: workspaceRoot,
-      stdio: 'inherit',
-    },
-  );
+  const cmd = `${packageManagerCommand.addDev} ${Object.entries({
+    ...peerDependencies,
+    [name]: version,
+  })
+    .map(([dependency, version]) => `${dependency}@${version}`)
+    .join(' ')}`;
+
+  logger.verbose(`Installing e2e test package in ${workspaceRoot}: ${cmd}`);
+
+  execSync(cmd, {
+    cwd: workspaceRoot,
+    stdio: 'inherit',
+  });
 }
 
 function generateWorkspaceName({ name }: { name?: string }) {

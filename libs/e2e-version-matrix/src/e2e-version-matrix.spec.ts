@@ -1,9 +1,11 @@
 import {
   CreateNodesContextV2,
+  getPackageManagerCommand,
   ProjectConfiguration,
   readCachedProjectGraph,
   workspaceRoot,
 } from '@nx/devkit';
+import { execSync } from 'child_process';
 import { DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import { join } from 'path';
@@ -13,6 +15,7 @@ import {
   E2E_VERSION_MATRIX_PLUGIN_PEER_DEPENDENCY_ENV_PREFIX,
   E2eVersionMatrixPluginSchema,
   getE2eVersionMatrixProject,
+  installE2eVersionMatrixProject,
 } from './e2e-version-matrix';
 import { VersionMatrixConfig } from './version-matrix';
 
@@ -21,6 +24,8 @@ vi.mock('fs', async () => {
 
   return fs;
 });
+
+vi.mock('child_process');
 
 vi.mock('@nx/devkit', async (actualModule) => {
   const devkit = await actualModule<typeof import('@nx/devkit')>();
@@ -608,6 +613,31 @@ describe('e2e version matrix', () => {
         },
         e2eWorkspaceName: expect.stringMatching(/some-target/),
       });
+    });
+  });
+
+  describe('installE2eVersionMatrixProject', () => {
+    it('should install the e2e package includign its peer dependencies', () => {
+      installE2eVersionMatrixProject({
+        workspaceRoot: 'some/workspace',
+        packageManagerCommand: getPackageManagerCommand('npm'),
+        package: {
+          name: 'some-package',
+          version: 'local',
+          peerDependencies: {
+            foo: '1',
+            bar: '2',
+          },
+        },
+      });
+
+      expect(execSync).toHaveBeenCalledWith(
+        'npm install -D foo@1 bar@2 some-package@local',
+        {
+          cwd: 'some/workspace',
+          stdio: 'inherit',
+        },
+      );
     });
   });
 });
