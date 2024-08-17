@@ -5,6 +5,7 @@ Plugin to infer a e2e test version matrix based on the peer dependencies of a pa
 ## TODO
 
 - move me in `libs-e2e-util` when secondary entry points work for local plugins.
+- check why the plugin cannot use the inferred build target of `tools-tsc`
 
 ### DX
 
