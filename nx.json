@@ -49,7 +49,7 @@
     {
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
       "options": {
-        "targetName": "e2e-vite",
+        "targetName": "e2e-vite-version-matrix",
         "targetConfiguration": {
           "cache": true,
           "inputs": [
@@ -59,7 +59,7 @@
             { "env": "CI" }
           ]
         },
-        "permutationTargetPrefix": "e2e-vite",
+        "permutationTargetPrefix": "e2e-vite-version-matrix",
         "permutationTargetConfiguration": {
           "cache": true,
           "parallelism": false,
