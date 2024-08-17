@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "nxCloudAccessToken": "Y2VlNzVkMTMtMTk5Yy00Y2MxLWE3OGQtNjEwNDNkZWU5OGI4fHJlYWQtd3JpdGU=",
   "cli": { "packageManager": "pnpm" },
   "release": {
     "releaseTagPattern": "{version}",
