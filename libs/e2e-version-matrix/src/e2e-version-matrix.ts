@@ -268,7 +268,7 @@ export function getE2eVersionMatrixProject() {
      * test.
      */
     e2eWorkspaceName: generateWorkspaceName({
-      name: [targetName, Object.entries(peerDependencies)].flat().join('-'),
+      name: targetName,
     }),
     /** The package of the e2e test target. */
     e2ePackage: {

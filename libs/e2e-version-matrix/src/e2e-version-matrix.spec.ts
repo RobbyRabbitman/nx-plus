@@ -586,7 +586,7 @@ describe('e2e version matrix', () => {
             bar: '2',
           },
         },
-        e2eWorkspaceName: expect.stringMatching(/some-target-bar2-foo1/),
+        e2eWorkspaceName: expect.stringMatching(/some-target/),
       });
 
       vi.stubEnv(
@@ -606,7 +606,7 @@ describe('e2e version matrix', () => {
             bar: '2',
           },
         },
-        e2eWorkspaceName: expect.stringMatching(/some-target-bar2-foo2/),
+        e2eWorkspaceName: expect.stringMatching(/some-target/),
       });
     });
   });
