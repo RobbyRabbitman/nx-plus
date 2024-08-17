@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "nxCloudAccessToken": "Y2VlNzVkMTMtMTk5Yy00Y2MxLWE3OGQtNjEwNDNkZWU5OGI4fHJlYWQtd3JpdGU=",
   "cli": { "packageManager": "pnpm" },
   "release": {
     "releaseTagPattern": "{version}",
@@ -50,8 +49,18 @@
     {
       "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
       "options": {
-        "targetPrefix": "e2e-vite",
+        "targetName": "e2e-vite",
         "targetConfiguration": {
+          "cache": true,
+          "inputs": [
+            "default",
+            "^default",
+            { "externalDependencies": ["vitest"] },
+            { "env": "CI" }
+          ]
+        },
+        "permutationTargetPrefix": "e2e-vite",
+        "permutationTargetConfiguration": {
           "cache": true,
           "parallelism": false,
           "command": "vitest",
@@ -60,15 +69,6 @@
             "coverage": false,
             "config": "{projectRoot}/vitest.config.mts"
           },
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        },
-        "matrixTargetConfiguration": {
-          "cache": true,
           "inputs": [
             "default",
             "^default",
@@ -103,13 +103,6 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "cache": true,
       "configurations": { "ci": { "run": true } }
-    },
-    "e2e-vite": {
-      "inputs": ["default", "^default"],
-      "options": {
-        "config": "{projectRoot}/vitest.config.mts",
-        "cwd": "{workspaceRoot}"
-      }
     }
   }
 }

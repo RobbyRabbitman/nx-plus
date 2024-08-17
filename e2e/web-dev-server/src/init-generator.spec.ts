@@ -27,7 +27,7 @@ describe(`@robby-rabbitman/nx-plus-web-dev-server:init`, () => {
 
     workspaceRoot = await createE2eNxWorkspace({
       projectName: 'web-dev-server-e2e',
-      name: `init${e2eWorkspaceName}`,
+      name: `init-${e2eWorkspaceName}`,
       version: e2ePackage.peerDependencies.nx,
       args: '--preset apps',
       clear: true,
