@@ -8,6 +8,7 @@ import { readJson } from '@nx/plugin/testing';
 import {
   createE2eNxWorkspace,
   getRandomPort,
+  releasePort,
 } from '@robby-rabbitman/nx-plus-libs-e2e-util';
 import {
   getE2eVersionMatrixProject,
@@ -22,18 +23,19 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
   const npm = getPackageManagerCommand('npm');
   let workspaceRoot: string;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
     }
 
-    workspaceRoot = createE2eNxWorkspace({
-      e2eProjectName: 'web-test-runner-e2e',
-      e2eNxWorkspaceName: `plugin-${e2eWorkspaceName}`,
-      e2eNxVersion: e2ePackage.peerDependencies.nx,
-      createNxWorkspaceArgs: '--preset apps',
+    workspaceRoot = await createE2eNxWorkspace({
+      projectName: 'web-test-runner-e2e',
+      name: `plugin-${e2eWorkspaceName}`,
+      version: e2ePackage.peerDependencies.nx,
+      args: '--preset apps',
+      clear: true,
     });
 
     installE2eVersionMatrixProject({
@@ -47,7 +49,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     nxJson.plugins ??= [];
     nxJson.plugins.push('@robby-rabbitman/nx-plus-web-test-runner/plugin');
     writeJsonFile(nxJsonPath, nxJson);
-  });
+  }, 60_000);
 
   it('should infer the Web Test Runner', async () => {
     execSync(
@@ -57,33 +59,39 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       },
     );
 
-    const webTestRunnerConfiguration = {
-      files: '**/*.spec.js',
-      nodeResolve: true,
-      watch: false,
-      port: await getRandomPort(),
-    } satisfies TestRunnerConfig;
+    const port = await getRandomPort();
 
-    writeFileSync(
-      join(workspaceRoot, 'some-project/web-test-runner.config.mjs'),
-      `export default ${JSON.stringify(webTestRunnerConfiguration, null, 2)};`,
-    );
+    try {
+      const webTestRunnerConfiguration = {
+        files: '**/*.spec.js',
+        nodeResolve: true,
+        watch: false,
+        port,
+      } satisfies TestRunnerConfig;
 
-    const project = JSON.parse(
-      execSync('nx show project some-project --json', {
-        cwd: workspaceRoot,
-        encoding: 'utf-8',
-      }),
-    ) as ProjectConfiguration;
+      writeFileSync(
+        join(workspaceRoot, 'some-project/web-test-runner.config.mjs'),
+        `export default ${JSON.stringify(webTestRunnerConfiguration, null, 2)};`,
+      );
 
-    expect(project.targets.test).toMatchObject({
-      executor: 'nx:run-commands',
-      options: {
-        command: 'web-test-runner',
-        config: 'web-test-runner.config.mjs',
-        cwd: 'some-project',
-      },
-    });
+      const project = JSON.parse(
+        execSync('nx show project some-project --json', {
+          cwd: workspaceRoot,
+          encoding: 'utf-8',
+        }),
+      ) as ProjectConfiguration;
+
+      expect(project.targets.test).toMatchObject({
+        executor: 'nx:run-commands',
+        options: {
+          command: 'web-test-runner',
+          config: 'web-test-runner.config.mjs',
+          cwd: 'some-project',
+        },
+      });
+    } finally {
+      await releasePort(port);
+    }
   });
 
   it('should run the Web Test Runner', () => {

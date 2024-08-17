@@ -24,18 +24,19 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
   const npm = getPackageManagerCommand('npm');
   let workspaceRoot: string;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     const { e2eWorkspaceName, e2ePackage } = getE2eVersionMatrixProject();
 
     if (!e2ePackage.peerDependencies['nx']) {
       throw new Error('nx not in peer dependencies!');
     }
 
-    workspaceRoot = createE2eNxWorkspace({
-      e2eProjectName: 'web-dev-server-e2e',
-      e2eNxWorkspaceName: `plugin-${e2eWorkspaceName}`,
-      e2eNxVersion: e2ePackage.peerDependencies.nx,
-      createNxWorkspaceArgs: '--preset apps',
+    workspaceRoot = await createE2eNxWorkspace({
+      projectName: 'web-dev-server-e2e',
+      name: `plugin-${e2eWorkspaceName}`,
+      version: e2ePackage.peerDependencies.nx,
+      args: '--preset apps',
+      clear: true,
     });
 
     installE2eVersionMatrixProject({
@@ -49,7 +50,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
     nxJson.plugins ??= [];
     nxJson.plugins.push('@robby-rabbitman/nx-plus-web-dev-server/plugin');
     writeJsonFile(nxJsonPath, nxJson);
-  });
+  }, 60_000);
 
   it('should infer the Web Dev Server', async () => {
     execSync(
@@ -114,7 +115,7 @@ describe('@robby-rabbitman/nx-plus-web-dev-server/plugin', () => {
         },
       );
     } finally {
-      releasePort(port);
+      await releasePort(port);
     }
   });
 });
