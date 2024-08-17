@@ -26,7 +26,9 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
 
-      - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
+      # this fails unpredictable with 'Request failed with status code 429. Your organization has exceeded your plan's concurrent connection limit of 10.'
+      # this seems to corelate with the number of agents, need to read docs.
+      # - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
 
       - uses: nrwl/nx-set-shas@v4
 
