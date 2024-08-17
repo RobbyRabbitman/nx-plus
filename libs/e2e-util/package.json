@@ -3,12 +3,9 @@
   "version": "0.0.0",
   "peerDependencies": {
     "@nx/devkit": "19.5.7",
-    "nx": "19.5.7",
     "tslib": "2.6.3",
     "semver": "7.6.3",
     "@robby-rabbitman/nx-plus-libs-node-util": "0.0.0",
-    "proper-lockfile": "4.1.2",
-    "vitest": "1.6.0",
-    "@robby-rabbitman/nx-plus-tools-vite": "0.0.0"
+    "proper-lockfile": "4.1.2"
   }
 }

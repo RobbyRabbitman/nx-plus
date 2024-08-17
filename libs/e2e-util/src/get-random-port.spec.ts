@@ -1,7 +1,6 @@
-import { workspaceRoot } from '@nx/devkit';
+import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import * as nodeUtil from '@robby-rabbitman/nx-plus-libs-node-util';
 import { rm } from 'fs/promises';
-import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
 import { join } from 'path';
 import {
   afterAll,
@@ -25,7 +24,7 @@ import {
 describe('getRandomPort', { timeout: 15_000 }, () => {
   const portsFilePath = join(
     workspaceRoot,
-    readCachedProjectConfiguration('libs-e2e-util').root,
+    readCachedProjectGraph().nodes['libs-e2e-util'].data.root,
     'tmp',
     'test-ports',
     'ports.json',

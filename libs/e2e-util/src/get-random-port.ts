@@ -1,7 +1,6 @@
-import { logger, workspaceRoot } from '@nx/devkit';
+import { logger, readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import { getRandomPort as getRandomPortUtil } from '@robby-rabbitman/nx-plus-libs-node-util';
 import { access, mkdir, readFile, writeFile } from 'fs/promises';
-import { readCachedProjectGraph } from 'nx/src/project-graph/project-graph';
 import { dirname, join } from 'path';
 import { lock } from 'proper-lockfile';
 
