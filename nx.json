@@ -62,7 +62,6 @@
         "permutationTargetPrefix": "e2e-vite-version-matrix",
         "permutationTargetConfiguration": {
           "cache": true,
-          "parallelism": false,
           "command": "vitest",
           "options": {
             "run": true,

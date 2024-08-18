@@ -1,0 +1,12 @@
+{
+  "name": "e2e-ci",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:util"],
+  "targets": {
+    "e2e-vite-version-matrix": {
+      "cache": true,
+      "inputs": ["publishable"],
+      "command": "ts-node {projectRoot}/src/e2e-vite-version-matrix.ts"
+    }
+  }
+}
