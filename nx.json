@@ -36,8 +36,7 @@
             "{workspaceRoot}/tools/tsc/**/*"
           ]
         }
-      },
-      "exclude": ["tools/tsc"]
+      }
     },
     {
       "plugin": "@nx/eslint/plugin",
