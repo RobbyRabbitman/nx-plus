@@ -13,7 +13,6 @@ Infers typescript projects and adds a build task with `@nx/js:tsc`.
       "inputs": ["default", "^default", "typescriptGlobals"]
     }
   },
-  "exclude": ["tools-tsc"] // ignore this project because this would be a self inferred build task
 },
 ```
 
