@@ -22,20 +22,22 @@
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "publishable": ["{workspaceRoot}/packages/**/*"],
     "eslintGlobals": ["{workspaceRoot}/tools/eslint/**/*"],
-    "typescriptGlobals": [
-      "{workspaceRoot}/tsconfig.base.config",
-      "{workspaceRoot}/tools/typescript/**/*"
-    ]
+    "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
   },
   "plugins": [
     {
       "plugin": "@robby-rabbitman/nx-plus-tools-tsc/plugin",
       "options": {
         "tscTargetConfig": {
-          "inputs": ["default", "^default", "typescriptGlobals"]
+          "inputs": [
+            "default",
+            "^default",
+            "typescriptGlobals",
+            "{workspaceRoot}/tools/tsc/**/*"
+          ]
         }
       },
-      "exclude": ["tools-tsc"]
+      "exclude": ["tools/tsc"]
     },
     {
       "plugin": "@nx/eslint/plugin",
