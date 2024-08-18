@@ -5,10 +5,6 @@
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "cache": true,
-      "outputs": ["{options.outputPath}"],
-      "inputs": ["default", "^default"],
-      "dependsOn": ["^build"],
       "options": {
         "outputPath": "dist/{projectRoot}",
         "main": "{projectRoot}/src/index.ts",
