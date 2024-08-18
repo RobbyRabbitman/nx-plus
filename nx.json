@@ -87,11 +87,6 @@
       "options": { "packageRoot": "{workspaceRoot}/dist/{projectRoot}" },
       "dependsOn": ["build"]
     },
-    "@nx/js:tsc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
-    },
     "lint-eslint": {
       "inputs": ["default", "^default", "eslintGlobals"]
     },
