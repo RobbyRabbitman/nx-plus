@@ -2,7 +2,6 @@
   "name": "@robby-rabbitman/nx-plus-e2e-ci",
   "version": "0.0.0",
   "peerDependencies": {
-    "tslib": "2.6.3",
     "@nx/devkit": "19.5.7",
     "@robby-rabbitman/nx-plus-tools-local-registry": "0.0.0"
   },
