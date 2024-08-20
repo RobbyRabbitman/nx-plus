@@ -28,7 +28,7 @@ jobs:
 
       # this fails unpredictable with 'Request failed with status code 429. Your organization has exceeded your plan's concurrent connection limit of 10.'
       # this seems to corelate with the number of agents, need to read docs.
-      # - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
+      # - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-ci:e2e-vite-version-matrix'
 
       - uses: nrwl/nx-set-shas@v4
 
@@ -42,6 +42,7 @@ jobs:
 
       - run: |
           pnpm nx format:check
-          pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix --configuration ci
+          pnpm nx affected -t lint-eslint test test-vite build --configuration ci
+          pnpm nx run e2e-ci:e2e-vite-version-matrix --configuration ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

@@ -31,7 +31,7 @@ import {
 
   try {
     execSync(
-      `${getPackageManagerCommand().exec} nx run web-test-runner-e2e:e2e-vite-version-matrix---nx@^19---@web/test-runner@^0.18.2`,
+      `${getPackageManagerCommand().exec} nx affected -t e2e-vite-version-matrix --exclude='e2e-ci'`,
       {
         cwd: workspaceRoot,
         stdio: 'inherit',
