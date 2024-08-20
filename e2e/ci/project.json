@@ -3,6 +3,10 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:util"],
   "targets": {
+    "build": { "executor": "nx:noop", "inputs": [], "cache": true },
+    "nx-release-publish": {
+      "executor": "nx:noop"
+    },
     "e2e-vite-version-matrix": {
       "cache": true,
       "inputs": ["publishable"],
