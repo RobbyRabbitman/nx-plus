@@ -1,4 +1,4 @@
-# web-dev-server-e2e
+# e2e-web-dev-server
 
 e2e test for the web dev server:
 
@@ -10,5 +10,5 @@ e2e test for the web dev server:
 ```sh
 nx run tools-local-registry:publish
 nx run tools-local-registry:serve --clear false
-nx run web-dev-server-e2e:{{ target }}
+nx run e2e-web-dev-server:{{ target }}
 ```
