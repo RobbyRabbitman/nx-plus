@@ -31,7 +31,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
     }
 
     workspaceRoot = await createE2eNxWorkspace({
-      projectName: 'web-test-runner-e2e',
+      projectName: 'e2e-web-test-runner',
       name: `plugin-${e2eWorkspaceName}`,
       version: e2ePackage.peerDependencies.nx,
       args: '--preset apps',

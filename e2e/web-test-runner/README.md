@@ -1,4 +1,4 @@
-# web-test-runner-e2e
+# e2e-web-test-runner
 
 e2e test for the web test runner:
 
@@ -10,5 +10,5 @@ e2e test for the web test runner:
 ```sh
 nx run tools-local-registry:publish
 nx run tools-local-registry:serve --clear false
-nx run web-test-runner-e2e:{{ target }}
+nx run e2e-web-test-runner:{{ target }}
 ```
