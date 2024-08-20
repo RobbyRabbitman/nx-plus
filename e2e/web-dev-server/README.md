@@ -1,0 +1,14 @@
+# web-dev-server-e2e
+
+e2e test for the web dev server:
+
+- init generator for the plugin
+- plugin for inferring web dev server
+
+## local developement
+
+```sh
+nx run tools-local-registry:publish
+nx run tools-local-registry:serve --clear false
+nx run web-dev-server-e2e:{{ target }}
+```

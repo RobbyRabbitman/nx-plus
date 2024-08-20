@@ -6,7 +6,10 @@
     "e2e-vite-version-matrix": {
       "cache": true,
       "inputs": ["publishable"],
-      "command": "ts-node {projectRoot}/src/e2e-vite-version-matrix.ts"
+      "command": "ts-node {projectRoot}/src/e2e-vite-version-matrix.ts",
+      "options": {
+        "project": "{projectRoot}/tsconfig.lib.json"
+      }
     }
   }
 }
