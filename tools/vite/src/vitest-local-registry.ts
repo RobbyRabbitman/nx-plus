@@ -1,5 +1,4 @@
-import { workspaceRoot } from '@nx/devkit';
-import { readCachedProjectConfiguration } from 'nx/src/project-graph/project-graph';
+import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import { join } from 'path';
 import { mergeConfig, UserConfig } from 'vitest/config';
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -22,7 +21,7 @@ export async function setup() {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
   const verbose = process.env['NX_VERBOSE_LOGGING'] === 'true';
 
-  const project = readCachedProjectConfiguration(projectName);
+  const project = readCachedProjectGraph().nodes[projectName].data;
 
   const { stopLocalRegistry } = await publish({
     clearStorage: true,
