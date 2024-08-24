@@ -2,7 +2,7 @@
   "name": "@robby-rabbitman/nx-plus",
   "version": "0.0.0",
   "engines": {
-    "node": "20.16.0"
+    "node": "20.17.0"
   },
   "packageManager": "pnpm@9.7.1",
   "scripts": {},
