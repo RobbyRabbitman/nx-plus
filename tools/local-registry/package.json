@@ -2,7 +2,7 @@
   "name": "@robby-rabbitman/nx-plus-tools-local-registry",
   "version": "0.0.0",
   "peerDependencies": {
-    "tslib": "2.6.3",
+    "tslib": "2.7.0",
     "@nx/devkit": "19.5.7",
     "yargs": "17.7.2",
     "@nx/js": "19.5.7",
