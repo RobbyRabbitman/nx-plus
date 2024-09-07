@@ -2,9 +2,9 @@
   "name": "@robby-rabbitman/nx-plus-tools-vite",
   "version": "0.0.0",
   "peerDependencies": {
-    "@nx/devkit": "19.6.4",
+    "@nx/devkit": "19.6.5",
     "vitest": "1.6.0",
     "@robby-rabbitman/nx-plus-tools-local-registry": "0.0.0",
-    "@nx/vite": "19.6.4"
+    "@nx/vite": "19.6.5"
   }
 }
