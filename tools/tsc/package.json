@@ -2,7 +2,7 @@
   "name": "@robby-rabbitman/nx-plus-tools-tsc",
   "version": "0.0.0",
   "peerDependencies": {
-    "@nx/devkit": "19.6.5",
+    "@nx/devkit": "19.7.0",
     "tslib": "2.7.0"
   }
 }
