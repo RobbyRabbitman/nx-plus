@@ -2,7 +2,7 @@
   "name": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix",
   "version": "0.0.0",
   "peerDependencies": {
-    "@nx/devkit": "19.7.2",
+    "@nx/devkit": "19.7.3",
     "tslib": "2.7.0"
   }
 }
