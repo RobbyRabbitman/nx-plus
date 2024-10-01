@@ -23,7 +23,7 @@
     "@swc/core": "1.7.26",
     "@swc/helpers": "0.5.13",
     "@types/eslint": "9.6.1",
-    "@types/node": "20.16.9",
+    "@types/node": "20.16.10",
     "@types/proper-lockfile": "4.1.4",
     "@types/semver": "7.5.8",
     "@types/uuid": "10.0.0",
