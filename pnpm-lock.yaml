@@ -121,8 +121,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       renovate:
-        specifier: 38.106.3
-        version: 38.106.3(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 38.106.4
+        version: 38.106.4(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0)
       semver:
         specifier: 7.6.3
         version: 7.6.3
@@ -4017,6 +4017,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@10.1.0:
@@ -6394,8 +6395,8 @@ packages:
   remark@13.0.0:
     resolution: {integrity: sha512-HDz1+IKGtOyWN+QgBiAT0kn+2s6ovOxHyPAFGKVE81VSzJ+mq7RwHFledEvB5F1p4iJvOah/LOKdFuzvRnNLCA==}
 
-  renovate@38.106.3:
-    resolution: {integrity: sha512-UzKxM41wdplQYG+gaAXB2tfCcu9n8xfrddenq/Cbe1xjRH8WYRlkHgJhCaJHlmTq1xhvj2z7zCh1lbsS560vCQ==}
+  renovate@38.106.4:
+    resolution: {integrity: sha512-zSX70JWFjZO7+bK2prbJwyqls6Kqhc3f9+3ozvXLPUlkrSGddD+8osz0/aX+oNZkY/g0ldgobNBmA8pRrIjzGg==}
     engines: {node: ^20.15.1, pnpm: ^9.0.0}
     hasBin: true
 
@@ -16018,7 +16019,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@38.106.3(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0):
+  renovate@38.106.4(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.658.1
       '@aws-sdk/client-ec2': 3.658.1
