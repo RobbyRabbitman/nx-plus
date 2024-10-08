@@ -31,7 +31,7 @@
   "peerDependencies": {
     "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "tslib": "^2.3.0",
-    "@web/test-runner": "^0.18.2"
+    "@web/test-runner": "^0.18.2 || ^0.19.0"
   },
   "generators": "./generators.json",
   "main": "./src/index.js",
