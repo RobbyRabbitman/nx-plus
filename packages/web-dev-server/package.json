@@ -30,7 +30,7 @@
   "license": "MIT",
   "peerDependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0",
     "@web/dev-server": "^0.4.6"
   },
   "generators": "./generators.json",
