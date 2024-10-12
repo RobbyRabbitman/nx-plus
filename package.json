@@ -45,7 +45,7 @@
     "renovate": "38.110.5",
     "semver": "7.6.3",
     "ts-node": "10.9.2",
-    "typescript": "5.6.2",
+    "typescript": "5.6.3",
     "verdaccio": "5.32.2",
     "vite": "5.4.8",
     "vitest": "1.6.0",
