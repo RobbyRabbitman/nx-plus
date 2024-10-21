@@ -121,8 +121,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       renovate:
-        specifier: 38.124.3
-        version: 38.124.3(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 38.126.2
+        version: 38.126.2(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0)
       semver:
         specifier: 7.6.3
         version: 7.6.3
@@ -4448,8 +4448,8 @@ packages:
     resolution: {integrity: sha512-QUcQZutczESpdo2w9BMG6VpLFoq9ix7ER5HLM1mAdZdri2F3eISkCb8ep84W6YOo0grYWJdyT/8JkYqGjQfSSQ==}
     engines: {node: '>=18.12.0', yarn: ^1.17.0}
 
-  google-auth-library@9.14.1:
-    resolution: {integrity: sha512-Rj+PMjoNFGFTmtItH7gHfbHpGVSb3vmnGK3nwNBqxQF9NoBpttSZI/rc0WiM63ma2uGDQtYEkMHkK9U6937NiA==}
+  google-auth-library@9.14.2:
+    resolution: {integrity: sha512-R+FRIfk1GBo3RdlRYWPdwk8nmtVUOn6+BkDomAC46KoU8kzXzE1HLmOasSCbWUByMMAGkknVF0G5kQ69Vj7dlA==}
     engines: {node: '>=14'}
 
   gopd@1.0.1:
@@ -6396,8 +6396,8 @@ packages:
   remark@13.0.0:
     resolution: {integrity: sha512-HDz1+IKGtOyWN+QgBiAT0kn+2s6ovOxHyPAFGKVE81VSzJ+mq7RwHFledEvB5F1p4iJvOah/LOKdFuzvRnNLCA==}
 
-  renovate@38.124.3:
-    resolution: {integrity: sha512-8LYRoIR7iTSa/MKDh6lZh9lgdKgSSvWC4E5G3FrEfsuhqjktOcY9tcikBRGtH+IPYI8c3ZDjrtM76WdkHFE5EA==}
+  renovate@38.126.2:
+    resolution: {integrity: sha512-Ln4Wx5It2UjIuzek1hoC8i5Ze1mJxVrEqxChVKXzLlO7y2OuXeEs2+wYDf4dsdAiAMEMbxzEqDcnKFEMP2Yoxg==}
     engines: {node: ^20.15.1, pnpm: ^9.0.0}
     hasBin: true
 
@@ -13639,7 +13639,7 @@ snapshots:
       klona: 2.0.6
       moo: 0.5.2
 
-  google-auth-library@9.14.1(encoding@0.1.13):
+  google-auth-library@9.14.2(encoding@0.1.13):
     dependencies:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
@@ -16023,7 +16023,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@38.124.3(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0):
+  renovate@38.126.2(@aws-sdk/client-sso-oidc@3.658.1(@aws-sdk/client-sts@3.658.1))(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.658.1
       '@aws-sdk/client-ec2': 3.658.1
@@ -16085,7 +16085,7 @@ snapshots:
       glob: 11.0.0
       global-agent: 3.0.0
       good-enough-parser: 1.1.23
-      google-auth-library: 9.14.1(encoding@0.1.13)
+      google-auth-library: 9.14.2(encoding@0.1.13)
       got: 11.8.6
       graph-data-structure: 3.5.0
       handlebars: 4.7.8
