@@ -32,8 +32,10 @@
     "source=${localWorkspaceFolderBasename}-.nx,target=${containerWorkspaceFolder}/.nx,type=volume"
   ],
   "remoteEnv": {
+    "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
     "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0",
-    "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    "NX_BASE": "${localEnv:NX_BASE}",
+    "NX_HEAD": "${localEnv:NX_HEAD}"
   },
   "remoteUser": "root"
 }

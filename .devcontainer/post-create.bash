@@ -10,3 +10,7 @@ corepack enable
 
 echo "⚙️ Installing npm workspace dependencies..."
 pnpm install --frozen-lockfile
+
+echo "⚙️ Installing Nx CLI..."
+NX_VERSION=$(jq -r .devDependencies.nx package.json)
+pnpm add -g nx@$NX_VERSION
