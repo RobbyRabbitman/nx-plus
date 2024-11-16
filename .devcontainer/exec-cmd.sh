@@ -1,3 +1,5 @@
+#!/bin/sh
+
 DEVCONTAINERS_CLI_VERSION=$(jq -r '.devDependencies["@devcontainers/cli"]' package.json)
 
 set -e

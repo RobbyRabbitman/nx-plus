@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo "⚙️ Installing Node.js..."
 NODE_VERSION=$(jq -r .engines.node package.json)
 . ${NVM_DIR}/nvm.sh
