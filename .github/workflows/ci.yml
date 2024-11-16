@@ -18,8 +18,9 @@ jobs:
         with:
           fetch-depth: 0 # required for nrwl/nx-set-shas@v4
 
+      - run: corepack enable
+
       # TODO: why are the node_modules not mounted and reinstalled when the dev container is started? pnpm store not mounted https://github.com/orgs/pnpm/discussions/3651 ?
-      # - run: corepack enable
       # - uses: actions/setup-node@v4
       #   with:
       #     node-version-file: package.json
