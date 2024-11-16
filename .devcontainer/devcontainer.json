@@ -1,0 +1,39 @@
+{
+  "name": "nx-plus-dev-container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "nx-plus-dev-container",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "bash .devcontainer/post-create.bash",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [
+    4873 // verdaccio
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nrwl.angular-console",
+        "yzhang.markdown-all-in-one",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "mutantdino.resourcemonitor",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+  "mounts": [
+    // https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=${localWorkspaceFolderBasename}-.nx,target=${containerWorkspaceFolder}/.nx,type=volume"
+  ],
+  "remoteEnv": {
+    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0",
+    "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "remoteUser": "root"
+}

@@ -1,0 +1,10 @@
+services:
+  nx-plus-dev-container:
+    image: mcr.microsoft.com/devcontainers/base:bookworm
+    container_name: nx-plus-dev-container
+    volumes:
+      - ${HOST_WORKSPACE_FOLDER:-..}:/workspace:cached
+    command: sleep infinity
+
+
+
