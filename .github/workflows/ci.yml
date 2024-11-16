@@ -35,6 +35,8 @@ jobs:
       - uses: devcontainers/ci@v0.3
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+          NX_BASE: ${{ env.NX_BASE }}
+          NX_HEAD: ${{ env.NX_HEAD }}
         with:
           runCmd: |
             git cat-file -t $NX_BASE
