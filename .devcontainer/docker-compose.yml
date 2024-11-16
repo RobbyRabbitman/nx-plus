@@ -5,6 +5,3 @@ services:
     volumes:
       - ${HOST_WORKSPACE_FOLDER:-..}:/workspace:cached
     command: sleep infinity
-
-
-

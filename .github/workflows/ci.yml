@@ -32,7 +32,7 @@ jobs:
 
       - run: sh .devcontainer/exec-cmd.sh pnpm nx report
 
-      - run: sh .devcontainer/exec-cmd.sh sh -c 'echo "NX_BASE=$NX_BASE NX_HEAD=$NX_HEAD"'
+      - run: sh .devcontainer/exec-cmd.sh sh -c 'echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"'
 
       - run: sh .devcontainer/exec-cmd.sh pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
 
