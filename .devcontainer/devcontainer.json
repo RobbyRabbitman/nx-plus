@@ -34,7 +34,9 @@
   ],
   "remoteEnv": {
     "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
-    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0",
+    "NX_BASE": "${localEnv:NX_BASE:origin/main}",
+    "NX_HEAD": "${localEnv:NX_HEAD:HEAD}"
   },
   "remoteUser": "root"
 }

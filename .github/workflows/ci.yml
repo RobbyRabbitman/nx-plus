@@ -28,16 +28,19 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      #- run: git branch --track $NX_HEAD $NX_BASE
       - run: git branch --track "${{ github.event.pull_request.head.ref }}" "origin/${{ github.event.pull_request.base.ref }}"
 
-      - run: sh .devcontainer/exec-cmd.sh pnpm nx report
+      - run: sh .devcontainer/exec-cmd.sh sh -c 'git cat-file -t $NX_HEAD; git cat-file -t $NX_BASE'
+
+      - run: sh .devcontainer/exec-cmd.sh nx report
 
       - run: sh .devcontainer/exec-cmd.sh sh -c 'echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"'
 
-      - run: sh .devcontainer/exec-cmd.sh pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+      - run: sh .devcontainer/exec-cmd.sh nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
 
       - run: |
-          sh .devcontainer/exec-cmd.sh pnpm nx format:check
-          sh .devcontainer/exec-cmd.sh pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix -c ci
+          sh .devcontainer/exec-cmd.sh nx format:check
+          sh .devcontainer/exec-cmd.sh nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix -c ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
