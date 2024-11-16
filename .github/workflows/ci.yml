@@ -30,7 +30,9 @@ jobs:
 
       - uses: devcontainers/ci@v0.3
         with:
-          runCmd: pnpm nx report
+          runCmd: |
+            echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"
+            pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
 
       # - run: sh .devcontainer/exec-cmd.sh echo '🚀 devcontainer started 🚀'
 
