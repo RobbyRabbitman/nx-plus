@@ -15,11 +15,12 @@
     "vscode": {
       "extensions": [
         "nrwl.angular-console",
-        "yzhang.markdown-all-in-one",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
         "mutantdino.resourcemonitor",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "yzhang.markdown-all-in-one"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
