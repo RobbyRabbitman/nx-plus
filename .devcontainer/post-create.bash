@@ -8,6 +8,9 @@ nvm use default
 echo "⚙️ Enabling corepack..."
 corepack enable
 
+echo "⚙️ Setup pnpm..."
+pnpm setup
+
 echo "⚙️ Installing npm workspace dependencies..."
 pnpm install --frozen-lockfile
 
