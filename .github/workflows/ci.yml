@@ -29,21 +29,10 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - uses: devcontainers/ci@v0.3
+        env:
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
         with:
           runCmd: |
-            echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"
-            pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
-
-      # - run: sh .devcontainer/exec-cmd.sh echo '🚀 devcontainer started 🚀'
-
-      # - run: sh .devcontainer/exec-cmd.sh pnpm nx report
-
-      # - run: sh .devcontainer/exec-cmd.sh sh -c 'echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"'
-
-      # - run: sh .devcontainer/exec-cmd.sh pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
-
-      # - run: |
-      #     sh .devcontainer/exec-cmd.sh pnpm nx format:check --base=$NX_BASE --head=$NX_HEAD
-      #     sh .devcontainer/exec-cmd.sh pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix -c ci
-      #   env:
-      #     NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+            nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+            nx format:check
+            nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix -c ci
