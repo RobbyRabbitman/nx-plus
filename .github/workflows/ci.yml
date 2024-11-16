@@ -32,11 +32,7 @@ jobs:
 
       - run: git branch --track "${{ github.event.pull_request.head.ref }}" "origin/${{ github.event.pull_request.base.ref }}"
 
-      - run: sh .devcontainer/exec-cmd.sh sh -c 'git cat-file -t $NX_HEAD; git cat-file -t $NX_BASE'
-
       - run: sh .devcontainer/exec-cmd.sh nx report
-
-      - run: sh .devcontainer/exec-cmd.sh sh -c 'echo "NX_BASE=$NX_BASE\nNX_HEAD=$NX_HEAD"'
 
       - run: sh .devcontainer/exec-cmd.sh nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
 
