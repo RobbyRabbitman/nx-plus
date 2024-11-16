@@ -4,6 +4,8 @@ echo "⚙️ Updating debian..."
 apt-get update
 apt-get -y upgrade
 
+git config --global --add safe.directory $(pwd)
+
 echo "⚙️ Installing node..."
 NODE_VERSION=$(jq -r .engines.node package.json)
 source ${NVM_DIR}/nvm.sh
