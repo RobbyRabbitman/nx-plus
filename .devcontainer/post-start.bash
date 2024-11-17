@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-nx run tools-verdaccio:start
+pnpm nx run tools-verdaccio:start

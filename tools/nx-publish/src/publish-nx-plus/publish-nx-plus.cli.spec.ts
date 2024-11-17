@@ -44,4 +44,12 @@ describe('[Unit Test] publishNxPlusCli', () => {
       npmTag: 'some-tag',
     } satisfies Parameters<typeof publishNxPlus>[0]);
   });
+
+  it('should demand a npm registry', async () => {
+    vi.mocked(hideBin).mockReturnValue([]);
+
+    await expect(import('./publish-nx-plus.cli.js')).rejects.toEqual(
+      new Error('process.exit(1)'),
+    );
+  });
 });
