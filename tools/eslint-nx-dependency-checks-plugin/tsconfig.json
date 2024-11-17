@@ -1,11 +1,11 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": [],
   "files": [],
+  "include": [],
   "exclude": [],
   "references": [
-    { "path": "../../tools/vite" },
-    { "path": "../../tools/eslint" },
+    { "path": "../vite" },
+    { "path": "../eslint" },
     { "path": "./tsconfig.lib.json" },
     { "path": "./tsconfig.spec.json" }
   ]

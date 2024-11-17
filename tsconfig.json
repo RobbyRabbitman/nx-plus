@@ -15,6 +15,7 @@
     { "path": "./libs/node-util" },
     { "path": "./libs/e2e-util" },
     { "path": "./tools/vite" },
-    { "path": "./tools/eslint" }
+    { "path": "./tools/eslint" },
+    { "path": "./tools/eslint-nx-dependency-checks-plugin" }
   ]
 }

@@ -27,7 +27,7 @@
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "publishable": ["{workspaceRoot}/packages/**/*"],
-    "eslintGlobals": ["{workspaceRoot}/tools/eslint/**/*"],
+    "eslintGlobals": ["{workspaceRoot}/tools/eslint*/**/*"],
     "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
   },
   "plugins": [
