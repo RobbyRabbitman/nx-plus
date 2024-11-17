@@ -1,8 +1,11 @@
-import { CreateNodesContextV2, ProjectConfiguration } from '@nx/devkit';
-import { DirectoryJSON, vol } from 'memfs';
+import {
+  type CreateNodesContextV2,
+  type ProjectConfiguration,
+} from '@nx/devkit';
+import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createNodesV2, TscPluginSchema } from './tsc-plugin';
+import { createNodesV2, type TscPluginSchema } from './tsc-plugin';
 
 vi.mock('fs', async () => {
   const { fs } = await vi.importActual<typeof import('memfs')>('memfs');

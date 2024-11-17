@@ -1,8 +1,8 @@
 import {
-  CreateNodesContextV2,
-  CreateNodesFunction,
-  CreateNodesV2,
-  TargetConfiguration,
+  type CreateNodesContextV2,
+  type CreateNodesFunction,
+  type CreateNodesV2,
+  type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
