@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
-  "exclude": [],
+
   "references": [
     { "path": "../eslint" },
     { "path": "./tsconfig.lib.json" },

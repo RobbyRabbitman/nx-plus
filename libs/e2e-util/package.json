@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/lib/index.js",
+  "typings": "./dist/lib/index.d.ts",
   "types": "./dist/lib/index.d.ts",
   "peerDependencies": {
     "@nx/devkit": "19.8.10",
     "tslib": "2.8.1",
     "semver": "7.6.3",
-    "@robby-rabbitman/nx-plus-libs-node-util": "0.0.0",
+    "@robby-rabbitman/nx-plus-libs-node-util": "workspace:*",
     "proper-lockfile": "4.1.2"
   }
 }

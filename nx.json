@@ -9,7 +9,10 @@
     "git": { "commitMessage": "chore: release {version} 🚀 [skip ci]" },
     "version": {
       "conventionalCommits": true,
-      "generatorOptions": { "fallbackCurrentVersionResolver": "disk" }
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk",
+        "preserveLocalDependencyProtocols": true
+      }
     },
     "changelog": {
       "automaticFromRef": true,
