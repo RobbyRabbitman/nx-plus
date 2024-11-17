@@ -55,7 +55,7 @@ export const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
   });
 
   // TODO: apparently NX_ISOLATE_PLUGINS=false must be set to false for create-nx-workspace@<=18
-  const isolatePlugins = major(coerce(version)) >= 19;
+  const isolatePlugins = major(coerce(version)!) >= 19;
 
   // TODO: always npx?
   const cmd = `NX_ISOLATE_PLUGINS=${isolatePlugins} npx --yes create-nx-workspace@${version} ${name} --nxCloud skip --no-interactive ${args}`;
@@ -94,7 +94,11 @@ export const createE2eNxWorkspace = async (
 ) => {
   const { projectName, version, name, args, clear } = options;
 
-  const projectConfig = readCachedProjectGraph().nodes[projectName].data;
+  const projectConfig = readCachedProjectGraph().nodes[projectName]?.data;
+
+  if (!projectConfig) {
+    throw new Error(`Project ${projectName} not found`);
+  }
 
   const e2eWorkspacesOfProject = join(
     workspaceRoot,

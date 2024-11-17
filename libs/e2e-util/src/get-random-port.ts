@@ -19,14 +19,14 @@ export async function getRandomPort(options?: {
 }) {
   const maxRetries = Math.max(options?.maxRetries ?? 100, 1);
 
-  let port: number;
+  let port: number | null = null;
   let retries = 0;
 
   await setPorts(async (ports) => {
     while (port == null && ++retries < maxRetries) {
       port = await getRandomPortUtil();
       // Check if the port is already locked => if so, unset it and try again
-      if (ports.includes(port)) {
+      if (ports.includes(port!)) {
         port = null;
       }
     }
@@ -43,7 +43,7 @@ export async function getRandomPort(options?: {
 
 export const PORTS_FILE_PATH = join(
   workspaceRoot,
-  readCachedProjectGraph().nodes['libs-e2e-util'].data.root,
+  readCachedProjectGraph().nodes['libs-e2e-util']!.data.root,
   'tmp',
   'ports',
   'ports.json',

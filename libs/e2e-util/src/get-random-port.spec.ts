@@ -16,7 +16,7 @@ import {
   getRandomPort,
   releaseAllPorts,
   releasePort,
-} from './get-random-port';
+} from './get-random-port.js';
 
 // I guess don't mock the fs, since the actual fs should be tested right (?)
 // => therefore we cannot test the default ports file path branches, since this test could be run in parallel with another test that uses the default ports file path
@@ -24,7 +24,7 @@ import {
 describe('getRandomPort', { timeout: 15_000 }, () => {
   const portsFilePath = join(
     workspaceRoot,
-    readCachedProjectGraph().nodes['libs-e2e-util'].data.root,
+    readCachedProjectGraph().nodes['libs-e2e-util']!.data.root,
     'tmp',
     'test-ports',
     'ports.json',

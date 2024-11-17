@@ -2,17 +2,17 @@ import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import { access, mkdir, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { createE2eNxWorkspace, createNxWorkspace } from './nx-workspace';
+import { createE2eNxWorkspace, createNxWorkspace } from './nx-workspace.js';
 
 // TODO: mock fs with memfs? node_modules too big for memory?
 
 describe('createNxWorkspace', { timeout: 60_000 }, () => {
   const project =
-    readCachedProjectGraph().nodes[process.env.NX_TASK_TARGET_PROJECT];
+    readCachedProjectGraph().nodes[process.env.NX_TASK_TARGET_PROJECT!]!;
 
   // TODO: pass via env? e2e version matrix?
   const nxVersions = ['17', '18', '19'];
-  const nxLatest = nxVersions.at(-1);
+  const nxLatest = nxVersions.at(-1)!;
 
   const cwd = join(
     workspaceRoot,
