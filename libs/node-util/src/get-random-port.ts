@@ -4,13 +4,13 @@ import { createServer } from 'net';
 export function getRandomPort() {
   return new Promise<number>((resolve, reject) => {
     const server = createServer();
-    let port: number;
+    let port: number | undefined;
 
     server.listen(0, () => {
       const address = server.address();
 
       if (typeof address === 'object') {
-        port = address.port;
+        port = address?.port;
       }
 
       server.close();
@@ -18,7 +18,7 @@ export function getRandomPort() {
 
     server.on('close', () => {
       if (port == null) {
-        reject();
+        return reject();
       }
 
       resolve(port);

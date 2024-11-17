@@ -1,4 +1,4 @@
-import { ChildProcess, exec, ExecOptions } from 'child_process';
+import { ChildProcess, exec, type ExecOptions } from 'child_process';
 
 /**
  * Wraps `exec` in a promise which resolves when the stdout or stderr matches a

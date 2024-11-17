@@ -5,7 +5,7 @@ import {
   coverageConfigDefaults,
   defineConfig,
   mergeConfig,
-  UserConfig,
+  type UserConfig,
 } from 'vitest/config';
 
 /**
@@ -23,7 +23,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
     return {};
   }
 
-  const project = readCachedProjectGraph().nodes[projectName].data;
+  const project = readCachedProjectGraph().nodes[projectName]?.data;
 
   if (!project) {
     return {};
