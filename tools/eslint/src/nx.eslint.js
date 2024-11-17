@@ -47,34 +47,9 @@ const nxEslintConfig = [
           enforceBuildableLibDependency: true,
           allow: [],
           depConstraints: [
-            // types
             {
               sourceTag: 'type:lib',
-              onlyDependOnLibsWithTags: [
-                'type:lib',
-                'type:assets',
-                'type:tokens',
-                'type:util',
-                'type:storybook',
-                'type:tool',
-              ],
-            },
-            {
-              sourceTag: 'type:storybook',
-              onlyDependOnLibsWithTags: [
-                'type:storybook',
-                'type:util',
-                'type:tool',
-                'type:lib',
-              ],
-            },
-            {
-              sourceTag: 'type:tokens',
-              onlyDependOnLibsWithTags: ['type:tokens', 'type:tool'],
-            },
-            {
-              sourceTag: 'type:assets',
-              onlyDependOnLibsWithTags: ['type:assets', 'type:tool'],
+              onlyDependOnLibsWithTags: ['type:lib', 'type:tool', 'type:util'],
             },
             {
               sourceTag: 'type:util',
@@ -84,26 +59,17 @@ const nxEslintConfig = [
               sourceTag: 'type:tool',
               onlyDependOnLibsWithTags: ['type:util', 'type:tool'],
             },
-            // scopes
             {
-              sourceTag: 'scope:js',
-              onlyDependOnLibsWithTags: ['scope:js'],
+              sourceTag: 'scope:shared',
+              onlyDependOnLibsWithTags: ['scope:shared'],
             },
             {
               sourceTag: 'scope:node',
-              onlyDependOnLibsWithTags: ['scope:js', 'scope:node'],
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:node'],
             },
             {
               sourceTag: 'scope:web',
-              onlyDependOnLibsWithTags: ['scope:js', 'scope:web'],
-            },
-            {
-              sourceTag: 'scope:angular',
-              onlyDependOnLibsWithTags: [
-                'scope:js',
-                'scope:web',
-                'scope:angular',
-              ],
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:web'],
             },
           ],
         },
