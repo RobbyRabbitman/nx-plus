@@ -21,6 +21,11 @@ const nodeEslintConfig = [
       '**/*.mts',
       '**/*.cts',
     ],
+    rules: {
+      ...nodeEslintConfigRecomended.rules,
+      /** @nx/dependency-checks is handling the dependency checks */
+      'n/no-extraneous-import': 'off',
+    },
   },
 ];
 

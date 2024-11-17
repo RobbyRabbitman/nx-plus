@@ -2,7 +2,11 @@
   "name": "@robby-rabbitman/nx-plus-tools-verdaccio",
   "version": "0.0.0",
   "type": "module",
-  "dependencies": {
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "peerDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
     "@nx/devkit": "20.1.2",
     "tslib": "2.8.1"
   }

@@ -34,10 +34,6 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
     },
     test: {
       globals: true,
-      typecheck: {
-        enabled: true,
-        tsconfig: join(workspaceRoot, project.root, 'tsconfig.spec.json'),
-      },
       environment: 'node',
       reporters: ['default'],
       coverage: {

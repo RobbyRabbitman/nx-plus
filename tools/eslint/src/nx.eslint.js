@@ -23,6 +23,11 @@ const nxEslintConfig = [
              * nx graph u can see the file as a dependency
              */
             '@robby-rabbitman/nx-plus-tools-eslint',
+            /**
+             * TODO: find out why projects (vite|vitest).config.ts are ignored -
+             * in the nx graph u can see the file as a dependency
+             */
+            '@robby-rabbitman/nx-plus-tools-vite',
           ],
           buildTargets: ['build-tsc'],
         },
