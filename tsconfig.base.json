@@ -34,14 +34,7 @@
     "strict": true,
     "target": "ESNext",
     "types": ["node"],
-    "verbatimModuleSyntax": true,
-    "paths": {
-      "@robby-rabbitman/nx-plus-*": ["packages/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-e2e-*": ["e2e/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-libs-*": ["libs/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-tools-*": ["tools/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-tools-tsc": ["tools/tsc/src/index.ts"]
-    }
+    "verbatimModuleSyntax": true
   },
   "exclude": ["node_modules", "tmp"]
 }

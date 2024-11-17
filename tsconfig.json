@@ -13,6 +13,6 @@
     { "path": "./libs/node-util" },
     { "path": "./libs/e2e-util" },
     { "path": "./tools/vite" },
-    { "path": "./tools/tsc" }
+    { "path": "./tools/eslint" }
   ]
 }

@@ -6,6 +6,10 @@
   },
   "packageManager": "pnpm@9.12.3",
   "scripts": {},
+  "workspaces": [
+    "packages/*",
+    "tools/*"
+  ],
   "devDependencies": {
     "@devcontainers/cli": "0.71.0",
     "@commitlint/cli": "19.5.0",
