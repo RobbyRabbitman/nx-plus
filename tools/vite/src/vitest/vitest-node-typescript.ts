@@ -1,5 +1,4 @@
 import { logger, readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { join } from 'path';
 import {
   coverageConfigDefaults,
@@ -8,31 +7,28 @@ import {
   type UserConfig,
 } from 'vitest/config';
 
-/**
- * Vitest config for a nx project:
- *
- * - Cache
- * - Ts paths via `nxViteTsPaths` plugin
- * - Test files typechecking
- * - Coverage
- */
 export function nodeTypescript(overrides?: Partial<UserConfig>) {
   const projectName = process.env['NX_TASK_TARGET_PROJECT'];
 
   if (!projectName) {
+    logger.verbose(
+      '[nodeTypescript] NX_TASK_TARGET_PROJECT is not set. Are you a nx task?',
+    );
     return {};
   }
 
   const project = readCachedProjectGraph().nodes[projectName]?.data;
 
   if (!project) {
+    logger.verbose(
+      `[nodeTypescript] Project ${projectName} does not exist in the project graph.`,
+    );
     return {};
   }
 
   const config = defineConfig({
     root: join(workspaceRoot, project.root),
     cacheDir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
-    plugins: [nxViteTsPaths()],
     server: {
       host: true,
     },
