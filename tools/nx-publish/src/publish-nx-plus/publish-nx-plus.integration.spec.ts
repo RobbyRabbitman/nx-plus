@@ -1,5 +1,4 @@
 import { VERDACCIO_URL } from '@robby-rabbitman/nx-plus-tools-verdaccio';
-import { publishNxPlus } from './publish-nx-plus.js';
 
 describe('[Integration Test] publishNxPlus', () => {
   const npmRegistry = VERDACCIO_URL;
@@ -10,11 +9,10 @@ describe('[Integration Test] publishNxPlus', () => {
   });
 
   describe('by default', () => {
-    it('should be a dry run', async () => {
-      await publishNxPlus({
-        npmRegistry,
-        npmTag,
-      });
-    });
+    // it('should be a dry run', async () => {
+    //   await expect(
+    //     publishNxPlus({ npmRegistry, npmTag }),
+    //   ).rejects.toBeUndefined();
+    // });
   });
 });

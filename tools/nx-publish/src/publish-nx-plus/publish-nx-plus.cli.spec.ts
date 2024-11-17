@@ -8,25 +8,35 @@ import {
 // vi.mock('yargs');
 vi.mock('yargs/helpers');
 vi.mock('./publish-nx-plus.js');
+vi.mock('@nx/devkit');
 
 describe('[Unit Test] publishNxPlusCli', () => {
   const args = '--npmRegistry https://some.registry --npmTag some-tag';
 
   beforeEach(() => {
+    vi.spyOn(process, 'exit').mockImplementation((code) => {
+      throw new Error(`process.exit(${code})`);
+    });
+
     vi.mocked(publishNxPlusDefaultOptions).mockReturnValue({
       dryRun: true,
     } satisfies ReturnType<typeof publishNxPlusDefaultOptions>);
 
     vi.mocked(hideBin).mockReturnValue(args.split(' '));
+
+    vi.mocked(publishNxPlus).mockResolvedValue(undefined);
   });
 
   afterEach(() => {
+    vi.mocked(process.exit).mockRestore();
     vi.restoreAllMocks();
     vi.resetModules();
   });
 
   it('should invoke publishNxPlus with the parsed args', async () => {
-    await import('./publish-nx-plus.cli.js');
+    await expect(import('./publish-nx-plus.cli.js')).rejects.toEqual(
+      new Error('process.exit(0)'),
+    );
 
     expect(publishNxPlus).toHaveBeenCalledWith({
       dryRun: true,

@@ -1,3 +1,4 @@
+import { logger } from '@nx/devkit';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import {
@@ -30,4 +31,10 @@ export const publishNxPlusCli = async () => {
   });
 };
 
-await publishNxPlusCli();
+await publishNxPlusCli().then(
+  () => process.exit(0),
+  (error) => {
+    logger.error(error);
+    process.exit(1);
+  },
+);

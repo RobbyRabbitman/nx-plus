@@ -25,6 +25,7 @@ const nodeEslintConfig = [
       ...nodeEslintConfigRecomended.rules,
       /** @nx/dependency-checks is handling the dependency checks */
       'n/no-extraneous-import': 'off',
+      'n/no-process-exit': 'off',
     },
   },
 ];
