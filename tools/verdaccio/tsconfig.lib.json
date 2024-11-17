@@ -11,6 +11,6 @@
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../vite/tsconfig.lib.json" },
-    { "path": "../eslint" }
+    { "path": "../eslint/tsconfig.lib.json" }
   ]
 }

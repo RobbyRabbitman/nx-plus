@@ -12,6 +12,6 @@
   "references": [
     { "path": "../../tools/vite/tsconfig.lib.json" },
     { "path": "../node-util/tsconfig.lib.json" },
-    { "path": "../../tools/eslint" }
+    { "path": "../../tools/eslint/tsconfig.lib.json" }
   ]
 }

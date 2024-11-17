@@ -9,9 +9,5 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
-  "references": [
-    { "path": "../../tools/vite/tsconfig.lib.json" },
-    { "path": "../node-util/tsconfig.lib.json" },
-    { "path": "../../tools/eslint" }
-  ]
+  "references": [{ "path": "../../tools/eslint" }]
 }
