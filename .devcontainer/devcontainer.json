@@ -2,6 +2,7 @@
   "name": "nx-plus-dev-container",
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "postCreateCommand": "bash .devcontainer/post-create.bash",
+  "postStartCommand": "bash .devcontainer/post-start.bash",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {}
   },
