@@ -25,13 +25,9 @@ export const publishNxPlus = async (options: PublishNxPlusOptions) => {
 
   const { dryRun, npmRegistry, npmTag } = combinedOptions;
 
-  const publishStatus = await releasePublish({
+  await releasePublish({
     dryRun,
     registry: npmRegistry,
     tag: npmTag,
   });
-
-  logger.verbose('[publishNxPlus] publish status:', publishStatus);
-
-  return { publishStatus };
 };

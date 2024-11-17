@@ -25,9 +25,9 @@ export const publishNxPlusCli = async () => {
       })
       .parseAsync();
 
-    const { publishStatus } = await publishNxPlus(options);
+    await publishNxPlus(options);
 
-    process.exit(publishStatus);
+    process.exit(0);
   } catch (error) {
     logger.error(error);
     process.exit(1);
