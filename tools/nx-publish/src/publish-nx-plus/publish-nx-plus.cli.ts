@@ -29,3 +29,5 @@ export const publishNxPlusCli = async () => {
     process.exit(1);
   }
 };
+
+await publishNxPlusCli();

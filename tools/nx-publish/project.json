@@ -1,36 +1,19 @@
 {
-  "name": "tools-local-registry",
+  "name": "tools-nx-publish",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:tool"],
   "targets": {
-    "serve": {
-      "executor": "@nx/js:verdaccio",
+    "publish-nx-plus-cli": {
+      "command": "tsx {projectRoot}/src/publish-nx-plus/publish-nx-plus.cli.ts",
       "options": {
-        "port": 4321,
-        "config": "{projectRoot}/src/config.yml",
-        "storage": "{projectRoot}/tmp/storage"
-      }
-    },
-    "publish": {
-      "cache": true,
-      "inputs": ["publishable"],
-      "outputs": ["{options.storage}"],
-      "command": "ts-node {projectRoot}/src/publish.cli.ts",
-      "options": {
-        "project": "{projectRoot}/tsconfig.lib.json",
-        "localRegistryTarget": "{projectName}:serve",
-        "storage": "{projectRoot}/tmp/storage"
-      }
-    },
-    "test": {
-      "parallelism": false,
-      "cache": true,
-      "inputs": ["publishable"],
-      "outputs": ["{options.storage}"],
-      "command": "nx run {projectName}:publish",
-      "options": {
-        "clear": true,
-        "storage": "{projectRoot}/tmp/storage-test"
+        "env": {
+          "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+        }
+      },
+      "configurations": {
+        "local": {
+          "npmRegistry": "http://localhost:4873"
+        }
       }
     }
   }
