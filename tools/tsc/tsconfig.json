@@ -9,6 +9,7 @@
   "include": [],
   "references": [
     { "path": "../vite" },
+    { "path": "../eslint" },
     { "path": "./tsconfig.lib.json" },
     { "path": "./tsconfig.spec.json" }
   ]

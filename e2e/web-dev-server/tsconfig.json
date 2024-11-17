@@ -6,6 +6,7 @@
   "references": [
     { "path": "../../tools/vite" },
     { "path": "../../packages/web-dev-server" },
+    { "path": "../../tools/eslint" },
     { "path": "./tsconfig.lib.json" },
     { "path": "./tsconfig.spec.json" }
   ]

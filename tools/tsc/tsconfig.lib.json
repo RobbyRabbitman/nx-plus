@@ -9,6 +9,7 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
+  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../vite/tsconfig.lib.json" },
     { "path": "../eslint" }
