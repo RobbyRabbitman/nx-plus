@@ -1,1 +1,1 @@
-export { initGenerator } from './generators/init';
+export { initGenerator } from './generators/init.js';

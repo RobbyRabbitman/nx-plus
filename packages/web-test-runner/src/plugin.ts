@@ -9,7 +9,7 @@ import {
 import { TestRunnerConfig } from '@web/test-runner';
 import { existsSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl';
+import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl.js';
 
 // TODO: copy pasta from '@web/test-runner/src/config/readCliArgs', remove this type if its exported from their public api
 // import { TestRunnerCliArgs } from '@web/test-runner';

@@ -5,7 +5,7 @@ import {
   WebDevServerTargetPluginSchema,
   createNodes,
   createNodesV2,
-} from './plugin';
+} from './plugin.js';
 
 vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
 

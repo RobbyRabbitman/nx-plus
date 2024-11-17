@@ -1,8 +1,8 @@
 import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
 import { Mock } from 'vitest';
-import { initGenerator, WebDevServerInitGeneratorSchema } from './init';
+import { initGenerator, WebDevServerInitGeneratorSchema } from './init.js';
 
 vi.mock('@nx/devkit', async () => {
   const module = await vi.importActual('@nx/devkit');
