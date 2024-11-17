@@ -1,6 +1,6 @@
 import {
-  ExpandedPluginConfiguration,
-  Generator,
+  type ExpandedPluginConfiguration,
+  type Generator,
   formatFiles,
   readNxJson,
   updateNxJson,
@@ -49,7 +49,7 @@ export const initGenerator: Generator<
 
   // 1.
   if (!skipAddPlugin) {
-    const nxJson = readNxJson(tree);
+    const nxJson = readNxJson(tree) ?? {};
     nxJson.plugins ??= [];
 
     const hasWebTestRunnerPlugin = nxJson.plugins.some((pluginConfig) => {

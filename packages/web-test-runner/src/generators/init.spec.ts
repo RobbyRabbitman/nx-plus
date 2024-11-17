@@ -1,8 +1,11 @@
 import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
-import { Mock } from 'vitest';
-import { initGenerator, WebTestRunnerInitGeneratorSchema } from './init.js';
+import { type Mock } from 'vitest';
+import {
+  initGenerator,
+  type WebTestRunnerInitGeneratorSchema,
+} from './init.js';
 
 vi.mock('@nx/devkit', async () => {
   const module = await vi.importActual('@nx/devkit');
@@ -70,7 +73,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
     await initGenerator(workspace, {});
 
-    expect(readNxJson(workspace).plugins).toContainEqual(
+    expect(readNxJson(workspace)?.plugins).toContainEqual(
       expect.objectContaining({
         plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
       }),
@@ -88,7 +91,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           testTargetName,
         });
 
-        expect(readNxJson(workspace).plugins).toContainEqual(
+        expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
             options: {
@@ -107,7 +110,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           testTargetName,
         });
 
-        expect(readNxJson(workspace).plugins).toContainEqual(
+        expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
             options: {
@@ -122,7 +125,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
         await initGenerator(workspace, {});
 
-        expect(readNxJson(workspace).plugins).toContainEqual(
+        expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
             options: {
@@ -169,7 +172,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
         await initGenerator(workspace, {});
 
-        expect(readNxJson(workspace).plugins).toContainEqual(
+        expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
           }),
@@ -183,7 +186,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           skipAddPlugin: false,
         });
 
-        expect(readNxJson(workspace).plugins).toContainEqual(
+        expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
           }),
@@ -193,7 +196,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
       it('should not add the plugin to `nx.json` when the provided value is `true`', async () => {
         const workspace = createWorkspace();
 
-        expect(readNxJson(workspace).plugins ?? []).not.toContainEqual(
+        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
           }),
@@ -203,7 +206,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
           skipAddPlugin: true,
         });
 
-        expect(readNxJson(workspace).plugins ?? []).not.toContainEqual(
+        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
           expect.objectContaining({
             plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
           }),

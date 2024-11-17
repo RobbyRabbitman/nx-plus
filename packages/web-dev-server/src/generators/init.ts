@@ -1,6 +1,6 @@
 import {
-  ExpandedPluginConfiguration,
-  Generator,
+  type ExpandedPluginConfiguration,
+  type Generator,
   formatFiles,
   readNxJson,
   updateNxJson,
@@ -62,7 +62,7 @@ export const initGenerator: Generator<WebDevServerInitGeneratorSchema> = async (
 
   // 1.
   if (!skipAddPlugin) {
-    const nxJson = readNxJson(tree);
+    const nxJson = readNxJson(tree) ?? {};
     nxJson.plugins ??= [];
 
     const hasWebDevServerPlugin = nxJson.plugins.some((pluginConfig) => {

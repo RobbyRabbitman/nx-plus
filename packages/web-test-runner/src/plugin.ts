@@ -1,15 +1,15 @@
 import {
-  CreateNodes,
-  CreateNodesContextV2,
-  CreateNodesFunction,
-  CreateNodesV2,
-  TargetConfiguration,
+  type CreateNodes,
+  type CreateNodesContextV2,
+  type CreateNodesFunction,
+  type CreateNodesV2,
+  type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
-import { TestRunnerConfig } from '@web/test-runner';
+import { type TestRunnerConfig } from '@web/test-runner';
 import { existsSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl.js';
+import { type RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl.js';
 
 // TODO: copy pasta from '@web/test-runner/src/config/readCliArgs', remove this type if its exported from their public api
 // import { TestRunnerCliArgs } from '@web/test-runner';
@@ -99,7 +99,7 @@ export const createNodesV2: CreateNodesV2<WebTestRunnerTargetPluginSchema> = [
  * @returns
  */
 const createWebTestRunnerTarget: CreateNodesFunction<
-  WebTestRunnerTargetPluginSchema
+  WebTestRunnerTargetPluginSchema | undefined
 > = (webTestRunnerConfigPath, schema, context) => {
   const defaultTestTargetName = 'test';
 

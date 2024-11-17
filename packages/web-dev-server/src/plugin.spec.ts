@@ -1,8 +1,8 @@
-import { CreateNodesContextV2 } from '@nx/devkit';
-import { DirectoryJSON, vol } from 'memfs';
+import { type CreateNodesContextV2 } from '@nx/devkit';
+import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
-  WebDevServerTargetPluginSchema,
+  type WebDevServerTargetPluginSchema,
   createNodes,
   createNodesV2,
 } from './plugin.js';

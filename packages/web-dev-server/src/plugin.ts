@@ -1,15 +1,15 @@
 import {
-  CreateNodes,
-  CreateNodesContextV2,
-  CreateNodesFunction,
-  CreateNodesV2,
-  TargetConfiguration,
+  type CreateNodes,
+  type CreateNodesContextV2,
+  type CreateNodesFunction,
+  type CreateNodesV2,
+  type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
-import { DevServerConfig } from '@web/dev-server';
+import { type DevServerConfig } from '@web/dev-server';
 import { existsSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import { RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl.js';
+import { type RunCommandsOptions } from 'nx/src/executors/run-commands/run-commands.impl.js';
 
 // TODO: copy pasta from '@web/dev-server/src/config/readCliArgs', remove this type if its exported from their public api
 // import { DevServerCliArgs } from '@web/dev-server';
@@ -87,7 +87,7 @@ export const createNodesV2: CreateNodesV2<WebDevServerTargetPluginSchema> = [
  * @returns
  */
 const createWebDevServerTarget: CreateNodesFunction<
-  WebDevServerTargetPluginSchema
+  WebDevServerTargetPluginSchema | undefined
 > = (webDevServerConfigPath, schema, context) => {
   const defaultServeTargetName = 'serve';
 

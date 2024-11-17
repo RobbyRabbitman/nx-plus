@@ -1,10 +1,10 @@
-import { CreateNodesContextV2 } from '@nx/devkit';
-import { DirectoryJSON, vol } from 'memfs';
+import { type CreateNodesContextV2 } from '@nx/devkit';
+import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
   createNodes,
   createNodesV2,
-  WebTestRunnerTargetPluginSchema,
+  type WebTestRunnerTargetPluginSchema,
 } from './plugin.js';
 
 vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
