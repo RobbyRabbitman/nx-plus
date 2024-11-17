@@ -2,5 +2,17 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    { "path": "./packages/web-test-runner" },
+    { "path": "./packages/web-dev-server" },
+    { "path": "./e2e/web-test-runner" },
+    { "path": "./e2e/web-dev-server" },
+    { "path": "./tools/commitlint" },
+    { "path": "./tools/nx-publish" },
+    { "path": "./tools/verdaccio" },
+    { "path": "./libs/node-util" },
+    { "path": "./libs/e2e-util" },
+    { "path": "./tools/vite" },
+    { "path": "./tools/tsc" }
+  ]
 }

@@ -1,5 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "exclude": ["src/**/*.spec.ts"],
+  "references": [
+    { "path": "../vite/tsconfig.lib.json" },
+    { "path": "../eslint" }
+  ]
 }

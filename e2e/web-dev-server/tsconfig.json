@@ -4,11 +4,11 @@
   "include": [],
   "exclude": [],
   "references": [
-    {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+    { "path": "../../packages/web-dev-server" },
+    { "path": "../../tools/vite" },
+    { "path": "../../libs/node-util" },
+    { "path": "../../libs/e2e-util" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
   ]
 }
