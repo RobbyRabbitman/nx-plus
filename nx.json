@@ -26,7 +26,7 @@
   },
   "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-tools-tsc/plugin",
+      "plugin": "@robby-rabbitman/nx-plus-tools-tsc",
       "options": {
         "tscTargetConfig": {
           "inputs": [

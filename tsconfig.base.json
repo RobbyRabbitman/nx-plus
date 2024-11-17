@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": true,
     "rootDir": ".",
     "baseUrl": ".",
     "sourceMap": true,
@@ -24,7 +25,7 @@
         "libs/e2e-version-matrix/src/index.ts"
       ],
       "@robby-rabbitman/nx-plus-tools-*": ["tools/*/src/index.ts"],
-      "@robby-rabbitman/nx-plus-tools-tsc/plugin": ["tools/tsc/src/index.ts"]
+      "@robby-rabbitman/nx-plus-tools-tsc": ["tools/tsc/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
