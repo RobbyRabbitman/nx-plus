@@ -5,6 +5,7 @@
   "peerDependencies": {
     "@nx/devkit": "19.8.10",
     "vitest": "1.6.0",
-    "@nx/vite": "19.8.10"
+    "@nx/vite": "19.8.10",
+    "tslib": "2.8.1"
   }
 }

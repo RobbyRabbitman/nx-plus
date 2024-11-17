@@ -4,5 +4,7 @@
   "type": "module",
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
-  "peerDependencies": {}
+  "peerDependencies": {
+    "tslib": "2.8.1"
+  }
 }

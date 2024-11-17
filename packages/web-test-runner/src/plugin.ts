@@ -46,7 +46,7 @@ export type WebTestRunnerTargetConfiguration = TargetConfiguration<
   Partial<RunCommandsOptions> & TestRunnerCliArgs
 >;
 
-export type WebTestRunnerTargetPluginSchema = {
+export interface WebTestRunnerTargetPluginSchema {
   /**
    * The name of the `web-test-runner` test target e.g. `'test'` or
    * `'web-test-runner'`.
@@ -55,7 +55,7 @@ export type WebTestRunnerTargetPluginSchema = {
 
   /** The configuration of the `web-test-runner` _test_ target. */
   testTargetConfig?: WebTestRunnerTargetConfiguration;
-};
+}
 
 export type WebTestRunnerTargetPluginOptions =
   Required<WebTestRunnerTargetPluginSchema>;

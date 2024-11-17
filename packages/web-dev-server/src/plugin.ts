@@ -33,7 +33,7 @@ export type WebDevServerTargetConfiguration = TargetConfiguration<
   Partial<RunCommandsOptions> & DevServerCliArgs
 >;
 
-export type WebDevServerTargetPluginSchema = {
+export interface WebDevServerTargetPluginSchema {
   /**
    * The name of the `web-dev-server` serve target e.g. `'serve'` or
    * `'web-dev-server'`.
@@ -42,7 +42,7 @@ export type WebDevServerTargetPluginSchema = {
 
   /** The configuration of the `web-dev-server` _serve_ target. */
   serveTargetConfig?: WebDevServerTargetConfiguration;
-};
+}
 
 export type WebDevServerTargetPluginOptions =
   Required<WebDevServerTargetPluginSchema>;

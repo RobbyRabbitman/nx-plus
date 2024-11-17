@@ -17,6 +17,13 @@ const nxEslintConfig = [
       '@nx/dependency-checks': [
         'error',
         {
+          ignoredDependencies: [
+            /**
+             * TODO: find out why projects eslint.config.js are ignored - in the
+             * nx graph u can see the file as a dependency
+             */
+            '@robby-rabbitman/nx-plus-tools-eslint',
+          ],
           buildTargets: ['build-tsc'],
         },
       ],

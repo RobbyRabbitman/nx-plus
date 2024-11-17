@@ -25,7 +25,7 @@ describe('[Integration Test] nodeTypescript', () => {
   });
 
   it('should respect ts paths', async () => {
-    // eslint-disable-next-line @nx/enforce-module-boundaries
+     
     const nxPlusViteModule = await import(
       '@robby-rabbitman/nx-plus-tools-vite'
     );
