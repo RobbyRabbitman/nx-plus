@@ -1,9 +1,9 @@
 // @ts-check
 import nodeEslint from 'eslint-plugin-n';
-import ignoreEslint from './ignore.eslint';
-import jsEslint from './js.eslint';
-import nxEslint from './nx.eslint';
-import tsEslint from './ts.eslint';
+import ignoreEslint from './ignore.eslint.js';
+import jsEslint from './js.eslint.js';
+import nxEslint from './nx.eslint.js';
+import tsEslint from './ts.eslint.js';
 
 const nodeEslintConfigRecomended =
   nodeEslint.configs['flat/recommended-module'];

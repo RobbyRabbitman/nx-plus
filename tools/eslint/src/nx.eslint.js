@@ -3,7 +3,8 @@ import nxEslintPlugin from '@nx/eslint-plugin';
 import jsoncEslintParser from 'jsonc-eslint-parser';
 import tsEslint from 'typescript-eslint';
 
-/** @type {import('eslint').Linter.Config[]} */
+/** TODO: @type {import('eslint').Linter.Config[]} */
+/** @type {Object[]} */
 const nxEslintConfig = [
   { plugins: { '@nx': nxEslintPlugin } },
   // https://nx.dev/nx-api/eslint-plugin#dependency-checks-rule
@@ -16,16 +17,16 @@ const nxEslintConfig = [
       '@nx/dependency-checks': [
         'error',
         {
-          ignoredFiles: [
-            '**/src/**/*.spec.*',
-            '**/src/**/*.stories.*',
-            '**/vite.config.*',
-            '**/vitest.config.*',
-            '**/wtr.config.*',
-            '**/eslint.config.*',
-            '**/stylelint.config.*',
-          ],
-          buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
+          // ignoredFiles: [
+          //   '**/src/**/*.spec.*',
+          //   '**/src/**/*.stories.*',
+          //   '**/vite.config.*',
+          //   '**/vitest.config.*',
+          //   '**/wtr.config.*',
+          //   '**/eslint.config.*',
+          //   '**/stylelint.config.*',
+          // ],
+          buildTargets: ['build-tsc'],
         },
       ],
     },

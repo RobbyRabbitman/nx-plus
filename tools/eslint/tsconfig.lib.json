@@ -7,7 +7,7 @@
     "tsBuildInfoFile": "dist/lib/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.js"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [{ "path": "../../tools/eslint" }]
 }

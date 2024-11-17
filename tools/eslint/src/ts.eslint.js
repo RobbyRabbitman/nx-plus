@@ -1,7 +1,8 @@
 // @ts-check
 import tsEslint from 'typescript-eslint';
 
-/** @type {import('eslint').Linter.Config[]} */
+/** TODO: @type {import('eslint').Linter.Config[]} */
+/** @type {Object[]} */
 const tsEslintConfig = [
   /** https://typescript-eslint.io/getting-started */
   ...tsEslint
