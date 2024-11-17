@@ -22,13 +22,6 @@ const nodeEslintConfig = [
       '**/*.cts',
     ],
   },
-  {
-    /** TODO: remove me when projects dont use relative imports */
-    files: ['**/eslint.config.*'],
-    rules: {
-      'n/no-unpublished-import': 'off',
-    },
-  },
 ];
 
 export default {
