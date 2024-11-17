@@ -35,11 +35,11 @@ export default {
   configs: {
     base: nodeEslintConfig,
     all: [
-      ...ignoreEslint.configs.base,
       ...jsEslint.configs.base,
       ...tsEslint.configs.base,
       ...nxEslint.configs.base,
       ...nodeEslintConfig,
+      ...ignoreEslint.configs.base,
     ],
   },
 };
