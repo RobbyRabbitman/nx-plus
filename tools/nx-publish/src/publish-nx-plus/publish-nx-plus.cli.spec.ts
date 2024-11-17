@@ -22,6 +22,19 @@ describe('[Unit Test] publishNxPlusCli', () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.resetModules();
+  });
+
+  describe('by default', () => {
+    it('should be a dry run', async () => {
+      await import('./publish-nx-plus.cli.js');
+
+      expect(publishNxPlus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          dryRun: true,
+        }),
+      );
+    });
   });
 
   it('should invoke publishNxPlus with the parsed args', async () => {
@@ -29,7 +42,6 @@ describe('[Unit Test] publishNxPlusCli', () => {
 
     expect(publishNxPlus).toHaveBeenCalledWith(
       expect.objectContaining({
-        dryRun: true,
         npmRegistry: 'https://some.registry',
         npmTag: 'some-tag',
       }),
