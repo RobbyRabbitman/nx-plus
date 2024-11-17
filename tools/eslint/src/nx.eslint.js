@@ -17,15 +17,6 @@ const nxEslintConfig = [
       '@nx/dependency-checks': [
         'error',
         {
-          // ignoredFiles: [
-          //   '**/src/**/*.spec.*',
-          //   '**/src/**/*.stories.*',
-          //   '**/vite.config.*',
-          //   '**/vitest.config.*',
-          //   '**/wtr.config.*',
-          //   '**/eslint.config.*',
-          //   '**/stylelint.config.*',
-          // ],
           buildTargets: ['build-tsc'],
         },
       ],
@@ -48,13 +39,6 @@ const nxEslintConfig = [
       '**/*.mjs',
       '**/*.cjs',
       '**/*.jsx',
-    ],
-    ignores: [
-      '**/vite.config.*',
-      '**/vitest.config.*',
-      '**/wtr.config.*',
-      '**/eslint.config.*',
-      '**/stylelint.config.*',
     ],
     rules: {
       '@nx/enforce-module-boundaries': [
