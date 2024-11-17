@@ -33,6 +33,9 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
     root: join(workspaceRoot, project.root),
     cacheDir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
     plugins: [nxViteTsPaths()],
+    server: {
+      host: true,
+    },
     test: {
       globals: true,
       typecheck: {
@@ -53,13 +56,16 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
         },
         provider: 'v8',
         reportsDirectory: join(workspaceRoot, 'coverage', project.root),
+        reporter: [...coverageConfigDefaults.reporter, 'lcov'],
       },
     },
   });
 
-  const mergedConfig = mergeConfig(config, overrides ?? {});
+  const combinedConfig = mergeConfig(config, overrides ?? {});
 
-  logger.verbose(mergedConfig);
+  logger.verbose('[nodeTypescript] config', config);
+  logger.verbose('[nodeTypescript] overrides', overrides);
+  logger.verbose('[nodeTypescript] combinedConfig', combinedConfig);
 
-  return mergedConfig;
+  return combinedConfig;
 }

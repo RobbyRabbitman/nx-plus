@@ -1,9 +1,9 @@
 import { workspaceRoot } from '@nx/devkit';
 import { join } from 'path';
 import { UserConfig } from 'vitest/config';
-import { nodeTypescript } from './vitest-node-typescript';
+import { nodeTypescript } from './vitest-node-typescript.js';
 
-describe('node and typescript config', () => {
+describe('[Integration Test] nodeTypescript', () => {
   it('should point to the project root', () => {
     expect(nodeTypescript()).toMatchObject({
       root: join(workspaceRoot, 'tools/vite'),

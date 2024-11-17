@@ -98,7 +98,13 @@
       ],
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "cache": true,
-      "configurations": { "ci": { "run": true } }
+      "defaultConfiguration": "local",
+      "configurations": {
+        "ci": { "run": true },
+        "local": {
+          "ui": true
+        }
+      }
     }
   }
 }

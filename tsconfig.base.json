@@ -4,7 +4,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "resolveJsonModule": true,
     "moduleResolution": "nodenext",
     "emitDecoratorMetadata": true,
