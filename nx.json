@@ -46,39 +46,6 @@
       "plugin": "@nx/vite/plugin",
       "options": { "testTargetName": "test-vite" },
       "exclude": ["e2e/**/*"]
-    },
-    {
-      "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
-      "options": {
-        "targetName": "e2e-vite-version-matrix",
-        "targetConfiguration": {
-          "cache": true,
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        },
-        "permutationTargetPrefix": "e2e-vite-version-matrix",
-        "permutationTargetConfiguration": {
-          "cache": true,
-          "parallelism": false,
-          "command": "vitest",
-          "options": {
-            "run": true,
-            "coverage": false,
-            "config": "{projectRoot}/vitest.config.mts"
-          },
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        }
-      },
-      "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
