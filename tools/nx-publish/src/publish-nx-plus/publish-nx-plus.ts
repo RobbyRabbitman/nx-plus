@@ -3,6 +3,7 @@ import { releasePublish } from 'nx/release';
 
 export type PublishNxPlusOptions = {
   npmRegistry: string;
+  npmTag?: string;
 } & Pick<Parameters<typeof releasePublish>[0], 'dryRun'>;
 
 export const publishNxPlusDefaultOptions = () =>
@@ -22,11 +23,12 @@ export const publishNxPlus = async (options: PublishNxPlusOptions) => {
   logger.verbose('[publishNxPlus] options:', options);
   logger.verbose('[publishNxPlus] combinedOptions:', combinedOptions);
 
-  const { dryRun, npmRegistry } = combinedOptions;
+  const { dryRun, npmRegistry, npmTag } = combinedOptions;
 
   const publishStatus = await releasePublish({
     dryRun,
     registry: npmRegistry,
+    tag: npmTag,
   });
 
   logger.verbose('[publishNxPlus] publish status:', publishStatus);

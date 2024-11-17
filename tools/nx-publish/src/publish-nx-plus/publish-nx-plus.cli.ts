@@ -13,11 +13,15 @@ export const publishNxPlusCli = async () => {
     const options = await yargs(hideBin(process.argv))
       .strict()
       .option('dryRun', {
+        type: 'boolean',
         default: defaultOptions.dryRun,
       })
       .option('npmRegistry', {
         type: 'string',
         demandOption: true,
+      })
+      .option('npmTag', {
+        type: 'string',
       })
       .parseAsync();
 

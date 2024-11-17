@@ -12,7 +12,9 @@
       },
       "configurations": {
         "local": {
-          "npmRegistry": "http://localhost:4873"
+          "dryRun": false,
+          "npmRegistry": "http://localhost:4873",
+          "npmTag": "local"
         }
       }
     }
