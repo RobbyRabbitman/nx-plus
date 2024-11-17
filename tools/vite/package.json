@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "peerDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
     "@nx/devkit": "19.8.10",
     "vitest": "1.6.0",
     "@nx/vite": "19.8.10",
