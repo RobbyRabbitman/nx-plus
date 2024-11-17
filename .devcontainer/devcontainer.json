@@ -12,7 +12,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "nrwl.angular-console",
+        // "nrwl.angular-console",
         "esbenp.prettier-vscode",
         "ms-azuretools.vscode-docker",
         "mutantdino.resourcemonitor",

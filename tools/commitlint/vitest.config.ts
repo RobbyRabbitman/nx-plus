@@ -1,4 +1,4 @@
-import { nodeTypescript } from '../vite/src/vitest/vitest-node-typescript.js';
+import { nodeTypescript } from '@robby-rabbitman/nx-plus-tools-vite';
 
 export default nodeTypescript({
   test: {

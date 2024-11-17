@@ -1,16 +1,20 @@
-import {
-  getPackageManagerCommand,
-  readCachedProjectGraph,
-  workspaceRoot,
-} from '@nx/devkit';
-import { execSync } from 'child_process';
+import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
+import { spawnSync } from 'child_process';
 
-describe('commits of `@robby-rabbitman/nx-plus`', () => {
-  const runCommitlint = (commitMessage: string) =>
-    execSync(
-      `${getPackageManagerCommand().exec} nx run tools-commitlint:exec:message --value '${commitMessage}'`,
+describe('[Integration Test] commits of nx plus', () => {
+  const commitlintProjectName = process.env.NX_TASK_TARGET_PROJECT as string;
+
+  const commitlint = (commitMessage: string) =>
+    spawnSync(
+      'pnpm',
+      `nx run ${commitlintProjectName}:lint-commitlint`.split(' '),
       {
         cwd: workspaceRoot,
+        encoding: 'utf-8',
+        env: {
+          ...process.env,
+          NX_PLUS_TOOLS_COMMITLINT_TEXT: commitMessage,
+        },
       },
     );
 
@@ -29,25 +33,35 @@ describe('commits of `@robby-rabbitman/nx-plus`', () => {
       'test',
     ];
 
-    for (const type of validTypes) {
-      const commitMessage = `${type}: some message`;
-      expect(() => runCommitlint(commitMessage)).not.toThrow();
-    }
+    const commitLintResult = commitlint(
+      `not_a_valid_type: type that does not exist`,
+    );
 
-    expect(() => runCommitlint('not-a-valid-type: some message')).toThrow();
+    expect(commitLintResult.status).toBe(1);
+
+    // Check that each valid type appears within the "type must be one of [ ... ]" section
+    for (const validType of validTypes) {
+      expect(commitLintResult.stdout).toMatch(
+        new RegExp(`type must be one of \\[.*${validType}.*\\]`),
+      );
+    }
   });
 
-  it('should reference projects of this workspace when scoped', () => {
+  it('should reference projects when scoped', () => {
     const projects = Object.keys(readCachedProjectGraph().nodes);
 
-    for (const project of projects) {
-      expect(() =>
-        runCommitlint(`feat(${project}): supa dupa feature`),
-      ).not.toThrow();
-    }
+    expect(projects.length).toBeGreaterThan(0);
 
-    expect(() =>
-      runCommitlint('feat(not-a-project-of-nx-plus): supa dupa feature'),
-    ).toThrow();
+    const commitLintResult = commitlint(
+      'feat(not-a-project-of-hdi-components): supa dupa feature',
+    );
+    expect(commitLintResult.status).toBe(1);
+
+    // Check that each project appears within the "scope must be one of [ ... ]" section
+    for (const project of projects) {
+      expect(commitLintResult.stdout).toMatch(
+        new RegExp(`scope must be one of \\[.*${project}.*\\]`),
+      );
+    }
   });
 });

@@ -3,13 +3,8 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:tool"],
   "targets": {
-    "exec": {
-      "command": "pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose",
-      "configurations": {
-        "message": {
-          "command": "echo \"{args.value}\" | pnpm exec commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
-        }
-      }
+    "lint-commitlint": {
+      "command": "echo \"$NX_PLUS_TOOLS_COMMITLINT_TEXT\" | pnpm commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
     }
   }
 }
