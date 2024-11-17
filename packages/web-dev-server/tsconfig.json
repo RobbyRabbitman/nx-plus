@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
-
+  "exclude": [],
   "references": [
     { "path": "../../tools/vite" },
     { "path": "../../tools/eslint" },

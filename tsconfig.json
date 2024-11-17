@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
+  "include": [],
   "files": [],
+  "exclude": [],
   "references": [
     { "path": "./packages/web-test-runner" },
     { "path": "./packages/web-dev-server" },
