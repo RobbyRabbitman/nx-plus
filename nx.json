@@ -26,15 +26,14 @@
   },
   "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-tools-tsc",
+      "plugin": "@nx/js/typescript",
       "options": {
-        "tscTargetConfig": {
-          "inputs": [
-            "default",
-            "^default",
-            "typescriptGlobals",
-            "{workspaceRoot}/tools/tsc/**/*"
-          ]
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json"
         }
       }
     },
