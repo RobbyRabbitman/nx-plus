@@ -4,6 +4,7 @@
   "include": [],
   "exclude": [],
   "references": [
+    { "path": "../verdaccio" },
     { "path": "../vite" },
     { "path": "../eslint" },
     { "path": "./tsconfig.lib.json" },

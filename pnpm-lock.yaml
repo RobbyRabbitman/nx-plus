@@ -265,6 +265,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-verdaccio':
+        specifier: workspace:*
+        version: link:../verdaccio
       '@robby-rabbitman/nx-plus-tools-vite':
         specifier: workspace:*
         version: link:../vite

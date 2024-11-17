@@ -55,8 +55,8 @@
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "options": { "packageRoot": "{workspaceRoot}/dist/{projectRoot}" },
-      "dependsOn": ["build"]
+      "options": { "packageRoot": "{projectRoot}" },
+      "dependsOn": ["build*"]
     },
     "lint-eslint": {
       "inputs": ["default", "^default", "eslintGlobals"]

@@ -10,6 +10,7 @@
   "include": ["src/**/*.ts"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
+    { "path": "../verdaccio/tsconfig.lib.json" },
     { "path": "../vite/tsconfig.lib.json" },
     { "path": "../eslint/tsconfig.lib.json" }
   ]

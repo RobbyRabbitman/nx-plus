@@ -36,11 +36,11 @@
   },
   "generators": "./generators.json",
   "type": "module",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
   "exports": {
-    ".": "./src/index.js",
+    ".": "./dist/lib/index.js",
     "./package.json": "./package.json",
-    "./plugin": "./src/plugin.js"
+    "./plugin": "./dist/lib/plugin.js"
   }
 }
