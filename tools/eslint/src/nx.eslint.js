@@ -29,7 +29,7 @@ const nxEslintConfig = [
              */
             '@robby-rabbitman/nx-plus-tools-vite',
           ],
-          buildTargets: ['build-tsc'],
+          buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
         },
       ],
     },
