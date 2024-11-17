@@ -1,0 +1,5 @@
+(node:29022) Warning: Verdaccio doesn't need superuser privileges. don't run it under root
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29022) Warning: Verdaccio doesn't need superuser privileges. don't run it under root
+(node:29022) Warning: multiple addresses will be deprecated in the next major, only use one
+[33mwarn [39m[37m[34m---[37m http address - [32mhttp://0.0.0.0:4873/[37m - [32mverdaccio/5.32.2[37m[39m

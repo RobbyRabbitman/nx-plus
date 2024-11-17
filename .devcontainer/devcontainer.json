@@ -1,12 +1,9 @@
 {
   "name": "nx-plus-dev-container",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "nx-plus-dev-container",
-  "workspaceFolder": "/workspace",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "postCreateCommand": "bash .devcontainer/post-create.bash",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "forwardPorts": [
     4873 // verdaccio
@@ -28,9 +25,7 @@
     }
   },
   "mounts": [
-    // https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
-    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-    "source=${localWorkspaceFolderBasename}-.nx,target=${containerWorkspaceFolder}/.nx,type=volume"
+    "source=${localWorkspaceFolderBasename},target=${localWorkspaceFolder},type=volume"
   ],
   "remoteEnv": {
     "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}",

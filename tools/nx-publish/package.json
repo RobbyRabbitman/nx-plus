@@ -1,0 +1,11 @@
+{
+  "name": "@robby-rabbitman/nx-plus-nx-publish",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@nx/devkit": "19.8.10",
+    "@nx/js": "19.8.10",
+    "nx": "19.8.10",
+    "tslib": "2.8.1"
+  }
+}
