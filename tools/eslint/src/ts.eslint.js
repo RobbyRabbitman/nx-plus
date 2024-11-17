@@ -10,22 +10,6 @@ const tsEslintConfig = [
     .map((tsEslintConfig) => ({
       ...tsEslintConfig,
       files: ['**/*.ts', '**/*.mts', '**/*.cts', '**/*.tsx'],
-      rules: {
-        ...tsEslintConfig.rules,
-        /** TODO: https://github.com/eslint/eslint/issues/19134 */
-        '@typescript-eslint/no-unused-expressions': [
-          'error',
-          {
-            allowShortCircuit: true,
-            allowTernary: true,
-          },
-        ],
-        '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
-        '@typescript-eslint/no-empty-function': [
-          'error',
-          { allow: ['arrowFunctions'] },
-        ],
-      },
     })),
 ];
 
