@@ -33,7 +33,7 @@ describe('[Unit Test] publishNxPlusCli', () => {
         dryRun: true,
         npmRegistry: 'https://some.registry',
         npmTag: 'some-tag',
-      }),
+      } satisfies Parameters<typeof publishNxPlus>[0]),
     );
   });
 });
