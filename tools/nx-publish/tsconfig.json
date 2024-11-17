@@ -3,5 +3,10 @@
   "files": [],
   "include": [],
   "exclude": [],
-  "references": [{ "path": "../eslint" }, { "path": "./tsconfig.lib.json" }]
+  "references": [
+    { "path": "../vite" },
+    { "path": "../eslint" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
+  ]
 }
