@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:tool"],
   "targets": {
-    "test": {
+    "lint": {
       "inputs": [
         "default",
         "^default",
