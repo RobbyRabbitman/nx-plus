@@ -23,7 +23,11 @@ export const publishNxPlusCli = async () => {
     })
     .parseAsync();
 
-  await publishNxPlus(options);
+  await publishNxPlus({
+    npmRegistry: options.npmRegistry,
+    npmTag: options.npmTag,
+    dryRun: options.dryRun,
+  });
 };
 
 await publishNxPlusCli();

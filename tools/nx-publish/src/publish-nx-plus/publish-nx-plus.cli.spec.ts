@@ -28,12 +28,10 @@ describe('[Unit Test] publishNxPlusCli', () => {
   it('should invoke publishNxPlus with the parsed args', async () => {
     await import('./publish-nx-plus.cli.js');
 
-    expect(publishNxPlus).toHaveBeenCalledWith(
-      expect.objectContaining({
-        dryRun: true,
-        npmRegistry: 'https://some.registry',
-        npmTag: 'some-tag',
-      } satisfies Parameters<typeof publishNxPlus>[0]),
-    );
+    expect(publishNxPlus).toHaveBeenCalledWith({
+      dryRun: true,
+      npmRegistry: 'https://some.registry',
+      npmTag: 'some-tag',
+    } satisfies Parameters<typeof publishNxPlus>[0]);
   });
 });
