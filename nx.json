@@ -29,10 +29,10 @@
       "plugin": "@nx/js/typescript",
       "options": {
         "typecheck": {
-          "targetName": "typecheck"
+          "targetName": "typecheck-tsc"
         },
         "build": {
-          "targetName": "build",
+          "targetName": "build-tsc",
           "configName": "tsconfig.lib.json"
         }
       }
