@@ -5,10 +5,11 @@
     "rootDir": "src",
     "outDir": "dist/lib",
     "tsBuildInfoFile": "dist/lib/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
+    "verbatimModuleSyntax": false
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
+  "exclude": ["vite.config.ts", "vitest.config.mts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../vite/tsconfig.lib.json" },
     { "path": "../eslint/tsconfig.lib.json" }

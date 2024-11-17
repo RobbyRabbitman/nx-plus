@@ -31,6 +31,7 @@
     "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
   },
   "plugins": [
+    "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-plugin",
     {
       "plugin": "@nx/js/typescript",
       "options": {
