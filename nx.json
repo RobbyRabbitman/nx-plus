@@ -45,8 +45,7 @@
     },
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint-eslint" },
-      "exclude": ["**/*"]
+      "options": { "targetName": "lint-eslint" }
     },
     {
       "plugin": "@nx/vite/plugin",

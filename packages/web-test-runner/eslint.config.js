@@ -1,5 +1,4 @@
-// @ts-check
-import nodeEslint from '../../tools/eslint/src/node.eslint.js';
+import { nodeEslint } from '@robby-rabbitman/nx-plus-tools-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...nodeEslint.configs.all];
+export default [...nodeEslint.configs.base];
