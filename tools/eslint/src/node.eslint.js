@@ -1,8 +1,8 @@
 // @ts-check
 import nodeEslint from 'eslint-plugin-n';
-import { nxEslint } from '.';
 import ignoreEslint from './ignore.eslint';
 import jsEslint from './js.eslint';
+import nxEslint from './nx.eslint';
 import tsEslint from './ts.eslint';
 
 const nodeEslintConfigRecomended =

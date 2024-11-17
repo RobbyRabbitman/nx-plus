@@ -3,7 +3,7 @@ import nxEslintPlugin from '@nx/eslint-plugin';
 import jsoncEslintParser from 'jsonc-eslint-parser';
 import tsEslint from 'typescript-eslint';
 
-// /** @type {import('eslint').Linter.Config[]} */
+/** @type {import('eslint').Linter.Config[]} */
 const nxEslintConfig = [
   { plugins: { '@nx': nxEslintPlugin } },
   // https://nx.dev/nx-api/eslint-plugin#dependency-checks-rule

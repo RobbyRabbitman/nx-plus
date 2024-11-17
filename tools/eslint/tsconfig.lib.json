@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "src",
+    "outDir": "dist/lib",
+    "tsBuildInfoFile": "dist/lib/tsconfig.lib.tsbuildinfo",
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
+  "references": [
+    { "path": "../../tools/vite/tsconfig.lib.json" },
+    { "path": "../node-util/tsconfig.lib.json" },
+    { "path": "../../tools/eslint" }
+  ]
+}

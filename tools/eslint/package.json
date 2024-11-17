@@ -1,0 +1,9 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-eslint",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/lib/index.js",
+  "typings": "./dist/lib/index.d.ts",
+  "types": "./dist/lib/index.d.ts",
+  "peerDependencies": {}
+}
