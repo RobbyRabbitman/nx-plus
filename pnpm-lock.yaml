@@ -155,31 +155,7 @@ importers:
         specifier: 17.7.2
         version: 17.7.2
 
-  e2e/web-dev-server:
-    dependencies:
-      '@nx/devkit':
-        specifier: 20.1.2
-        version: 20.1.2(nx@20.1.2(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15)))
-      '@nx/plugin':
-        specifier: 20.1.2
-        version: 20.1.2(@babel/traverse@7.25.9)(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15))(@types/node@20.17.6)(@zkochan/js-yaml@0.0.7)(eslint@9.14.0(jiti@1.21.6))(nx@20.1.2(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15)))(ts-node@10.9.1(@swc/core@1.9.2(@swc/helpers@0.5.15))(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(verdaccio@5.32.2(encoding@0.1.13)(typanion@3.14.0))
-      '@web/dev-server':
-        specifier: 0.4.6
-        version: 0.4.6
-
-  e2e/web-test-runner:
-    dependencies:
-      '@nx/devkit':
-        specifier: 20.1.2
-        version: 20.1.2(nx@20.1.2(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15)))
-      '@nx/plugin':
-        specifier: 20.1.2
-        version: 20.1.2(@babel/traverse@7.25.9)(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15))(@types/node@20.17.6)(@zkochan/js-yaml@0.0.7)(eslint@9.14.0(jiti@1.21.6))(nx@20.1.2(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15)))(ts-node@10.9.1(@swc/core@1.9.2(@swc/helpers@0.5.15))(@types/node@20.17.6)(typescript@5.6.3))(typescript@5.6.3)(verdaccio@5.32.2(encoding@0.1.13)(typanion@3.14.0))
-      '@web/test-runner':
-        specifier: 0.18.3
-        version: 0.18.3
-
-  packages/e2e-util:
+  packages/node-e2e-util:
     dependencies:
       '@nx/devkit':
         specifier: 20.1.2
@@ -193,12 +169,12 @@ importers:
       '@robby-rabbitman/nx-plus-tools-vite':
         specifier: workspace:*
         version: link:../../tools/vite
+      memfs:
+        specifier: 4.14.0
+        version: 4.14.0
       proper-lockfile:
         specifier: 4.1.2
         version: 4.1.2
-      semver:
-        specifier: 7.6.3
-        version: 7.6.3
       vitest:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.17.6)(@vitest/ui@1.6.0)

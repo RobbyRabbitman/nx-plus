@@ -60,8 +60,8 @@ describe('[Unit Test] nodeTypescript', () => {
     expect(nodeTypescript()).toMatchObject({
       cacheDir: join(
         workspaceRoot,
-        'node_modules/.cache/vitest',
         'some-project',
+        'node_modules/.cache/vitest',
       ),
     } satisfies UserConfig);
   });
