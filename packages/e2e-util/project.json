@@ -1,5 +1,0 @@
-{
-  "name": "e2e-util",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:util"]
-}

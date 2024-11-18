@@ -4,6 +4,7 @@
   "files": [],
   "exclude": [],
   "references": [
+    { "path": "../node-util" },
     { "path": "../../tools/vite" },
     { "path": "../../tools/eslint" },
     { "path": "./tsconfig.lib.json" },
