@@ -12,10 +12,10 @@
     { "path": "./tools/commitlint" },
     { "path": "./tools/nx-publish" },
     { "path": "./tools/verdaccio" },
-    { "path": "./libs/node-util" },
-    { "path": "./libs/e2e-util" },
     { "path": "./tools/vite" },
     { "path": "./tools/eslint" },
-    { "path": "./tools/eslint-nx-dependency-checks-plugin" }
+    { "path": "./tools/eslint-nx-dependency-checks-plugin" },
+    { "path": "./packages/node-util" },
+    { "path": "./packages/e2e-util" }
   ]
 }

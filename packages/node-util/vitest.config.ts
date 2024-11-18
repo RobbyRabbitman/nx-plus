@@ -1,9 +1,3 @@
-import { nodeTypescript } from '../../tools/vite/src/vitest/vitest-node-typescript.js';
+import { nodeTypescript } from '@robby-rabbitman/nx-plus-tools-vite';
 
-export default nodeTypescript({
-  test: {
-    coverage: {
-      exclude: ['**/get-random-port.ts'],
-    },
-  },
-});
+export default nodeTypescript();
