@@ -8,10 +8,6 @@ vi.mock('@nx/devkit');
 vi.mock('nx/release');
 
 describe('[Unit Test] publishNxPlus', () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   describe('by default', () => {
     it('should be a dry run', async () => {
       expect(publishNxPlusDefaultOptions().dryRun).toBe(true);

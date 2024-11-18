@@ -28,7 +28,6 @@ describe('[Unit Test] nodeTypescript', () => {
   });
 
   afterEach(() => {
-    vi.restoreAllMocks();
     vi.unstubAllEnvs();
   });
 

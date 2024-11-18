@@ -11,10 +11,6 @@ describe(
     const npmRegistry = VERDACCIO_URL;
     const npmTag = 'integration-test';
 
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
-
     describe.todo('by default', () => {
       it('should be a dry run', async () => {
         await publishNxPlus({ npmRegistry, npmTag });

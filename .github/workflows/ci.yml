@@ -34,7 +34,11 @@ jobs:
 
       - run: sh .devcontainer/exec-cmd.sh nx report
 
-      - run: sh .devcontainer/exec-cmd.sh nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
+      - run: sh .devcontainer/exec-cmd.sh nx run tools-commitlint:lint-commitlint
+        env:
+          NX_PLUS_TOOLS_COMMITLINT_TEXT: ${{ github.event.pull_request.title }}
+
+      - run: sh .devcontainer/exec-cmd.sh nx sync:check
 
       - run: sh .devcontainer/exec-cmd.sh nx format:check
 

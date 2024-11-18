@@ -29,7 +29,6 @@ describe('[Unit Test] publishNxPlusCli', () => {
 
   afterEach(() => {
     vi.mocked(process.exit).mockRestore();
-    vi.restoreAllMocks();
     vi.resetModules();
   });
 

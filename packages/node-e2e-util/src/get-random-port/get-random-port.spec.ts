@@ -59,8 +59,6 @@ describe('[Unit Test] getRandomPort', () => {
 
   afterEach(() => {
     vol.reset();
-    vi.restoreAllMocks();
-    vi.resetModules();
   });
 
   describe('should track acquired ports', () => {

@@ -14,11 +14,6 @@ describe('[Unit Test] getRandomPort', () => {
     } as unknown as Server);
   });
 
-  afterEach(() => {
-    vi.restoreAllMocks();
-    vi.resetModules();
-  });
-
   it('should return a random port number', async () => {
     await expect(getRandomPort()).resolves.toBe(1234);
   });
