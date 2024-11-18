@@ -1,6 +1,6 @@
 import { ChildProcess } from 'child_process';
 import { describe, expect, it, vitest } from 'vitest';
-import { execUntil } from './exec-until';
+import { execUntil } from './exec-until.js';
 
 describe('execUntil', { timeout: 30_000 }, () => {
   const TIMEOUT = Symbol('Time out :(');

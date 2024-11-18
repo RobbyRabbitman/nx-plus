@@ -4,6 +4,7 @@ import { createServer } from 'net';
 export function getRandomPort() {
   return new Promise<number>((resolve, reject) => {
     const server = createServer();
+
     let port: number | undefined;
 
     server.listen(0, () => {
