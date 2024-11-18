@@ -1,5 +1,5 @@
 {
-  "name": "libs-node-util",
+  "name": "node-util",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["scope:node", "type:util"]
 }

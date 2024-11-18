@@ -179,7 +179,7 @@ importers:
         specifier: 0.18.3
         version: 0.18.3
 
-  libs/e2e-util:
+  packages/e2e-util:
     dependencies:
       '@nx/devkit':
         specifier: 20.1.2
@@ -194,7 +194,7 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/node@20.17.6)(@vitest/ui@1.6.0)
 
-  libs/node-util:
+  packages/node-util:
     dependencies:
       vitest:
         specifier: 1.6.0

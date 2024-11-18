@@ -1,5 +1,5 @@
 {
-  "name": "@robby-rabbitman/nx-plus-libs-node-util",
+  "name": "@robby-rabbitman/nx-plus-node-util",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/lib/index.js",
