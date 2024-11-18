@@ -28,7 +28,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
 
   const config = defineConfig({
     root: join(workspaceRoot, project.root),
-    cacheDir: join(workspaceRoot, 'node_modules/.cache/vitest', project.root),
+    cacheDir: join(workspaceRoot, project.root, 'node_modules/.cache/vitest'),
     server: {
       host: true,
     },
@@ -52,7 +52,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
           statements: 95,
         },
         provider: 'v8',
-        reportsDirectory: join(workspaceRoot, 'coverage', project.root),
+        reportsDirectory: join(workspaceRoot, project.root, 'coverage'),
         reporter: [...coverageConfigDefaults.reporter, 'lcov'],
       },
     },

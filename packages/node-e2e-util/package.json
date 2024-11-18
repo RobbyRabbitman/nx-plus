@@ -11,6 +11,6 @@
     "@nx/devkit": "20.1.2",
     "vitest": "1.6.0",
     "proper-lockfile": "4.1.2",
-    "semver": "7.6.3"
+    "memfs": "4.14.0"
   }
 }
