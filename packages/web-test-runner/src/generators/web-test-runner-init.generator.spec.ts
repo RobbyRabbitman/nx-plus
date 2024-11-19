@@ -1,136 +1,127 @@
-import * as devkit from '@nx/devkit';
-import { readNxJson, updateNxJson } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
-import { type Mock } from 'vitest';
-import {
-  initGenerator,
-  type WebTestRunnerInitGeneratorSchema,
-} from './init.js';
+import { formatFiles, readNxJson, updateNxJson } from '@nx/devkit';
+import { webTestRunnerInitGenerator } from './web-test-runner-init.generator.js';
 
-vi.mock('@nx/devkit', async () => {
-  const module = await vi.importActual('@nx/devkit');
-  return {
-    ...module,
-    formatFiles: vi.fn(),
-  };
-});
+vi.mock('@nx/devkit');
 
-describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
-  const formatFiles = devkit.formatFiles as Mock;
-  const createWorkspace = () =>
-    createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+describe('[Unit Test] nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
+  const MOCK_TREE = Symbol('MOCK_TREE');
 
   beforeEach(() => {
-    console.warn = vi.fn();
-    formatFiles.mockClear();
+    vi.mocked(readNxJson).mockReturnValue({
+      plugins: [],
+    });
   });
 
-  describe('should not modify the `nx.json` when the plugin is already registered in the `nx.json`', () => {
-    it('when provided as an string', async () => {
-      const workspace = createWorkspace();
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-      updateNxJson(workspace, {
-        plugins: ['@robby-rabbitman/nx-plus-web-test-runner/plugin'],
+  describe('should not modify the `nx.json`', () => {
+    it('when the plugin is registered as a string', async () => {
+      vi.mocked(readNxJson).mockReturnValueOnce({
+        plugins: [
+          '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+        ],
       });
-
-      const before = readNxJson(workspace);
-
-      await initGenerator(workspace, { testTargetName: 'test' });
-
-      const after = readNxJson(workspace);
-
-      expect(after).toEqual(before);
+      await webTestRunnerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).not.toHaveBeenCalled();
     });
 
-    it('when provided as an object', async () => {
-      const workspace = createWorkspace();
-
-      const testTargetName = 'I am already registered :D';
-
-      updateNxJson(workspace, {
+    it('when the plugin is registered as an object', async () => {
+      vi.mocked(readNxJson).mockReturnValueOnce({
         plugins: [
           {
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-            options: {
-              testTargetName,
-            } satisfies WebTestRunnerInitGeneratorSchema,
+            plugin:
+              '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+            options: {},
           },
         ],
       });
-
-      const before = readNxJson(workspace);
-
-      await initGenerator(workspace, { testTargetName: 'test' });
-
-      const after = readNxJson(workspace);
-
-      expect(after).toEqual(before);
+      await webTestRunnerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).not.toHaveBeenCalled();
     });
   });
 
-  it('should register the plugin in the `nx.json` when the plugin is not registered in the `nx.json`', async () => {
-    const workspace = createWorkspace();
-
-    await initGenerator(workspace, {});
-
-    expect(readNxJson(workspace)?.plugins).toContainEqual(
-      expect.objectContaining({
-        plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-      }),
-    );
+  describe('should add the plugin to the `nx.json`', () => {
+    it('when the plugin is not registered', async () => {
+      await webTestRunnerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).toHaveBeenCalledWith(
+        MOCK_TREE,
+        expect.objectContaining({
+          plugins: [
+            expect.objectContaining({
+              plugin:
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+            }),
+          ],
+        }),
+      );
+    });
   });
 
   describe('schema', () => {
     describe('testTargetName', () => {
       it('should use the provided value', async () => {
-        const workspace = createWorkspace();
-
         const testTargetName = 'web-test-runner';
 
-        await initGenerator(workspace, {
+        await webTestRunnerInitGenerator(MOCK_TREE, {
           testTargetName,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-            options: {
-              testTargetName,
-            } satisfies WebTestRunnerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+                options: {
+                  testTargetName,
+                },
+              }),
+            ],
           }),
         );
       });
 
       it('should fall back to `test` when the provided value is an empty string', async () => {
-        const workspace = createWorkspace();
-
         const testTargetName = '';
 
-        await initGenerator(workspace, {
+        await webTestRunnerInitGenerator(MOCK_TREE, {
           testTargetName,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-            options: {
-              testTargetName: 'test',
-            } satisfies WebTestRunnerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+                options: {
+                  testTargetName: 'test',
+                },
+              }),
+            ],
           }),
         );
       });
 
       it('should fall back to `test` when the value is not provided', async () => {
-        const workspace = createWorkspace();
+        await webTestRunnerInitGenerator(MOCK_TREE, {});
 
-        await initGenerator(workspace, {});
-
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-            options: {
-              testTargetName: 'test',
-            } satisfies WebTestRunnerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+                options: {
+                  testTargetName: 'test',
+                },
+              }),
+            ],
           }),
         );
       });
@@ -138,29 +129,19 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
     describe('skipFormatFiles', () => {
       it('should format when the value is not provided', async () => {
-        const workspace = createWorkspace();
-
-        expect(formatFiles).not.toHaveBeenCalled();
-
-        await initGenerator(workspace, {});
+        await webTestRunnerInitGenerator(MOCK_TREE, {});
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should format when the provided value is `false`', async () => {
-        const workspace = createWorkspace();
-
-        expect(formatFiles).not.toHaveBeenCalled();
-
-        await initGenerator(workspace, { skipFormat: false });
+        await webTestRunnerInitGenerator(MOCK_TREE, { skipFormat: false });
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should not format when the provided value is `true`', async () => {
-        const workspace = createWorkspace();
-
-        await initGenerator(workspace, { skipFormat: true });
+        await webTestRunnerInitGenerator(MOCK_TREE, { skipFormat: true });
 
         expect(formatFiles).not.toHaveBeenCalled();
       });
@@ -168,49 +149,45 @@ describe('nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
 
     describe('skipAddPlugin', () => {
       it('should add the plugin to `nx.json` when the value is not provided', async () => {
-        const workspace = createWorkspace();
+        await webTestRunnerInitGenerator(MOCK_TREE, {});
 
-        await initGenerator(workspace, {});
-
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+              }),
+            ],
           }),
         );
       });
 
       it('should add the plugin to `nx.json` when the provided value is `false`', async () => {
-        const workspace = createWorkspace();
-
-        await initGenerator(workspace, {
+        await webTestRunnerInitGenerator(MOCK_TREE, {
           skipAddPlugin: false,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+              }),
+            ],
           }),
         );
       });
 
       it('should not add the plugin to `nx.json` when the provided value is `true`', async () => {
-        const workspace = createWorkspace();
-
-        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
-          expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-          }),
-        );
-
-        await initGenerator(workspace, {
+        await webTestRunnerInitGenerator(MOCK_TREE, {
           skipAddPlugin: true,
         });
 
-        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
-          expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-test-runner/plugin',
-          }),
-        );
+        expect(updateNxJson).not.toHaveBeenCalled();
       });
     });
   });

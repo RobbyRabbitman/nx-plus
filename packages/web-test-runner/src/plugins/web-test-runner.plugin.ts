@@ -14,7 +14,7 @@ export const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
 
 /**
  * TODO: '@web/test-runner' does not export the `TestRunnerCliArgs` type - add
- * them when its exported from their public api
+ * them when its exported from their public api.
  *
  * https://github.com/modernweb-dev/web/blob/17cfc0d70f46b321912e4506b2cccae1b16b1534/packages/test-runner/src/config/readCliArgs.ts#L7-L34
  */
@@ -55,10 +55,12 @@ export const createNodesV2 = [
     ),
 ] satisfies CreateNodesV2<WebTestRunnerTargetPluginSchema>;
 
+export const DEFAULT_WEB_TEST_RUNNER_TARGET_NAME = 'test';
+
 const createWebTestRunnerTarget: CreateNodesFunction<
   WebTestRunnerTargetPluginSchema | undefined
 > = (webTestRunnerConfigPath, schema, context) => {
-  const defaultWebTestRunnerTargetName = 'test';
+  const defaultWebTestRunnerTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
 
   const options = {
     testTargetName: defaultWebTestRunnerTargetName,
@@ -66,7 +68,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
     ...schema,
   } satisfies WebTestRunnerTargetPluginOptions;
 
-  /** Make sure `testTargetName` is not an empty string */
+  /** Make sure `testTargetName` is not an empty string. */
   if (options.testTargetName === '') {
     options.testTargetName = defaultWebTestRunnerTargetName;
   }

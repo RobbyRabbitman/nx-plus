@@ -5,12 +5,15 @@ import {
   readNxJson,
   updateNxJson,
 } from '@nx/devkit';
+import { DEFAULT_WEB_TEST_RUNNER_TARGET_NAME } from '../plugins/web-test-runner.plugin.js';
 
-// TODO: import the package.json and read the name? :D
 export const WEB_TEST_RUNNER_PLUGIN_PATH =
-  '@robby-rabbitman/nx-plus-web-test-runner/plugin';
+  '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner';
 
-// TODO: can this type be generated from the schema.json or the json imported and then inferred in order to be synced?
+/**
+ * TODO: can this type be generated from the schema.json or the json imported
+ * and then inferred in order to be synced?
+ */
 export interface WebTestRunnerInitGeneratorSchema {
   /**
    * The name of the `web-test-runner` test target e.g. 'test' or
@@ -28,68 +31,61 @@ export interface WebTestRunnerInitGeneratorSchema {
 export type WebTestRunnerInitGeneratorOptions =
   Required<WebTestRunnerInitGeneratorSchema>;
 
-export const initGenerator: Generator<
+export const webTestRunnerInitGenerator: Generator<
   WebTestRunnerInitGeneratorSchema
 > = async (tree, schema) => {
-  const defaultTestTargetName = 'test';
+  const defaultWebTestRunnerTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
 
   const options = {
     skipAddPlugin: false,
     skipFormat: false,
-    testTargetName: defaultTestTargetName,
+    testTargetName: defaultWebTestRunnerTargetName,
     ...schema,
   } satisfies WebTestRunnerInitGeneratorOptions;
 
-  // make sure `testTargetName` is not an empty string
+  /** Make sure `testTargetName` is not an empty string. */
   if (options.testTargetName === '') {
-    options.testTargetName = defaultTestTargetName;
+    options.testTargetName = defaultWebTestRunnerTargetName;
   }
 
   const { skipAddPlugin, skipFormat } = options;
 
-  // 1.
-  if (!skipAddPlugin) {
-    const nxJson = readNxJson(tree) ?? {};
-    nxJson.plugins ??= [];
-
-    const hasWebTestRunnerPlugin = nxJson.plugins.some((pluginConfig) => {
-      // `pluginConfig` can be a string representing the plugin name or a object with a plugin property representing the plugin name
-      if (typeof pluginConfig === 'string') {
-        return pluginConfig === WEB_TEST_RUNNER_PLUGIN_PATH;
-      }
-
-      return pluginConfig.plugin === WEB_TEST_RUNNER_PLUGIN_PATH;
-    });
-
-    if (!hasWebTestRunnerPlugin) {
-      nxJson.plugins.push(
-        createWebTestRunnerPluginConfiguration({
-          webTestRunnerPluginName: WEB_TEST_RUNNER_PLUGIN_PATH,
-          options,
-        }),
-      );
-      updateNxJson(tree, nxJson);
-    }
+  if (skipAddPlugin) {
+    return;
   }
 
-  // 2.
+  const nxJson = readNxJson(tree) ?? {};
+  nxJson.plugins ??= [];
+
+  const hasWebTestRunnerPlugin = nxJson.plugins.some((pluginConfig) => {
+    /**
+     * `pluginConfig` can be a string representing the plugin name or a object
+     * with a plugin property representing the plugin name. So we need to check
+     * both.
+     */
+
+    if (typeof pluginConfig === 'string') {
+      return pluginConfig === WEB_TEST_RUNNER_PLUGIN_PATH;
+    }
+
+    return pluginConfig.plugin === WEB_TEST_RUNNER_PLUGIN_PATH;
+  });
+
+  /** When the plugin is not already added to the `nx.json` file, add it. */
+  if (!hasWebTestRunnerPlugin) {
+    nxJson.plugins.push({
+      plugin: WEB_TEST_RUNNER_PLUGIN_PATH,
+      options: {
+        testTargetName: options.testTargetName,
+      },
+    } satisfies ExpandedPluginConfiguration<WebTestRunnerInitGeneratorSchema>);
+
+    updateNxJson(tree, nxJson);
+  }
+
   if (!skipFormat) {
     await formatFiles(tree);
   }
 };
 
-export default initGenerator;
-
-export const createWebTestRunnerPluginConfiguration = ({
-  options,
-  webTestRunnerPluginName,
-}: {
-  options: WebTestRunnerInitGeneratorOptions;
-  webTestRunnerPluginName: string;
-}) =>
-  ({
-    plugin: webTestRunnerPluginName,
-    options: {
-      testTargetName: options.testTargetName,
-    },
-  }) satisfies ExpandedPluginConfiguration<WebTestRunnerInitGeneratorSchema>;
+export default webTestRunnerInitGenerator;
