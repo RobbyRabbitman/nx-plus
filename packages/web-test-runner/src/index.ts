@@ -1,1 +1,1 @@
-export { initGenerator } from './generators/init.js';
+export { initGenerator } from './generators/web-test-runner-init.generator.js';
