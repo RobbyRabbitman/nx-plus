@@ -14,13 +14,13 @@ export const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
 
 /**
  * TODO: '@web/test-runner' does not export the `TestRunnerCliArgs` type - add
- * them when its exported from their public api.
+ * it when its exported from their public api.
  *
  * https://github.com/modernweb-dev/web/blob/17cfc0d70f46b321912e4506b2cccae1b16b1534/packages/test-runner/src/config/readCliArgs.ts#L7-L34
  */
 export type WebTestRunnerTargetConfiguration = TargetConfiguration;
 
-export interface WebTestRunnerTargetPluginSchema {
+export interface WebTestRunnerPluginSchema {
   /**
    * The name of the `web-test-runner` test target e.g. `'test'` or
    * `'web-test-runner'`.
@@ -29,7 +29,7 @@ export interface WebTestRunnerTargetPluginSchema {
 
   /**
    * The configuration of the `web-test-runner` target identified by
-   * {@link WebTestRunnerTargetPluginSchema.testTargetName testTargetName}.
+   * {@link WebTestRunnerPluginSchema.testTargetName testTargetName}.
    *
    * @example
    *   {
@@ -41,8 +41,7 @@ export interface WebTestRunnerTargetPluginSchema {
   testTargetConfig?: WebTestRunnerTargetConfiguration;
 }
 
-export type WebTestRunnerTargetPluginOptions =
-  Required<WebTestRunnerTargetPluginSchema>;
+export type WebTestRunnerPluginOptions = Required<WebTestRunnerPluginSchema>;
 
 export const createNodesV2 = [
   WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB,
@@ -53,12 +52,12 @@ export const createNodesV2 = [
       schema,
       context,
     ),
-] satisfies CreateNodesV2<WebTestRunnerTargetPluginSchema>;
+] satisfies CreateNodesV2<WebTestRunnerPluginSchema>;
 
 export const DEFAULT_WEB_TEST_RUNNER_TARGET_NAME = 'test';
 
 const createWebTestRunnerTarget: CreateNodesFunction<
-  WebTestRunnerTargetPluginSchema | undefined
+  WebTestRunnerPluginSchema | undefined
 > = (webTestRunnerConfigPath, schema, context) => {
   const defaultWebTestRunnerTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
 
@@ -66,7 +65,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
     testTargetName: defaultWebTestRunnerTargetName,
     testTargetConfig: {},
     ...schema,
-  } satisfies WebTestRunnerTargetPluginOptions;
+  } satisfies WebTestRunnerPluginOptions;
 
   /** Make sure `testTargetName` is not an empty string. */
   if (options.testTargetName === '') {
@@ -82,7 +81,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
   /**
    * TODO: should a root web-test-runner be allowed?
    *
-   * Checks whether `webTestRunnerConfigPath` is considered a non root project,
+   * Check whether `webTestRunnerConfigPath` is considered a non root project,
    * if not returns without modifying the project graph.
    */
   if (!isNonRootProject(maybeWebTestRunnerProjectRoot, context.workspaceRoot)) {

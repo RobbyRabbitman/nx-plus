@@ -2,7 +2,7 @@ import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
   createNodesV2,
-  type WebTestRunnerTargetPluginSchema,
+  type WebTestRunnerPluginSchema,
 } from './web-test-runner.plugin.js';
 
 vi.mock('fs', async () => {
@@ -24,7 +24,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-
       schema,
     }: {
       directories: DirectoryJSON;
-      schema?: WebTestRunnerTargetPluginSchema;
+      schema?: WebTestRunnerPluginSchema;
     }) => {
       const workspaceRoot = 'some-workspace-root';
 

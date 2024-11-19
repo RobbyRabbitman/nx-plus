@@ -29,13 +29,20 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@nx/devkit": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "@web/dev-server": "^0.4.6",
-    "nx": "20.1.2",
+    "@nx/devkit": "^20.0.0"
+  },
+  "devDependencies": {
     "vitest": "1.6.0",
     "memfs": "4.14.0",
-    "minimatch": "10.0.1"
+    "minimatch": "10.0.1",
+    "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
+  "files": [
+    "dist/lib",
+    "generators.json",
+    "package.json"
+  ],
   "generators": "./generators.json",
   "type": "module",
   "main": "./dist/lib/index.js",
@@ -43,6 +50,6 @@
   "exports": {
     ".": "./dist/lib/index.js",
     "./package.json": "./package.json",
-    "./plugin": "./dist/lib/plugin.js"
+    "./plugins/web-dev-server.plugin": "./dist/lib/plugins/web-dev-server.plugin.js"
   }
 }
