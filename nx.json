@@ -21,12 +21,11 @@
         "renderOptions": { "authors": false }
       }
     },
-    "projects": ["packages/**/*"]
+    "projects": ["tag:publish"]
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
-    "publishable": ["{workspaceRoot}/packages/**/*"],
     "eslintGlobals": ["{workspaceRoot}/tools/eslint*/**/*"],
     "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
   },

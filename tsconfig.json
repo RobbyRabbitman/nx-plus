@@ -7,8 +7,6 @@
   "references": [
     { "path": "./packages/web-test-runner" },
     { "path": "./packages/web-dev-server" },
-    { "path": "./e2e/web-test-runner" },
-    { "path": "./e2e/web-dev-server" },
     { "path": "./tools/commitlint" },
     { "path": "./tools/nx-publish" },
     { "path": "./tools/verdaccio" },
@@ -16,6 +14,6 @@
     { "path": "./tools/eslint" },
     { "path": "./tools/eslint-nx-dependency-checks-plugin" },
     { "path": "./packages/node-util" },
-    { "path": "./packages/e2e-util" }
+    { "path": "./packages/node-e2e-util" }
   ]
 }
