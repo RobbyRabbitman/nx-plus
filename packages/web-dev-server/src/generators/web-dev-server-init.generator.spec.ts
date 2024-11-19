@@ -1,136 +1,127 @@
-import * as devkit from '@nx/devkit';
-import { readNxJson, updateNxJson } from '@nx/devkit';
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
-import { type Mock } from 'vitest';
-import {
-  webDevServerInitGenerator,
-  type WebDevServerInitGeneratorSchema,
-} from './web-dev-server-init.generator.js';
+import { formatFiles, readNxJson, updateNxJson } from '@nx/devkit';
+import { webDevServerInitGenerator } from './web-dev-server-init.generator.js';
 
-vi.mock('@nx/devkit', async () => {
-  const module = await vi.importActual('@nx/devkit');
-  return {
-    ...module,
-    formatFiles: vi.fn(),
-  };
-});
+vi.mock('@nx/devkit');
 
-describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
-  const formatFiles = devkit.formatFiles as Mock;
-  const createWorkspace = () =>
-    createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+describe('[Unit Test] nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
+  const MOCK_TREE = Symbol('MOCK_TREE');
 
   beforeEach(() => {
-    console.warn = vi.fn();
-    formatFiles.mockClear();
+    vi.mocked(readNxJson).mockReturnValue({
+      plugins: [],
+    });
   });
 
-  describe('should not modify the `nx.json` when the plugin is already registered in the `nx.json`', () => {
-    it('when provided as an string', async () => {
-      const workspace = createWorkspace();
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-      updateNxJson(workspace, {
-        plugins: ['@robby-rabbitman/nx-plus-web-dev-server/plugin'],
+  describe('should not modify the `nx.json`', () => {
+    it('when the plugin is registered as a string', async () => {
+      vi.mocked(readNxJson).mockReturnValueOnce({
+        plugins: [
+          '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+        ],
       });
-
-      const before = readNxJson(workspace);
-
-      await webDevServerInitGenerator(workspace, { serveTargetName: 'serve' });
-
-      const after = readNxJson(workspace);
-
-      expect(after).toEqual(before);
+      await webDevServerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).not.toHaveBeenCalled();
     });
 
-    it('when provided as an object', async () => {
-      const workspace = createWorkspace();
-
-      const serveTargetName = 'I am already registered :D';
-
-      updateNxJson(workspace, {
+    it('when the plugin is registered as an object', async () => {
+      vi.mocked(readNxJson).mockReturnValueOnce({
         plugins: [
           {
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-            options: {
-              serveTargetName,
-            } satisfies WebDevServerInitGeneratorSchema,
+            plugin:
+              '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+            options: {},
           },
         ],
       });
-
-      const before = readNxJson(workspace);
-
-      await webDevServerInitGenerator(workspace, { serveTargetName: 'serve' });
-
-      const after = readNxJson(workspace);
-
-      expect(after).toEqual(before);
+      await webDevServerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).not.toHaveBeenCalled();
     });
   });
 
-  it('should register the plugin in the `nx.json` when the plugin is not registered in the `nx.json`', async () => {
-    const workspace = createWorkspace();
-
-    await webDevServerInitGenerator(workspace, {});
-
-    expect(readNxJson(workspace)?.plugins).toContainEqual(
-      expect.objectContaining({
-        plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-      }),
-    );
+  describe('should add the plugin to the `nx.json`', () => {
+    it('when the plugin is not registered', async () => {
+      await webDevServerInitGenerator(MOCK_TREE, {});
+      expect(updateNxJson).toHaveBeenCalledWith(
+        MOCK_TREE,
+        expect.objectContaining({
+          plugins: [
+            expect.objectContaining({
+              plugin:
+                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+            }),
+          ],
+        }),
+      );
+    });
   });
 
   describe('schema', () => {
     describe('serveTargetName', () => {
       it('should use the provided value', async () => {
-        const workspace = createWorkspace();
-
         const serveTargetName = 'web-dev-server';
 
-        await webDevServerInitGenerator(workspace, {
+        await webDevServerInitGenerator(MOCK_TREE, {
           serveTargetName,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-            options: {
-              serveTargetName,
-            } satisfies WebDevServerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                options: {
+                  serveTargetName,
+                },
+              }),
+            ],
           }),
         );
       });
 
       it('should fall back to `serve` when the provided value is an empty string', async () => {
-        const workspace = createWorkspace();
-
         const serveTargetName = '';
 
-        await webDevServerInitGenerator(workspace, {
+        await webDevServerInitGenerator(MOCK_TREE, {
           serveTargetName,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-            options: {
-              serveTargetName: 'serve',
-            } satisfies WebDevServerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                options: {
+                  serveTargetName: 'serve',
+                },
+              }),
+            ],
           }),
         );
       });
 
       it('should fall back to `serve` when the value is not provided', async () => {
-        const workspace = createWorkspace();
+        await webDevServerInitGenerator(MOCK_TREE, {});
 
-        await webDevServerInitGenerator(workspace, {});
-
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-            options: {
-              serveTargetName: 'serve',
-            } satisfies WebDevServerInitGeneratorSchema,
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                options: {
+                  serveTargetName: 'serve',
+                },
+              }),
+            ],
           }),
         );
       });
@@ -138,29 +129,19 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
     describe('skipFormatFiles', () => {
       it('should format when the value is not provided', async () => {
-        const workspace = createWorkspace();
-
-        expect(formatFiles).not.toHaveBeenCalled();
-
-        await webDevServerInitGenerator(workspace, {});
+        await webDevServerInitGenerator(MOCK_TREE, {});
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should format when the provided value is `false`', async () => {
-        const workspace = createWorkspace();
-
-        expect(formatFiles).not.toHaveBeenCalled();
-
-        await webDevServerInitGenerator(workspace, { skipFormat: false });
+        await webDevServerInitGenerator(MOCK_TREE, { skipFormat: false });
 
         expect(formatFiles).toHaveBeenCalled();
       });
 
       it('should not format when the provided value is `true`', async () => {
-        const workspace = createWorkspace();
-
-        await webDevServerInitGenerator(workspace, { skipFormat: true });
+        await webDevServerInitGenerator(MOCK_TREE, { skipFormat: true });
 
         expect(formatFiles).not.toHaveBeenCalled();
       });
@@ -168,49 +149,45 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
     describe('skipAddPlugin', () => {
       it('should add the plugin to `nx.json` when the value is not provided', async () => {
-        const workspace = createWorkspace();
+        await webDevServerInitGenerator(MOCK_TREE, {});
 
-        await webDevServerInitGenerator(workspace, {});
-
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+              }),
+            ],
           }),
         );
       });
 
       it('should add the plugin to `nx.json` when the provided value is `false`', async () => {
-        const workspace = createWorkspace();
-
-        await webDevServerInitGenerator(workspace, {
+        await webDevServerInitGenerator(MOCK_TREE, {
           skipAddPlugin: false,
         });
 
-        expect(readNxJson(workspace)?.plugins).toContainEqual(
+        expect(updateNxJson).toHaveBeenCalledWith(
+          MOCK_TREE,
           expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
+            plugins: [
+              expect.objectContaining({
+                plugin:
+                  '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+              }),
+            ],
           }),
         );
       });
 
       it('should not add the plugin to `nx.json` when the provided value is `true`', async () => {
-        const workspace = createWorkspace();
-
-        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
-          expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-          }),
-        );
-
-        await webDevServerInitGenerator(workspace, {
+        await webDevServerInitGenerator(MOCK_TREE, {
           skipAddPlugin: true,
         });
 
-        expect(readNxJson(workspace)?.plugins ?? []).not.toContainEqual(
-          expect.objectContaining({
-            plugin: '@robby-rabbitman/nx-plus-web-dev-server/plugin',
-          }),
-        );
+        expect(updateNxJson).not.toHaveBeenCalled();
       });
     });
   });
