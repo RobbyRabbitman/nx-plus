@@ -4,8 +4,8 @@ import {
   type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
-import { existsSync } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
+import { existsSync } from 'fs';
+import { basename, dirname, join } from 'path';
 
 export const WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB =
   '**/@(web-test-runner|wtr).config.@(js|cjs|mjs)';

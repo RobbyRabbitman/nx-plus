@@ -1,4 +1,3 @@
-import { type CreateNodesContextV2 } from '@nx/devkit';
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import {
@@ -6,23 +5,12 @@ import {
   type WebTestRunnerTargetPluginSchema,
 } from './web-test-runner.plugin.js';
 
-vi.mock('node:fs', () => vi.importActual('memfs').then((m) => m.fs));
+vi.mock('fs', async () => {
+  const memfs = await vi.importActual<typeof import('memfs')>('memfs');
+  return memfs.fs;
+});
 
-describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
-  const context = {
-    nxJsonConfiguration: {
-      targetDefaults: {
-        test: {
-          command: "echo 'I am the default test command'",
-        },
-      },
-      namedInputs: {
-        default: ['{projectRoot}/**/*'],
-      },
-    },
-    workspaceRoot: 'tmp/web-test-runner',
-  } satisfies CreateNodesContextV2;
-
+describe('[Unit Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner', () => {
   afterEach(() => {
     vol.reset();
     vi.resetModules();
@@ -33,19 +21,24 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
 
     const runCreateNodesV2 = async ({
       directories,
-      options,
+      schema,
     }: {
       directories: DirectoryJSON;
-      options?: WebTestRunnerTargetPluginSchema;
+      schema?: WebTestRunnerTargetPluginSchema;
     }) => {
-      vol.fromJSON(directories, context.workspaceRoot);
+      const workspaceRoot = 'some-workspace-root';
+
+      vol.fromJSON(directories, workspaceRoot);
 
       return createNodesV2Fn(
         Object.keys(directories).filter((file) =>
           minimatch(file, createNodesV2Glob, { dot: true }),
         ),
-        options,
-        context,
+        schema,
+        {
+          workspaceRoot,
+          nxJsonConfiguration: {},
+        },
       );
     };
 
@@ -63,7 +56,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
       });
     });
 
-    describe('with a web-test-runner config in a directory of the workspace', () => {
+    describe('with a web-test-runner config in a sub directory of the workspace', () => {
       it('should not modify the project graph by default', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
@@ -77,48 +70,50 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
         ]);
       });
 
-      it('should add a web-test-runner test target when a project is identified because a `package.json` is present', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'some/project/web-test-runner.config.js': '{}',
-            'some/project/package.json': '{}',
-          },
-        });
+      describe('should add a web-test-runner target', () => {
+        it('when a `package.json` is present', async () => {
+          const nodes = await runCreateNodesV2({
+            directories: {
+              'some/project/web-test-runner.config.js': '{}',
+              'some/project/package.json': '{}',
+            },
+          });
 
-        expect(nodes).toContainEqual([
-          'some/project/web-test-runner.config.js',
-          expect.objectContaining({
-            projects: {
-              ['some/project']: {
-                targets: {
-                  test: expect.anything(),
+          expect(nodes).toContainEqual([
+            'some/project/web-test-runner.config.js',
+            expect.objectContaining({
+              projects: {
+                ['some/project']: {
+                  targets: {
+                    test: expect.anything(),
+                  },
                 },
               },
-            },
-          }),
-        ]);
-      });
-
-      it('should add a web-test-runner test target when a project is identified because a `project.json` is present', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'some/project/web-test-runner.config.js': '{}',
-            'some/project/project.json': '{}',
-          },
+            }),
+          ]);
         });
 
-        expect(nodes).toContainEqual([
-          'some/project/web-test-runner.config.js',
-          expect.objectContaining({
-            projects: {
-              ['some/project']: {
-                targets: {
-                  test: expect.anything(),
+        it('when a `project.json` is present', async () => {
+          const nodes = await runCreateNodesV2({
+            directories: {
+              'some/project/web-test-runner.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-test-runner.config.js',
+            expect.objectContaining({
+              projects: {
+                ['some/project']: {
+                  targets: {
+                    test: expect.anything(),
+                  },
                 },
               },
-            },
-          }),
-        ]);
+            }),
+          ]);
+        });
       });
 
       it('should run the web-test-runner in the root of the project pointing to the inferred config', async () => {
@@ -159,7 +154,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
                 'some/project/web-test-runner.config.js': '{}',
                 'some/project/project.json': '{}',
               },
-              options: {
+              schema: {
                 testTargetName,
               },
             });
@@ -186,7 +181,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
                 'some/project/web-test-runner.config.js': '{}',
                 'some/project/project.json': '{}',
               },
-              options: {
+              schema: {
                 testTargetName,
               },
             });
@@ -211,7 +206,7 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
                 'some/project/web-test-runner.config.js': '{}',
                 'some/project/project.json': '{}',
               },
-              options: {},
+              schema: {},
             });
 
             expect(nodes).toContainEqual([
@@ -230,15 +225,15 @@ describe('@robby-rabbitman/nx-plus-web-test-runner/plugin', () => {
         });
 
         describe('testTargetConfig', () => {
-          it('should allow to override the default target configuration', async () => {
+          it('should set the default target configuration', async () => {
             const nodes = await runCreateNodesV2({
               directories: {
                 'some/project/web-test-runner.config.js': '{}',
                 'some/project/package.json': '{}',
               },
-              options: {
+              schema: {
                 testTargetConfig: {
-                  dependsOn: ['pre-test'], // add dependsOn property
+                  dependsOn: ['pre-test'],
                 },
               },
             });
