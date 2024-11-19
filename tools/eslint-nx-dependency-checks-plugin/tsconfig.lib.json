@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "rootDir": "src",
     "outDir": "dist/lib",
-    "tsBuildInfoFile": "dist/lib/tsconfig.lib.tsbuildinfo",
+    "tsBuildInfoFile": "build/lib/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false,
     "verbatimModuleSyntax": false
   },
