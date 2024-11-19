@@ -16,6 +16,7 @@ jobs:
       contents: read
 
     env:
+      NX_PLUS_DEV_CONTAINER_LOG_LEVEL: trace
       NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true --remote-env NX_PLUS_TOOLS_COMMITLINT_TEXT='${{ github.event.pull_request.title }}'
 
     steps:
@@ -35,7 +36,9 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=\"$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD\"" >> $GITHUB_ENV
+      - run: |
+          RUNNER_DEBUG=${{ runner.debug && true || false }}
+          echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=\"$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_VERBOSE_LOGGING=$RUNNER_DEBUG --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD\"" >> $GITHUB_ENV
 
       - run: cat $GITHUB_ENV
 
