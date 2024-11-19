@@ -31,6 +31,10 @@ export interface WebTestRunnerInitGeneratorSchema {
 export type WebTestRunnerInitGeneratorOptions =
   Required<WebTestRunnerInitGeneratorSchema>;
 
+/**
+ * Adds the `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`
+ * plugin to the `nx.json` file.
+ */
 export const webTestRunnerInitGenerator: Generator<
   WebTestRunnerInitGeneratorSchema
 > = async (tree, schema) => {

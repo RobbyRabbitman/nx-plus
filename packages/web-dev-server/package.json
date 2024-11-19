@@ -50,6 +50,6 @@
   "exports": {
     ".": "./dist/lib/index.js",
     "./package.json": "./package.json",
-    "./plugins/web-dev-server.plugin": "./dist/lib/plugins/web-dev-server.plugin.js"
+    "./plugins/web-dev-server": "./dist/lib/plugins/web-dev-server.plugin.js"
   }
 }

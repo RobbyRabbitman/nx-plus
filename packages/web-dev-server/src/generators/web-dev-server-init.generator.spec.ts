@@ -2,7 +2,10 @@ import * as devkit from '@nx/devkit';
 import { readNxJson, updateNxJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing.js';
 import { type Mock } from 'vitest';
-import { initGenerator, type WebDevServerInitGeneratorSchema } from './init.js';
+import {
+  webDevServerInitGenerator,
+  type WebDevServerInitGeneratorSchema,
+} from './web-dev-server-init.generator.js';
 
 vi.mock('@nx/devkit', async () => {
   const module = await vi.importActual('@nx/devkit');
@@ -32,7 +35,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
       const before = readNxJson(workspace);
 
-      await initGenerator(workspace, { serveTargetName: 'serve' });
+      await webDevServerInitGenerator(workspace, { serveTargetName: 'serve' });
 
       const after = readNxJson(workspace);
 
@@ -57,7 +60,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
       const before = readNxJson(workspace);
 
-      await initGenerator(workspace, { serveTargetName: 'serve' });
+      await webDevServerInitGenerator(workspace, { serveTargetName: 'serve' });
 
       const after = readNxJson(workspace);
 
@@ -68,7 +71,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
   it('should register the plugin in the `nx.json` when the plugin is not registered in the `nx.json`', async () => {
     const workspace = createWorkspace();
 
-    await initGenerator(workspace, {});
+    await webDevServerInitGenerator(workspace, {});
 
     expect(readNxJson(workspace)?.plugins).toContainEqual(
       expect.objectContaining({
@@ -84,7 +87,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
         const serveTargetName = 'web-dev-server';
 
-        await initGenerator(workspace, {
+        await webDevServerInitGenerator(workspace, {
           serveTargetName,
         });
 
@@ -103,7 +106,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
         const serveTargetName = '';
 
-        await initGenerator(workspace, {
+        await webDevServerInitGenerator(workspace, {
           serveTargetName,
         });
 
@@ -120,7 +123,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       it('should fall back to `serve` when the value is not provided', async () => {
         const workspace = createWorkspace();
 
-        await initGenerator(workspace, {});
+        await webDevServerInitGenerator(workspace, {});
 
         expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
@@ -139,7 +142,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
         expect(formatFiles).not.toHaveBeenCalled();
 
-        await initGenerator(workspace, {});
+        await webDevServerInitGenerator(workspace, {});
 
         expect(formatFiles).toHaveBeenCalled();
       });
@@ -149,7 +152,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
 
         expect(formatFiles).not.toHaveBeenCalled();
 
-        await initGenerator(workspace, { skipFormat: false });
+        await webDevServerInitGenerator(workspace, { skipFormat: false });
 
         expect(formatFiles).toHaveBeenCalled();
       });
@@ -157,7 +160,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       it('should not format when the provided value is `true`', async () => {
         const workspace = createWorkspace();
 
-        await initGenerator(workspace, { skipFormat: true });
+        await webDevServerInitGenerator(workspace, { skipFormat: true });
 
         expect(formatFiles).not.toHaveBeenCalled();
       });
@@ -167,7 +170,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       it('should add the plugin to `nx.json` when the value is not provided', async () => {
         const workspace = createWorkspace();
 
-        await initGenerator(workspace, {});
+        await webDevServerInitGenerator(workspace, {});
 
         expect(readNxJson(workspace)?.plugins).toContainEqual(
           expect.objectContaining({
@@ -179,7 +182,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
       it('should add the plugin to `nx.json` when the provided value is `false`', async () => {
         const workspace = createWorkspace();
 
-        await initGenerator(workspace, {
+        await webDevServerInitGenerator(workspace, {
           skipAddPlugin: false,
         });
 
@@ -199,7 +202,7 @@ describe('nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
           }),
         );
 
-        await initGenerator(workspace, {
+        await webDevServerInitGenerator(workspace, {
           skipAddPlugin: true,
         });
 
