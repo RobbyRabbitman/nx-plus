@@ -29,7 +29,7 @@ nx run {{project}}:test
 
 ### `@robby-rabbitman/nx-plus-web-test-runner:init`
 
-Adds [`@robby-rabbitman/nx-plus-web-test-runner/plugin`](#robby-rabbitmannx-plus-web-test-runnerplugin) to the `plugins` in the `nx.json`.
+Adds [`@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`](#robby-rabbitmannx-plus-web-test-runnerpluginsweb-test-runner) to the `plugins` in the `nx.json`.
 
 #### Usage
 
@@ -45,7 +45,7 @@ nx g @robby-rabbitman/nx-plus-web-test-runner:init
 | skip-format      | boolean | false   | Whether to skip formatting the updated files. |
 | skip-add-plugin  | boolean | false   | Whether to skip adding the plugin.            |
 
-### `@robby-rabbitman/nx-plus-web-test-runner/plugin`
+### `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`
 
 Adds a _test_ target for projects that have a [Web Test Runner config](https://modern-web.dev/docs/test-runner/cli-and-configuration/#configuration-file) file in their root, the plugin infers a Web Test Runner with one of the following names.
 
@@ -62,13 +62,14 @@ Adds a _test_ target for projects that have a [Web Test Runner config](https://m
 // nx.json
 "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugin",
+      "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner",
       "options": {
         // the name of the web test runner target => nx run {{project}}:test
         "testTargetName": "test",
         // the default configuration of the web test runner targets inferred by this plugin
         "testTargetConfig": {
           "options":{
+            "watch": true,
             "node-resolve": true
           }
         }
