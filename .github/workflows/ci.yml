@@ -16,7 +16,7 @@ jobs:
       contents: read
 
     env:
-      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: "--remote-env CI=true --remote-env NX_PLUS_TOOLS_COMMITLINT_TEXT='${{ github.event.pull_request.title }}'"
+      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true --remote-env NX_PLUS_TOOLS_COMMITLINT_TEXT='${{ github.event.pull_request.title }}'
 
     steps:
       - uses: actions/checkout@v4
