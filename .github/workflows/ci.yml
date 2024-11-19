@@ -10,9 +10,14 @@ concurrency:
 jobs:
   main:
     runs-on: ubuntu-latest
+
     permissions:
       actions: read
       contents: read
+
+    env:
+      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true --remote-env NX_PLUS_TOOLS_COMMITLINT_TEXT="${{ github.event.pull_request.title }}"
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,13 +35,15 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      - run: |
+          NX_PLUS_DEV_CONTAINER_EXEC_ARGS="$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD"
+          $NX_PLUS_DEV_CONTAINER_EXEC_ARGS >> $GITHUB_ENV
+
       - run: git branch --track "${{ github.event.pull_request.head.ref }}" "origin/${{ github.event.pull_request.base.ref }}"
 
       - run: sh .devcontainer/exec-cmd.sh nx report
 
       - run: sh .devcontainer/exec-cmd.sh nx run tools-commitlint:lint-commitlint
-        env:
-          NX_PLUS_TOOLS_COMMITLINT_TEXT: ${{ github.event.pull_request.title }}
 
       - run: sh .devcontainer/exec-cmd.sh nx sync:check
 
