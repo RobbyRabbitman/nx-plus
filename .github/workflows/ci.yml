@@ -39,7 +39,6 @@ jobs:
           RUNNER_DEBUG=${{ runner.debug && true || false }}
           echo "NX_PLUS_DEV_CONTAINER_LOG_LEVEL=$(if [ "$RUNNER_DEBUG" = true ]; then echo 'trace'; else echo 'info'; fi)" >> $GITHUB_ENV
           echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_VERBOSE_LOGGING=$RUNNER_DEBUG --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD" >> $GITHUB_ENV
-          cat $GITHUB_ENV
 
       - run: git branch --track '${{ github.event.pull_request.head.ref }}' 'origin/${{ github.event.pull_request.base.ref }}'
 
