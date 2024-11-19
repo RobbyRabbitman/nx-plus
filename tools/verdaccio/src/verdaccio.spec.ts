@@ -1,5 +1,4 @@
 import { execSync } from 'child_process';
-import { vi } from 'vitest';
 import { isVerdaccioAvailable } from './verdaccio.js';
 
 vi.mock('child_process');

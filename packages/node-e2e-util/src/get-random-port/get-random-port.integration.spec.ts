@@ -1,7 +1,6 @@
 import { logger } from '@nx/devkit';
 import { dirname, join } from 'path';
 import { lock } from 'proper-lockfile';
-import { describe, expect, vi } from 'vitest';
 import { getPorts, getPortsFilePath, setPorts } from './get-random-port.js';
 
 describe('[Integration Test] getRandomPort', () => {

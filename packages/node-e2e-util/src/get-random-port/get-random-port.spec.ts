@@ -3,7 +3,6 @@ import { existsSync } from 'fs';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import { vol } from 'memfs';
 import { dirname } from 'path';
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest';
 import {
   getPorts,
   getPortsFilePath,

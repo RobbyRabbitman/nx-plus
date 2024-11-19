@@ -1,5 +1,4 @@
 import { createServer, Server } from 'net';
-import { describe } from 'vitest';
 import { getRandomPort } from './get-random-port.js';
 
 vi.mock('net');
