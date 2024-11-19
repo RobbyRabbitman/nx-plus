@@ -38,7 +38,7 @@ jobs:
 
       - run: |
           RUNNER_DEBUG=${{ runner.debug && true || false }}
-          echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=\"$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_VERBOSE_LOGGING=$RUNNER_DEBUG --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD\"" >> $GITHUB_ENV
+          echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_VERBOSE_LOGGING=$RUNNER_DEBUG --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD" >> $GITHUB_ENV
 
       - run: cat $GITHUB_ENV
 
