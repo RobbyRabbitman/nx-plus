@@ -1,7 +1,15 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "node"]
+    "outDir": "dist/spec",
+    "tsBuildInfoFile": "build/spec/tsconfig.spec.tsbuildinfo",
+    "types": [
+      "vitest/globals",
+      "vitest/importMeta",
+      "vite/client",
+      "node",
+      "vitest"
+    ]
   },
   "include": [
     "vite.config.ts",
