@@ -6,10 +6,10 @@ pnpm tsc --build tools/eslint-nx-dependency-checks-plugin/tsconfig.lib.json
 
 # in order for projects to use the vite configs, we need to build them first
 echo "⚙️ Building tools-vite ..."
-pnpm nx run tools-vite:build-tsc
+pnpm tsc --build tools/vite/tsconfig.lib.json
 
 # in order for projects to use the eslint configs, we need to build them first
 echo "⚙️ Building tools-eslint ..."
-pnpm nx run tools-eslint:build-tsc
+pnpm tsc --build tools/eslint/tsconfig.lib.json
 
 pnpm nx run tools-verdaccio:start
