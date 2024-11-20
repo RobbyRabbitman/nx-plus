@@ -10,14 +10,9 @@ on:
       dry-run:
         type: boolean
         default: true
-  push:
-    branches:
-      - 'main'
 
 jobs:
   main:
-    # Kind of unnessecary because nx release will add `[skip ci]` in the commit message, but safe is safe
-    if: "${{ github.event_name == 'workflow_dispatch' || !startsWith(github.event.head_commit.message, 'chore: release') }}"
     runs-on: ubuntu-latest
     steps:
       # Observation:
@@ -44,19 +39,6 @@ jobs:
 
       - run: corepack enable
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+      - run: sh .devcontainer/exec-cmd.sh nx report
 
-      - run: pnpm i
-
-      - run: pnpm exec nx report
-
-      - run: pnpm exec nx release --skip-publish --dry-run=${{ env.DRY_RUN }} ${{ env.VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
-          VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+      - run: sh .devcontainer/exec-cmd.sh sh -c "GITHUB_TOKEN=${{ steps.create-release-app-token.outputs.token }} nx release --skip-publish --dry-run=${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }} --verbose=${{ runner.debug && true || false }} ${{ inputs.version }}"
