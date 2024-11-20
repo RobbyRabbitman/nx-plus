@@ -26,8 +26,7 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
-    "eslintGlobals": ["{workspaceRoot}/tools/eslint*/**/*"],
-    "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
+    "eslintGlobals": ["{workspaceRoot}/tools/eslint*/**/*"]
   },
   "plugins": [
     "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-plugin",
@@ -61,16 +60,9 @@
     "lint-eslint": {
       "inputs": ["default", "eslintGlobals"]
     },
-    "test-vite*": {
-      "inputs": [
-        "default",
-        "^default",
-        { "externalDependencies": ["vitest"] },
-        { "env": "CI" }
-      ],
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "cache": true,
+    "test-vite": {
       "defaultConfiguration": "local",
+      "outputs": ["{workspaceRoot}/{projectRoot}/coverage"],
       "configurations": {
         "ci": { "run": true },
         "local": {
