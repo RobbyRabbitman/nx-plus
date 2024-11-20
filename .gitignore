@@ -1,5 +1,6 @@
 dist
 build
+.build-tsc
 tmp
 /out-tsc
 node_modules

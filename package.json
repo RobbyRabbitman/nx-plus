@@ -8,8 +8,8 @@
   "scripts": {
     "clean:node_modules": "pnpm -r exec rm -rf node_modules",
     "clean:dist": "pnpm -r exec rm -rf dist",
-    "clean:build": "pnpm -r exec rm -rf build",
-    "clean": "pnpm -r exec rm -rf node_modules dist build"
+    "clean:build-tsc": "pnpm -r exec rm -rf .build-tsc",
+    "clean": "pnpm -r exec rm -rf node_modules dist .build-tsc"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
