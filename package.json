@@ -6,7 +6,7 @@
   },
   "packageManager": "pnpm@9.12.3",
   "scripts": {
-    "clean": "pnpm -r exec rm -rf node_modules tmp .storage .logs coverage dist .build-tsc"
+    "clean": "pnpm -r exec rm -rf node_modules tmp .storage .logs coverage dist .build-tsc && find . -name '*.timestamp-*' -type f -delete"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
