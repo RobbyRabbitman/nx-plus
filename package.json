@@ -6,10 +6,7 @@
   },
   "packageManager": "pnpm@9.12.3",
   "scripts": {
-    "clean:node_modules": "pnpm -r exec rm -rf node_modules",
-    "clean:dist": "pnpm -r exec rm -rf dist",
-    "clean:build-tsc": "pnpm -r exec rm -rf .build-tsc",
-    "clean": "pnpm -r exec rm -rf node_modules dist .build-tsc"
+    "clean": "pnpm -r exec rm -rf node_modules tmp .storage .logs coverage dist .build-tsc"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
