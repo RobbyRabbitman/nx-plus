@@ -50,9 +50,9 @@ jobs:
 
       - run: sh .devcontainer/exec-cmd.sh nx format:check
 
-      - run: sh .devcontainer/exec-cmd.sh nx affected -t build -c ci
-
       - run: sh .devcontainer/exec-cmd.sh nx affected -t lint lint-eslint -c ci
+
+      - run: sh .devcontainer/exec-cmd.sh nx affected -t build -c ci
 
       - run: sh .devcontainer/exec-cmd.sh nx affected -t test test-vite -c ci
 

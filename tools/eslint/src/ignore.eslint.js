@@ -2,12 +2,13 @@
 const ignoreEslintConfig = [
   {
     ignores: [
-      'dist',
-      'build',
-      'node_modules',
-      'tmp',
-      'storage',
-      'coverage',
+      'dist/',
+      'build/',
+      'node_modules/',
+      'tmp/',
+      '.storage/',
+      '.logs/',
+      'coverage/',
       '**/*.timestamp-*',
     ],
   },
