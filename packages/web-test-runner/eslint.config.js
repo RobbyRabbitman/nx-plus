@@ -17,7 +17,6 @@ export default [
             '**/vitest.config.ts',
             '**/*.spec.ts',
           ],
-          buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
         },
       ],
     },

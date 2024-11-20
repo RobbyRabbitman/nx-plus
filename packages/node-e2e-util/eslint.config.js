@@ -8,16 +8,8 @@ export default [
       '@nx/dependency-checks': [
         'error',
         {
-          /**
-           * TODO: why are wild cards needed? The config files are in the root
-           * of the project.
-           */
-          ignoredFiles: [
-            '**/eslint.config.js',
-            '**/vitest.config.ts',
-            '**/*.spec.ts',
-          ],
-          buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
+          /** TODO: why is not found? find out how the rule resolves deps */
+          ignoredDependencies: ['@robby-rabbitman/nx-plus-node-util'],
         },
       ],
     },
