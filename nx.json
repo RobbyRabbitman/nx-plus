@@ -58,11 +58,6 @@
       "options": { "packageRoot": "{projectRoot}" },
       "dependsOn": ["build*"]
     },
-    "build-tsc": {
-      "options": {
-        "command": "rm -rf dist/lib && tsc --build tsconfig.lib.json --pretty --verbose"
-      }
-    },
     "lint-eslint": {
       "inputs": ["default", "^default", "eslintGlobals"]
     },
