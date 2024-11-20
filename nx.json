@@ -58,8 +58,18 @@
       "options": { "packageRoot": "{projectRoot}" },
       "dependsOn": ["build*"]
     },
+    "build-tsc": {
+      "inputs": [
+        "{workspaceRoot}/tsconfig.base.json",
+        "{projectRoot}/tsconfig.lib.json",
+        "default",
+        "^default",
+        { "dependentTasksOutputFiles": "**/*.d.ts" },
+        { "externalDependencies": ["typescript"] }
+      ]
+    },
     "lint-eslint": {
-      "inputs": ["default", "^default", "eslintGlobals"]
+      "inputs": ["default", "eslintGlobals"]
     },
     "test-vite*": {
       "inputs": [
