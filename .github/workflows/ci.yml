@@ -54,4 +54,5 @@ jobs:
 
       - run: sh .devcontainer/exec-cmd.sh nx affected -t build build-tsc -c ci
 
-      - run: sh .devcontainer/exec-cmd.sh nx affected -t test test-vite -c ci
+      # TODO: 'WebSocket server error: Port is already in use' when multiple targets run vitest in parallel
+      - run: sh .devcontainer/exec-cmd.sh nx affected -t test test-vite -c ci --parallel 1
