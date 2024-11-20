@@ -62,7 +62,7 @@
     },
     "test-vite": {
       "defaultConfiguration": "local",
-      "outputs": ["{workspaceRoot}/{projectRoot}/coverage"],
+      "outputs": ["{projectRoot}/coverage"],
       "configurations": {
         "ci": { "run": true },
         "local": {
