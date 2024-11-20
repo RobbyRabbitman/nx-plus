@@ -6,10 +6,10 @@
   },
   "packageManager": "pnpm@9.12.3",
   "scripts": {
-   "clean:node_modules": "pnpm -r exec rm -rf node_modules",
-   "clean:dist": "pnpm -r exec rm -rf dist",
-   "clean:build": "pnpm -r exec rm -rf build",
-   "clean": "pnpm -r exec rm -rf node_modules dist build"
+    "clean:node_modules": "pnpm -r exec rm -rf node_modules",
+    "clean:dist": "pnpm -r exec rm -rf dist",
+    "clean:build": "pnpm -r exec rm -rf build",
+    "clean": "pnpm -r exec rm -rf node_modules dist build"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
