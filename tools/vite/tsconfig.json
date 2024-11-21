@@ -4,5 +4,9 @@
   "files": [],
   "include": [],
   "exclude": [],
-  "references": [{ "path": "../eslint" }]
+  "references": [
+    { "path": "../eslint" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
+  ]
 }

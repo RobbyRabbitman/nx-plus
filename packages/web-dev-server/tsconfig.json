@@ -6,6 +6,8 @@
   "exclude": [],
   "references": [
     { "path": "../../tools/vite" },
-    { "path": "../../tools/eslint" }
+    { "path": "../../tools/eslint" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
   ]
 }
