@@ -6,6 +6,5 @@
     "emitDeclarationOnly": false
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
-  "references": [{ "path": "../eslint/tsconfig.lib.json" }]
+  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"]
 }

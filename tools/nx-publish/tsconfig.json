@@ -3,12 +3,5 @@
   "compilerOptions": { "baseUrl": ".", "rootDir": "." },
   "files": [],
   "include": [],
-  "exclude": [],
-  "references": [
-    { "path": "../verdaccio" },
-    { "path": "../vite" },
-    { "path": "../eslint" },
-    { "path": "./tsconfig.lib.json" },
-    { "path": "./tsconfig.spec.json" }
-  ]
+  "exclude": []
 }
