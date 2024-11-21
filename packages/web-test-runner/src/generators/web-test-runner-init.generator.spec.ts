@@ -59,6 +59,24 @@ describe('[Unit Test] nx run @robby-rabbitman/nx-plus-web-test-runner:init', () 
     });
   });
 
+  it("should create the `nx.json` file when it doesn't exist", async () => {
+    vi.mocked(readNxJson).mockReturnValueOnce(null);
+
+    await webTestRunnerInitGenerator(MOCK_TREE, {});
+
+    expect(updateNxJson).toHaveBeenCalledWith(
+      MOCK_TREE,
+      expect.objectContaining({
+        plugins: [
+          expect.objectContaining({
+            plugin:
+              '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
+          }),
+        ],
+      }),
+    );
+  });
+
   describe('schema', () => {
     describe('testTargetName', () => {
       it('should use the provided value', async () => {
