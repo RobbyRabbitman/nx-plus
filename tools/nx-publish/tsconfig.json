@@ -3,5 +3,10 @@
   "compilerOptions": { "baseUrl": ".", "rootDir": "." },
   "files": [],
   "include": [],
-  "exclude": []
+  "exclude": [],
+  "references": [
+    { "path": "../verdaccio" },
+    { "path": "../vite" },
+    { "path": "../eslint" }
+  ]
 }

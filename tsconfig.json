@@ -3,5 +3,17 @@
   "compileOnSave": false,
   "include": [],
   "files": [],
-  "exclude": []
+  "exclude": [],
+  "references": [
+    { "path": "./tools/eslint-nx-dependency-checks-plugin" },
+    { "path": "./packages/web-test-runner" },
+    { "path": "./packages/web-dev-server" },
+    { "path": "./packages/node-e2e-util" },
+    { "path": "./packages/node-util" },
+    { "path": "./tools/commitlint" },
+    { "path": "./tools/nx-publish" },
+    { "path": "./tools/verdaccio" },
+    { "path": "./tools/eslint" },
+    { "path": "./tools/vite" }
+  ]
 }

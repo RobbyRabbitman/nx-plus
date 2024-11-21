@@ -3,5 +3,6 @@
   "compilerOptions": { "baseUrl": ".", "rootDir": "." },
   "files": [],
   "include": [],
-  "exclude": []
+  "exclude": [],
+  "references": [{ "path": "../vite" }, { "path": "../eslint" }]
 }

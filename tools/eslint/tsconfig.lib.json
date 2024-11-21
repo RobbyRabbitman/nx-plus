@@ -6,6 +6,5 @@
     "emitDeclarationOnly": false
   },
   "include": ["src/**/*.js"],
-  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
-  : [{ "path": "../../tools/eslint" }]
+  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"]
 }
