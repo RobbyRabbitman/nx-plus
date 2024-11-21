@@ -39,7 +39,7 @@
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "files": [
-    "dist/lib",
+    "dist/src",
     "generators.json",
     "package.json"
   ],
