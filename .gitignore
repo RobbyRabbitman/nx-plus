@@ -3,6 +3,7 @@ build
 tmp
 /out-tsc
 node_modules
+v8-compile-cache-*
 /.idea
 .project
 .classpath
