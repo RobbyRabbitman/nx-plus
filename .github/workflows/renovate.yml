@@ -18,6 +18,10 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+
+    env:
+      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true
+
     steps:
       - uses: actions/create-github-app-token@v1
         id: create-renovate-app-token
