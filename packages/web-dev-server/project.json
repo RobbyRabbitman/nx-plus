@@ -1,7 +1,7 @@
 {
   "name": "web-dev-server",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:lib", "publish"],
+  "tags": ["scope:node", "type:lib"],
   "targets": {
     "nx-release-publish": {
       "dependsOn": ["build-tsc"]
