@@ -1,10 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "./tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": "src",
-    "outDir": "dist/lib",
-    "tsBuildInfoFile": ".build-tsc/lib/tsconfig.lib.tsbuildinfo",
+    "outDir": "dist",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false
   },
   "include": ["src/**/*.js"],

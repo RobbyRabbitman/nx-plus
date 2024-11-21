@@ -1,8 +1,8 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "./tsconfig",
   "compilerOptions": {
     "outDir": "dist/spec",
-    "tsBuildInfoFile": ".build-tsc/spec/tsconfig.spec.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.spec.tsbuildinfo",
     "types": [
       "vitest/globals",
       "vitest/importMeta",

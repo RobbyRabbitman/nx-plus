@@ -2,8 +2,8 @@
   "name": "@robby-rabbitman/nx-plus-tools-eslint",
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@eslint/js": "9.14.0",
     "eslint-config-prettier": "9.1.0",

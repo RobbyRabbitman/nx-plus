@@ -2,8 +2,8 @@
   "name": "@robby-rabbitman/nx-plus-tools-verdaccio",
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "dependencies": {
     "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",

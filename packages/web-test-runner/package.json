@@ -45,11 +45,11 @@
   ],
   "generators": "./generators.json",
   "type": "module",
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
-    ".": "./dist/lib/index.js",
+    ".": "./dist/src/index.js",
     "./package.json": "./package.json",
-    "./plugins/web-test-runner": "./dist/lib/plugins/web-test-runner.plugin.js"
+    "./plugins/web-test-runner": "./dist/src/plugins/web-test-runner.plugin.js"
   }
 }
