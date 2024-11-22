@@ -5,7 +5,7 @@
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "package.json"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../node-util/tsconfig.lib.json" },
