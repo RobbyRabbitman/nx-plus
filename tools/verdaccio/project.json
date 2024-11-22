@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "tags": ["type:tool", "scope:node"],
   "targets": {
-    "clear": {
+    "clean": {
       "command": "find '.storage' -mindepth 1 -delete",
       "options": {
         "cwd": "{projectRoot}"

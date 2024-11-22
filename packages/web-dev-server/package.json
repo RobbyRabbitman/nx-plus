@@ -45,9 +45,9 @@
     "package.json"
   ],
   "generators": "./generators.json",
-  "type": "module",
-  "main": "./dist/esm/src/index.js",
-  "types": "./dist/esm/src/index.d.ts",
+  "type": "commonjs",
+  "main": "./dist/cjs/src/index.js",
+  "types": "./dist/cjs/src/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {

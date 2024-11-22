@@ -15,7 +15,7 @@ type CreateE2eNxWorkspaceOptions = Partial<
  *
  * By default:
  *
- * - Clears the to be created nx workspace directory if it exists
+ * - Cleans the to be created nx workspace directory if it exists
  * - Disables nx cloud
  * - Uses the nx version of this workspace
  *
@@ -33,7 +33,7 @@ export const createE2eNxWorkspace = async (
   }
 
   const defaultOptions = {
-    clear: true,
+    clean: true,
     name: `${projectName}---${Date.now()}`,
     /**
      * Its fine that we import `@nx/devkit` here from this package, because:
@@ -55,7 +55,7 @@ export const createE2eNxWorkspace = async (
   logger.verbose(`[createE2eNxWorkspace] options`, options);
   logger.verbose(`[createE2eNxWorkspace] combinedOptions`, combinedOptions);
 
-  const { version, name, args, clear } = combinedOptions;
+  const { version, name, args, clean } = combinedOptions;
 
   const projectConfig = readCachedProjectGraph().nodes[projectName]?.data;
 
@@ -77,7 +77,7 @@ export const createE2eNxWorkspace = async (
     version,
     name,
     args,
-    clear,
+    clean,
   });
 
   logger.verbose(
@@ -105,10 +105,10 @@ interface CreateNxWorkspaceOptions {
   name: string;
 
   /**
-   * If true, clears `{{cwd}}/{{name}}`. Note that `create-nx-workspace` fails
+   * If true, cleans `{{cwd}}/{{name}}`. Note that `create-nx-workspace` fails
    * if there is a workspace already.
    */
-  clear?: boolean;
+  clean?: boolean;
 
   /**
    * The nx version to use for `create-nx-workspace@{nxVersion}`, must be a
@@ -128,7 +128,7 @@ interface CreateNxWorkspaceOptions {
  * @returns The workspace root of the created nx workspace.
  */
 const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
-  const { cwd, name, version, args, clear } = options;
+  const { cwd, name, version, args, clean } = options;
 
   const workspaceRoot = join(cwd, name);
 
@@ -136,8 +136,8 @@ const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
     `[createNxWorkspace] Creating nx@${version} workspace in ${workspaceRoot}`,
   );
 
-  if (clear) {
-    logger.verbose(`[createNxWorkspace] Clearing ${workspaceRoot}`);
+  if (clean) {
+    logger.verbose(`[createNxWorkspace] Cleaning ${workspaceRoot}`);
 
     await rm(workspaceRoot, {
       recursive: true,

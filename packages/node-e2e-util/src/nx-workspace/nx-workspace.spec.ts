@@ -58,7 +58,7 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
     );
   });
 
-  it('should clear any existing e2e-nx-workspace', async () => {
+  it('should clean any existing e2e-nx-workspace', async () => {
     await createE2eNxWorkspace({
       name: 'some-e2e-workspace',
     });
