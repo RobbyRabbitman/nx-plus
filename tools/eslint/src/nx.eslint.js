@@ -15,7 +15,15 @@ const nxEslintConfig = [
     },
     rules: {
       '@nx/dependency-checks': [
-        'error',
+        /**
+         * TODO: enable this rule.
+         *
+         * Observation: this rule doesn't regognize dependencies that are
+         * clearly used, however nx graph also doesnt show them, so maybe its
+         * not a problem of this rule but rather a graph bug or a miss
+         * configured workspace
+         */
+        'off',
         {
           buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
         },

@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false,
-    "verbatimModuleSyntax": false
+    "emitDeclarationOnly": false
   },
   "include": ["src/**/*.ts"],
   "exclude": ["vite.config.ts", "vitest.config.mts", "src/**/*.spec.ts"],

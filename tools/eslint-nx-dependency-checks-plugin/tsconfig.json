@@ -1,6 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "baseUrl": ".", "rootDir": "." },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+
+    // TODO: remove the cjs target when nx generators can be written in esm
+    // => adjust package.json, tsconfig.lib.json, remove manual lint-eslint because nx does not infer eslint.config.mjs
+    "verbatimModuleSyntax": false
+  },
   "files": [],
   "include": [],
   "exclude": [],

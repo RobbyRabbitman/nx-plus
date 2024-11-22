@@ -34,7 +34,7 @@ describe(
     beforeAll(
       async () => {
         workspaceRoot = await createE2eNxWorkspace({
-          name: '@robby-rabbitman__nx-plus-web-test-runner--init',
+          name: 'robby-rabbitman__nx-plus-web-test-runner--init',
           args: {
             preset: 'ts',
           },

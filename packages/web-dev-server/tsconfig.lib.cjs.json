@@ -1,6 +1,6 @@
 {
   // TODO: remove the cjs target when nx generators can be written in esm
-  // => adjust tsconfig.lib.json, remove manual lint-eslint because nx does not infer eslint.config.mjs
+  // => adjust package.json, tsconfig.lib.json, remove manual lint-eslint because nx does not infer eslint.config.mjs
   "extends": "./tsconfig",
   "compilerOptions": {
     "outDir": "dist/cjs",

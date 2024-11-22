@@ -5,7 +5,8 @@
     "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
     "@robby-rabbitman/nx-plus-node-e2e-util": "workspace:*",
     "@robby-rabbitman/nx-plus-web-dev-server": "workspace:*",
-    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@nx/devkit": "20.1.2"
   },
   "files": [
     "dist/src",

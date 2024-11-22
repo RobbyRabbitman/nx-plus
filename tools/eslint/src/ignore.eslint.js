@@ -9,6 +9,7 @@ const ignoreEslintConfig = [
       '.storage/',
       '.logs/',
       'coverage/',
+      'e2e-nx-workspaces/',
       '**/*.timestamp-*',
     ],
   },
