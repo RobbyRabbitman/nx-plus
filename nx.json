@@ -47,8 +47,7 @@
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "test-vite" },
-      "exclude": ["e2e/**/*"]
+      "options": { "testTargetName": "test-vite" }
     }
   ],
   "targetDefaults": {
