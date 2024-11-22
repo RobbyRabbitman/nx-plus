@@ -1,6 +1,10 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-verdaccio",
   "version": "0.6.2",
+  "files": [
+    "dist/src",
+    "package.json"
+  ],
   "type": "module",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",

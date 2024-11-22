@@ -1,6 +1,10 @@
 {
   "name": "@robby-rabbitman/nx-plus-node-e2e-util",
   "version": "0.6.2",
+  "files": [
+    "dist/src",
+    "package.json"
+  ],
   "type": "module",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
