@@ -155,6 +155,21 @@ importers:
         specifier: 17.7.2
         version: 17.7.2
 
+  e2e/web-dev-server:
+    dependencies:
+      '@robby-rabbitman/nx-plus-node-e2e-util':
+        specifier: workspace:*
+        version: link:../../packages/node-e2e-util
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-vite':
+        specifier: workspace:*
+        version: link:../../tools/vite
+      '@robby-rabbitman/nx-plus-web-dev-server':
+        specifier: workspace:*
+        version: link:../../packages/web-dev-server
+
   packages/node-e2e-util:
     dependencies:
       '@nx/devkit':
@@ -276,9 +291,12 @@ importers:
       '@robby-rabbitman/nx-plus-tools-vite':
         specifier: workspace:*
         version: link:../vite
-      tslib:
-        specifier: 2.8.1
-        version: 2.8.1
+      memfs:
+        specifier: 4.14.0
+        version: 4.14.0
+      minimatch:
+        specifier: 10.0.1
+        version: 10.0.1
 
   tools/nx-publish:
     dependencies:

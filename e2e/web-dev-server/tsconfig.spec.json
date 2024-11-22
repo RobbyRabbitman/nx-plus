@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "outDir": "dist/spec",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.spec.tsbuildinfo",
+    "types": [
+      "vitest/globals",
+      "vitest/importMeta",
+      "vite/client",
+      "node",
+      "vitest"
+    ]
+  },
+  "include": ["vite.config.ts", "vitest.config.ts", "src/**/*.ts"]
+}

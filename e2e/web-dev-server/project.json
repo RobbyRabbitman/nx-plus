@@ -1,5 +1,5 @@
 {
-  "name": "tools-eslint",
+  "name": "e2e-web-dev-server",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:node", "type:tool"]
+  "tags": ["scope:node", "type:e2e"]
 }

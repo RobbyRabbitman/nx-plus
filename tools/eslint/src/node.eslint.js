@@ -13,6 +13,13 @@ const nodeEslintConfig = [
   /** https://github.com/eslint-community/eslint-plugin-n */
   {
     ...nodeEslintConfigRecomended,
+    settings: {
+      ...nodeEslintConfigRecomended.settings,
+      node: {
+        /** TODO: add renovate syntax here so this value gets renovated aswell */
+        version: '>=20.18.0',
+      },
+    },
     files: [
       '**/*.js',
       '**/*.mjs',
@@ -27,11 +34,6 @@ const nodeEslintConfig = [
       'n/no-missing-import': 'off',
       'n/no-extraneous-import': 'off',
       'n/no-process-exit': 'off',
-      /**
-       * The engines field is only declared in the root package.json of this
-       * workspace => we turn it off, the node version is >=20
-       */
-      'n/no-unsupported-features/es-syntax': 'off',
     },
   },
 ];

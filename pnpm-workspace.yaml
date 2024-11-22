@@ -1,1 +1,1 @@
-packages: ['packages/*', 'tools/*']
+packages: ['packages/*', 'tools/*', 'e2e/*']

@@ -3,7 +3,7 @@ import { webDevServerInitGenerator } from './web-dev-server-init.generator.js';
 
 vi.mock('@nx/devkit');
 
-describe('[Unit Test] nx run @robby-rabbitman/nx-plus-web-dev-server:init', () => {
+describe('[Unit Test] nx generate @robby-rabbitman/nx-plus-web-dev-server:init', () => {
   const MOCK_TREE = Symbol('MOCK_TREE');
 
   beforeEach(() => {

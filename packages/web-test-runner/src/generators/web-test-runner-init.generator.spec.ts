@@ -3,7 +3,7 @@ import { webTestRunnerInitGenerator } from './web-test-runner-init.generator.js'
 
 vi.mock('@nx/devkit');
 
-describe('[Unit Test] nx run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
+describe('[Unit Test] generate run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
   const MOCK_TREE = Symbol('MOCK_TREE');
 
   beforeEach(() => {
