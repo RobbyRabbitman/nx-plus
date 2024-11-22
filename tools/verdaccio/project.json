@@ -4,7 +4,7 @@
   "tags": ["type:tool", "scope:node"],
   "targets": {
     "clean": {
-      "command": "find '.storage' -mindepth 1 -delete",
+      "command": "test -f .storage && find .storage -mindepth 1 -delete",
       "options": {
         "cwd": "{projectRoot}"
       }

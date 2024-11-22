@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "dist/esm",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
+
+    "verbatimModuleSyntax": false
   },
   "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
