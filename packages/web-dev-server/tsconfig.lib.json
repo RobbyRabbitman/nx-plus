@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false
   },

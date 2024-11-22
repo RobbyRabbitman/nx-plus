@@ -1,0 +1,19 @@
+{
+  // TODO: remove the cjs target when nx generators can be written in esm
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "outDir": "dist/cjs",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib-cjs.tsbuildinfo",
+    "emitDeclarationOnly": false,
+
+    "verbatimModuleSyntax": false,
+    "module": "CommonJS",
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
+  "references": [
+    { "path": "../../tools/vite/tsconfig.lib.json" },
+    { "path": "../../tools/eslint/tsconfig.lib.json" }
+  ]
+}

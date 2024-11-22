@@ -40,16 +40,26 @@
   },
   "files": [
     "dist/src",
+    "dist/cjs",
     "generators.json",
     "package.json"
   ],
   "generators": "./generators.json",
   "type": "module",
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/esm/src/index.js",
+  "types": "./dist/esm/src/index.d.ts",
   "exports": {
-    ".": "./dist/src/index.js",
-    "./package.json": "./package.json",
-    "./plugins/web-dev-server": "./dist/src/plugins/web-dev-server.plugin.js"
+    ".": {
+      "import": "./dist/esm/src/index.js",
+      "require": "./dist/cjs/src/index.js",
+      "types": "./dist/esm/src/index.d.ts",
+      "default": "./dist/esm/src/index.js"
+    },
+    "./plugins/web-dev-server": {
+      "import": "./dist/esm/src/plugins/web-dev-server.plugin.js",
+      "require": "./dist/cjs/src/plugins/web-dev-server.plugin.js",
+      "types": "./dist/esm/src/plugins/web-dev-server.plugin.d.ts",
+      "default": "./dist/esm/src/plugins/web-dev-server.plugin.js"
+    }
   }
 }

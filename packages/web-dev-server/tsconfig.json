@@ -8,6 +8,7 @@
     { "path": "../../tools/vite" },
     { "path": "../../tools/eslint" },
     { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.lib.cjs.json" },
     { "path": "./tsconfig.spec.json" }
   ]
 }
