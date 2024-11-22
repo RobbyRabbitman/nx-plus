@@ -5,6 +5,7 @@
   "files": [],
   "exclude": [],
   "references": [
+    { "path": "../../tools/verdaccio" },
     { "path": "../node-util" },
     { "path": "../../tools/vite" },
     { "path": "../../tools/eslint" },

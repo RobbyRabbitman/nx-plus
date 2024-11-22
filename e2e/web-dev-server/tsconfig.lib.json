@@ -9,6 +9,7 @@
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../../packages/web-dev-server/tsconfig.lib.json" },
+    { "path": "../../tools/verdaccio/tsconfig.lib.json" },
     { "path": "../../packages/node-util/tsconfig.lib.json" },
     { "path": "../../packages/node-e2e-util/tsconfig.lib.json" },
     { "path": "../../tools/vite/tsconfig.lib.json" },

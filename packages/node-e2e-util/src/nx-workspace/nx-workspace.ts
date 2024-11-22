@@ -1,6 +1,7 @@
 import { logger, readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
+import { VERDACCIO_URL } from '@robby-rabbitman/nx-plus-tools-verdaccio';
 import { spawnSync } from 'child_process';
-import { mkdir, rm } from 'fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
 import nodeE2eUtilPackageJson from '../../package.json';
 
@@ -71,13 +72,29 @@ export const createE2eNxWorkspace = async (
     'e2e-nx-workspaces',
   );
 
-  return createNxWorkspace({
+  const e2eWorkspaceRoot = await createNxWorkspace({
     cwd: e2eNxWorkspacesOfProject,
     version,
     name,
     args,
     clear,
   });
+
+  logger.verbose(
+    `[createE2eNxWorkspace] Created nx workspace in ${e2eWorkspaceRoot}`,
+  );
+
+  const npmrcPath = join(e2eWorkspaceRoot, '.npmrc');
+
+  const npmrc = await readFile(npmrcPath, { encoding: 'utf-8' }).catch(
+    () => '',
+  );
+
+  await writeFile(npmrcPath, `${npmrc}\nregistry=${VERDACCIO_URL}`, {
+    encoding: 'utf-8',
+  });
+
+  return e2eWorkspaceRoot;
 };
 
 interface CreateNxWorkspaceOptions {

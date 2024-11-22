@@ -7,17 +7,18 @@ import {
 } from '@nx/devkit';
 import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-node-e2e-util';
 import { type WebDevServerInitGeneratorSchema } from '@robby-rabbitman/nx-plus-web-dev-server';
-import { spawnSync } from 'child_process';
+import { execSync } from 'child_process';
 import { join } from 'path';
 
 describe(
-  '[E2e Test] generate run @robby-rabbitman/nx-plus-web-test-runner:init',
+  '[E2e Test] nx generate run @robby-rabbitman/nx-plus-web-test-runner:init',
   {
     timeout: 10 * 60 * 1000,
   },
   () => {
     let workspaceRoot: string;
     let nxJson: NxJsonConfiguration;
+    let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
 
     const readNxJson = () =>
       readJsonFile<NxJsonConfiguration>(join(workspaceRoot, 'nx.json'));
@@ -30,18 +31,35 @@ describe(
      * run the `nx.json` is restored to save resources.
      */
 
-    beforeAll(async () => {
-      workspaceRoot = await createE2eNxWorkspace({
-        name: '@robby-rabbitman/nx-plus-web-test-runner--init',
-        args: {
-          preset: 'ts',
-        },
-      });
+    beforeAll(
+      async () => {
+        workspaceRoot = await createE2eNxWorkspace({
+          name: '@robby-rabbitman__nx-plus-web-test-runner--init',
+          args: {
+            preset: 'ts',
+          },
+        });
 
-      nxJson = readNxJson();
+        packageManagerCommand = getPackageManagerCommand(
+          detectPackageManager(workspaceRoot),
+          workspaceRoot,
+        );
 
-      Object.freeze(nxJson);
-    });
+        execSync(
+          `${packageManagerCommand.add} @robby-rabbitman/nx-plus-web-dev-server@local`,
+          {
+            cwd: workspaceRoot,
+            stdio: 'inherit',
+            encoding: 'utf-8',
+          },
+        );
+
+        nxJson = readNxJson();
+
+        Object.freeze(nxJson);
+      },
+      10 * 60 * 1000,
+    );
 
     afterEach(() => {
       writeNxJson(nxJson);
@@ -58,25 +76,14 @@ describe(
         .map(([name, value]) => `--${name}=${value}`)
         .join(' ');
 
-      const packageManager = getPackageManagerCommand(
-        detectPackageManager(workspaceRoot),
-      );
-
-      const result = spawnSync(
-        packageManager.exec,
-        `nx generate @robby-rabbitman/nx-plus-web-dev-server:init ${args}`
-          .trim()
-          .split(' '),
+      execSync(
+        `${packageManagerCommand.exec} nx generate @robby-rabbitman/nx-plus-web-dev-server:init ${args}`,
         {
           cwd: workspaceRoot,
+          stdio: 'inherit',
+          encoding: 'utf-8',
         },
       );
-
-      if (result.status !== 0) {
-        throw result;
-      }
-
-      return result;
     };
 
     describe('should not modify the `nx.json` when the plugin is already registered in the `nx.json`', () => {

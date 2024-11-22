@@ -30,3 +30,4 @@ Thumbs.db
 .nx/workspace-data
 **/*.timestamp-*
 .pnpm-store
+e2e-nx-workspaces
