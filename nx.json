@@ -59,7 +59,13 @@
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "test-vite" }
+      "options": { "testTargetName": "test-vite" },
+      "exclude": ["e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": { "testTargetName": "e2e-vite" },
+      "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
