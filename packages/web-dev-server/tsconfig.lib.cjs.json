@@ -10,7 +10,7 @@
     "module": "CommonJS",
     "moduleResolution": "node"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
   "references": [
     { "path": "../../tools/vite/tsconfig.lib.json" },
