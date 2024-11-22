@@ -21,13 +21,13 @@ type CreateE2eNxWorkspaceOptions = Partial<
  * @returns The workspace root of the created nx workspace.
  */
 export const createE2eNxWorkspace = async (
-  options: CreateE2eNxWorkspaceOptions,
+  options?: CreateE2eNxWorkspaceOptions,
 ) => {
   const projectName = process.env.NX_TASK_TARGET_PROJECT;
 
   if (!projectName) {
     throw new Error(
-      '[createE2eNxWorkspace] Missing required environment variable `NX_TASK_TARGET_PROJECT` - are you a nx task?',
+      '[createE2eNxWorkspace] Missing required environment variable NX_TASK_TARGET_PROJECT - are you a nx task?',
     );
   }
 
@@ -61,7 +61,7 @@ export const createE2eNxWorkspace = async (
   /** Can not really happen, but safe is safe. */
   if (!projectConfig) {
     throw new Error(
-      `[createE2eNxWorkspace] Could not find project config for project '${projectName}'`,
+      `[createE2eNxWorkspace] Could not find project config for project ${projectName}`,
     );
   }
 
@@ -100,7 +100,7 @@ interface CreateNxWorkspaceOptions {
   version: string;
 
   /** Additional arguments for `create-nx-workspace`. */
-  args?: string;
+  args?: Record<string, string | number | boolean>;
 }
 
 /**
@@ -132,19 +132,23 @@ const createNxWorkspace = async (options: CreateNxWorkspaceOptions) => {
     recursive: true,
   });
 
-  const createNxWorkspaceCmd = `create-nx-workspace@${version} ${name} --nxCloud skip --no-interactive ${args}`;
+  const createNxWorkspaceCmd = `create-nx-workspace@${version} --name=${name} --skipGit=true --nxCloud=skip --interactive=false ${Object.entries(
+    args ?? {},
+  )
+    .map(([name, value]) => `--${name}=${value}`)
+    .join(' ')}`;
 
   logger.verbose(`[createNxWorkspace] Running ${createNxWorkspaceCmd}`);
 
   const createNxWorkspaceResult = spawnSync(
     'pnpx',
-    createNxWorkspaceCmd.split(' '),
+    createNxWorkspaceCmd.trim().split(' '),
     {
       cwd,
     },
   );
 
-  if (createNxWorkspaceResult.error) {
+  if (createNxWorkspaceResult.status !== 0) {
     throw new Error(
       `[createNxWorkspace] Failed to create nx workspace in ${workspaceRoot}`,
       {
