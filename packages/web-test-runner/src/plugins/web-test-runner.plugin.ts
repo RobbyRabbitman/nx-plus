@@ -78,13 +78,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
 
   const maybeWebTestRunnerProjectRoot = dirname(webTestRunnerConfigPath);
 
-  /**
-   * TODO: should a root web-test-runner be allowed?
-   *
-   * Check whether `webTestRunnerConfigPath` is considered a non root project,
-   * if not returns without modifying the project graph.
-   */
-  if (!isNonRootProject(maybeWebTestRunnerProjectRoot, context.workspaceRoot)) {
+  if (!isProject(maybeWebTestRunnerProjectRoot, context.workspaceRoot)) {
     return {};
   }
 
@@ -122,18 +116,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
   };
 };
 
-/**
- * Helper function for `createWebTestRunnerTarget()`.
- *
- * https://nx.dev/extending-nx/recipes/project-graph-plugins#identifying-projects
- *
- * @param directory Relative to `workspaceRoot` e.g `'path/to/project'`
- * @returns Whether `directory` is considered a non root project => `directory`
- *   is not `workspaceRoot` and has a `project.json` or `package.json`
- */
-const isNonRootProject = (directory: string, workspaceRoot: string) => {
-  if (directory === '.') return false;
-
+const isProject = (directory: string, workspaceRoot: string) => {
   return (
     existsSync(join(workspaceRoot, directory, 'project.json')) ||
     existsSync(join(workspaceRoot, directory, 'package.json'))

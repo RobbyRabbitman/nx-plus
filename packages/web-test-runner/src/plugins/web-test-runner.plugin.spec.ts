@@ -42,21 +42,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-
       );
     };
 
-    describe('with a web-test-runner config in the workspace root', () => {
-      it('should not modify the project graph', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'package.json': '{}',
-            'project.json': '{}',
-            'web-test-runner.config.js': '{}',
-          },
-        });
-
-        expect(nodes).toContainEqual(['web-test-runner.config.js', {}]);
-      });
-    });
-
-    describe('with a web-test-runner config in a sub directory of the workspace', () => {
+    describe('with a web-test-runner config in a directory of the workspace', () => {
       it('should not modify the project graph by default', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
