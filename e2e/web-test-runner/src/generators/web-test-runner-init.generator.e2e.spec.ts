@@ -7,6 +7,7 @@ import {
 } from '@nx/devkit';
 import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-node-e2e-util';
 import { type WebTestRunnerInitGeneratorSchema } from '@robby-rabbitman/nx-plus-web-test-runner';
+import nxPlusWebTestRunnerPackageJson from '@robby-rabbitman/nx-plus-web-test-runner/package.json';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
@@ -46,7 +47,7 @@ describe(
         );
 
         execSync(
-          `${packageManagerCommand.add} @robby-rabbitman/nx-plus-web-test-runner@local`,
+          `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local`,
           {
             cwd: workspaceRoot,
             stdio: 'inherit',

@@ -11,8 +11,7 @@ import {
   getRandomPort,
   releasePort,
 } from '@robby-rabbitman/nx-plus-node-e2e-util';
-import { execUntil } from '@robby-rabbitman/nx-plus-node-util';
-import nxPlusWebDevServerPackageJson from '@robby-rabbitman/nx-plus-web-test-runner/package.json';
+import nxPlusWebTestRunnerPackageJson from '@robby-rabbitman/nx-plus-web-test-runner/package.json';
 import { execSync } from 'child_process';
 import { mkdir, rm, writeFile } from 'fs/promises';
 import { join, relative } from 'path';
@@ -23,9 +22,9 @@ describe(
     timeout: 10 * 60 * 1000,
   },
   () => {
-    const webDevServerNpmPackage = '@web/dev-server';
-    const webDevServerVersion =
-      nxPlusWebDevServerPackageJson.peerDependencies[webDevServerNpmPackage];
+    const webTestRunnerNpmPackage = '@web/test-runner';
+    const webTestRunnerVersion =
+      nxPlusWebTestRunnerPackageJson.peerDependencies[webTestRunnerNpmPackage];
 
     let workspaceRoot: string;
     let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
@@ -40,7 +39,7 @@ describe(
     const getSomeWebAppProjectRoot = () =>
       join(workspaceRoot, 'packages', someWebAppName);
 
-    const writeWebDevServerConfig = async (options: {
+    const writeWebTestRunnerConfig = async (options: {
       path: string;
       config: object;
     }) => {
@@ -49,15 +48,24 @@ describe(
       await writeFile(path, `export default ${JSON.stringify(config)};`);
     };
 
+    const getWebTestRunnerConfig = async (path: string) => {
+      const config = await import(path);
+
+      return config.default as object;
+    };
+
     /**
-     * Creates a web app in packages/{{name}} with the given
-     * `webDevServerConfig` and a simple index.html file in the root.
+     * Creates a project with a basic web test runner config in
+     * packages/{{name}}, installs `@esm-bundle/chai` and includes a simple test
+     * file.
      */
-    const createWebApp = async (options: {
-      name: string;
-      webDevServerConfig: object;
-    }) => {
-      const { name, webDevServerConfig } = options;
+    const createWebTestRunnerProject = async (options: { name: string }) => {
+      const { name } = options;
+
+      const webTestRunnerConfig = {
+        files: ['some-math.spec.js'],
+        watch: false,
+      };
 
       const projectRoot = join(workspaceRoot, 'packages', name);
 
@@ -68,22 +76,24 @@ describe(
       writeJsonFile(join(projectRoot, 'package.json'), {
         name,
         type: 'module',
+        devDependencies: {
+          '@esm-bundle/chai': 'latest',
+        },
       });
 
-      await writeWebDevServerConfig({
+      await writeWebTestRunnerConfig({
         path: join(projectRoot, 'web-test-runner.config.js'),
-        config: webDevServerConfig,
+        config: webTestRunnerConfig,
       });
 
       await writeFile(
-        join(projectRoot, 'index.html'),
+        join(projectRoot, 'some-math.spec.js'),
         `
-        <!DOCTYPE html>
-        <html>
-          <body>
-            <h1>${name}</h1>
-          </body>
-        </html>
+        import { expect } from '@esm-bundle/chai';
+  
+        it('1 + 2 should be 3', () => {
+          expect(1 + 2).to.equal(3);
+        });
         `,
       );
     };
@@ -104,16 +114,7 @@ describe(
         );
 
         execSync(
-          `${packageManagerCommand.add} ${webDevServerNpmPackage}@${webDevServerVersion}`,
-          {
-            cwd: workspaceRoot,
-            stdio: 'inherit',
-            encoding: 'utf-8',
-          },
-        );
-
-        execSync(
-          `${packageManagerCommand.add} ${nxPlusWebDevServerPackageJson.name}@local ${webDevServerNpmPackage}@${webDevServerVersion}`,
+          `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local ${webTestRunnerNpmPackage}@${webTestRunnerVersion}`,
           {
             cwd: workspaceRoot,
             stdio: 'inherit',
@@ -124,7 +125,7 @@ describe(
         const nxJson = readNxJson();
         nxJson.plugins ??= [];
         nxJson.plugins.push(
-          `${nxPlusWebDevServerPackageJson.name}/plugins/web-test-runner`,
+          `${nxPlusWebTestRunnerPackageJson.name}/plugins/web-test-runner`,
         );
         writeNxJson(nxJson);
       },
@@ -133,7 +134,9 @@ describe(
 
     beforeEach(async () => {
       await rm(getSomeWebAppProjectRoot(), { force: true, recursive: true });
-      await createWebApp({ name: someWebAppName, webDevServerConfig: {} });
+      await createWebTestRunnerProject({
+        name: someWebAppName,
+      });
     });
 
     it('should be inferred', async () => {
@@ -144,7 +147,7 @@ describe(
         }),
       ) as ProjectConfiguration;
 
-      expect(someWebAppProjectConfig.targets?.serve).toMatchObject({
+      expect(someWebAppProjectConfig.targets?.test).toMatchObject({
         executor: 'nx:run-commands',
         options: {
           command: 'web-test-runner',
@@ -154,26 +157,29 @@ describe(
       });
     });
 
-    it('should run the Web Dev Server', async () => {
+    it('should run the Web Test Runner', async () => {
       const port = await getRandomPort();
 
       try {
-        const webDevServerConfiguration = {
+        const webTestRunnerConfiguration = {
           port,
         };
 
-        await writeWebDevServerConfig({
+        await writeWebTestRunnerConfig({
           path: join(getSomeWebAppProjectRoot(), 'web-test-runner.config.js'),
-          config: webDevServerConfiguration,
+          config: {
+            ...(await getWebTestRunnerConfig(
+              join(getSomeWebAppProjectRoot(), 'web-test-runner.config.js'),
+            )),
+            ...webTestRunnerConfiguration,
+          },
         });
 
-        await execUntil(
-          `nx serve ${someWebAppName}`,
-          (log) => /Web Dev Server started.../.test(log),
-          {
+        expect(() =>
+          execSync(`${packageManagerCommand.exec} nx test ${someWebAppName}`, {
             cwd: workspaceRoot,
-          },
-        );
+          }),
+        ).not.toThrow();
       } finally {
         await releasePort(port);
       }
