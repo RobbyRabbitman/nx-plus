@@ -169,7 +169,7 @@ describe(
 
         await execUntil(
           `nx serve ${someWebAppName}`,
-          (log) => log.includes('Web Dev Server started...'),
+          (log) => /Web Dev Server started.../.test(log),
           {
             cwd: workspaceRoot,
           },
