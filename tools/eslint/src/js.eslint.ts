@@ -1,6 +1,6 @@
 import jsEslint from '@eslint/js';
 import type { Linter } from 'eslint';
-import * as prettierEslintConfig from 'eslint-config-prettier';
+import prettierEslintConfig from 'eslint-config-prettier';
 
 const jsEslintConfig = [
   /** https://eslint.org/docs/latest/use/getting-started */
@@ -8,9 +8,7 @@ const jsEslintConfig = [
     ...jsEslint.configs.recommended,
     files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.jsx'],
   },
-  {
-    rules: prettierEslintConfig.rules,
-  },
+  prettierEslintConfig,
 ] satisfies Linter.Config[];
 
 export default {

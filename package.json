@@ -27,7 +27,6 @@
     "@swc/core": "1.9.2",
     "@swc/helpers": "0.5.15",
     "@types/eslint": "9.6.1",
-    "@types/eslint-config-prettier": "6.11.3",
     "@types/node": "20.17.6",
     "@types/proper-lockfile": "4.1.4",
     "@types/semver": "7.5.8",
