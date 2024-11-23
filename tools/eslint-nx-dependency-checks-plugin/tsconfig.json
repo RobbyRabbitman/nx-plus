@@ -3,7 +3,7 @@
     "composite": true
   },
   "references": [
-    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.lib-cjs.json" },
     { "path": "./tsconfig.spec.json" }
   ]
 }
