@@ -4,7 +4,7 @@
   "engines": {
     "node": "20.18.1"
   },
-  "packageManager": "pnpm@9.13.2",
+  "packageManager": "pnpm@9.14.1",
   "scripts": {},
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
