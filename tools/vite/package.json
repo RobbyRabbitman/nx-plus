@@ -10,6 +10,7 @@
   "types": "./dist/esm/index.d.ts",
   "dependencies": {
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
     "@nx/devkit": "20.1.2",
     "vitest": "1.6.0"
   }
