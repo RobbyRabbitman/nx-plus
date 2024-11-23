@@ -1,4 +1,4 @@
-// @ts-check
+import type { Linter } from 'eslint';
 import nodeEslint from 'eslint-plugin-n';
 import ignoreEslint from './ignore.eslint.js';
 import jsEslint from './js.eslint.js';
@@ -8,7 +8,6 @@ import tsEslint from './ts.eslint.js';
 const nodeEslintConfigRecomended =
   nodeEslint.configs['flat/recommended-module'];
 
-/** @type {import('eslint').Linter.Config[]} */
 const nodeEslintConfig = [
   /** https://github.com/eslint-community/eslint-plugin-n */
   {
@@ -36,7 +35,7 @@ const nodeEslintConfig = [
       'n/no-process-exit': 'off',
     },
   },
-];
+] satisfies Linter.Config[];
 
 export default {
   configs: {

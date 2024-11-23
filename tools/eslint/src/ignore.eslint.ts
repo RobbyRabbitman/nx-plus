@@ -1,4 +1,5 @@
-/** @type {import('eslint').Linter.Config[]} */
+import type { Linter } from 'eslint';
+
 const ignoreEslintConfig = [
   {
     ignores: [
@@ -13,7 +14,7 @@ const ignoreEslintConfig = [
       '**/*.timestamp-*',
     ],
   },
-];
+] satisfies Linter.Config[];
 
 export default {
   configs: {

@@ -1,4 +1,3 @@
-// @ts-check
 import ignoreEslint from './ignore.eslint.js';
 import jsEslint from './js.eslint.js';
 import nodeEslint from './node.eslint.js';

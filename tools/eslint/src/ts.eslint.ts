@@ -1,8 +1,6 @@
-// @ts-check
+import type { Linter } from 'eslint';
 import tsEslint from 'typescript-eslint';
 
-/** TODO: @type {import('eslint').Linter.Config[]} */
-/** @type {Object[]} */
 const tsEslintConfig = [
   /** https://typescript-eslint.io/getting-started */
   ...tsEslint
@@ -11,7 +9,7 @@ const tsEslintConfig = [
       ...tsEslintConfig,
       files: ['**/*.ts', '**/*.mts', '**/*.cts', '**/*.tsx'],
     })),
-];
+] as Linter.Config[]; // TODO: types are wrong
 
 export default {
   configs: {

@@ -1,10 +1,8 @@
-// @ts-check
 import nxEslintPlugin from '@nx/eslint-plugin';
+import type { Linter } from 'eslint';
 import jsoncEslintParser from 'jsonc-eslint-parser';
 import tsEslint from 'typescript-eslint';
 
-/** TODO: @type {import('eslint').Linter.Config[]} */
-/** @type {Object[]} */
 const nxEslintConfig = [
   { plugins: { '@nx': nxEslintPlugin } },
   // https://nx.dev/nx-api/eslint-plugin#dependency-checks-rule
@@ -88,7 +86,7 @@ const nxEslintConfig = [
       ],
     },
   },
-];
+] as Linter.Config[]; // TODO: types are wrong
 
 export default {
   configs: {

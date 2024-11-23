@@ -1,8 +1,7 @@
-// @ts-check
 import jsEslint from '@eslint/js';
+import type { Linter } from 'eslint';
 import prettierEslintConfig from 'eslint-config-prettier';
 
-/** @type {import('eslint').Linter.Config[]} */
 const jsEslintConfig = [
   /** https://eslint.org/docs/latest/use/getting-started */
   {
@@ -10,7 +9,7 @@ const jsEslintConfig = [
     files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.jsx'],
   },
   prettierEslintConfig,
-];
+] satisfies Linter.Config[];
 
 export default {
   configs: {
