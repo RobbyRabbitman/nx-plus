@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "dist-spec",
+    "outDir": "dist/spec",
     "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo"
   },
   "include": ["vite.config.*", "vitest.config.*", "src/**/*"]
