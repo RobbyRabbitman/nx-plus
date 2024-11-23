@@ -8,7 +8,7 @@
   "references": [
     { "path": "../vite" },
     { "path": "../eslint" },
-    { "path": "./tsconfig.lib-cjs.json" },
+    { "path": "./tsconfig.lib.json" },
     { "path": "./tsconfig.spec.json" }
   ]
 }

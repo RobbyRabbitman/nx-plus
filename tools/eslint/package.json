@@ -2,12 +2,12 @@
   "name": "@robby-rabbitman/nx-plus-tools-eslint",
   "version": "0.6.2",
   "files": [
-    "dist/esm",
+    "dist",
     "package.json"
   ],
   "type": "module",
-  "main": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@eslint/js": "9.14.0",
     "eslint-config-prettier": "9.1.0",

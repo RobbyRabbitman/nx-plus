@@ -2,12 +2,12 @@
   "name": "@robby-rabbitman/nx-plus-node-util",
   "version": "0.6.2",
   "files": [
-    "dist/esm",
+    "dist",
     "package.json"
   ],
   "type": "module",
-  "main": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"

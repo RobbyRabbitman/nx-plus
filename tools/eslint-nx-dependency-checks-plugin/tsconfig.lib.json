@@ -3,8 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",
-    "outDir": "dist/cjs",
-    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node-cjs.tsbuildinfo"
+    "outDir": "dist",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo"
   },
   "include": ["src/**/*"],
   "exclude": [
@@ -12,5 +12,9 @@
     "vitest.config.*",
     "src/**/*.spec.*",
     "src/**/*.d.ts"
+  ],
+  "references": [
+    { "path": "../vite/tsconfig.lib.json" },
+    { "path": "../eslint/tsconfig.lib.json" }
   ]
 }

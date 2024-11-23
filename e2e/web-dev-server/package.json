@@ -9,10 +9,10 @@
     "@nx/devkit": "20.1.2"
   },
   "files": [
-    "dist/esm",
+    "dist",
     "package.json"
   ],
   "type": "module",
-  "main": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
 }

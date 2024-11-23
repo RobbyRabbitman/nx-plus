@@ -39,26 +39,19 @@
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "files": [
-    "dist/esm",
-    "dist/cjs",
+    "dist",
     "generators.json",
     "package.json"
   ],
   "generators": "./generators.json",
   "type": "commonjs",
-  "main": "./dist/cjs/index.js",
-  "types": "./dist/cjs/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
-    },
     "./plugins/web-dev-server": {
-      "import": "./dist/esm/plugins/web-dev-server.plugin.js",
-      "require": "./dist/cjs/plugins/web-dev-server.plugin.js",
-      "types": "./dist/esm/plugins/web-dev-server.plugin.d.ts"
+      "require": "./dist/plugins/web-dev-server.plugin.js",
+      "types": "./dist/plugins/web-dev-server.plugin.d.ts"
     }
   }
 }

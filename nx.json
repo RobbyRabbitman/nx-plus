@@ -42,18 +42,6 @@
       }
     },
     {
-      "plugin": "@nx/js/typescript",
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck-tsc-cjs"
-        },
-        "build": {
-          "targetName": "build-tsc-cjs",
-          "configName": "tsconfig.lib-cjs.json"
-        }
-      }
-    },
-    {
       "plugin": "@nx/eslint/plugin",
       "options": { "targetName": "lint-eslint" }
     },
