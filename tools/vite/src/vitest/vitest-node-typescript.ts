@@ -36,7 +36,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
       globals: true,
       /**
        * TODO: threads is resulting in segmentation fault with e.g. nx run
-       * tools-nx-publish:test-vite
+       * tools-nx-publish:test-vitest
        */
       pool: 'forks',
       environment: 'node',

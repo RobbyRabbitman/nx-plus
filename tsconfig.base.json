@@ -35,6 +35,7 @@
     "incremental": true,
     "isolatedModules": true,
     "noEmitOnError": true,
+    "esModuleInterop": true,
     "pretty": true
   }
 }
