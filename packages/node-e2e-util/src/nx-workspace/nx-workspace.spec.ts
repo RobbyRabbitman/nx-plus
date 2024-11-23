@@ -1,6 +1,6 @@
 import { readCachedProjectGraph, type ProjectGraph } from '@nx/devkit';
 import { spawnSync, type SpawnSyncReturns } from 'child_process';
-import { rm } from 'fs/promises';
+import { readFile, rm } from 'fs/promises';
 import { createE2eNxWorkspace } from './nx-workspace.js';
 
 vi.mock('@nx/devkit', () => ({
@@ -40,6 +40,16 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
       stderr: Buffer.from(''),
       stdout: Buffer.from(''),
     } satisfies SpawnSyncReturns<Buffer>);
+
+    vi.mocked(readFile).mockImplementation(
+      async (...args: Parameters<typeof readFile>) => {
+        if (typeof args[0] === 'string' && args[0].endsWith('.npmrc')) {
+          throw new Error('ENOENT');
+        }
+
+        return Symbol('not mocked') as unknown as ReturnType<typeof readFile>;
+      },
+    );
   });
 
   it('should be inkoved as a nx task', async () => {

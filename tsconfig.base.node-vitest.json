@@ -4,6 +4,8 @@
   "include": [],
   "exclude": [],
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "module": "ESNext",
     "types": [
       "node",
       "vitest/globals",
