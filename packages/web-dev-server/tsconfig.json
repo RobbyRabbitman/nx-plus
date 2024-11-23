@@ -15,6 +15,9 @@
   ],
   "references": [
     { "path": "../../tools/vite" },
-    { "path": "../../tools/eslint" }
+    { "path": "../../tools/eslint" },
+    {
+      "path": "./tsconfig.spec.json"
+    }
   ]
 }
