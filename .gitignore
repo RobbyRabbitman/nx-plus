@@ -1,4 +1,5 @@
 dist
+dist-spec
 build
 tmp
 /out-tsc

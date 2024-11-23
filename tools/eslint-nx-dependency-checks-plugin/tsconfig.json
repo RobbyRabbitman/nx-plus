@@ -6,6 +6,8 @@
   "include": [],
   "exclude": [],
   "references": [
+    { "path": "../vite" },
+    { "path": "../eslint" },
     { "path": "./tsconfig.lib-cjs.json" },
     { "path": "./tsconfig.spec.json" }
   ]

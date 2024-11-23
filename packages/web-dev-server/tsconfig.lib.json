@@ -14,10 +14,8 @@
     "src/**/*.d.ts"
   ],
   "references": [
-    { "path": "../../tools/vite" },
-    { "path": "../../tools/eslint" },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+    { "path": "../../tools/vite/tsconfig.lib.json" },
+    { "path": "../../tools/eslint/tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
   ]
 }
