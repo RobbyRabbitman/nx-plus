@@ -12,13 +12,13 @@ import {
   releasePort,
 } from '@robby-rabbitman/nx-plus-node-e2e-util';
 import { execUntil } from '@robby-rabbitman/nx-plus-node-util';
-import nxPlusWebDevServerPackageJson from '@robby-rabbitman/nx-plus-web-dev-server/package.json';
+import nxPlusWebDevServerPackageJson from '@robby-rabbitman/nx-plus-web-test-runner/package.json';
 import { execSync } from 'child_process';
 import { mkdir, rm, writeFile } from 'fs/promises';
 import { join, relative } from 'path';
 
 describe(
-  '[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+  '[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
   {
     timeout: 10 * 60 * 1000,
   },
@@ -71,7 +71,7 @@ describe(
       });
 
       await writeWebDevServerConfig({
-        path: join(projectRoot, 'web-dev-server.config.js'),
+        path: join(projectRoot, 'web-test-runner.config.js'),
         config: webDevServerConfig,
       });
 
@@ -91,7 +91,7 @@ describe(
     beforeAll(
       async () => {
         workspaceRoot = await createE2eNxWorkspace({
-          name: 'robby-rabbitman__nx-plus-web-dev-server__plugins__web-dev-server',
+          name: 'robby-rabbitman__nx-plus-web-test-runner__plugins__web-test-runner',
           args: {
             packageManager: 'pnpm',
             preset: 'ts',
@@ -124,7 +124,7 @@ describe(
         const nxJson = readNxJson();
         nxJson.plugins ??= [];
         nxJson.plugins.push(
-          `${nxPlusWebDevServerPackageJson.name}/plugins/web-dev-server`,
+          `${nxPlusWebDevServerPackageJson.name}/plugins/web-test-runner`,
         );
         writeNxJson(nxJson);
       },
@@ -147,8 +147,8 @@ describe(
       expect(someWebAppProjectConfig.targets?.serve).toMatchObject({
         executor: 'nx:run-commands',
         options: {
-          command: 'web-dev-server',
-          config: 'web-dev-server.config.js',
+          command: 'web-test-runner',
+          config: 'web-test-runner.config.js',
           cwd: relative(workspaceRoot, getSomeWebAppProjectRoot()),
         },
       });
@@ -163,7 +163,7 @@ describe(
         };
 
         await writeWebDevServerConfig({
-          path: join(getSomeWebAppProjectRoot(), 'web-dev-server.config.js'),
+          path: join(getSomeWebAppProjectRoot(), 'web-test-runner.config.js'),
           config: webDevServerConfiguration,
         });
 

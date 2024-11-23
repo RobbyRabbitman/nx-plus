@@ -6,12 +6,12 @@ import {
   writeJsonFile,
 } from '@nx/devkit';
 import { createE2eNxWorkspace } from '@robby-rabbitman/nx-plus-node-e2e-util';
-import { type WebDevServerInitGeneratorSchema } from '@robby-rabbitman/nx-plus-web-dev-server';
+import { type WebTestRunnerInitGeneratorSchema } from '@robby-rabbitman/nx-plus-web-test-runner';
 import { execSync } from 'child_process';
 import { join } from 'path';
 
 describe(
-  '[E2e Test] nx generate run @robby-rabbitman/nx-plus-web-dev-server:init',
+  '[E2e Test] nx generate run @robby-rabbitman/nx-plus-web-test-runner:init',
   {
     timeout: 10 * 60 * 1000,
   },
@@ -34,7 +34,7 @@ describe(
     beforeAll(
       async () => {
         workspaceRoot = await createE2eNxWorkspace({
-          name: 'robby-rabbitman__nx-plus-web-dev-server--init',
+          name: 'robby-rabbitman__nx-plus-web-test-runner--init',
           args: {
             preset: 'ts',
           },
@@ -46,7 +46,7 @@ describe(
         );
 
         execSync(
-          `${packageManagerCommand.add} @robby-rabbitman/nx-plus-web-dev-server@local`,
+          `${packageManagerCommand.add} @robby-rabbitman/nx-plus-web-test-runner@local`,
           {
             cwd: workspaceRoot,
             stdio: 'inherit',
@@ -66,18 +66,18 @@ describe(
     });
 
     /**
-     * Runs the `@robby-rabbitman/nx-plus-web-dev-server:init` generator in the
+     * Runs the `@robby-rabbitman/nx-plus-web-test-runner:init` generator in the
      * e2e workspace.
      */
-    const runWebDevServerInitGenerator = (
-      schema?: WebDevServerInitGeneratorSchema,
+    const runWebTestRunnerInitGenerator = (
+      schema?: WebTestRunnerInitGeneratorSchema,
     ) => {
       const args = Object.entries(schema ?? {})
         .map(([name, value]) => `--${name}=${value}`)
         .join(' ');
 
       execSync(
-        `${packageManagerCommand.exec} nx generate @robby-rabbitman/nx-plus-web-dev-server:init ${args}`,
+        `${packageManagerCommand.exec} nx generate @robby-rabbitman/nx-plus-web-test-runner:init ${args}`,
         {
           cwd: workspaceRoot,
           stdio: 'inherit',
@@ -91,12 +91,12 @@ describe(
         const nxJsonBefore = readNxJson();
 
         nxJsonBefore.plugins = [
-          '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+          '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
         ];
 
         writeNxJson(nxJsonBefore);
 
-        runWebDevServerInitGenerator();
+        runWebTestRunnerInitGenerator();
 
         const nxJsonAfter = readNxJson();
 
@@ -109,13 +109,13 @@ describe(
         nxJsonBefore.plugins = [
           {
             plugin:
-              '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+              '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
           },
         ];
 
         writeNxJson(nxJsonBefore);
 
-        runWebDevServerInitGenerator();
+        runWebTestRunnerInitGenerator();
 
         const nxJsonAfter = readNxJson();
 
@@ -124,60 +124,60 @@ describe(
     });
 
     it('should declare the plugin in the `nx.json` when the plugin is not declared in the `nx.json`', async () => {
-      runWebDevServerInitGenerator();
+      runWebTestRunnerInitGenerator();
 
       expect(readNxJson().plugins).toContainEqual(
         expect.objectContaining({
           plugin:
-            '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+            '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
         }),
       );
     });
 
     describe('schema', () => {
-      describe('serveTargetName', () => {
+      describe('testTargetName', () => {
         it('should use the provided value', () => {
-          const serveTargetName = 'web-dev-server';
+          const testTargetName = 'web-test-runner';
 
-          runWebDevServerInitGenerator({ serveTargetName });
+          runWebTestRunnerInitGenerator({ testTargetName });
 
           expect(readNxJson().plugins).toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
               options: {
-                serveTargetName,
-              } satisfies WebDevServerInitGeneratorSchema,
+                testTargetName,
+              } satisfies WebTestRunnerInitGeneratorSchema,
             }),
           );
         });
 
-        it('should fall back to `serve` when the provided value is an empty string', () => {
-          const serveTargetName = '';
+        it('should fall back to `test` when the provided value is an empty string', () => {
+          const testTargetName = '';
 
-          runWebDevServerInitGenerator({ serveTargetName });
+          runWebTestRunnerInitGenerator({ testTargetName });
 
           expect(readNxJson().plugins).toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
               options: {
-                serveTargetName: 'serve',
-              } satisfies WebDevServerInitGeneratorSchema,
+                testTargetName: 'test',
+              } satisfies WebTestRunnerInitGeneratorSchema,
             }),
           );
         });
 
-        it('should fall back to `serve` when the value is not provided', () => {
-          runWebDevServerInitGenerator();
+        it('should fall back to `test` when the value is not provided', () => {
+          runWebTestRunnerInitGenerator();
 
           expect(readNxJson().plugins).toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
               options: {
-                serveTargetName: 'serve',
-              } satisfies WebDevServerInitGeneratorSchema,
+                testTargetName: 'test',
+              } satisfies WebTestRunnerInitGeneratorSchema,
             }),
           );
         });
@@ -187,34 +187,34 @@ describe(
 
       describe('skipAddPlugin', () => {
         it('should add the plugin to `nx.json` when the value is not provided', () => {
-          runWebDevServerInitGenerator();
+          runWebTestRunnerInitGenerator();
 
           expect(readNxJson().plugins).toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
             }),
           );
         });
 
         it('should add the plugin to `nx.json` when the provided value is `false`', () => {
-          runWebDevServerInitGenerator({ skipAddPlugin: false });
+          runWebTestRunnerInitGenerator({ skipAddPlugin: false });
 
           expect(readNxJson().plugins).toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
             }),
           );
         });
 
         it('should not add the plugin to `nx.json` when the provided value is `true`', () => {
-          runWebDevServerInitGenerator({ skipAddPlugin: true });
+          runWebTestRunnerInitGenerator({ skipAddPlugin: true });
 
           expect(readNxJson().plugins).not.toContainEqual(
             expect.objectContaining({
               plugin:
-                '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+                '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
             }),
           );
         });

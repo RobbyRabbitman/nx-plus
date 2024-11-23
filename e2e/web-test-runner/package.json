@@ -1,0 +1,19 @@
+{
+  "name": "@robby-rabbitman/nx-plus-e2e-web-test-runner",
+  "version": "0.6.2",
+  "dependencies": {
+    "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
+    "@robby-rabbitman/nx-plus-node-e2e-util": "workspace:*",
+    "@robby-rabbitman/nx-plus-node-util": "workspace:*",
+    "@robby-rabbitman/nx-plus-web-test-runner": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@nx/devkit": "20.1.2"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}

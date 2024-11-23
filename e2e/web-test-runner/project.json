@@ -1,0 +1,5 @@
+{
+  "name": "e2e-web-test-runner",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:e2e"]
+}
