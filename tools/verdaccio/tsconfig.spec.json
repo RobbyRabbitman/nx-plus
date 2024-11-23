@@ -6,10 +6,5 @@
     "outDir": "dist/spec",
     "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo"
   },
-  "include": [
-    "vite.config.*",
-    "vitest.config.*",
-    "src/**/*.spec.*",
-    "src/**/*.d.ts"
-  ]
+  "include": ["vite.config.*", "vitest.config.*", "src/**/*"]
 }

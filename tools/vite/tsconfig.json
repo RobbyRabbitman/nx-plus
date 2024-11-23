@@ -13,10 +13,5 @@
     "src/**/*.spec.*",
     "src/**/*.d.ts"
   ],
-  "references": [
-    { "path": "../eslint" },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ]
+  "references": [{ "path": "../eslint" }]
 }
