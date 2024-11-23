@@ -7,7 +7,7 @@
   "packageManager": "pnpm@9.12.3",
   "scripts": {
     "postinstall": "sh post-install.sh",
-    "clean": "pnpm -r exec rm -rf node_modules tmp .storage .logs coverage dist && find . -name '*.timestamp-*' -type f -delete && nx reset && pnpm i"
+    "clean": "pnpm -r exec rm -rf node_modules tmp .storage .logs coverage dist dist-spec && find . -name '*.timestamp-*' -type f -delete && nx reset && pnpm i"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
