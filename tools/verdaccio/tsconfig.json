@@ -12,5 +12,6 @@
     "vitest.config.*",
     "src/**/*.spec.*",
     "src/**/*.d.ts"
-  ]
+  ],
+  "references": [{ "path": "../vite" }, { "path": "../eslint" }]
 }
