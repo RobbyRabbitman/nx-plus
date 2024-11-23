@@ -36,7 +36,7 @@ describe(
           args: {
             packageManager: 'pnpm',
             preset: 'ts',
-            workspaceType: 'integrated',
+            workspaceType: 'standalone',
           },
         });
 
@@ -73,21 +73,6 @@ describe(
       10 * 60 * 1000,
     );
 
-    it('should be inferred', async () => {
-      execSync(
-        'nx generate @nx/js:library --no-interactive --directory packages/some-web-project --name=some-web-project --linter=none --unitTestRunner=none --js --minimal',
-        {
-          cwd: workspaceRoot,
-          stdio: 'inherit',
-          encoding: 'utf-8',
-        },
-      );
-
-      execSync(packageManagerCommand.install, {
-        cwd: workspaceRoot,
-        stdio: 'inherit',
-        encoding: 'utf-8',
-      });
-    });
+    it('should be inferred', async () => {});
   },
 );

@@ -27,7 +27,7 @@
     "forceConsistentCasingInFileNames": true,
 
     "allowJs": true,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "composite": true,
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
