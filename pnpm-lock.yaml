@@ -160,6 +160,9 @@ importers:
       '@robby-rabbitman/nx-plus-node-e2e-util':
         specifier: workspace:*
         version: link:../../packages/node-e2e-util
+      '@robby-rabbitman/nx-plus-node-util':
+        specifier: workspace:*
+        version: link:../../packages/node-util
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint

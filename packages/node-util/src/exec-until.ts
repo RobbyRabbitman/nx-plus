@@ -1,3 +1,4 @@
+import { logger } from '@nx/devkit';
 import { ChildProcess, exec, type ExecOptions } from 'child_process';
 
 /**
@@ -21,6 +22,8 @@ export function execUntil(
     let predicateMatched = false;
 
     const callPredicateOnDataEvent = (data: string) => {
+      logger.verbose(data);
+
       output += data;
 
       if (!predicateMatched && predicate(output)) {
