@@ -1,15 +1,22 @@
 {
-  "extends": "./tsconfig",
+  "extends": "../../tsconfig.base.node-vitest.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
     "outDir": "dist/spec",
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.spec.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo",
     "types": [
+      "node",
       "vitest/globals",
       "vitest/importMeta",
       "vite/client",
-      "node",
       "vitest"
     ]
   },
-  "include": ["vite.config.ts", "vitest.config.mts", "src/**/*.ts"]
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "src/**/*.spec.*",
+    "src/**/*.d.ts"
+  ]
 }
