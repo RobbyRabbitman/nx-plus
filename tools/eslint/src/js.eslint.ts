@@ -1,6 +1,6 @@
 import jsEslint from '@eslint/js';
 import type { Linter } from 'eslint';
-// @ts-expect-error
+// @ts-expect-error eslint-config-prettier has wrong typings in its @types package
 import prettierEslintConfig from 'eslint-config-prettier';
 
 const jsEslintConfig = [
