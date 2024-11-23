@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "generators": {
     "init": {
-      "factory": "./dist/src/generators/web-dev-server-init.generator",
-      "schema": "./dist/src/generators/web-dev-server-init.generator.schema.json",
+      "factory": "./dist/generators/web-dev-server-init.generator",
+      "schema": "./dist/generators/web-dev-server-init.generator.schema.json",
       "hidden": true
     }
   }

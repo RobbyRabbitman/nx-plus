@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "generators": {
     "init": {
-      "factory": "./src/generators/web-test-runner-init.generator",
-      "schema": "./src/generators/web-test-runner-init.generator.schema.json",
+      "factory": "./dist/generators/web-test-runner-init.generator",
+      "schema": "./dist/generators/web-test-runner-init.generator.schema.json",
       "hidden": true
     }
   }

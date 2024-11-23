@@ -48,10 +48,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
+    ".": "./dist/index.js",
     "./package.json": "./package.json",
-    "./plugins/web-dev-server": {
-      "require": "./dist/plugins/web-dev-server.plugin.js",
-      "types": "./dist/plugins/web-dev-server.plugin.d.ts"
-    }
+    "./plugins/web-dev-server": "./dist/plugins/web-dev-server.plugin.js"
   }
 }

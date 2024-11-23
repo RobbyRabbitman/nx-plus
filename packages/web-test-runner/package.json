@@ -39,17 +39,17 @@
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "files": [
-    "dist/src",
+    "dist",
     "generators.json",
     "package.json"
   ],
   "generators": "./generators.json",
-  "type": "module",
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/src/index.js",
+    ".": "./dist/index.js",
     "./package.json": "./package.json",
-    "./plugins/web-test-runner": "./dist/src/plugins/web-test-runner.plugin.js"
+    "./plugins/web-test-runner": "./dist/plugins/web-test-runner.plugin.js"
   }
 }
