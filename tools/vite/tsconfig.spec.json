@@ -4,14 +4,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "outDir": "dist/spec",
-    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo",
-    "types": [
-      "node",
-      "vitest/globals",
-      "vitest/importMeta",
-      "vite/client",
-      "vitest"
-    ]
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo"
   },
   "include": [
     "vite.config.*",
