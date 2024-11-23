@@ -1,4 +1,7 @@
 {
+  "files": [],
+  "include": [],
+  "exclude": [],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",

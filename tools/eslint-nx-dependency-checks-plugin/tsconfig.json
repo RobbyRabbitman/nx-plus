@@ -2,6 +2,9 @@
   "compilerOptions": {
     "composite": true
   },
+  "files": [],
+  "include": [],
+  "exclude": [],
   "references": [
     { "path": "./tsconfig.lib-cjs.json" },
     { "path": "./tsconfig.spec.json" }

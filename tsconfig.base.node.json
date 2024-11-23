@@ -1,5 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "exclude": [],
   "compilerOptions": {
     "types": ["node"],
     "module": "NodeNext",

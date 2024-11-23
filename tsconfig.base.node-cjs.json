@@ -1,5 +1,8 @@
 {
   "extends": "./tsconfig.base.node.json",
+  "files": [],
+  "include": [],
+  "exclude": [],
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "node",
