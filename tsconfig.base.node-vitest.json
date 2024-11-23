@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.base.node.json",
   "compilerOptions": {
-    "outDir": "dist/node-vitest",
-    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node-vitest.tsbuildinfo",
     "types": [
       "node",
       "vitest/globals",
