@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.base.node.json",
+  "extends": "../../tsconfig.base.node-cjs.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",
-    "outDir": "dist/esm",
-    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node.tsbuildinfo"
+    "outDir": "dist/cjs",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node-cjs.tsbuildinfo"
   },
   "include": ["src/**/*"],
   "exclude": [
