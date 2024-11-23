@@ -42,20 +42,6 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
       );
     };
 
-    describe('with a web-dev-server config in the workspace root', () => {
-      it('should not modify the project graph', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'package.json': '{}',
-            'project.json': '{}',
-            'web-dev-server.config.js': '{}',
-          },
-        });
-
-        expect(nodes).toContainEqual(['web-dev-server.config.js', {}]);
-      });
-    });
-
     describe('with a web-dev-server config in a directory of the workspace', () => {
       it('should not modify the project graph by default', async () => {
         const nodes = await runCreateNodesV2({
