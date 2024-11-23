@@ -31,7 +31,8 @@
   "remoteEnv": {
     "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
     "WORKSPACE_FOLDER": "${containerWorkspaceFolder}",
-    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0",
+    "NX_DAEMON": "true" // https://github.com/nrwl/nx/issues/14126
   },
   "remoteUser": "root"
 }
