@@ -16,6 +16,7 @@
     { "path": "./tools/nx-publish" },
     { "path": "./tools/verdaccio" },
     { "path": "./tools/eslint" },
-    { "path": "./tools/vite" }
+    { "path": "./tools/vite" },
+    { "path": "./e2e/web-test-runner" }
   ]
 }
