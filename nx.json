@@ -49,7 +49,7 @@
         },
         "build": {
           "targetName": "build-tsc-cjs",
-          "configName": "tsconfig.lib.cjs.json"
+          "configName": "tsconfig.lib-cjs.json"
         }
       }
     },
