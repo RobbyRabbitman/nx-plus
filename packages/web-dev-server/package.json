@@ -46,19 +46,19 @@
   ],
   "generators": "./generators.json",
   "type": "commonjs",
-  "main": "./dist/cjs/src/index.js",
-  "types": "./dist/cjs/src/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/esm/src/index.js",
-      "require": "./dist/cjs/src/index.js",
-      "types": "./dist/esm/src/index.d.ts"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
     },
     "./plugins/web-dev-server": {
-      "import": "./dist/esm/src/plugins/web-dev-server.plugin.js",
-      "require": "./dist/cjs/src/plugins/web-dev-server.plugin.js",
-      "types": "./dist/esm/src/plugins/web-dev-server.plugin.d.ts"
+      "import": "./dist/esm/plugins/web-dev-server.plugin.js",
+      "require": "./dist/cjs/plugins/web-dev-server.plugin.js",
+      "types": "./dist/esm/plugins/web-dev-server.plugin.d.ts"
     }
   }
 }
