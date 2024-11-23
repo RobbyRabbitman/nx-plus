@@ -4,8 +4,8 @@ import {
   type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
-import { existsSync } from 'node:fs';
-import { basename, dirname, join } from 'node:path';
+import { existsSync } from 'fs';
+import { basename, dirname, join } from 'path';
 
 export const WEB_DEV_SERVER_CONFIG_FILE_NAME_GLOB =
   '**/@(web-dev-server|wds).config.@(js|cjs|mjs)';
@@ -78,13 +78,7 @@ const createWebDevServerTarget: CreateNodesFunction<
   const webDevServerConfigFileName = basename(webDevServerConfigPath);
   const maybeWebDevServerProjectRoot = dirname(webDevServerConfigPath);
 
-  /**
-   * TODO: should a root web-dev-server be allowed?
-   *
-   * Check whether `webDevServerConfigPath` is considered a non root project, if
-   * not returns without modifying the project graph.
-   */
-  if (!isNonRootProject(maybeWebDevServerProjectRoot, context.workspaceRoot)) {
+  if (!isProject(maybeWebDevServerProjectRoot, context.workspaceRoot)) {
     return {};
   }
 
@@ -122,18 +116,7 @@ const createWebDevServerTarget: CreateNodesFunction<
   };
 };
 
-/**
- * Helper function for `createWebTestRunnerTarget()`.
- *
- * https://nx.dev/extending-nx/recipes/project-graph-plugins#identifying-projects
- *
- * @param directory Relative to `workspaceRoot` e.g `'path/to/project'`
- * @returns Whether `directory` is considered a non root project => `directory`
- *   is not `workspaceRoot` and has a `project.json` or `package.json`
- */
-const isNonRootProject = (directory: string, workspaceRoot: string) => {
-  if (directory === '.') return false;
-
+const isProject = (directory: string, workspaceRoot: string) => {
   return (
     existsSync(join(workspaceRoot, directory, 'project.json')) ||
     existsSync(join(workspaceRoot, directory, 'package.json'))

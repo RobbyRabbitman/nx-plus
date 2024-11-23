@@ -3,10 +3,14 @@
   "sync": {
     "applyChanges": true
   },
-  "cli": { "packageManager": "pnpm" },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "release": {
     "releaseTagPattern": "{version}",
-    "git": { "commitMessage": "chore: release {version} 🚀 [skip ci]" },
+    "git": {
+      "commitMessage": "chore: release {version} 🚀 [skip ci]"
+    },
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {
@@ -18,7 +22,9 @@
       "automaticFromRef": true,
       "workspaceChangelog": {
         "createRelease": "github",
-        "renderOptions": { "authors": false }
+        "renderOptions": {
+          "authors": false
+        }
       }
     }
   },
@@ -39,26 +45,35 @@
           "targetName": "build-tsc",
           "configName": "tsconfig.lib.json"
         }
-      }
+      },
+      "exclude": ["e2e/web-dev-server/e2e-nx-workspaces/packages/*"]
     },
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint-eslint" }
+      "options": {
+        "targetName": "lint-eslint"
+      }
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "test-vitest" },
+      "options": {
+        "testTargetName": "test-vitest"
+      },
       "exclude": ["e2e/**/*"]
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "e2e-vitest" },
+      "options": {
+        "testTargetName": "e2e-vitest"
+      },
       "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "options": { "packageRoot": "{projectRoot}" },
+      "options": {
+        "packageRoot": "{projectRoot}"
+      },
       "dependsOn": ["build*"]
     },
     "lint-eslint": {
@@ -68,7 +83,9 @@
       "defaultConfiguration": "local",
       "outputs": ["{projectRoot}/coverage"],
       "configurations": {
-        "ci": { "run": true },
+        "ci": {
+          "run": true
+        },
         "local": {
           "ui": true
         }

@@ -42,6 +42,7 @@ describe(
 
         packageManagerCommand = getPackageManagerCommand(
           detectPackageManager(workspaceRoot),
+          workspaceRoot,
         );
 
         execSync(

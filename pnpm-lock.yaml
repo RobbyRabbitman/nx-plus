@@ -208,6 +208,9 @@ importers:
       '@nx/devkit':
         specifier: ^20.0.0
         version: 20.1.2(nx@20.1.2(@swc-node/register@1.10.9(@swc/core@1.9.2(@swc/helpers@0.5.15))(@swc/types@0.1.15)(typescript@5.6.3))(@swc/core@1.9.2(@swc/helpers@0.5.15)))
+      '@web/dev-server':
+        specifier: ^0.4.6
+        version: 0.4.6
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*

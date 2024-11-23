@@ -34,12 +34,15 @@ describe(
         workspaceRoot = await createE2eNxWorkspace({
           name: 'robby-rabbitman__nx-plus-web-test-runner__plugins__web-dev-server',
           args: {
+            packageManager: 'pnpm',
             preset: 'ts',
+            workspaceType: 'integrated',
           },
         });
 
         packageManagerCommand = getPackageManagerCommand(
           detectPackageManager(workspaceRoot),
+          workspaceRoot,
         );
 
         execSync(
@@ -51,14 +54,40 @@ describe(
           },
         );
 
+        execSync(
+          `${packageManagerCommand.add} ${nxPlusWebDevServerPackageJson.name}@local ${webDevServerNpmPackage}@${webDevServerVersion}`,
+          {
+            cwd: workspaceRoot,
+            stdio: 'inherit',
+            encoding: 'utf-8',
+          },
+        );
+
         const nxJson = readNxJson();
         nxJson.plugins ??= [];
         nxJson.plugins.push(
-          '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server',
+          `${nxPlusWebDevServerPackageJson.name}/plugins/web-dev-server`,
         );
         writeNxJson(nxJson);
       },
       10 * 60 * 1000,
     );
+
+    it('should be inferred', async () => {
+      execSync(
+        'nx generate @nx/js:library --no-interactive --directory packages/some-web-project --name=some-web-project --linter=none --unitTestRunner=none --js --minimal',
+        {
+          cwd: workspaceRoot,
+          stdio: 'inherit',
+          encoding: 'utf-8',
+        },
+      );
+
+      execSync(packageManagerCommand.install, {
+        cwd: workspaceRoot,
+        stdio: 'inherit',
+        encoding: 'utf-8',
+      });
+    });
   },
 );
