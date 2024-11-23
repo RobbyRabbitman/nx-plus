@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
     "lib": ["ESNext"],
-    "types": ["node"],
 
-    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
 
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "sourceMap": true,
     "removeComments": false,
     "skipLibCheck": true,

@@ -1,14 +1,16 @@
 {
-  "extends": "./tsconfig",
+  "extends": "../../tsconfig.base.node.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": false
+    "baseUrl": ".",
+    "rootDir": "src",
+    "outDir": "dist/esm",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node.tsbuildinfo"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
-  "references": [
-    { "path": "../../tools/vite/tsconfig.lib.json" },
-    { "path": "../../tools/eslint/tsconfig.lib.json" }
+  "include": ["src/**/*"],
+  "exclude": [
+    "vite.config.*",
+    "vitest.config.*",
+    "src/**/*.spec.*",
+    "src/**/*.d.ts"
   ]
 }

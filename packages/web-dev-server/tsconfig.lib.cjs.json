@@ -1,20 +1,16 @@
 {
-  // TODO: remove the cjs target when nx generators can be written in esm
-  // => adjust package.json, tsconfig.lib.json, remove manual lint-eslint because nx does not infer eslint.config.mjs
-  "extends": "./tsconfig",
+  "extends": "../../tsconfig.base.node-cjs.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "src",
     "outDir": "dist/cjs",
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/tsconfig.lib-cjs.tsbuildinfo",
-    "emitDeclarationOnly": false,
-
-    "verbatimModuleSyntax": false,
-    "module": "CommonJS",
-    "moduleResolution": "node"
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.node-cjs.tsbuildinfo"
   },
-  "include": ["src/**/*.ts", "src/**/*.json"],
-  "exclude": ["vite.config.ts", "vitest.config.ts", "src/**/*.spec.ts"],
-  "references": [
-    { "path": "../../tools/vite/tsconfig.lib.json" },
-    { "path": "../../tools/eslint/tsconfig.lib.json" }
+  "include": ["src/**/*"],
+  "exclude": [
+    "vite.config.*",
+    "vitest.config.*",
+    "src/**/*.spec.*",
+    "src/**/*.d.ts"
   ]
 }
