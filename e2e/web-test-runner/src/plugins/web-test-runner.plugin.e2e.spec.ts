@@ -24,6 +24,7 @@ describe(
   },
   () => {
     let workspaceRoot: string;
+    let port: number;
     let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
 
     const readNxJson = () =>
@@ -32,9 +33,10 @@ describe(
     const writeNxJson = (nxJson: NxJsonConfiguration) =>
       writeJsonFile(join(workspaceRoot, 'nx.json'), nxJson);
 
-    const someWebAppName = 'some-web-app';
-    const getSomeWebAppProjectRoot = () =>
-      join(workspaceRoot, 'packages', someWebAppName);
+    const someWebTestRunnerProjectName = 'some-web-app';
+
+    const getProjectRootOfSomeWebTestRunnerProject = () =>
+      join(workspaceRoot, 'packages', someWebTestRunnerProjectName);
 
     const writeWebTestRunnerConfig = async (options: {
       path: string;
@@ -45,27 +47,25 @@ describe(
       await writeFile(path, `export default ${JSON.stringify(config)};`);
     };
 
-    const getWebTestRunnerConfig = async (path: string) => {
-      const config = await import(path);
-
-      return config.default as object;
-    };
-
     /**
      * Creates a project with a basic web test runner config in
-     * packages/{{name}}
+     * packages/{{name}} expected to be run with playwright.
      *
-     * - Installs `chai` and `@web/test-runner-playwright`
+     * - Uses `chai` for assertions.
      * - Includes a simple passing test file.
      * - Must be launched with `--playwright`
      */
-    const createWebTestRunnerProject = async (options: { name: string }) => {
+    const createWebTestRunnerProject = async (options: {
+      name: string;
+      webTestRunnerConfig?: object;
+    }) => {
       const { name } = options;
 
       const webTestRunnerConfig = {
-        files: ['some-math.spec.js'],
+        files: ['some-legit-math.spec.js'],
         watch: false,
         nodeResolve: true,
+        ...options.webTestRunnerConfig,
       };
 
       const projectRoot = join(workspaceRoot, 'packages', name);
@@ -94,7 +94,7 @@ describe(
       });
 
       await writeFile(
-        join(projectRoot, 'some-math.spec.js'),
+        join(projectRoot, 'some-legit-math.spec.js'),
         `
         import { expect } from 'chai';
   
@@ -103,52 +103,90 @@ describe(
         });
         `,
       );
+
+      await writeFile(
+        join(projectRoot, 'some-failing-math.spec.js'),
+        `
+        import { expect } from 'chai';
+  
+        it('2 + 2 should be 3', () => {
+          expect(2 + 2).to.equal(3);
+        });
+        `,
+      );
+    };
+
+    /**
+     * Creates a new Nx workspace with the following configuration:
+     *
+     * - Package Manager: pnpm
+     * - Preset: ts
+     * - Installs `@robby-rabbitman/nx-plus-web-test-runner`, `@web/test-runner`,
+     *   `@web/test-runner-playwright`, and `chai`
+     * - Adds `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`
+     *   to the Nx plugins
+     */
+    const createNxWorkspace = async () => {
+      workspaceRoot = await createE2eNxWorkspace({
+        name: 'robby-rabbitman__nx-plus-web-test-runner__plugins__web-test-runner',
+        args: {
+          packageManager: 'pnpm',
+          preset: 'ts',
+        },
+      });
+
+      packageManagerCommand = getPackageManagerCommand(
+        detectPackageManager(workspaceRoot),
+        workspaceRoot,
+      );
+
+      execSync(
+        `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local @web/test-runner@${nxPlusWebTestRunnerPackageJson.peerDependencies['@web/test-runner']} @web/test-runner-playwright@${packageJson.dependencies['@web/test-runner-playwright']} chai@${packageJson.dependencies['chai']}`,
+        {
+          cwd: workspaceRoot,
+          stdio: 'inherit',
+          encoding: 'utf-8',
+        },
+      );
+
+      const nxJson = readNxJson();
+      nxJson.plugins ??= [];
+      nxJson.plugins.push(
+        `${nxPlusWebTestRunnerPackageJson.name}/plugins/web-test-runner`,
+      );
+      writeNxJson(nxJson);
     };
 
     beforeAll(
       async () => {
-        workspaceRoot = await createE2eNxWorkspace({
-          name: 'robby-rabbitman__nx-plus-web-test-runner__plugins__web-test-runner',
-          args: {
-            packageManager: 'pnpm',
-            preset: 'ts',
-          },
-        });
-
-        packageManagerCommand = getPackageManagerCommand(
-          detectPackageManager(workspaceRoot),
-          workspaceRoot,
-        );
-
-        execSync(
-          `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local @web/test-runner@${nxPlusWebTestRunnerPackageJson.peerDependencies['@web/test-runner']} @web/test-runner-playwright@${packageJson.dependencies['@web/test-runner-playwright']} chai@${packageJson.dependencies['chai']}`,
-          {
-            cwd: workspaceRoot,
-            stdio: 'inherit',
-            encoding: 'utf-8',
-          },
-        );
-
-        const nxJson = readNxJson();
-        nxJson.plugins ??= [];
-        nxJson.plugins.push(
-          `${nxPlusWebTestRunnerPackageJson.name}/plugins/web-test-runner`,
-        );
-        writeNxJson(nxJson);
+        await createNxWorkspace();
       },
       10 * 60 * 1000,
     );
 
     beforeEach(async () => {
-      await rm(getSomeWebAppProjectRoot(), { force: true, recursive: true });
-      await createWebTestRunnerProject({
-        name: someWebAppName,
+      port = await getRandomPort();
+
+      await rm(getProjectRootOfSomeWebTestRunnerProject(), {
+        force: true,
+        recursive: true,
       });
+
+      await createWebTestRunnerProject({
+        name: someWebTestRunnerProjectName,
+        webTestRunnerConfig: {
+          port,
+        },
+      });
+    });
+
+    afterEach(async () => {
+      await releasePort(port);
     });
 
     it('should be inferred', async () => {
       const someWebAppProjectConfig = JSON.parse(
-        execSync(`nx show project ${someWebAppName} --json`, {
+        execSync(`nx show project ${someWebTestRunnerProjectName} --json`, {
           cwd: workspaceRoot,
           encoding: 'utf-8',
         }),
@@ -159,37 +197,32 @@ describe(
         options: {
           command: 'web-test-runner',
           config: 'web-test-runner.config.js',
-          cwd: relative(workspaceRoot, getSomeWebAppProjectRoot()),
+          cwd: relative(
+            workspaceRoot,
+            getProjectRootOfSomeWebTestRunnerProject(),
+          ),
         },
       });
     });
 
     it('should run the Web Test Runner', async () => {
-      const port = await getRandomPort();
-
-      try {
-        const webTestRunnerConfiguration = {
-          port,
-        };
-
-        await writeWebTestRunnerConfig({
-          path: join(getSomeWebAppProjectRoot(), 'web-test-runner.config.js'),
-          config: {
-            ...(await getWebTestRunnerConfig(
-              join(getSomeWebAppProjectRoot(), 'web-test-runner.config.js'),
-            )),
-            ...webTestRunnerConfiguration,
-          },
-        });
-
-        expect(() =>
-          execSync(`${packageManagerCommand.exec} nx test ${someWebAppName}`, {
+      expect(() =>
+        execSync(
+          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-math.spec.js`,
+          {
             cwd: workspaceRoot,
-          }),
-        ).not.toThrow();
-      } finally {
-        await releasePort(port);
-      }
+          },
+        ),
+      ).not.toThrow();
+
+      expect(() =>
+        execSync(
+          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-failing-math.spec.js`,
+          {
+            cwd: workspaceRoot,
+          },
+        ),
+      ).toThrow();
     });
   },
 );
