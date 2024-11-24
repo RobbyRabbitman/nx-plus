@@ -50,7 +50,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-ser
    */
   const createWebApp = async (options: {
     name: string;
-    webDevServerConfig: object;
+    webDevServerConfig?: object;
   }) => {
     const { name, webDevServerConfig } = options;
 
@@ -67,7 +67,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-ser
 
     await writeWebDevServerConfig({
       path: join(projectRoot, 'web-dev-server.config.js'),
-      config: webDevServerConfig,
+      config: webDevServerConfig ?? {},
     });
 
     await writeFile(
@@ -126,10 +126,25 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-ser
     10 * 60 * 1000,
   );
 
-  beforeEach(async () => {
-    await rm(getSomeWebAppProjectRoot(), { force: true, recursive: true });
-    await createWebApp({ name: someWebAppName, webDevServerConfig: {} });
-  });
+  beforeEach(
+    async () => {
+      await rm(getSomeWebAppProjectRoot(), { force: true, recursive: true });
+      await createWebApp({ name: someWebAppName });
+
+      execSync(`${packageManagerCommand.exec} nx reset`, {
+        cwd: workspaceRoot,
+        stdio: 'inherit',
+      });
+
+      expect(
+        execSync(`${packageManagerCommand.exec} nx show projects --json`, {
+          cwd: workspaceRoot,
+          encoding: 'utf-8',
+        }),
+      ).toContain(someWebAppName);
+    },
+    10 * 60 * 1000,
+  );
 
   it('should be inferred', async () => {
     const someWebAppProjectConfig = JSON.parse(

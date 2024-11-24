@@ -180,7 +180,6 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
       execSync(`${packageManagerCommand.exec} nx reset`, {
         cwd: workspaceRoot,
         stdio: 'inherit',
-        encoding: 'utf-8',
       });
 
       expect(
@@ -188,7 +187,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
           cwd: workspaceRoot,
           encoding: 'utf-8',
         }),
-      ).toMatch(/some-web-app/);
+      ).toContain(someWebTestRunnerProjectName);
     },
     10 * 60 * 1000,
   );

@@ -22,8 +22,9 @@ describe('[E2e Test] nx generate run @robby-rabbitman/nx-plus-web-dev-server:ini
     writeJsonFile(join(workspaceRoot, 'nx.json'), nxJson);
 
   /**
-   * Before all test run, a nx workspace is created and after each test has
-   * run the `nx.json` is restored to save resources.
+   * - Before all test run, a nx workspace is created
+   * - After each test has run, the `nx.json` is restored to save resources
+   *   instead of creating a new nx workspace for each test
    */
 
   beforeAll(
