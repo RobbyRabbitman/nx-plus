@@ -208,7 +208,7 @@ describe(
     it('should run the Web Test Runner', async () => {
       expect(() =>
         execSync(
-          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-math.spec.js`,
+          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-legit-math.spec.js`,
           {
             cwd: workspaceRoot,
           },
