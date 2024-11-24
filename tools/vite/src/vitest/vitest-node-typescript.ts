@@ -41,6 +41,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
       pool: 'forks',
       environment: 'node',
       reporters: ['default'],
+      include: [join(workspaceRoot, project.root, 'src/**/*')],
       coverage: {
         enabled: true,
         clean: true,
