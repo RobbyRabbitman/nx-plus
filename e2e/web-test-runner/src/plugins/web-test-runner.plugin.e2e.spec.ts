@@ -15,6 +15,7 @@ import nxPlusWebTestRunnerPackageJson from '@robby-rabbitman/nx-plus-web-test-ru
 import { execSync } from 'child_process';
 import { mkdir, rm, writeFile } from 'fs/promises';
 import { join, relative } from 'path';
+import packageJson from '../../package.json';
 
 describe(
   '[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
@@ -22,10 +23,6 @@ describe(
     timeout: 10 * 60 * 1000,
   },
   () => {
-    const webTestRunnerNpmPackage = '@web/test-runner';
-    const webTestRunnerVersion =
-      nxPlusWebTestRunnerPackageJson.peerDependencies[webTestRunnerNpmPackage];
-
     let workspaceRoot: string;
     let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
 
@@ -56,8 +53,11 @@ describe(
 
     /**
      * Creates a project with a basic web test runner config in
-     * packages/{{name}}, installs `@esm-bundle/chai` and includes a simple test
-     * file.
+     * packages/{{name}}
+     *
+     * - Installs `chai` and `@web/test-runner-playwright`
+     * - Includes a simple passing test file.
+     * - Must be launched with `--playwright`
      */
     const createWebTestRunnerProject = async (options: { name: string }) => {
       const { name } = options;
@@ -65,6 +65,7 @@ describe(
       const webTestRunnerConfig = {
         files: ['some-math.spec.js'],
         watch: false,
+        nodeResolve: true,
       };
 
       const projectRoot = join(workspaceRoot, 'packages', name);
@@ -76,10 +77,16 @@ describe(
       writeJsonFile(join(projectRoot, 'package.json'), {
         name,
         type: 'module',
-        devDependencies: {
-          '@esm-bundle/chai': 'latest',
-        },
       });
+
+      execSync(
+        `${packageManagerCommand.add} @web/test-runner-playwright@${packageJson.dependencies['@web/test-runner-playwright']} chai@${packageJson.dependencies['chai']}`,
+        {
+          cwd: projectRoot,
+          stdio: 'inherit',
+          encoding: 'utf-8',
+        },
+      );
 
       await writeWebTestRunnerConfig({
         path: join(projectRoot, 'web-test-runner.config.js'),
@@ -89,7 +96,7 @@ describe(
       await writeFile(
         join(projectRoot, 'some-math.spec.js'),
         `
-        import { expect } from '@esm-bundle/chai';
+        import { expect } from 'chai';
   
         it('1 + 2 should be 3', () => {
           expect(1 + 2).to.equal(3);
@@ -114,7 +121,7 @@ describe(
         );
 
         execSync(
-          `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local ${webTestRunnerNpmPackage}@${webTestRunnerVersion}`,
+          `${packageManagerCommand.add} ${nxPlusWebTestRunnerPackageJson.name}@local @web/test-runner@${nxPlusWebTestRunnerPackageJson.peerDependencies['@web/test-runner']} @web/test-runner-playwright@${packageJson.dependencies['@web/test-runner-playwright']} chai@${packageJson.dependencies['chai']}`,
           {
             cwd: workspaceRoot,
             stdio: 'inherit',

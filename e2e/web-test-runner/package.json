@@ -7,7 +7,9 @@
     "@robby-rabbitman/nx-plus-node-util": "workspace:*",
     "@robby-rabbitman/nx-plus-web-test-runner": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
-    "@nx/devkit": "20.1.2"
+    "@nx/devkit": "20.1.2",
+    "chai": "5.1.2",
+    "@web/test-runner-playwright": "0.11.0"
   },
   "files": [
     "dist",

@@ -44,6 +44,7 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
       coverage: {
         enabled: true,
         clean: true,
+        include: [join(workspaceRoot, project.root, 'src/**/*')],
         exclude: [...coverageConfigDefaults.exclude, '**/index.ts'],
         thresholds: {
           branches: 95,

@@ -6,7 +6,7 @@
     "outDir": "dist",
     "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "package.json"],
   "exclude": [
     "vite.config.*",
     "vitest.config.*",

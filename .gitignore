@@ -32,3 +32,4 @@ Thumbs.db
 **/*.timestamp-*
 .pnpm-store
 e2e-nx-workspaces
+.browsers
