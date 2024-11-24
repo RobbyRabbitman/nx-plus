@@ -18,9 +18,11 @@ import { join, relative } from 'path';
 import packageJson from '../../package.json';
 
 describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner', () => {
-  let workspaceRoot: string;
+  let workspaceRoot: string =
+    '/workspaces/nx-plus/.e2e-nx-workspaces/e2e/web-test-runner/robby-rabbitman__nx-plus-web-test-runner__plugins__web-test-runner';
   let port: number;
-  let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
+  let packageManagerCommand: ReturnType<typeof getPackageManagerCommand> =
+    getPackageManagerCommand('pnpm', workspaceRoot);
 
   const readNxJson = () =>
     readJsonFile<NxJsonConfiguration>(join(workspaceRoot, 'nx.json'));
@@ -43,8 +45,8 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
   };
 
   /**
-   * Creates a project with a basic web test runner config in
-   * packages/{{name}} expected to be run with playwright.
+   * Creates a project with a basic web test runner config in packages/{{name}}
+   * expected to be run with playwright.
    *
    * - Uses `chai` for assertions.
    * - Includes a simple passing test file.
@@ -118,8 +120,8 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
    * - Preset: ts
    * - Installs `@robby-rabbitman/nx-plus-web-test-runner`, `@web/test-runner`,
    *   `@web/test-runner-playwright`, and `chai`
-   * - Adds `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`
-   *   to the Nx plugins
+   * - Adds `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner` to
+   *   the Nx plugins
    */
   const createNxWorkspace = async () => {
     workspaceRoot = await createE2eNxWorkspace({
@@ -159,25 +161,44 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
     10 * 60 * 1000,
   );
 
-  beforeEach(async () => {
-    port = await getRandomPort();
+  beforeEach(
+    async () => {
+      port = await getRandomPort();
 
-    await rm(getProjectRootOfSomeWebTestRunnerProject(), {
-      force: true,
-      recursive: true,
-    });
+      await rm(getProjectRootOfSomeWebTestRunnerProject(), {
+        force: true,
+        recursive: true,
+      });
 
-    await createWebTestRunnerProject({
-      name: someWebTestRunnerProjectName,
-      webTestRunnerConfig: {
-        port,
-      },
-    });
-  });
+      await createWebTestRunnerProject({
+        name: someWebTestRunnerProjectName,
+        webTestRunnerConfig: {
+          port: 4455,
+        },
+      });
 
-  afterEach(async () => {
-    await releasePort(port);
-  });
+      execSync(`${packageManagerCommand.exec} nx reset`, {
+        cwd: workspaceRoot,
+        stdio: 'inherit',
+        encoding: 'utf-8',
+      });
+
+      expect(
+        execSync(`${packageManagerCommand.exec} nx show projects --json`, {
+          cwd: workspaceRoot,
+          encoding: 'utf-8',
+        }),
+      ).toMatch(/some-web-app/);
+    },
+    10 * 60 * 1000,
+  );
+
+  afterEach(
+    async () => {
+      await releasePort(port);
+    },
+    10 * 60 * 1000,
+  );
 
   it('should be inferred', async () => {
     const someWebAppProjectConfig = JSON.parse(
@@ -200,25 +221,29 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
     });
   });
 
-  it('should run the Web Test Runner', () => {
-    expect(() =>
-      execSync(
-        `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-legit-math.spec.js`,
-        {
-          cwd: workspaceRoot,
-          stdio: 'inherit',
-        },
-      ),
-    ).not.toThrow();
+  describe('should run the Web Test Runner', () => {
+    it('some-legit-math.spec.js', () => {
+      expect(() =>
+        execSync(
+          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-legit-math.spec.js`,
+          {
+            cwd: workspaceRoot,
+            stdio: 'inherit',
+          },
+        ),
+      ).not.toThrow();
+    });
 
-    expect(() =>
-      execSync(
-        `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-failing-math.spec.js`,
-        {
-          cwd: workspaceRoot,
-          stdio: 'inherit',
-        },
-      ),
-    ).toThrow();
+    it('some-failing-math.spec.js', () => {
+      expect(() =>
+        execSync(
+          `${packageManagerCommand.exec} nx test ${someWebTestRunnerProjectName} --playwright --files some-failing-math.spec.js`,
+          {
+            cwd: workspaceRoot,
+            stdio: 'inherit',
+          },
+        ),
+      ).toThrow();
+    });
   });
 });

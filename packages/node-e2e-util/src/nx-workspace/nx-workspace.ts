@@ -68,8 +68,8 @@ export const createE2eNxWorkspace = async (
 
   const e2eNxWorkspacesOfProject = join(
     workspaceRoot,
+    '.e2e-nx-workspaces',
     projectConfig.root,
-    'e2e-nx-workspaces',
   );
 
   const e2eWorkspaceRoot = await createNxWorkspace({

@@ -40,8 +40,8 @@ export function nodeTypescript(overrides?: Partial<UserConfig>) {
        */
       pool: 'forks',
       environment: 'node',
-      reporters: ['default'],
-      include: [join(workspaceRoot, project.root, 'src/**/*')],
+      reporters: ['default', 'hanging-process'],
+      include: [join(workspaceRoot, project.root, 'src/**/*.spec.ts')],
       coverage: {
         enabled: true,
         clean: true,
