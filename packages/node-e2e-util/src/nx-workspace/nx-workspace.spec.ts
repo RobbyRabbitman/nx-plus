@@ -74,7 +74,7 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
     });
 
     expect(rm).toHaveBeenCalledWith(
-      'some-workspace/some-project/e2e-nx-workspaces/some-e2e-workspace',
+      'some-workspace/.e2e-nx-workspaces/some-project/some-e2e-workspace',
       { recursive: true, force: true },
     );
   });
@@ -102,7 +102,7 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
           '--interactive=false',
         ],
         {
-          cwd: 'some-workspace/some-project/e2e-nx-workspaces',
+          cwd: 'some-workspace/.e2e-nx-workspaces/some-project',
         },
       );
     });
@@ -127,7 +127,7 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
       });
 
       expect(workspaceRoot).toBe(
-        'some-workspace/some-project/e2e-nx-workspaces/some-e2e-workspace',
+        'some-workspace/.e2e-nx-workspaces/some-project/some-e2e-workspace',
       );
     });
   });
@@ -146,7 +146,7 @@ describe('[Unit Test] createE2eNxWorkspace', () => {
     await expect(
       createE2eNxWorkspace({ name: 'some-e2e-workspace' }),
     ).rejects.toThrowError(
-      '[createNxWorkspace] Failed to create nx workspace in some-workspace/some-project/e2e-nx-workspaces/some-e2e-workspace',
+      '[createNxWorkspace] Failed to create nx workspace in some-workspace/.e2e-nx-workspaces/some-project/some-e2e-workspace',
     );
   });
 });
