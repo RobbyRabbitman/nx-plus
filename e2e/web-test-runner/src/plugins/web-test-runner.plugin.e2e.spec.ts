@@ -18,11 +18,9 @@ import { join, relative } from 'path';
 import packageJson from '../../package.json';
 
 describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner', () => {
-  let workspaceRoot: string =
-    '/workspaces/nx-plus/.e2e-nx-workspaces/e2e/web-test-runner/robby-rabbitman__nx-plus-web-test-runner__plugins__web-test-runner';
+  let workspaceRoot: string;
   let port: number;
-  let packageManagerCommand: ReturnType<typeof getPackageManagerCommand> =
-    getPackageManagerCommand('pnpm', workspaceRoot);
+  let packageManagerCommand: ReturnType<typeof getPackageManagerCommand>;
 
   const readNxJson = () =>
     readJsonFile<NxJsonConfiguration>(join(workspaceRoot, 'nx.json'));
@@ -50,6 +48,8 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
    *
    * - Uses `chai` for assertions.
    * - Includes a simple passing test file.
+   * - Includes a simple failing test file.
+   * - Defaults to running the passing test file.
    * - Must be launched with `--playwright`
    */
   const createWebTestRunnerProject = async (options: {
@@ -114,7 +114,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
   };
 
   /**
-   * Creates a new Nx workspace with the following configuration:
+   * Creates a nx workspace with the following configuration:
    *
    * - Package Manager: pnpm
    * - Preset: ts
@@ -173,7 +173,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
       await createWebTestRunnerProject({
         name: someWebTestRunnerProjectName,
         webTestRunnerConfig: {
-          port: 4455,
+          port,
         },
       });
 
