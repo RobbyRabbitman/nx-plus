@@ -55,7 +55,7 @@ describe('[E2e Test] nx generate run @robby-rabbitman/nx-plus-web-test-runner:in
 
       Object.freeze(nxJson);
     },
-    10 * 60 * 1000,
+    5 * 60 * 1000,
   );
 
   afterEach(() => {

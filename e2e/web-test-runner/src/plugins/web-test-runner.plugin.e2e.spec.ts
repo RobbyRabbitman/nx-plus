@@ -158,7 +158,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
     async () => {
       await createNxWorkspace();
     },
-    10 * 60 * 1000,
+    5 * 60 * 1000,
   );
 
   beforeEach(
@@ -189,14 +189,14 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-r
         }),
       ).toContain(someWebTestRunnerProjectName);
     },
-    10 * 60 * 1000,
+    2 * 60 * 1000,
   );
 
   afterEach(
     async () => {
       await releasePort(port);
     },
-    10 * 60 * 1000,
+    1 * 60 * 1000,
   );
 
   it('should be inferred', async () => {

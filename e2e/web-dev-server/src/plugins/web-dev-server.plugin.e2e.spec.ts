@@ -123,7 +123,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-ser
       );
       writeNxJson(nxJson);
     },
-    10 * 60 * 1000,
+    5 * 60 * 1000,
   );
 
   beforeEach(
@@ -143,7 +143,7 @@ describe('[E2e Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-ser
         }),
       ).toContain(someWebAppName);
     },
-    10 * 60 * 1000,
+    2 * 60 * 1000,
   );
 
   it('should be inferred', async () => {
