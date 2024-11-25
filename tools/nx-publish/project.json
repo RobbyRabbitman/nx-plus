@@ -1,0 +1,22 @@
+{
+  "name": "tools-nx-publish",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["scope:node", "type:tool"],
+  "targets": {
+    "publish-nx-plus-cli": {
+      "command": "tsx {projectRoot}/src/publish-nx-plus/publish-nx-plus.cli.ts",
+      "options": {
+        "env": {
+          "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+        }
+      },
+      "configurations": {
+        "local": {
+          "dryRun": false,
+          "npmRegistry": "http://localhost:4873",
+          "npmTag": "local"
+        }
+      }
+    }
+  }
+}

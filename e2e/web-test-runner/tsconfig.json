@@ -1,14 +1,18 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "types": ["node"]
+    "composite": true
   },
   "files": [],
   "include": [],
+  "exclude": [],
   "references": [
-    {
-      "path": "./tsconfig.spec.json"
-    }
+    { "path": "../../packages/web-test-runner" },
+    { "path": "../../tools/verdaccio" },
+    { "path": "../../packages/node-util" },
+    { "path": "../../packages/node-e2e-util" },
+    { "path": "../../tools/vite" },
+    { "path": "../../tools/eslint" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
   ]
 }

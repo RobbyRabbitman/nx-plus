@@ -29,7 +29,7 @@ nx run {{project}}:serve
 
 ### `@robby-rabbitman/nx-plus-web-dev-server:init`
 
-Adds [`@robby-rabbitman/nx-plus-web-dev-server/plugin`](#robby-rabbitmannx-plus-web-dev-serverplugin) to the `plugins` in the `nx.json`.
+Adds [`@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server`](#robby-rabbitmannx-plus-web-dev-serverplugin) to the `plugins` in the `nx.json`.
 
 #### Usage
 
@@ -45,7 +45,7 @@ nx g @robby-rabbitman/nx-plus-web-dev-server:init
 | skip-format       | boolean | false   | Whether to skip formatting the updated files. |
 | skip-add-plugin   | boolean | false   | Whether to skip adding the plugin.            |
 
-### `@robby-rabbitman/nx-plus-web-dev-server/plugin`
+### `@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server`
 
 Adds a _serve_ target for projects that have a [Web Dev Server config](https://modern-web.dev/docs/dev-server/cli-and-configuration/#configuration-file) file in their root, the plugin infers a Web Dev Server with one of the following names.
 
@@ -62,7 +62,7 @@ Adds a _serve_ target for projects that have a [Web Dev Server config](https://m
 // nx.json
 "plugins": [
     {
-      "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugin",
+      "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server",
       "options": {
         // the name of the web dev server target => nx run {{project}}:serve
         "serveTargetName": "serve",

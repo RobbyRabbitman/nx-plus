@@ -13,9 +13,14 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       id-token: write
+
+    env:
+      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true
+
     steps:
       - uses: actions/checkout@v4
 
@@ -32,14 +37,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
-      - run: pnpm i
+      - run: corepack enable
 
-      - run: pnpm exec nx report
+      - run: sh .devcontainer/exec-cmd.sh nx report
 
-      - run: pnpm exec nx release publish --dry-run=${{ env.DRY_RUN }}
-        env:
-          # when it is not a tag (release) => dont publish
-          DRY_RUN: ${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+      # when it is not a tag (release) => dont publish
+      - run: sh .devcontainer/exec-cmd.sh sh -c "NODE_AUTH_TOKEN=${{ secrets.NPM_ACCESS_TOKEN }} NPM_CONFIG_PROVENANCE=true nx run tools-nx-publish:publish-nx-plus-cli --dry-run=${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }} --verbose=${{ runner.debug && true || false }}"

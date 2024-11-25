@@ -1,7 +1,10 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.base.node-vitest.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "node"]
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "dist-spec",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo"
   },
-  "include": ["src/**/*.spec.ts"]
+  "include": ["vite.config.*", "vitest.config.*", "src/**/*"]
 }

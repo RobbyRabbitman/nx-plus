@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.node.json",
+  "files": [],
+  "include": [],
+  "exclude": [],
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "types": [
+      "node",
+      "vitest/globals",
+      "vitest/importMeta",
+      "vite/client",
+      "vitest"
+    ]
+  }
+}
