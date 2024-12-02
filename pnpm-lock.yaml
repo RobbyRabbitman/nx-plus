@@ -121,8 +121,8 @@ importers:
         specifier: 4.1.2
         version: 4.1.2
       renovate:
-        specifier: 39.33.1
-        version: 39.33.1(@aws-sdk/client-sso-oidc@3.687.0(@aws-sdk/client-sts@3.687.0))(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 39.38.0
+        version: 39.38.0(@aws-sdk/client-sso-oidc@3.687.0(@aws-sdk/client-sts@3.687.0))(encoding@0.1.13)(typanion@3.14.0)
       semver:
         specifier: 7.6.3
         version: 7.6.3
@@ -3659,8 +3659,8 @@ packages:
     resolution: {integrity: sha512-onMB0OkDjkXunhdW9htFjEhqrD54+M94i6ackoUkjHKbRnXdyEyKRelp4nJ1kAz32+s27jP1FsebpJCVl0BsvA==}
     engines: {node: '>=18.0'}
 
-  cronstrue@2.51.0:
-    resolution: {integrity: sha512-7EG9VaZZ5SRbZ7m25dmP6xaS0qe9ay6wywMskFOU/lMDKa+3gZr2oeT5OUfXwRP/Bcj8wxdYJ65AHU70CI3tsw==}
+  cronstrue@2.52.0:
+    resolution: {integrity: sha512-NKgHbWkSZXJUcaBHSsyzC8eegD6bBd4O0oCI6XMIJ+y4Bq3v4w7sY3wfWoKPuVlq9pQHRB6od0lmKpIqi8TlKA==}
     hasBin: true
 
   cross-spawn@7.0.3:
@@ -5923,8 +5923,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openpgp@6.0.0:
-    resolution: {integrity: sha512-8YMuhOV6bP8+J4bCHltvRwol1sBJhxAcJXvwEKpcK65lKpQ0VUbymQR/EuGrzxYnatNSyMyrMgip4j/F0vhZvg==}
+  openpgp@6.0.1:
+    resolution: {integrity: sha512-3lReDKjgWsKFArZT4Y/yj7/Q0q6/VhXarn4WqKEkyiBWckNjrThSGoB1t0IKo3Ke0ClvBpyQfTwumkGUkxOwww==}
     engines: {node: '>= 18.0.0'}
 
   optionator@0.9.4:
@@ -6402,8 +6402,8 @@ packages:
   remark@13.0.0:
     resolution: {integrity: sha512-HDz1+IKGtOyWN+QgBiAT0kn+2s6ovOxHyPAFGKVE81VSzJ+mq7RwHFledEvB5F1p4iJvOah/LOKdFuzvRnNLCA==}
 
-  renovate@39.33.1:
-    resolution: {integrity: sha512-rJg3VOr/tcQSbRJ6oLL2vehlqxwLaVYyhBu2lfrL7pUh5xjQtSEkEFxFTJH6dMftxyOOg8HTK+jhWuXC112Pdg==}
+  renovate@39.38.0:
+    resolution: {integrity: sha512-iwp+9KrwjxNkCNubieRFGsi8DD4vTf4qDFgbkUEFmJq5/VIo72l4Dz/Ue39rdE7uRKqMggjy0UdQ/B3xbPt3yA==}
     engines: {node: ^20.15.1 || ^22.11.0, pnpm: ^9.0.0}
     hasBin: true
 
@@ -12785,7 +12785,7 @@ snapshots:
 
   croner@9.0.0: {}
 
-  cronstrue@2.51.0: {}
+  cronstrue@2.52.0: {}
 
   cross-spawn@7.0.3:
     dependencies:
@@ -15469,7 +15469,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openpgp@6.0.0:
+  openpgp@6.0.1:
     optional: true
 
   optionator@0.9.4:
@@ -16051,7 +16051,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@39.33.1(@aws-sdk/client-sso-oidc@3.687.0(@aws-sdk/client-sts@3.687.0))(encoding@0.1.13)(typanion@3.14.0):
+  renovate@39.38.0(@aws-sdk/client-sso-oidc@3.687.0(@aws-sdk/client-sts@3.687.0))(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.687.0
       '@aws-sdk/client-ec2': 3.687.0
@@ -16094,7 +16094,7 @@ snapshots:
       commander: 12.1.0
       conventional-commits-detector: 1.0.3
       croner: 9.0.0
-      cronstrue: 2.51.0
+      cronstrue: 2.52.0
       deepmerge: 4.3.1
       dequal: 2.0.3
       detect-indent: 6.1.0
@@ -16164,7 +16164,7 @@ snapshots:
       zod: 3.23.8
     optionalDependencies:
       better-sqlite3: 11.5.0
-      openpgp: 6.0.0
+      openpgp: 6.0.1
       re2: 1.21.4
     transitivePeerDependencies:
       - '@aws-sdk/client-sso-oidc'
