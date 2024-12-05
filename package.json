@@ -36,7 +36,7 @@
     "@web/test-runner": "0.18.3",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
-    "memfs": "4.14.0",
+    "memfs": "4.14.1",
     "minimatch": "10.0.1",
     "nx": "19.8.13",
     "prettier": "3.4.1",
