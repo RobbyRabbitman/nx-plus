@@ -2,7 +2,7 @@
   "name": "@robby-rabbitman/nx-plus",
   "version": "0.0.0",
   "engines": {
-    "node": "20.18.1"
+    "node": "22.12.0"
   },
   "packageManager": "pnpm@9.14.4",
   "scripts": {},
@@ -23,7 +23,7 @@
     "@swc/core": "1.10.0",
     "@swc/helpers": "0.5.15",
     "@types/eslint": "9.6.1",
-    "@types/node": "20.17.9",
+    "@types/node": "22.10.1",
     "@types/proper-lockfile": "4.1.4",
     "@types/semver": "7.5.8",
     "@types/uuid": "10.0.0",
