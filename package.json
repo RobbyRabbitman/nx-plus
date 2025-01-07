@@ -40,7 +40,7 @@
     "minimatch": "10.0.1",
     "nx": "19.8.14",
     "prettier": "3.4.2",
-    "prettier-plugin-jsdoc": "1.3.0",
+    "prettier-plugin-jsdoc": "1.3.2",
     "proper-lockfile": "4.1.2",
     "renovate": "39.90.2",
     "semver": "7.6.3",
