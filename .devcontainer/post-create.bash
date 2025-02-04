@@ -14,6 +14,7 @@ nvm alias default ${NODE_VERSION}
 nvm use default
 
 echo "⚙️ Enabling corepack ..."
+npm i -g corepack@latest
 corepack enable
 
 echo "⚙️ Setup pnpm ..."
