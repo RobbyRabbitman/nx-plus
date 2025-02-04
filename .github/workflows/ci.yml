@@ -10,38 +10,56 @@ concurrency:
 jobs:
   main:
     runs-on: ubuntu-latest
+
     permissions:
       actions: read
       contents: read
+
+    env:
+      NX_PLUS_DEV_CONTAINER_EXEC_ARGS: --remote-env CI=true
+
     steps:
       - uses: actions/checkout@v4
         with:
+          # the full git history is required for nrwl/nx-set-shas@v4
           fetch-depth: 0
 
-      - run: corepack enable
+      - run: |
+          npm i -g corepack@latest
+          corepack enable
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
-
-      # this fails unpredictable with 'Request failed with status code 429. Your organization has exceeded your plan's concurrent connection limit of 10.'
-      # this seems to corelate with the number of agents, need to read docs.
-      # - run: pnpx nx-cloud start-ci-run --distribute-on='4 linux-medium-js' --stop-agents-after='e2e-vite-version-matrix'
+      # TODO: why are the node_modules not mounted and reinstalled when the dev container is started? pnpm store not mounted https://github.com/orgs/pnpm/discussions/3651 ?
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version-file: package.json
+      #     cache: pnpm
+      #     cache-dependency-path: pnpm-lock.yaml
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm i
-
-      - run: pnpm nx report
-
-      - run: pnpm nx run tools-commitlint:exec:message --value "${{ github.event.pull_request.title }}"
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-
       - run: |
-          pnpm nx format:check
-          pnpm nx affected -t lint-eslint test test-vite build e2e-vite-version-matrix --configuration ci
-        env:
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+          RUNNER_DEBUG=${{ runner.debug && true || false }}
+          echo "NX_PLUS_DEV_CONTAINER_LOG_LEVEL=$(if [ "$RUNNER_DEBUG" = true ]; then echo 'trace'; else echo 'info'; fi)" >> $GITHUB_ENV
+          echo "NX_PLUS_DEV_CONTAINER_EXEC_ARGS=$NX_PLUS_DEV_CONTAINER_EXEC_ARGS --remote-env NX_VERBOSE_LOGGING=$RUNNER_DEBUG --remote-env NX_BASE=$NX_BASE --remote-env NX_HEAD=$NX_HEAD" >> $GITHUB_ENV
+
+      - run: git branch --track '${{ github.event.pull_request.head.ref }}' 'origin/${{ github.event.pull_request.base.ref }}'
+
+      - run: sh .devcontainer/exec-cmd.sh nx report
+
+      - run: sh .devcontainer/exec-cmd.sh sh -c "NX_PLUS_TOOLS_COMMITLINT_TEXT='${{ github.event.pull_request.title }}' nx run tools-commitlint:lint-commitlint"
+
+      - run: sh .devcontainer/exec-cmd.sh nx sync:check
+
+      - run: sh .devcontainer/exec-cmd.sh nx format:check
+
+      - run: sh .devcontainer/exec-cmd.sh nx affected -t lint lint-eslint -c ci
+
+      - run: sh .devcontainer/exec-cmd.sh nx affected -t build build-tsc -c ci
+
+      # TODO: 'WebSocket server error: Port is already in use' when multiple targets run vitest in parallel
+      - run: sh .devcontainer/exec-cmd.sh nx affected -t test test-vitest -c ci --parallel 1
+
+      # TODO: 'WebSocket server error: Port is already in use' when multiple targets run vitest in parallel
+      - run: |
+          sh .devcontainer/exec-cmd.sh sh -c 'if [ -n "$(nx show projects --affected --projects 'e2e-*')" ]; then nx run tools-nx-publish:publish-nx-plus-cli:local; fi'
+          sh .devcontainer/exec-cmd.sh nx affected -t e2e e2e-vitest -c ci --parallel 1

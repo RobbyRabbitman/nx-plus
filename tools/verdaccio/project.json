@@ -1,0 +1,25 @@
+{
+  "name": "tools-verdaccio",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "tags": ["type:tool", "scope:node"],
+  "targets": {
+    "clean": {
+      "command": "rm -rf .storage",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    },
+    "start": {
+      "command": "bash src/start-verdaccio.bash",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    },
+    "stop": {
+      "command": "bash src/stop-verdaccio.bash",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

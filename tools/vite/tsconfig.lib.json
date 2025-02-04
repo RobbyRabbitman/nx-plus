@@ -1,8 +1,17 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.base.node.json",
   "compilerOptions": {
-    "declaration": true
+    "baseUrl": ".",
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "vite.config.*",
+    "vitest.config.*",
+    "src/**/*.spec.*",
+    "src/**/*.d.ts"
+  ],
+  "references": [{ "path": "../eslint/tsconfig.lib.json" }]
 }

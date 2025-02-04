@@ -1,104 +1,96 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "cli": { "packageManager": "pnpm" },
+  "sync": {
+    "applyChanges": true
+  },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "release": {
     "releaseTagPattern": "{version}",
-    "git": { "commitMessage": "chore: release {version} 🚀 [skip ci]" },
+    "git": {
+      "commitMessage": "chore: release {version} 🚀 [skip ci]"
+    },
     "version": {
       "conventionalCommits": true,
-      "generatorOptions": { "fallbackCurrentVersionResolver": "disk" }
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk",
+        "preserveLocalDependencyProtocols": true
+      }
     },
     "changelog": {
       "automaticFromRef": true,
       "workspaceChangelog": {
         "createRelease": "github",
-        "renderOptions": { "authors": false }
+        "renderOptions": {
+          "authors": false
+        }
       }
-    },
-    "projects": ["packages/**/*"]
+    }
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
-    "publishable": ["{workspaceRoot}/packages/**/*"],
-    "eslintGlobals": ["{workspaceRoot}/tools/eslint/**/*"],
-    "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
+    "eslintGlobals": ["{workspaceRoot}/tools/eslint*/**/*"]
   },
   "plugins": [
+    "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-plugin",
     {
-      "plugin": "@robby-rabbitman/nx-plus-tools-tsc/plugin",
+      "plugin": "@nx/js/typescript",
       "options": {
-        "tscTargetConfig": {
-          "inputs": [
-            "default",
-            "^default",
-            "typescriptGlobals",
-            "{workspaceRoot}/tools/tsc/**/*"
-          ]
+        "typecheck": {
+          "targetName": "typecheck-tsc"
+        },
+        "build": {
+          "targetName": "build-tsc",
+          "configName": "tsconfig.lib.json"
         }
-      }
+      },
+      "exclude": ["e2e/web-dev-server/e2e-nx-workspaces/packages/*"]
     },
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint-eslint" }
+      "options": {
+        "targetName": "lint-eslint"
+      }
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "test-vite" },
+      "options": {
+        "testTargetName": "test-vitest"
+      },
       "exclude": ["e2e/**/*"]
     },
     {
-      "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
+      "plugin": "@nx/vite/plugin",
       "options": {
-        "targetName": "e2e-vite-version-matrix",
-        "targetConfiguration": {
-          "cache": true,
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        },
-        "permutationTargetPrefix": "e2e-vite-version-matrix",
-        "permutationTargetConfiguration": {
-          "cache": true,
-          "parallelism": false,
-          "command": "vitest",
-          "options": {
-            "run": true,
-            "coverage": false,
-            "config": "{projectRoot}/vitest.config.mts"
-          },
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        }
+        "testTargetName": "e2e-vitest"
       },
       "include": ["e2e/**/*"]
     }
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "options": { "packageRoot": "{workspaceRoot}/dist/{projectRoot}" },
-      "dependsOn": ["build"]
+      "options": {
+        "packageRoot": "{projectRoot}"
+      },
+      "dependsOn": ["build*"]
     },
     "lint-eslint": {
-      "inputs": ["default", "^default", "eslintGlobals"]
+      "inputs": ["default", "eslintGlobals"]
     },
-    "test-vite*": {
-      "inputs": [
-        "default",
-        "^default",
-        { "externalDependencies": ["vitest"] },
-        { "env": "CI" }
-      ],
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "cache": true,
-      "configurations": { "ci": { "run": true } }
+    "{test,e2e}-vitest": {
+      "defaultConfiguration": "local",
+      "outputs": ["{projectRoot}/coverage"],
+      "configurations": {
+        "ci": {
+          "run": true
+        },
+        "local": {
+          "ui": true
+        }
+      },
+      "dependsOn": ["build*", "^build*"]
     }
   }
 }

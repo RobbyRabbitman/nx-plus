@@ -1,0 +1,18 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-plugin",
+  "version": "0.6.2",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@robby-rabbitman/nx-plus-tools-vite": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@nx/devkit": "20.1.2",
+    "memfs": "4.14.0",
+    "minimatch": "10.0.1"
+  }
+}

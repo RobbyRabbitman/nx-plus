@@ -1,0 +1,38 @@
+{
+  "name": "nx-plus-dev-container",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+  "postCreateCommand": "bash .devcontainer/post-create.bash",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/kreemer/features/chrometesting:1": {}
+  },
+  "forwardPorts": [
+    4873 // verdaccio
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nrwl.angular-console",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "mutantdino.resourcemonitor",
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolderBasename},target=${localWorkspaceFolder},type=volume"
+  ],
+  "remoteEnv": {
+    "HOST_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
+    "WORKSPACE_FOLDER": "${containerWorkspaceFolder}",
+    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0",
+    "NX_DAEMON": "true" // the nx deamon is disabled in container environments, so we enable it - https://github.com/nrwl/nx/issues/14126
+  },
+  "remoteUser": "root"
+}
