@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
-# in order to use a nx plugin locally, we need to build it first
-echo "⚙️ Building tools-eslint-nx-dependency-checks-plugin ..."
-pnpm tsc --build tools/eslint-nx-dependency-checks-plugin/tsconfig.lib.json
+echo "⚙️ Building tools ..."
+for tool in "tools"/*; do
+  if [ -d "$tool" ]; then
+    tsconfig="$tool/tsconfig.lib.json"
 
-# in order for projects to use the vite configs, we need to build them first
-echo "⚙️ Building tools-vite ..."
-pnpm tsc --build tools/vite/tsconfig.lib.json
+    if [ -f "$tsconfig" ]; then
+      echo "⚙️ Building $tool ..."
+      pnpm tsc --build $tsconfig
+    fi
+  fi
+done
 
-# in order for projects to use the eslint configs, we need to build them first
-echo "⚙️ Building tools-eslint ..."
-pnpm tsc --build tools/eslint/tsconfig.lib.json
+echo "⚙️ Starting verdaccio ..."
+pnpm nx run tools-verdaccio:start
