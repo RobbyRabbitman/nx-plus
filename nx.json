@@ -89,7 +89,8 @@
         "local": {
           "ui": true
         }
-      }
+      },
+      "dependsOn": ["build*", "^build*"]
     }
   }
 }
