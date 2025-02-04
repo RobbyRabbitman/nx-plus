@@ -41,7 +41,9 @@ jobs:
           git config user.email "robby.rabbitman+nx-plus@gmail.com"
           git config user.name "release"
 
-      - run: corepack enable
+      - run: |
+          npm i -g corepack@latest
+          corepack enable
 
       - run: sh .devcontainer/exec-cmd.sh nx report
 

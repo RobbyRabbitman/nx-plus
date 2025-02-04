@@ -33,7 +33,9 @@ jobs:
         with:
           token: ${{ steps.create-renovate-app-token.outputs.token }}
 
-      - run: corepack enable
+      - run: |
+          npm i -g corepack@latest
+          corepack enable
 
       - run: sh .devcontainer/exec-cmd.sh nx report
 

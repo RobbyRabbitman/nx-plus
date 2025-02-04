@@ -24,20 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: package.json
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
-          registry-url: 'https://registry.npmjs.org'
-
-      - run: pnpm whoami && echo 'npm credentials are valid' || (echo 'npm credentials are invalid or have expired.' && exit 1)
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
-
-      - run: corepack enable
+      - run: |
+          npm i -g corepack@latest
+          corepack enable
 
       - run: sh .devcontainer/exec-cmd.sh nx report
 
