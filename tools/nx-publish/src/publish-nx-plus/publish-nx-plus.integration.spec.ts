@@ -26,7 +26,7 @@ describe(
 
       const pnpmViewNxPlusWebTestRunner = () =>
         execSync(
-          'pnpm view ${nxPlusWebTestRunnerTestTag} --registry ${npmRegistry}',
+          `pnpm view ${nxPlusWebTestRunnerTestTag} --registry ${npmRegistry}`,
           { encoding: 'utf8' },
         );
 
