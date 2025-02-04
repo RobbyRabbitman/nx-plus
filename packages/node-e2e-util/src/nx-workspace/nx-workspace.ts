@@ -3,7 +3,7 @@ import { VERDACCIO_URL } from '@robby-rabbitman/nx-plus-tools-verdaccio';
 import { spawnSync } from 'child_process';
 import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join } from 'path';
-import nodeE2eUtilPackageJson from '../../package.json';
+import nodeE2eUtilPackageJson from '../../package.json' with { type: 'json' };
 
 type CreateE2eNxWorkspaceOptions = Partial<
   Omit<CreateNxWorkspaceOptions, 'cwd'>
