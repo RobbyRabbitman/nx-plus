@@ -1,5 +1,5 @@
 import { VERDACCIO_URL } from '@robby-rabbitman/nx-plus-tools-verdaccio';
-import { spawnSync } from 'child_process';
+import { execSync } from 'child_process';
 import { publishNxPlus } from './publish-nx-plus.js';
 
 describe(
@@ -25,29 +25,22 @@ describe(
       const nxPlusWebTestRunnerTestTag = `${nxPlusWebTestRunnerPackageName}@${uniqueNpmTag}`;
 
       const pnpmViewNxPlusWebTestRunner = () =>
-        spawnSync(
-          'pnpm',
-          `view ${nxPlusWebTestRunnerTestTag} --registry ${npmRegistry}`.split(
-            ' ',
-          ),
+        execSync(
+          'pnpm view ${nxPlusWebTestRunnerTestTag} --registry ${npmRegistry}',
           { encoding: 'utf8' },
         );
 
-      const pnpmViewResultBeforePublishing = pnpmViewNxPlusWebTestRunner();
-
       expect(
-        pnpmViewResultBeforePublishing.status,
+        () => pnpmViewNxPlusWebTestRunner(),
         `Expect ${nxPlusWebTestRunnerTestTag} not to be published in ${npmRegistry}`,
-      ).toBe(1);
+      ).toThrow();
 
       await publishNxPlus({ dryRun: false, npmRegistry, npmTag: uniqueNpmTag });
 
-      const pnpmViewResultAfterPublishing = pnpmViewNxPlusWebTestRunner();
-
       expect(
-        pnpmViewResultAfterPublishing.status,
+        () => pnpmViewNxPlusWebTestRunner(),
         `Expect ${nxPlusWebTestRunnerTestTag} to be published in ${npmRegistry}`,
-      ).toBe(0);
+      ).not.throw();
     });
   },
 );
