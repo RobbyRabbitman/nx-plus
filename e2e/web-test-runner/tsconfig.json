@@ -6,26 +6,13 @@
   "include": [],
   "exclude": [],
   "references": [
-    {
-      "path": "../../packages/web-test-runner"
-    },
-    {
-      "path": "../../packages/node-util"
-    },
-    {
-      "path": "../../packages/node-e2e-util"
-    },
-    {
-      "path": "../../tools/vite"
-    },
-    {
-      "path": "../../tools/eslint"
-    },
-    {
-      "path": "./tsconfig.lib.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+    { "path": "../../packages/web-test-runner" },
+    { "path": "../../tools/verdaccio" },
+    { "path": "../../packages/node-util" },
+    { "path": "../../packages/node-e2e-util" },
+    { "path": "../../tools/vite" },
+    { "path": "../../tools/eslint" },
+    { "path": "./tsconfig.lib.json" },
+    { "path": "./tsconfig.spec.json" }
   ]
 }
