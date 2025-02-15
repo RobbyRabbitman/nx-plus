@@ -17,6 +17,9 @@
           "npmTag": "local"
         }
       }
+    },
+    "test-vitest": {
+      "parallelism": false
     }
   }
 }

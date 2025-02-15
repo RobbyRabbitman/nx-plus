@@ -80,8 +80,8 @@
       "inputs": ["default", "eslintGlobals"]
     },
     "{test,e2e}-vitest": {
-      "defaultConfiguration": "local",
       "outputs": ["{projectRoot}/coverage"],
+      "defaultConfiguration": "local",
       "configurations": {
         "ci": {
           "run": true

@@ -5,6 +5,9 @@
   "targets": {
     "lint-commitlint": {
       "command": "echo \"$NX_PLUS_TOOLS_COMMITLINT_TEXT\" | pnpm commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
+    },
+    "test-vitest": {
+      "parallelism": false
     }
   }
 }
