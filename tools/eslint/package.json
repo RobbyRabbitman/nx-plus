@@ -1,5 +1,5 @@
 {
-  "name": "@hdi-components/tools-eslint",
+  "name": "@robby-rabbitman/nx-plus-tools-eslint",
   "version": "0.9.0",
   "files": [
     "dist",
