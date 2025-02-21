@@ -78,6 +78,10 @@ export const nxPlusEslintNxConfig = [
               sourceTag: 'runtime:node',
               onlyDependOnLibsWithTags: ['runtime:js', 'runtime:node'],
             },
+            {
+              sourceTag: 'runtime:web',
+              onlyDependOnLibsWithTags: ['runtime:js', 'runtime:web'],
+            },
           ],
         },
       ],
