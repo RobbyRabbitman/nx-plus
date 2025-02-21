@@ -29,5 +29,9 @@
       "include": ["tools/**/*"]
     }
   ],
-  "targetDefaults": {}
+  "targetDefaults": {
+    "build-tsc": {
+      "inputs": ["targets-build-tsc", "^targets-build-tsc"]
+    }
+  }
 }
