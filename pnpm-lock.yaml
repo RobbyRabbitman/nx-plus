@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  verdaccio: 5.33.0
+
 importers:
 
   .:
@@ -169,6 +172,16 @@ importers:
         version: 8.24.0(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3)
 
   tools/typescript-config: {}
+
+  tools/verdaccio:
+    dependencies:
+      '@nx/devkit':
+        specifier: 20.4.4
+        version: 20.4.4(nx@20.4.6)
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../eslint
 
   tools/workspace: {}
 
@@ -1558,7 +1571,7 @@ packages:
   '@nx/js@20.4.4':
     resolution: {integrity: sha512-ZFiQBhL7ajmXVKe9u4iypwh1WKYXpxG2U6ta925h+OuvHSk2YcVNm815stmddAdAI/MzOMBGlCdJdjKf/wwAmA==}
     peerDependencies:
-      verdaccio: ^5.0.4
+      verdaccio: 5.33.0
     peerDependenciesMeta:
       verdaccio:
         optional: true
@@ -1566,7 +1579,7 @@ packages:
   '@nx/js@20.4.6':
     resolution: {integrity: sha512-wHO6tXJNVIW0Z9zKLL/g6qee7K92XJNS4D8irpJB9sOg25fqAzKjwgcK0bPtnRhYsIjLkjh0FsTKIcznxTGnkA==}
     peerDependencies:
-      verdaccio: ^5.0.4
+      verdaccio: 5.33.0
     peerDependenciesMeta:
       verdaccio:
         optional: true
@@ -9835,6 +9848,18 @@ snapshots:
       ignore: 5.3.2
       minimatch: 9.0.3
       nx: 20.4.4
+      semver: 7.6.3
+      tmp: 0.2.3
+      tslib: 2.8.1
+      yargs-parser: 21.1.1
+
+  '@nx/devkit@20.4.4(nx@20.4.6)':
+    dependencies:
+      ejs: 3.1.10
+      enquirer: 2.3.6
+      ignore: 5.3.2
+      minimatch: 9.0.3
+      nx: 20.4.6
       semver: 7.6.3
       tmp: 0.2.3
       tslib: 2.8.1

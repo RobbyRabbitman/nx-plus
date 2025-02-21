@@ -1,5 +1,5 @@
 {
-  "name": "@hdi-components/tools-verdaccio",
+  "name": "@robby-rabbitman/nx-plus-tools-verdaccio",
   "version": "0.9.0",
   "files": [
     "dist",
@@ -11,17 +11,12 @@
     "@nx/devkit": "20.4.4"
   },
   "devDependencies": {
-    "@hdi-components/tools-eslint": "workspace:*",
-    "@hdi-components/tools-vite": "workspace:*"
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "nx": {
     "name": "tools-verdaccio",
     "projectType": "library",
-    "tags": [
-      "type:tool",
-      "scope:node",
-      "domain:shared"
-    ],
+    "tags": [],
     "targets": {
       "clean": {
         "command": "sh {projectRoot}/src/clean-verdaccio.sh"

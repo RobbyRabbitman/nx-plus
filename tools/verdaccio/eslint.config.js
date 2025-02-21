@@ -1,5 +1,5 @@
 // @ts-check
-import { nodeEslintConfig } from '@hdi-components/tools-eslint';
+import { nxPlusEslintNodeConfig } from '@robby-rabbitman/nx-plus-tools-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...nodeEslintConfig];
+export default [...nxPlusEslintNodeConfig];
