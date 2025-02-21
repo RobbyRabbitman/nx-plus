@@ -17,6 +17,8 @@ export const nxPlusEslintNodeConfig = [
   ...nxPlusEslintJsConfig,
   ...nxPlusEslintTsConfig,
   ...nxPlusEslintNxConfig,
+
+  /** https://github.com/eslint-community/eslint-plugin-n */
   {
     ...eslintNodeRecommendedConfig,
     files: [

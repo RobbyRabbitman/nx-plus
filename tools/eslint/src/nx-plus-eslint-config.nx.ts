@@ -21,7 +21,9 @@ const nxPlusEslintNxDependencyChecksRuleOptions = {
 
 export const nxPlusEslintNxConfig = [
   ...nxPlusEslintIgnoreConfig,
+
   { plugins: { '@nx': eslintNxPlugin } },
+
   // https://nx.dev/nx-api/eslint-plugin#dependency-checks-rule
   {
     files: ['**/*.json'],
@@ -35,6 +37,7 @@ export const nxPlusEslintNxConfig = [
       ],
     },
   },
+
   // https://nx.dev/nx-api/eslint-plugin#enforce-module-boundaries-rule
   {
     files: ['**/*.ts', '**/*.mts', '**/*.cts', '**/*.tsx'],

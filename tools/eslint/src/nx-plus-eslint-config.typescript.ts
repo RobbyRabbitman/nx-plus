@@ -4,6 +4,8 @@ import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
 
 export const nxPlusEslintTsConfig = [
   ...nxPlusEslintIgnoreConfig,
+
+  /** https://typescript-eslint.io/getting-started */
   ...eslintTsConfig
     .config(
       ...eslintTsConfig.configs.strict,
