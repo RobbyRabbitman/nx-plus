@@ -19,13 +19,13 @@
     "tags": [],
     "targets": {
       "clean": {
-        "command": "sh {projectRoot}/src/clean-verdaccio.sh"
+        "command": "sh {projectRoot}/src/commands/clean.sh"
       },
       "start": {
-        "command": "sh {projectRoot}/src/start-verdaccio.sh"
+        "command": "sh {projectRoot}/src/commands/start.sh"
       },
       "stop": {
-        "command": "sh {projectRoot}/src/stop-verdaccio.sh"
+        "command": "sh {projectRoot}/src/src/commands/stop.sh"
       }
     }
   }
