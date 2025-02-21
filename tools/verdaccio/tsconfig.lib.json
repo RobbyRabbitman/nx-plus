@@ -7,5 +7,9 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["*.config.*", "src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../eslint/tsconfig.lib.json"
+    }
+  ]
 }

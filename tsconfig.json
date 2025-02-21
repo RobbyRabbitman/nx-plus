@@ -4,6 +4,9 @@
   "references": [
     {
       "path": "./tools/eslint"
+    },
+    {
+      "path": "./tools/verdaccio"
     }
   ]
 }
