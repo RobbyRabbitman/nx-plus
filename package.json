@@ -2,9 +2,9 @@
   "name": "@robby-rabbitman/nx-plus",
   "version": "0.0.0",
   "engines": {
-    "node": "20.18.2"
+    "node": "22.13.1"
   },
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.4.1",
   "scripts": {
     "sync-dependencies": "echo 'Need to build every project and reset project graph before syncing dependencies ...' && nx run-many -t build && nx reset && nx run-many -t lint-eslint --fix --rule '@nx/dependency-checks:error'",
     "clean": "git clean -dfX && pnpm i && pnpm nx reset && pnpm nx sync",
