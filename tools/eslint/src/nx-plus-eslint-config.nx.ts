@@ -4,8 +4,18 @@ import eslintJsoncParser from 'jsonc-eslint-parser';
 import eslintTs from 'typescript-eslint';
 import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
 
-const nxDependencyChecksRuleOptions = {
+const nxPlusEslintNxDependencyChecksRuleOptions = {
   ignoredFiles: ['**/{*.config.*,*.spec.*,test-setup.*}'],
+  /**
+   * TODO: Apparently this rule does not seem to work when 1. not every project
+   * has been build and 2. the workspace has been reset via 'nx reset'
+   *
+   * - https://github.com/nrwl/nx/issues/29438
+   *
+   * Either disable this rule or build every project and reset the workspace
+   * before linting - otherwise this rule reports false positives in cia via 'nx
+   * affected' commands.
+   */
   buildTargets: ['eslint-nx-dependency-checks-pseudo-build'],
 };
 
@@ -20,17 +30,8 @@ export const nxPlusEslintNxConfig = [
     },
     rules: {
       '@nx/dependency-checks': [
-        /**
-         * TODO: Apparently this rule does not seem to work when 1. not every
-         * project has been build and 2. the workspace has been reset via 'nx
-         * reset' - https://github.com/nrwl/nx/issues/29438
-         *
-         * Either disable this rule or build every project and reset the
-         * workspace before linting - otherwise this rule reports false
-         * positives in cia via 'nx affected' commands.
-         */
         'error',
-        nxDependencyChecksRuleOptions,
+        nxPlusEslintNxDependencyChecksRuleOptions,
       ],
     },
   },
@@ -68,7 +69,16 @@ export const nxPlusEslintNxConfig = [
         {
           enforceBuildableLibDependency: true,
           allow: [],
-          depConstraints: [],
+          depConstraints: [
+            {
+              sourceTag: 'runtime:js',
+              onlyDependOnLibsWithTags: ['runtime:js'],
+            },
+            {
+              sourceTag: 'runtime:node',
+              onlyDependOnLibsWithTags: ['runtime:js', 'runtime:node'],
+            },
+          ],
         },
       ],
     },
