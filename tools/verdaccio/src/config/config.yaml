@@ -1,5 +1,5 @@
 listen:
-  - 0.0.0.0:4433
+  - http://localhost:4433
 
 storage: ../../.storage
 
@@ -17,13 +17,6 @@ packages:
     access: $all
     proxy:
       - npmjs
-
-log:
-  type: file
-  path: .logs/verdaccio.log
-  format: pretty-timestamped
-  colors: false
-  level: warn
 
 publish:
   allow_offline: true
