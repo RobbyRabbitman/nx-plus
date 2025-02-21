@@ -1,0 +1,27 @@
+{
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 0,
+        "proseWrap": "preserve"
+      }
+    },
+    {
+      "files": "nginx.conf",
+      "options": {
+        "parser": "nginx"
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-sh",
+    "prettier-plugin-nginx"
+  ]
+}
