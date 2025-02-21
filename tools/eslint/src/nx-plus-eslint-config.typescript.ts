@@ -14,7 +14,7 @@ export const nxPlusEslintTsConfig = [
         ({
           ...tsEslintConfig,
           files: ['**/*.ts', '**/*.mts', '**/*.cts', '**/*.tsx'],
-        }) as Linter.Config,
+        }) as Linter.Config, // TODO: Check why types are incompatible
     ),
   {
     files: ['**/*.spec.ts', '**/*.spec.mts', '**/*.spec.cts', '**/*.spec.tsx'],
