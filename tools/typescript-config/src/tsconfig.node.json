@@ -1,6 +1,6 @@
 {
   // the base tsconfig for all ts projects of this repository that run in node
-  "extends": "./base/tsconfig.base.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "types": ["node"],
     "module": "NodeNext",
