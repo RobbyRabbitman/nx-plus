@@ -1,1 +1,1 @@
-export * from './config/verdaccio.js';
+export * from './verdaccio.js';
