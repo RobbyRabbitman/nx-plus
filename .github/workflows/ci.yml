@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - run: pnpm i
+
+      - run: pnpm nx report
+
+      - run: |
+          pnpm nx sync:check
+          pnpm nx format:check
+          pnpm nx affected -t build -c ci
+        env:
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
