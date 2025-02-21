@@ -1,0 +1,37 @@
+{
+  "name": "@hdi-components/tools-verdaccio",
+  "version": "0.9.0",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.4"
+  },
+  "devDependencies": {
+    "@hdi-components/tools-eslint": "workspace:*",
+    "@hdi-components/tools-vite": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-verdaccio",
+    "projectType": "library",
+    "tags": [
+      "type:tool",
+      "scope:node",
+      "domain:shared"
+    ],
+    "targets": {
+      "clean": {
+        "command": "sh {projectRoot}/src/clean-verdaccio.sh"
+      },
+      "start": {
+        "command": "sh {projectRoot}/src/start-verdaccio.sh"
+      },
+      "stop": {
+        "command": "sh {projectRoot}/src/stop-verdaccio.sh"
+      }
+    }
+  }
+}

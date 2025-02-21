@@ -1,0 +1,27 @@
+listen:
+  - 0.0.0.0:4433
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+packages:
+  '@robby-rabbitman/nx-plus-*':
+    access: $all
+    publish: $all
+    unpublish: $all
+
+  '**':
+    access: $all
+    proxy:
+      - npmjs
+
+log:
+  type: file
+  path: .logs/verdaccio.log
+  format: pretty-timestamped
+  colors: false
+  level: warn
+
+publish:
+  allow_offline: true
