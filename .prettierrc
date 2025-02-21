@@ -11,17 +11,7 @@
         "printWidth": 0,
         "proseWrap": "preserve"
       }
-    },
-    {
-      "files": "nginx.conf",
-      "options": {
-        "parser": "nginx"
-      }
     }
   ],
-  "plugins": [
-    "prettier-plugin-jsdoc",
-    "prettier-plugin-sh",
-    "prettier-plugin-nginx"
-  ]
+  "plugins": ["prettier-plugin-jsdoc", "prettier-plugin-sh"]
 }

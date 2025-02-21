@@ -1,2 +1,2 @@
 packages:
-  - 'tools'
+  ['tools/**', '!**/dist/**', '!**/dist-spec/**', '!**/build/**', '!**/tmp/**']
