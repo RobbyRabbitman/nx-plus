@@ -1,9 +1,33 @@
 {
   "cli": { "packageManager": "pnpm" },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": []
+    "default": ["{projectRoot}/**/*", "globals-shared"],
+    "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
+    "globals-typescript": [
+      "{workspaceRoot}/tools/typescript-config/**/*",
+      {
+        "externalDependencies": ["typescript", "tslib"]
+      }
+    ],
+    "targets-build-tsc": ["default", "globals-typescript"]
   },
-  "plugins": [],
+  "sync": {
+    "applyChanges": true
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck-tsc"
+        },
+        "build": {
+          "targetName": "build-tsc",
+          "configName": "tsconfig.lib.json"
+        }
+      },
+      "include": ["tools/**/*"]
+    }
+  ],
   "targetDefaults": {}
 }

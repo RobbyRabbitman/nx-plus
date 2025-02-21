@@ -1,5 +1,9 @@
 {
   // This file is kept in sync by 'nx sync' as part of the ts setup of this repository
   // Run 'nx sync' to update this file instead of editing it manually
-  "references": []
+  "references": [
+    {
+      "path": "./tools/eslint"
+    }
+  ]
 }
