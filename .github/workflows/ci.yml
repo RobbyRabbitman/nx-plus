@@ -18,6 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
+      # remove global install of corepack or pin to a version
       - run: |
           pnpm add -g corepack
           corepack enable
