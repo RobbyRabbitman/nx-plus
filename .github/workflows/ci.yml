@@ -20,7 +20,7 @@ jobs:
 
       # remove global install of corepack or pin to a version
       - run: |
-          pnpm add -g corepack
+          npm -g corepack
           corepack enable
 
       - uses: actions/setup-node@v4
