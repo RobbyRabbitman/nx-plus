@@ -1,6 +1,8 @@
 listen:
   - 0.0.0.0:4433
 
+storage: ../../.storage
+
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/

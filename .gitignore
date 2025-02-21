@@ -5,3 +5,4 @@ coverage
 .nx
 **/*.timestamp-*
 .logs
+.storage
