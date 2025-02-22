@@ -5,7 +5,7 @@ on:
     types: [synchronize, edited]
 
 concurrency:
-  group: ${{ github.head_ref }}
+  group: '${{ github.event.pull_request.id }} ${{ github.event.pull_request.title }}'
   cancel-in-progress: true
 
 jobs:
