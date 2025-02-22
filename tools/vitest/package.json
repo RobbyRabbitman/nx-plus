@@ -1,0 +1,17 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-vite",
+  "version": "0.6.2",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "dependencies": {
+    "@nx/devkit": "20.1.2",
+    "vitest": "1.6.0"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  }
+}
