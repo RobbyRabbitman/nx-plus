@@ -12,7 +12,7 @@ describe('[e2e Test] Web Test Runner', () => {
     webTestRunnerExampleProjectPackageJson.nx.name;
 
   const webTestRunnerExampleProject =
-    readCachedProjectGraph().nodes[webTestRunnerExampleProjectName]?.data!;
+    readCachedProjectGraph().nodes[webTestRunnerExampleProjectName]!.data;
 
   const webTestRunnerTargetName = 'test-web-test-runner';
 

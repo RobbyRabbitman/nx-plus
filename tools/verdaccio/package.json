@@ -18,9 +18,6 @@
   },
   "nx": {
     "name": "nx-plus-tools-verdaccio",
-    "tags": [
-      "runtime:js"
-    ],
     "targets": {
       "clean": {
         "command": "sh {projectRoot}/src/commands/clean.sh"

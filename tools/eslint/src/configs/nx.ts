@@ -71,21 +71,6 @@ export const nxPlusEslintNxConfig = [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: [],
-          depConstraints: [
-            {
-              sourceTag: 'runtime:js',
-              onlyDependOnLibsWithTags: ['runtime:js'],
-            },
-            {
-              sourceTag: 'runtime:node',
-              onlyDependOnLibsWithTags: ['runtime:js', 'runtime:node'],
-            },
-            {
-              sourceTag: 'runtime:web',
-              onlyDependOnLibsWithTags: ['runtime:js', 'runtime:web'],
-            },
-          ],
         },
       ],
     },
