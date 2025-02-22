@@ -1,11 +1,11 @@
 import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
 import { spawnSync } from 'child_process';
 
-describe('[Integration Test] commits of nx plus', () => {
+describe('[Integration Test] commits of Nx Plus', () => {
   const commitlintProjectName = process.env.NX_TASK_TARGET_PROJECT as string;
 
-  const commitlint = (commitMessage: string) =>
-    spawnSync(
+  function invokeCommitlint(commitMessage: string) {
+    return spawnSync(
       'pnpm',
       `nx run ${commitlintProjectName}:lint-commitlint`.split(' '),
       {
@@ -17,6 +17,7 @@ describe('[Integration Test] commits of nx plus', () => {
         },
       },
     );
+  }
 
   it('should follow conventional format', () => {
     const validTypes = [
@@ -33,7 +34,7 @@ describe('[Integration Test] commits of nx plus', () => {
       'test',
     ];
 
-    const commitLintResult = commitlint(
+    const commitLintResult = invokeCommitlint(
       `not_a_valid_type: type that does not exist`,
     );
 
@@ -52,8 +53,8 @@ describe('[Integration Test] commits of nx plus', () => {
 
     expect(projects.length).toBeGreaterThan(0);
 
-    const commitLintResult = commitlint(
-      'feat(not-a-project-of-hdi-components): supa dupa feature',
+    const commitLintResult = invokeCommitlint(
+      'feat(not-a-project): supa dupa feature',
     );
     expect(commitLintResult.status).toBe(1);
 

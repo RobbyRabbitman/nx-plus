@@ -21,7 +21,7 @@
     ],
     "targets": {
       "lint-commitlint": {
-        "command": "echo \"$NX_PLUS_TOOLS_COMMITLINT_TEXT\" | commitlint --config={projectRoot}/src/commitlint.config.ts --verbose"
+        "command": "echo \"$NX_PLUS_TOOLS_COMMITLINT_TEXT\" | commitlint --config={projectRoot}/src/commitlint.ts --verbose"
       },
       "test-vitest": {
         "parallelism": false
