@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "git clean -dfX && pnpm i && pnpm nx reset && pnpm nx sync",
     "postinstall": "sh tools/workspace/src/npm-life-cycle/post-install.sh",
-    "sync-dependencies": "echo 'Need to build every project and reset project graph before syncing dependencies ...' && nx run-many -t build && nx reset && nx run-many -t lint-eslint --fix --rule '@nx/dependency-checks:error'"
+    "sync-dependencies": "echo 'Need to build every project and reset project graph before syncing dependencies ...' && nx run-many -t build build-tsc && nx reset && nx run-many -t lint-eslint --fix --rule '@nx/dependency-checks:error'"
   },
   "devDependencies": {
     "@commitlint/cli": "19.7.1",

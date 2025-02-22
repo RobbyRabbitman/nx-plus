@@ -7,7 +7,9 @@
   ],
   "type": "commonjs",
   "main": "./dist/plugin.js",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6"
+  },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
