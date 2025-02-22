@@ -1,16 +1,13 @@
 import { type Linter } from 'eslint';
-import eslintTsConfig from 'typescript-eslint';
-import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
+import tsEslint from 'typescript-eslint';
+import nxPlusEslintIgnoreConfig from './ignore.js';
 
 export const nxPlusEslintTsConfig = [
   ...nxPlusEslintIgnoreConfig,
 
   /** https://typescript-eslint.io/getting-started */
-  ...eslintTsConfig
-    .config(
-      ...eslintTsConfig.configs.strict,
-      ...eslintTsConfig.configs.stylistic,
-    )
+  ...tsEslint
+    .config(...tsEslint.configs.strict, ...tsEslint.configs.stylistic)
     .map(
       (tsEslintConfig) =>
         ({

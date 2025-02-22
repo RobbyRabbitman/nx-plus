@@ -1,8 +1,8 @@
-import eslintNxPlugin from '@nx/eslint-plugin';
+import nxEslintPlguin from '@nx/eslint-plugin';
 import { type Linter } from 'eslint';
-import eslintJsoncParser from 'jsonc-eslint-parser';
-import eslintTs from 'typescript-eslint';
-import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
+import jsoncEslintParser from 'jsonc-eslint-parser';
+import tsEslint from 'typescript-eslint';
+import nxPlusEslintIgnoreConfig from './ignore.js';
 
 const nxPlusEslintNxDependencyChecksRuleOptions = {
   ignoredFiles: ['**/{*.config.*,*.spec.*,test-setup.*}'],
@@ -22,13 +22,13 @@ const nxPlusEslintNxDependencyChecksRuleOptions = {
 export const nxPlusEslintNxConfig = [
   ...nxPlusEslintIgnoreConfig,
 
-  { plugins: { '@nx': eslintNxPlugin } },
+  { plugins: { '@nx': nxEslintPlguin } },
 
   // https://nx.dev/nx-api/eslint-plugin#dependency-checks-rule
   {
     files: ['**/*.json'],
     languageOptions: {
-      parser: eslintJsoncParser,
+      parser: jsoncEslintParser,
     },
     rules: {
       '@nx/dependency-checks': [
@@ -42,7 +42,7 @@ export const nxPlusEslintNxConfig = [
   {
     files: ['**/*.ts', '**/*.mts', '**/*.cts', '**/*.tsx'],
     languageOptions: {
-      parser: eslintTs.parser,
+      parser: tsEslint.parser,
     },
   },
   {

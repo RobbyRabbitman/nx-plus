@@ -1,7 +1,7 @@
-import eslintJs from '@eslint/js';
+import jsEslint from '@eslint/js';
 import { type Linter } from 'eslint';
-import eslintPrettierConfig from 'eslint-config-prettier';
-import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
+import prettierEslintConfig from 'eslint-config-prettier';
+import nxPlusEslintIgnoreConfig from './ignore.js';
 
 /** The ESLint configuration for JavaScript files of `Nx Plus`. */
 export const nxPlusEslintJsConfig = [
@@ -9,10 +9,10 @@ export const nxPlusEslintJsConfig = [
 
   /** https://eslint.org/docs/latest/use/getting-started */
   {
-    ...eslintJs.configs.recommended,
+    ...jsEslint.configs.recommended,
     files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.jsx'],
   },
-  eslintPrettierConfig,
+  prettierEslintConfig,
 ] satisfies Linter.Config[];
 
 export default nxPlusEslintJsConfig;

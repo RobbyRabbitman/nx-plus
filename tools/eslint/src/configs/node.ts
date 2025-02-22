@@ -1,12 +1,12 @@
 import { type Linter } from 'eslint';
-import eslintNode from 'eslint-plugin-n';
-import nxPlusEslintIgnoreConfig from './nx-plus-eslint-config.ignore.js';
-import nxPlusEslintJsConfig from './nx-plus-eslint-config.javascript.js';
-import nxPlusEslintNxConfig from './nx-plus-eslint-config.nx.js';
-import nxPlusEslintTsConfig from './nx-plus-eslint-config.typescript.js';
+import nodeEslint from 'eslint-plugin-n';
+import nxPlusEslintIgnoreConfig from './ignore.js';
+import nxPlusEslintJsConfig from './javascript.js';
+import nxPlusEslintNxConfig from './nx.js';
+import nxPlusEslintTsConfig from './typescript.js';
 
 const eslintNodeRecommendedConfig =
-  eslintNode.configs['flat/recommended-module'];
+  nodeEslint.configs['flat/recommended-module'];
 
 /**
  * The ESLint configuration for JavaScript files of `Nx Plus` that are expected
