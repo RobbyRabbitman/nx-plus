@@ -4,10 +4,6 @@ on:
   pull_request:
     types: [synchronize, edited]
 
-defaults:
-  run:
-    shell: bash
-
 concurrency:
   group: '${{ github.event.pull_request.id }} ${{ github.event.pull_request.title }}'
   cancel-in-progress: true

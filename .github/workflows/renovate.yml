@@ -15,10 +15,6 @@ on:
   schedule:
     - cron: '0 2,8 * * *' # At 02:00 AM, 08:00 AM
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   main:
     runs-on: ubuntu-latest
