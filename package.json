@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus",
-  "version": "0.0.0",
+  "version": "0.6.2",
   "scripts": {
     "clean": "git clean -dfX && pnpm i && pnpm nx reset && pnpm nx sync",
     "postinstall": "sh tools/workspace/src/npm-life-cycle/post-install.sh",
