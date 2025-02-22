@@ -212,6 +212,9 @@ importers:
       '@nx/devkit':
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
+      nx:
+        specifier: 20.4.6
+        version: 20.4.6
       yargs:
         specifier: 17.7.2
         version: 17.7.2
