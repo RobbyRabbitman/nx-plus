@@ -3,6 +3,23 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "globals-shared"],
     "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
+    "globals-eslint": [
+      "{workspaceRoot}/tools/eslint/**/*",
+      {
+        "externalDependencies": [
+          "@nx/eslint",
+          "@nx/eslint-plugin",
+          "eslint",
+          "@types/eslint",
+          "eslint-config-prettier",
+          "@types/eslint-config-prettier",
+          "typescript-eslint",
+          "eslint-plugin-n",
+          "jsonc-eslint-parser",
+          "globals"
+        ]
+      }
+    ],
     "globals-typescript": [
       "{workspaceRoot}/tools/typescript/**/*",
       {
@@ -21,12 +38,19 @@
       }
     ],
     "targets-build-tsc": ["default", "globals-typescript"],
-    "targets-test-vitest": ["default", "globals-vitest", "globals-vite"]
+    "targets-test-vitest": ["default", "globals-vitest", "globals-vite"],
+    "targets-lint-eslint": ["default", "globals-eslint"]
   },
   "sync": {
     "applyChanges": true
   },
   "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint-eslint"
+      }
+    },
     {
       "plugin": "@nx/js/typescript",
       "options": {
@@ -48,6 +72,9 @@
     }
   ],
   "targetDefaults": {
+    "lint-eslint": {
+      "inputs": ["targets-lint-eslint"]
+    },
     "build-tsc": {
       "inputs": ["targets-build-tsc", "^targets-build-tsc"]
     },
