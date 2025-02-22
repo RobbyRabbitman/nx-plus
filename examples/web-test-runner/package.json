@@ -1,0 +1,18 @@
+{
+  "name": "@robby-rabbitman/nx-plus-examples-web-test-runner",
+  "version": "0.6.2",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "nx": {
+    "name": "nx-plus-examples-web-test-runner",
+    "tags": [
+      "runtime:web"
+    ]
+  }
+}
