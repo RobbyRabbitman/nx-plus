@@ -1,5 +1,24 @@
 {
   "cli": { "packageManager": "pnpm" },
+  "release": {
+    "releaseTagPattern": "{version}",
+    "version": {
+      "conventionalCommits": true,
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk",
+        "preserveLocalDependencyProtocols": true
+      }
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "createRelease": "github",
+        "renderOptions": {
+          "authors": false
+        }
+      }
+    }
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "globals-shared"],
     "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
