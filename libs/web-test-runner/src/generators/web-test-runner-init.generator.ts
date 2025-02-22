@@ -16,7 +16,7 @@ const WEB_TEST_RUNNER_PLUGIN_PATH =
  */
 interface WebTestRunnerInitGeneratorSchema {
   /**
-   * The name of the `web-test-runner` test target e.g. 'test' or
+   * The name of the `Web Test Runner` test target e.g. 'test' or
    * 'web-test-runner'.
    */
   testTargetName?: string;
@@ -37,20 +37,8 @@ type WebTestRunnerInitGeneratorOptions =
  */
 export const webTestRunnerInitGenerator: Generator<
   WebTestRunnerInitGeneratorSchema
-> = async (tree, schema) => {
-  const defaultWebTestRunnerTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
-
-  const options = {
-    skipAddPlugin: false,
-    skipFormat: false,
-    testTargetName: defaultWebTestRunnerTargetName,
-    ...schema,
-  } satisfies WebTestRunnerInitGeneratorOptions;
-
-  /** Make sure `testTargetName` is not an empty string. */
-  if (options.testTargetName === '') {
-    options.testTargetName = defaultWebTestRunnerTargetName;
-  }
+> = async (tree, userOptions) => {
+  const options = normalizeWebTestRunnerInitGeneratorOptions(userOptions);
 
   const { skipAddPlugin, skipFormat } = options;
 
@@ -63,7 +51,7 @@ export const webTestRunnerInitGenerator: Generator<
 
   const hasWebTestRunnerPlugin = nxJson.plugins.some((pluginConfig) => {
     /**
-     * `pluginConfig` can be a string representing the plugin name or a object
+     * `pluginConfig` can be a string representing the plugin name or an object
      * with a plugin property representing the plugin name. So we need to check
      * both.
      */
@@ -93,3 +81,21 @@ export const webTestRunnerInitGenerator: Generator<
 };
 
 export default webTestRunnerInitGenerator;
+
+function normalizeWebTestRunnerInitGeneratorOptions(
+  userOptions?: WebTestRunnerInitGeneratorSchema,
+) {
+  const normalizedOptions = {
+    skipAddPlugin: false,
+    skipFormat: false,
+    testTargetName: DEFAULT_WEB_TEST_RUNNER_TARGET_NAME,
+    ...userOptions,
+  } satisfies WebTestRunnerInitGeneratorOptions;
+
+  /** Make sure `testTargetName` is not an empty string. */
+  if (normalizedOptions.testTargetName === '') {
+    normalizedOptions.testTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
+  }
+
+  return normalizedOptions;
+}
