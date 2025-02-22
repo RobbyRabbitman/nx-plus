@@ -25,6 +25,9 @@
     },
     {
       "path": "./libs/web-test-runner"
+    },
+    {
+      "path": "./e2e/web-test-runner"
     }
   ]
 }

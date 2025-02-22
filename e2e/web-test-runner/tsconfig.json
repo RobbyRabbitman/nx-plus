@@ -7,13 +7,10 @@
   "exclude": [],
   "references": [
     {
-      "path": "../vitest"
+      "path": "../../tools/vitest"
     },
     {
-      "path": "../eslint"
-    },
-    {
-      "path": "./tsconfig.lib.json"
+      "path": "../../tools/eslint"
     },
     {
       "path": "./tsconfig.spec.json"

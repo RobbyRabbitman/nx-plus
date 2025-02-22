@@ -1,15 +1,17 @@
 #!/bin/sh
 
 echo "⚙️ Building tools ..."
-for tool in "tools"/*; do
-  if [ -d "$tool" ]; then
-    tsconfig="$tool/tsconfig.lib.json"
+for tsconfig in $(find tools -name 'tsconfig.lib.json'); do
+  tool=$(dirname "$tsconfig")
+  echo "⚙️ Building $tool ..."
+  pnpm tsc --build $tsconfig
+done
 
-    if [ -f "$tsconfig" ]; then
-      echo "⚙️ Building $tool ..."
-      pnpm tsc --build $tsconfig
-    fi
-  fi
+localPlugins="libs/web-test-runner"
+
+for plugin in $localPlugins; do
+  echo "⚙️ Building $plugin ..."
+  pnpm tsc --build $plugin/tsconfig.lib.json
 done
 
 echo "⚙️ Starting verdaccio ..."
