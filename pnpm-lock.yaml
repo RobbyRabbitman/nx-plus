@@ -68,6 +68,9 @@ importers:
       '@web/test-runner':
         specifier: 0.20.0
         version: 0.20.0
+      chai:
+        specifier: 5.2.0
+        version: 5.2.0
       eslint:
         specifier: 9.21.0
         version: 9.21.0(jiti@2.4.2)
@@ -134,6 +137,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      chai:
+        specifier: 5.2.0
+        version: 5.2.0
 
   libs/web-test-runner:
     dependencies:
