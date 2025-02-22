@@ -129,6 +129,22 @@ importers:
         specifier: 17.7.2
         version: 17.7.2
 
+  libs/web-test-runner:
+    dependencies:
+      '@nx/devkit':
+        specifier: ^20.0.0
+        version: 20.4.6(nx@20.4.6)
+      '@web/test-runner':
+        specifier: ~0.20.0
+        version: 0.20.0
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../../tools/vitest
+
   tools/commitlint:
     dependencies:
       '@commitlint/types':
