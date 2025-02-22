@@ -36,7 +36,7 @@ jobs:
 
       - run: pnpm nx report
 
-      - run: pnpm nx run @robby-rabbitman/nx-plus-tools-commitlint:lint-commitlint
+      - run: pnpm nx run nx-plus-tools-commitlint:lint-commitlint
         env:
           NX_PLUS_TOOLS_COMMITLINT_TEXT: ${{ github.event.pull_request.title }}
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

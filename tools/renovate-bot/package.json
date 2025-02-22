@@ -6,6 +6,7 @@
     "package.json"
   ],
   "nx": {
+    "name": "nx-plus-tools-renovate-bot",
     "namedInputs": {
       "targets-lint-renovate-config": [
         {

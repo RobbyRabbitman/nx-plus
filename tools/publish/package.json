@@ -18,6 +18,7 @@
     "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"
   },
   "nx": {
+    "name": "nx-plus-tools-publish",
     "tags": [
       "runtime:node"
     ],

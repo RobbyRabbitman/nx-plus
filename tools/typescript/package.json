@@ -4,5 +4,8 @@
   "files": [
     "src/configs",
     "package.json"
-  ]
+  ],
+  "nx": {
+    "name": "nx-plus-tools-typescript"
+  }
 }

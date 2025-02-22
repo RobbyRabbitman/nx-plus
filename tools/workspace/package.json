@@ -6,6 +6,7 @@
     "package.json"
   ],
   "nx": {
+    "name": "nx-plus-tools-workspace",
     "targets": {
       "delete-all-local-git-branches": {
         "command": "sh {projectRoot}/src/git/delete-all-local-git-branches.sh"
