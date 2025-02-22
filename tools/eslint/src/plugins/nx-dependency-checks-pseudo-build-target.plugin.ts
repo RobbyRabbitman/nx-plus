@@ -25,6 +25,9 @@ export const createNodesV2 = [
     ),
 ] satisfies CreateNodesV2;
 
+export const PSEUDO_BUILD_TARGET_NAME =
+  'eslint-nx-dependency-checks-pseudo-build';
+
 /**
  * The eslint rule `@nx/dependency-checks` requires a build target name to find
  * the dependencies of a project. Every dependency must have exactly the
@@ -44,7 +47,7 @@ const createNxDependencyChecksPseudoBuildTarget: CreateNodesFunction = (
     projects: {
       [packageJson]: {
         targets: {
-          'eslint-nx-dependency-checks-pseudo-build': {
+          [PSEUDO_BUILD_TARGET_NAME]: {
             command:
               "echo 'It seems like you called me - you should not. I am just a workaround for https://github.com/nrwl/nx/issues/9748' && exit 1",
           },
