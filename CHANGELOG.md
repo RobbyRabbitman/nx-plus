@@ -1,3 +1,9 @@
+## 0.6.3 (2025-02-22)
+
+### 🩹 Fixes
+
+- **tools-renovate-bot:** migrate config ([#103](https://github.com/RobbyRabbitman/nx-plus/pull/103))
+
 ## 0.6.2 (2024-07-21)
 
 
