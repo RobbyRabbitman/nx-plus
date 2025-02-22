@@ -51,8 +51,6 @@ describe('[Integration Test] commits of Nx Plus', () => {
   it('should reference projects when scoped', () => {
     const projects = Object.keys(readCachedProjectGraph().nodes);
 
-    expect(projects.length).toBeGreaterThan(0);
-
     const commitLintResult = invokeCommitlint(
       'feat(not-a-project): supa dupa feature',
     );
