@@ -38,6 +38,8 @@ jobs:
       - run: |
           pnpm nx sync:check
           pnpm nx format:check
-          pnpm nx affected -t build -c ci
+          pnpm nx affected -t lint lint-eslint -c ci
+          pnpm nx affected -t build build-tsc -c ci
+          pnpm nx affected -t test test-vitest -c ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
