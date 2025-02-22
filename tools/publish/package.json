@@ -9,7 +9,8 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@nx/devkit": "20.4.6",
-    "yargs": "17.7.2"
+    "yargs": "17.7.2",
+    "nx": "20.4.6"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
@@ -17,6 +18,9 @@
     "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"
   },
   "nx": {
+    "tags": [
+      "runtime:node"
+    ],
     "targets": {
       "exec-publish-cli": {
         "command": "tsx {projectRoot}/src/cli/publish.cli.ts",
