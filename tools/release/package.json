@@ -1,5 +1,5 @@
 {
-  "name": "@robby-rabbitman/nx-plus-tools-publish",
+  "name": "@robby-rabbitman/nx-plus-tools-release",
   "version": "0.6.2",
   "files": [
     "dist",
@@ -18,8 +18,8 @@
   },
   "nx": {
     "targets": {
-      "exec-publish-cli": {
-        "command": "tsx {projectRoot}/src/cli/publish.cli.ts",
+      "exec-release-cli": {
+        "command": "tsx {projectRoot}/src/cli/release.cli.ts",
         "options": {
           "env": {
             "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
@@ -27,11 +27,7 @@
         },
         "defaultConfiguration": "local",
         "configurations": {
-          "local": {
-            "dryRun": false,
-            "npmRegistry": "http://localhost:4433",
-            "npmTag": "local"
-          }
+          "local": {}
         }
       },
       "test-vitest": {
