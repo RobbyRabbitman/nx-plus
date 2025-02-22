@@ -7,14 +7,14 @@ import {
 } from '@nx/devkit';
 import { DEFAULT_WEB_TEST_RUNNER_TARGET_NAME } from '../plugins/web-test-runner.plugin.js';
 
-export const WEB_TEST_RUNNER_PLUGIN_PATH =
+const WEB_TEST_RUNNER_PLUGIN_PATH =
   '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner';
 
 /**
  * TODO: can this type be generated from the schema.json or the json imported
  * and then inferred in order to be synced?
  */
-export interface WebTestRunnerInitGeneratorSchema {
+interface WebTestRunnerInitGeneratorSchema {
   /**
    * The name of the `web-test-runner` test target e.g. 'test' or
    * 'web-test-runner'.
@@ -28,7 +28,7 @@ export interface WebTestRunnerInitGeneratorSchema {
   skipFormat?: boolean;
 }
 
-export type WebTestRunnerInitGeneratorOptions =
+type WebTestRunnerInitGeneratorOptions =
   Required<WebTestRunnerInitGeneratorSchema>;
 
 /**

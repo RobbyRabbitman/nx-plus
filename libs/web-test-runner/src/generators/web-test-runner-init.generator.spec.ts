@@ -3,17 +3,16 @@ import { webTestRunnerInitGenerator } from './web-test-runner-init.generator.js'
 
 vi.mock('@nx/devkit');
 
-describe('[Unit Test] generate run @robby-rabbitman/nx-plus-web-test-runner:init', () => {
-  const MOCK_TREE = Symbol('MOCK_TREE');
+describe('[Unit Test] webTestRunnerInitGenerator', () => {
+  const MOCK_TREE = Symbol('MOCK_TREE') as unknown as Parameters<
+    typeof webTestRunnerInitGenerator
+  >[0];
 
   beforeEach(() => {
     vi.mocked(readNxJson).mockReturnValue({
       plugins: [],
     });
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('should not modify the `nx.json`', () => {
@@ -23,7 +22,9 @@ describe('[Unit Test] generate run @robby-rabbitman/nx-plus-web-test-runner:init
           '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner',
         ],
       });
+
       await webTestRunnerInitGenerator(MOCK_TREE, {});
+
       expect(updateNxJson).not.toHaveBeenCalled();
     });
 
@@ -37,7 +38,9 @@ describe('[Unit Test] generate run @robby-rabbitman/nx-plus-web-test-runner:init
           },
         ],
       });
+
       await webTestRunnerInitGenerator(MOCK_TREE, {});
+
       expect(updateNxJson).not.toHaveBeenCalled();
     });
   });
