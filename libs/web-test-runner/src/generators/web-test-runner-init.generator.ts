@@ -5,7 +5,7 @@ import {
   readNxJson,
   updateNxJson,
 } from '@nx/devkit';
-import { DEFAULT_WEB_TEST_RUNNER_TARGET_NAME } from '../plugins/web-test-runner.plugin.js';
+import { DEFAULT_WEB_TEST_RUNNER_TARGET_NAME } from '../plugins/web-test-runner.plugin';
 
 const WEB_TEST_RUNNER_PLUGIN_PATH =
   '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner';

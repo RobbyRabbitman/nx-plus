@@ -1,5 +1,7 @@
 {
-  "cli": { "packageManager": "pnpm" },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "release": {
     "releaseTagPattern": "{version}",
     "version": {
@@ -88,6 +90,12 @@
       "plugin": "@nx/vite/plugin",
       "options": {
         "testTargetName": "test-vitest"
+      }
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner",
+      "options": {
+        "testTargetName": "test"
       }
     }
   ],
