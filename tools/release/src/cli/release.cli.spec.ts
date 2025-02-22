@@ -32,14 +32,22 @@ describe('[Unit Test] releaseNxPlusCli', () => {
   });
 
   it("should invoke 'releaseNxPlus()' with the parsed args", async () => {
-    await invokeReleaseNxPlusCli('--specifier major --preid rc');
+    await invokeReleaseNxPlusCli('--specifier major --preid rc --dryRun false');
 
     expect(releaseNxPlus).toHaveBeenCalledWith({
-      dryRun: true,
+      dryRun: false,
       specifier: 'major',
       preid: 'rc',
     } satisfies Parameters<typeof releaseNxPlus>[0]);
 
     expect(process.exit).toHaveBeenCalledWith(0);
+  });
+
+  it("should exit with 1 if 'releaseNxPlus()' throws", async () => {
+    vi.mocked(releaseNxPlus).mockRejectedValue(new Error('Oopsie!'));
+
+    await invokeReleaseNxPlusCli('--specifier major --preid rc --dryRun false');
+
+    expect(process.exit).toHaveBeenCalledWith(1);
   });
 });
