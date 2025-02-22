@@ -139,11 +139,10 @@ importers:
         version: 17.7.2
 
   e2e/web-test-runner:
-    dependencies:
+    devDependencies:
       '@nx/devkit':
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
-    devDependencies:
       '@robby-rabbitman/nx-plus-examples-web-test-runner':
         specifier: workspace:*
         version: link:../../examples/web-test-runner

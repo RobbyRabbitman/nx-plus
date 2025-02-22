@@ -4,7 +4,7 @@ import jsoncEslintParser from 'jsonc-eslint-parser';
 import tsEslint from 'typescript-eslint';
 import nxPlusEslintIgnoreConfig from './ignore.js';
 
-const nxPlusEslintNxDependencyChecksRuleOptions = {
+export const nxPlusEslintNxDependencyChecksRuleOptions = {
   ignoredFiles: ['**/{*.config.*,*.spec.*,test-setup.*}'],
   /**
    * TODO: Apparently this rule does not seem to work when 1. not every project

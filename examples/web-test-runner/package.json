@@ -15,6 +15,9 @@
   },
   "nx": {
     "name": "nx-plus-examples-web-test-runner",
+    "implicitDependencies": [
+      "nx-plus-web-test-runner"
+    ],
     "tags": [
       "runtime:web"
     ]
