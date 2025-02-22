@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo '⚙️ Deleting all local branches except main'
 

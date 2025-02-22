@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "⚙️ Building tools ..."
 for tsconfig in $(find tools -name 'tsconfig.lib.json'); do
@@ -7,9 +7,9 @@ for tsconfig in $(find tools -name 'tsconfig.lib.json'); do
   pnpm tsc --build $tsconfig
 done
 
-localPlugins="libs/web-test-runner"
+localPlugins=(libs/web-test-runner)
 
-for plugin in $localPlugins; do
+for plugin in ${localPlugins[@]}; do
   echo "⚙️ Building $plugin ..."
   pnpm tsc --build $plugin/tsconfig.lib.json
 done
