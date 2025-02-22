@@ -4,12 +4,24 @@
     "default": ["{projectRoot}/**/*", "globals-shared"],
     "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
     "globals-typescript": [
-      "{workspaceRoot}/tools/typescript-config/**/*",
+      "{workspaceRoot}/tools/typescript/**/*",
       {
         "externalDependencies": ["typescript", "tslib"]
       }
     ],
-    "targets-build-tsc": ["default", "globals-typescript"]
+    "globals-vite": [
+      {
+        "externalDependencies": ["@nx/vite", "vite"]
+      }
+    ],
+    "globals-vitest": [
+      "{workspaceRoot}/tools/vitest/**/*",
+      {
+        "externalDependencies": ["@vitest/coverage-v8", "@vitest/ui", "vitest"]
+      }
+    ],
+    "targets-build-tsc": ["default", "globals-typescript"],
+    "targets-test-vitest": ["default", "globals-vitest", "globals-vite"]
   },
   "sync": {
     "applyChanges": true
@@ -27,11 +39,20 @@
         }
       },
       "include": ["tools/**/*"]
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test-vitest"
+      }
     }
   ],
   "targetDefaults": {
     "build-tsc": {
       "inputs": ["targets-build-tsc", "^targets-build-tsc"]
+    },
+    "test-vitest": {
+      "inputs": ["targets-test-vitest", "^targets-test-vitest"]
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   // the base tsconfig for all ts projects of this repository that test in node with vitest
-  "extends": "./tsconfig.base.node.json",
+  "extends": "./tsconfig.node.json",
   "compilerOptions": {
     "moduleResolution": "bundler",
     "module": "ESNext",
