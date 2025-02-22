@@ -3,6 +3,8 @@
   "version": "0.9.0",
   "files": [
     "dist",
+    "src/config/config.yaml",
+    "src/commands",
     "package.json"
   ],
   "type": "module",
@@ -16,8 +18,6 @@
   },
   "nx": {
     "name": "tools-verdaccio",
-    "projectType": "library",
-    "tags": [],
     "targets": {
       "clean": {
         "command": "sh {projectRoot}/src/commands/clean.sh"
