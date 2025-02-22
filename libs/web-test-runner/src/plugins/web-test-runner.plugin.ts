@@ -7,10 +7,20 @@ import {
 import { existsSync } from 'fs';
 import { basename, dirname, join } from 'path';
 
-export const WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB =
+/**
+ * The glob pattern to match `Web Test Runner` configuration files.
+ *
+ * https://modern-web.dev/docs/test-runner/cli-and-configuration/#configuration-file
+ */
+const WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB =
   '**/@(web-test-runner|wtr).config.@(js|cjs|mjs)';
 
-export const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
+/**
+ * The name of the `Web Test Runner` command.
+ *
+ * https://modern-web.dev/docs/test-runner/overview/#basic-commands
+ */
+const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
 
 /**
  * TODO: '@web/test-runner' does not export the `TestRunnerCliArgs` type - add
@@ -18,17 +28,17 @@ export const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
  *
  * https://github.com/modernweb-dev/web/blob/17cfc0d70f46b321912e4506b2cccae1b16b1534/packages/test-runner/src/config/readCliArgs.ts#L7-L34
  */
-export type WebTestRunnerTargetConfiguration = TargetConfiguration;
+type WebTestRunnerTargetConfiguration = TargetConfiguration;
 
-export interface WebTestRunnerPluginSchema {
+interface WebTestRunnerPluginSchema {
   /**
-   * The name of the `web-test-runner` test target e.g. `'test'` or
+   * The name of the `Web Test Runner` test target e.g. `'test'` or
    * `'web-test-runner'`.
    */
   testTargetName?: string;
 
   /**
-   * The configuration of the `web-test-runner` target identified by
+   * The configuration of the `Web Test Runner` target identified by
    * {@link WebTestRunnerPluginSchema.testTargetName testTargetName}.
    *
    * @example
@@ -41,7 +51,7 @@ export interface WebTestRunnerPluginSchema {
   testTargetConfig?: WebTestRunnerTargetConfiguration;
 }
 
-export type WebTestRunnerPluginOptions = Required<WebTestRunnerPluginSchema>;
+type WebTestRunnerPluginOptions = Required<WebTestRunnerPluginSchema>;
 
 export const createNodesV2 = [
   WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB,
@@ -54,35 +64,21 @@ export const createNodesV2 = [
     ),
 ] satisfies CreateNodesV2<WebTestRunnerPluginSchema>;
 
-export const DEFAULT_WEB_TEST_RUNNER_TARGET_NAME = 'test';
-
 const createWebTestRunnerTarget: CreateNodesFunction<
   WebTestRunnerPluginSchema | undefined
-> = (webTestRunnerConfigPath, schema, context) => {
-  const defaultWebTestRunnerTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
-
-  const options = {
-    testTargetName: defaultWebTestRunnerTargetName,
-    testTargetConfig: {},
-    ...schema,
-  } satisfies WebTestRunnerPluginOptions;
-
-  /** Make sure `testTargetName` is not an empty string. */
-  if (options.testTargetName === '') {
-    options.testTargetName = defaultWebTestRunnerTargetName;
-  }
+> = (webTestRunnerConfigPath, userOptions, context) => {
+  const options = normalizeWebTestRunnerOptions(userOptions);
 
   const { testTargetName, testTargetConfig } = options;
 
-  const webTestRunnerConfigFileName = basename(webTestRunnerConfigPath);
+  const webTestRunnerInformation = extractWebTestRunnerInformation(
+    webTestRunnerConfigPath,
+    context.workspaceRoot,
+  );
 
-  const maybeWebTestRunnerProjectRoot = dirname(webTestRunnerConfigPath);
-
-  if (!isProject(maybeWebTestRunnerProjectRoot, context.workspaceRoot)) {
+  if (!webTestRunnerInformation.isProject) {
     return {};
   }
-
-  const webTestRunnerProjectRoot = maybeWebTestRunnerProjectRoot;
 
   /**
    * TODO: '@web/test-runner' does not export the `TestRunnerCliArgs` type - add
@@ -90,24 +86,23 @@ const createWebTestRunnerTarget: CreateNodesFunction<
    *
    * https://github.com/modernweb-dev/web/blob/17cfc0d70f46b321912e4506b2cccae1b16b1534/packages/test-runner/src/config/readCliArgs.ts#L7-L34
    */
-  const webTestRunnerCliArgs = {
-    config: webTestRunnerConfigFileName,
+  const webTestRunnerDefaultCliArgs = {
+    config: webTestRunnerInformation.configFileName,
   };
 
   const webTestRunnerTargetConfiguration = {
     command: WEB_TEST_RUNNER_COMMAND,
     ...testTargetConfig,
     options: {
-      /** Make sure to run `web-test-runner` in the project root directory. */
-      cwd: '{projectRoot}',
-      ...webTestRunnerCliArgs,
+      cwd: webTestRunnerInformation.configDir,
+      ...webTestRunnerDefaultCliArgs,
       ...testTargetConfig.options,
     },
   } satisfies WebTestRunnerTargetConfiguration;
 
   return {
     projects: {
-      [webTestRunnerProjectRoot]: {
+      [webTestRunnerInformation.configDir]: {
         targets: {
           [testTargetName]: webTestRunnerTargetConfiguration,
         },
@@ -116,9 +111,43 @@ const createWebTestRunnerTarget: CreateNodesFunction<
   };
 };
 
-const isProject = (directory: string, workspaceRoot: string) => {
+function normalizeWebTestRunnerOptions(
+  userOptions?: WebTestRunnerPluginSchema,
+) {
+  const defaultWebTestRunnerTargetName = 'test';
+
+  const normalizedOptions = {
+    testTargetName: defaultWebTestRunnerTargetName,
+    testTargetConfig: {},
+    ...userOptions,
+  } satisfies WebTestRunnerPluginOptions;
+
+  /** Make sure `testTargetName` is not an empty string. */
+  if (normalizedOptions.testTargetName === '') {
+    normalizedOptions.testTargetName = defaultWebTestRunnerTargetName;
+  }
+
+  return normalizedOptions;
+}
+
+function extractWebTestRunnerInformation(
+  webTestRunnerConfigPath: string,
+  workspaceRoot: string,
+) {
+  return {
+    configFileName: basename(webTestRunnerConfigPath),
+    configDir: dirname(webTestRunnerConfigPath),
+    isProject: isProject(dirname(webTestRunnerConfigPath), workspaceRoot),
+  };
+}
+
+/**
+ * Returns true if the directory contains a `project.json` or `package.json`
+ * file.
+ */
+function isProject(directory: string, workspaceRoot: string) {
   return (
     existsSync(join(workspaceRoot, directory, 'project.json')) ||
     existsSync(join(workspaceRoot, directory, 'package.json'))
   );
-};
+}
