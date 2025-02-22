@@ -9,9 +9,6 @@
   "exclude": ["*.config.*", "src/**/*.spec.ts"],
   "references": [
     {
-      "path": "../verdaccio/tsconfig.lib.json"
-    },
-    {
       "path": "../vitest/tsconfig.lib.json"
     },
     {

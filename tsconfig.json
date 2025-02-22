@@ -13,6 +13,12 @@
     },
     {
       "path": "./tools/eslint-nx-dependency-checks-pseudo-build-target-plugin"
+    },
+    {
+      "path": "./tools/commitlint"
+    },
+    {
+      "path": "./tools/publish"
     }
   ]
 }
