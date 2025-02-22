@@ -52,7 +52,18 @@
       "inputs": ["targets-build-tsc", "^targets-build-tsc"]
     },
     "test-vitest": {
-      "inputs": ["targets-test-vitest", "^targets-test-vitest"]
+      "inputs": ["targets-test-vitest", "^targets-test-vitest"],
+      "outputs": ["{projectRoot}/coverage"],
+      "defaultConfiguration": "local",
+      "configurations": {
+        "ci": {
+          "run": true
+        },
+        "local": {
+          "ui": true
+        }
+      },
+      "dependsOn": ["build-deps"]
     }
   }
 }
