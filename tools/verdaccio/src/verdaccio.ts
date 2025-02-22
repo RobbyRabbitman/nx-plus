@@ -16,7 +16,7 @@ export function isVerdaccioAvailable() {
     });
 
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }
