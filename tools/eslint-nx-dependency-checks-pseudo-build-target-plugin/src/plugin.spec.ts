@@ -1,10 +1,7 @@
 import { type CreateNodesContextV2, type CreateNodesResult } from '@nx/devkit';
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
-import {
-  createNodesV2,
-  PSEUDO_BUILD_TARGET_NAME,
-} from './nx-dependency-checks-pseudo-build-target.plugin.js';
+import { createNodesV2, PSEUDO_BUILD_TARGET_NAME } from './plugin.js';
 
 vi.mock('fs', async () => {
   const memfs = await vi.importActual<typeof import('memfs')>('memfs');

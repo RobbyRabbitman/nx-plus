@@ -1,0 +1,20 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
+  "version": "0.9.0",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/plugin.js",
+  "peerDependencies": {},
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "nx": {
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}

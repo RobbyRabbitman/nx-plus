@@ -7,10 +7,6 @@
   ],
   "type": "module",
   "main": "./dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./plugins/nx-dependency-checks-pseudo-build-target": "./dist/plugins/nx-dependency-checks-pseudo-build-target.plugin.js"
-  },
   "peerDependencies": {
     "@eslint/js": "9.20.0",
     "@nx/eslint-plugin": "20.4.4",
@@ -20,9 +16,6 @@
     "jsonc-eslint-parser": "2.4.0",
     "globals": "15.15.0",
     "typescript-eslint": "8.24.0"
-  },
-  "devDependencies": {
-    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
   },
   "nx": {
     "tags": [
