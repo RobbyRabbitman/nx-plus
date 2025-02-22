@@ -17,7 +17,6 @@
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
   },
   "nx": {
-    "name": "tools-verdaccio",
     "targets": {
       "clean": {
         "command": "sh {projectRoot}/src/commands/clean.sh"
