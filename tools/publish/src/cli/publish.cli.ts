@@ -25,6 +25,8 @@ export async function publishNxPlusCli() {
       })
       .parseAsync();
 
+    logger.verbose('[publishNxPlusCli] options', options);
+
     await publishNxPlus({
       npmRegistry: options.npmRegistry,
       npmTag: options.npmTag,
