@@ -144,7 +144,7 @@ importers:
         specifier: 8.24.0
         version: 8.24.0(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3)
 
-  tools/typescript-config: {}
+  tools/typescript: {}
 
   tools/verdaccio:
     dependencies:
