@@ -3,6 +3,10 @@ name: ci
 on:
   pull_request:
 
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: ${{ github.head_ref }}
   cancel-in-progress: true
@@ -10,9 +14,6 @@ concurrency:
 jobs:
   main:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
     permissions:
       actions: read
       contents: read
