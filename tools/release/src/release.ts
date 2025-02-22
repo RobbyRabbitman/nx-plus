@@ -13,6 +13,12 @@ export interface ReleaseNxPlusOptions {
   preid?: string;
 }
 
+export function releaseNxPlusDefaultOptions() {
+  return {
+    dryRun: true,
+  } satisfies Partial<ReleaseNxPlusOptions>;
+}
+
 /**
  * Releases Nx Plus.
  *
@@ -26,9 +32,7 @@ export interface ReleaseNxPlusOptions {
 export async function releaseNxPlus(options?: ReleaseNxPlusOptions) {
   const verbose = process.env.NX_VERBOSE_LOGGING === 'true';
 
-  const defaultOptions = {
-    dryRun: true,
-  } satisfies Partial<ReleaseNxPlusOptions>;
+  const defaultOptions = releaseNxPlusDefaultOptions();
 
   const normalizedOptions = {
     ...defaultOptions,
