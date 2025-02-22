@@ -22,6 +22,8 @@ const WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB =
  */
 const WEB_TEST_RUNNER_COMMAND = 'web-test-runner';
 
+export const DEFAULT_WEB_TEST_RUNNER_TARGET_NAME = 'test';
+
 /**
  * TODO: '@web/test-runner' does not export the `TestRunnerCliArgs` type - add
  * it when its exported from their public api.
@@ -114,17 +116,15 @@ const createWebTestRunnerTarget: CreateNodesFunction<
 function normalizeWebTestRunnerOptions(
   userOptions?: WebTestRunnerPluginSchema,
 ) {
-  const defaultWebTestRunnerTargetName = 'test';
-
   const normalizedOptions = {
-    testTargetName: defaultWebTestRunnerTargetName,
+    testTargetName: DEFAULT_WEB_TEST_RUNNER_TARGET_NAME,
     testTargetConfig: {},
     ...userOptions,
   } satisfies WebTestRunnerPluginOptions;
 
   /** Make sure `testTargetName` is not an empty string. */
   if (normalizedOptions.testTargetName === '') {
-    normalizedOptions.testTargetName = defaultWebTestRunnerTargetName;
+    normalizedOptions.testTargetName = DEFAULT_WEB_TEST_RUNNER_TARGET_NAME;
   }
 
   return normalizedOptions;
