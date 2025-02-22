@@ -92,6 +92,9 @@
     }
   ],
   "targetDefaults": {
+    "nx-release-publish": {
+      "dependsOn": ["build*"]
+    },
     "lint-eslint": {
       "inputs": ["targets-lint-eslint"]
     },
