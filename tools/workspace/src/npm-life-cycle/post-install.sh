@@ -13,4 +13,4 @@ for tool in "tools"/*; do
 done
 
 echo "⚙️ Starting verdaccio ..."
-pnpm nx run tools-verdaccio:start
+pnpm nx run @robby-rabbitman/nx-plus-tools-verdaccio:start
