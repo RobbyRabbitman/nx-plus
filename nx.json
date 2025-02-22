@@ -45,6 +45,7 @@
     "applyChanges": true
   },
   "plugins": [
+    "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
     {
       "plugin": "@nx/eslint/plugin",
       "options": {

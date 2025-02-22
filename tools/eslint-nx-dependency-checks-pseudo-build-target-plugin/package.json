@@ -5,7 +5,7 @@
     "dist",
     "package.json"
   ],
-  "type": "module",
+  "type": "commonjs",
   "main": "./dist/plugin.js",
   "peerDependencies": {},
   "devDependencies": {

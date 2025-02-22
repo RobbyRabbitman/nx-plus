@@ -1,5 +1,5 @@
 {
-  "extends": "../../tools/typescript/src/configs/tsconfig.node.json",
+  "extends": "../../tools/typescript/src/configs/tsconfig.node-cjs.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
