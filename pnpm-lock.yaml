@@ -138,6 +138,9 @@ importers:
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
     devDependencies:
+      '@robby-rabbitman/nx-plus-examples-web-test-runner':
+        specifier: workspace:*
+        version: link:../../examples/web-test-runner
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint

@@ -2,8 +2,15 @@
   "name": "@robby-rabbitman/nx-plus-examples-web-test-runner",
   "version": "0.6.2",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "exports": {
+    "./package.json": "./package.json"
+  },
   "devDependencies": {
-    "chai":"5.2.0",
+    "chai": "5.2.0",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "nx": {
