@@ -6,5 +6,10 @@
     "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["*.config.*", "src/**/*.spec.ts"]
+  "exclude": ["*.config.*", "src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../eslint/tsconfig.lib.json"
+    }
+  ]
 }

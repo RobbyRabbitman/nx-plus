@@ -7,6 +7,10 @@ export function nodeTypescript() {
       globals: true,
       environment: 'node',
       reporters: ['default', 'hanging-process'],
+      typecheck: {
+        enabled: true,
+        tsconfig: 'tsconfig.spec.json',
+      },
       coverage: {
         enabled: true,
         clean: true,
