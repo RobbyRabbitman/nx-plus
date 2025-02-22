@@ -18,14 +18,23 @@
   },
   "nx": {
     "targets": {
-      "clean": {
-        "command": "sh {projectRoot}/src/commands/clean.sh"
+      "exec-publish-cli": {
+        "command": "tsx {projectRoot}/src/cli/publish.cli.ts",
+        "options": {
+          "env": {
+            "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+          }
+        },
+        "configurations": {
+          "local": {
+            "dryRun": false,
+            "npmRegistry": "http://localhost:4433",
+            "npmTag": "local"
+          }
+        }
       },
-      "start": {
-        "command": "sh {projectRoot}/src/commands/start.sh"
-      },
-      "stop": {
-        "command": "sh {projectRoot}/src/commands/stop.sh"
+      "test-vitest": {
+        "parallelism": false
       }
     }
   }
