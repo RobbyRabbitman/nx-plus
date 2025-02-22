@@ -37,7 +37,6 @@ describe('[Unit Test] createNxDependencyChecksPseudoBuildTarget', () => {
 
   afterEach(() => {
     vol.reset();
-    vi.resetModules();
   });
 
   describe('should infer all projects', () => {

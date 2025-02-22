@@ -1,0 +1,31 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-publish",
+  "version": "0.9.0",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"
+  },
+  "nx": {
+    "targets": {
+      "clean": {
+        "command": "sh {projectRoot}/src/commands/clean.sh"
+      },
+      "start": {
+        "command": "sh {projectRoot}/src/commands/start.sh"
+      },
+      "stop": {
+        "command": "sh {projectRoot}/src/commands/stop.sh"
+      }
+    }
+  }
+}
