@@ -22,6 +22,9 @@
     },
     {
       "path": "./tools/release"
+    },
+    {
+      "path": "./libs/web-test-runner"
     }
   ]
 }

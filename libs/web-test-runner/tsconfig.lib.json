@@ -7,5 +7,12 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["*.config.*", "src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../../tools/vitest/tsconfig.lib.json"
+    },
+    {
+      "path": "../../tools/eslint/tsconfig.lib.json"
+    }
+  ]
 }

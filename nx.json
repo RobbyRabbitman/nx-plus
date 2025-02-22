@@ -82,7 +82,7 @@
           "configName": "tsconfig.lib.json"
         }
       },
-      "include": ["tools/**/*"]
+      "include": ["{tools,libs}/**/*"]
     },
     {
       "plugin": "@nx/vite/plugin",
