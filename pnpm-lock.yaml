@@ -160,6 +160,8 @@ importers:
         specifier: workspace:*
         version: link:../vitest
 
+  tools/renovate-bot: {}
+
   tools/typescript: {}
 
   tools/verdaccio:
