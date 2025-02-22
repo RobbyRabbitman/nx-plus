@@ -7,6 +7,15 @@
   "exclude": [],
   "references": [
     {
+      "path": "../verdaccio"
+    },
+    {
+      "path": "../vitest"
+    },
+    {
+      "path": "../eslint"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {
