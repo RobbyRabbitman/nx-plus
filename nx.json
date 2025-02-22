@@ -60,7 +60,8 @@
     ],
     "targets-build-tsc": ["default", "globals-typescript"],
     "targets-test-vitest": ["default", "globals-vitest", "globals-vite"],
-    "targets-lint-eslint": ["default", "globals-eslint"]
+    "targets-lint-eslint": ["default", "globals-eslint"],
+    "targets-test-web-test-runner": ["default"]
   },
   "sync": {
     "applyChanges": true
@@ -95,7 +96,7 @@
     {
       "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner",
       "options": {
-        "testTargetName": "test"
+        "testTargetName": "test-web-test-runner"
       }
     }
   ],
@@ -122,6 +123,23 @@
         }
       },
       "dependsOn": ["build-deps"]
+    },
+    "test-web-test-runner": {
+      "inputs": [
+        "targets-test-web-test-runner",
+        "^targets-test-web-test-runner"
+      ],
+      "outputs": ["{projectRoot}/coverage"],
+      "defaultConfiguration": "local",
+      "configurations": {
+        "ci": {
+          "watch": false
+        },
+        "local": {
+          "watch": true
+        }
+      },
+      "dependsOn": ["build*", "^build*"]
     }
   }
 }
