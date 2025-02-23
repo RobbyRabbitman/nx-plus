@@ -13,7 +13,7 @@ export default [
         'error',
         {
           ...nxPlusEslintNxDependencyChecksRuleOptions,
-          ignoredDependencies: ['@web/test-runner'],
+          ignoredDependencies: ['@web/dev-server'],
         },
       ],
     },
