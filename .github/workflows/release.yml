@@ -43,8 +43,8 @@ jobs:
           fetch-depth: 0
 
       - run: |
-          git config user.email "robby.rabbitman+nx-plus@gmail.com"
-          git config user.name "release"
+          git config user.email 'robby.rabbitman+nx-plus@gmail.com'
+          git config user.name 'release'
 
       # remove global install of corepack or pin to a version
       - run: |
@@ -54,8 +54,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - run: pnpm i
 

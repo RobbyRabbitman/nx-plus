@@ -19,27 +19,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: corepack enable
+      # remove global install of corepack or pin to a version
+      - run: |
+          npm i -g corepack
+          corepack enable
 
       - uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
-          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+          registry-url: https://registry.npmjs.org
 
-      - run: pnpm whoami && echo 'npm credentials are valid' || (echo 'npm credentials are invalid or have expired.' && exit 1)
+      - run: pnpm whoami || (echo 'npm credentials are invalid or have expired.' && exit 1)
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - run: pnpm i
 
-      - run: pnpm exec nx report
+      - run: pnpm nx report
 
-      - run: pnpm exec nx release publish --dry-run=${{ env.DRY_RUN }}
+      - run: pnpm nx tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --npm-registry=${{ env.NPM_REGISTRY }}
         env:
           # when it is not a tag (release) => dont publish
           DRY_RUN: ${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+          NPM_REGISTRY: https://registry.npmjs.org
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
