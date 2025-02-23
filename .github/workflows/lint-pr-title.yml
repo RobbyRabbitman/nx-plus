@@ -2,7 +2,7 @@ name: lint-pr-title
 
 on:
   pull_request:
-    types: [synchronize, edited]
+    types: [opened, reopened, synchronize, edited]
 
 concurrency:
   group: '${{ github.event.pull_request.id }} ${{ github.event.pull_request.title }}'
