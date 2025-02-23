@@ -39,6 +39,13 @@
       "matchPackageNames": ["@robby-rabbitman/nx-plus-*"]
     },
     {
+      "description": "TODO: @web/test-runner and @web/dev-server are not stable yet and they are pinned to a minor, so we don't auto merge them",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@web/test-runner", "@web/dev-server"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
+    },
+    {
       "description": "Groups all 'prettier' packages together. Remove me when there is a group preset",
       "groupName": "prettier",
       "matchManagers": ["npm"],
@@ -48,7 +55,7 @@
       "description": "Groups all 'nx' packages together. Remove me when there is a group preset",
       "groupName": "nx",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["nx", "@nx/*"]
+      "matchPackageNames": ["nx", "@nx/**"]
     },
     {
       "description": "Update renovate itself once a week",
