@@ -186,6 +186,19 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
 
+  libs/nx-util:
+    dependencies:
+      '@nx/devkit':
+        specifier: 20.4.6
+        version: 20.4.6(nx@20.4.6)
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../../tools/vitest
+
   libs/web-dev-server:
     dependencies:
       '@nx/devkit':
@@ -13887,7 +13900,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.6.3
+      semver: 7.7.1
 
   jsprim@2.0.2:
     dependencies:
