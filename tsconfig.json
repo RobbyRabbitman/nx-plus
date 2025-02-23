@@ -37,6 +37,9 @@
     },
     {
       "path": "./libs/nx-util"
+    },
+    {
+      "path": "./tools/sonar"
     }
   ]
 }

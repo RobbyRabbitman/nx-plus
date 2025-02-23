@@ -7,10 +7,13 @@
   "exclude": [],
   "references": [
     {
-      "path": "../../tools/vitest"
+      "path": "../../libs/nx-util"
     },
     {
-      "path": "../../tools/eslint"
+      "path": "../vitest"
+    },
+    {
+      "path": "../eslint"
     },
     {
       "path": "./tsconfig.lib.json"
