@@ -24,14 +24,9 @@
       "exec-release-cli": {
         "command": "tsx {projectRoot}/src/cli/release.cli.ts",
         "options": {
-          "dryRun": true,
           "env": {
             "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
           }
-        },
-        "defaultConfiguration": "local",
-        "configurations": {
-          "local": {}
         }
       }
     }
