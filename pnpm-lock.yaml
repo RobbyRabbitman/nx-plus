@@ -344,6 +344,9 @@ importers:
       '@nx/devkit':
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
+      sonarqube-scanner:
+        specifier: 4.2.7
+        version: 4.2.7
     devDependencies:
       '@robby-rabbitman/nx-plus-nx-util':
         specifier: workspace:*
