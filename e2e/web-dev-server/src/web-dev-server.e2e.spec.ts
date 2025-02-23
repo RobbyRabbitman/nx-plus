@@ -1,11 +1,10 @@
 import {
-  getPackageManagerCommand,
   readCachedProjectGraph,
   workspaceRoot,
   type TargetConfiguration,
 } from '@nx/devkit';
 import webDevServerExampleProjectPackageJson from '@robby-rabbitman/nx-plus-examples-web-dev-server/package.json';
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 
 describe('[e2e Test] Web Dev Server', () => {
   const webDevServerExampleProjectName =
@@ -18,10 +17,14 @@ describe('[e2e Test] Web Dev Server', () => {
   const webDevServerPort = 8080;
 
   function runWebDevServerOfExampleProject() {
-    return exec(
-      `${getPackageManagerCommand().exec} nx run ${webDevServerExampleProjectName}:${webDevServerTargetName} --port ${webDevServerPort}`,
+    return spawn(
+      'pnpm',
+      `nx run ${webDevServerExampleProjectName}:${webDevServerTargetName} --port ${webDevServerPort}`.split(
+        ' ',
+      ),
       {
         cwd: workspaceRoot,
+        detached: true,
       },
     );
   }
@@ -71,8 +74,8 @@ describe('[e2e Test] Web Dev Server', () => {
         '<title>@robby-rabbitman/nx-plus-examples-web-dev-server</title>',
       );
 
-      if (!serveProcess.killed) {
-        serveProcess.kill();
+      if (serveProcess.pid && !serveProcess.killed) {
+        process.kill(-serveProcess.pid);
       }
     },
   );
