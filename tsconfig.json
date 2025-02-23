@@ -28,6 +28,9 @@
     },
     {
       "path": "./e2e/web-test-runner"
+    },
+    {
+      "path": "./libs/web-dev-server"
     }
   ]
 }

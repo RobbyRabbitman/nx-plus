@@ -1,0 +1,54 @@
+{
+  "name": "@robby-rabbitman/nx-plus-web-dev-server",
+  "version": "0.6.2",
+  "description": "Web Dev Server plugin for Nx workspaces.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobbyRabbitman/nx-plus.git",
+    "directory": "libs/web-dev-server"
+  },
+  "keywords": [
+    "Nx",
+    "Web Dev Server",
+    "Plugin",
+    "Monorepo",
+    "Nrwl",
+    "Modern Web",
+    "Generator",
+    "Web Development",
+    "Web"
+  ],
+  "author": "Robby Rabbitman",
+  "homepage": "https://github.com/RobbyRabbitman/nx-plus/tree/main/libs/web-dev-server",
+  "bugs": {
+    "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@nx/devkit": "^20.0.0",
+    "@web/dev-server": "~0.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "files": [
+    "dist",
+    "generators.json",
+    "package.json"
+  ],
+  "generators": "./generators.json",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json",
+    "./plugins/web-dev-server": "./dist/plugins/web-dev-server.plugin.js"
+  },
+  "nx": {
+    "name": "web-dev-server",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}

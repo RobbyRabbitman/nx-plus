@@ -162,6 +162,22 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
 
+  libs/web-dev-server:
+    dependencies:
+      '@nx/devkit':
+        specifier: ^20.0.0
+        version: 20.4.6(nx@20.4.6)
+      '@web/dev-server':
+        specifier: ~0.4.6
+        version: 0.4.6
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../../tools/vitest
+
   libs/web-test-runner:
     dependencies:
       '@nx/devkit':
