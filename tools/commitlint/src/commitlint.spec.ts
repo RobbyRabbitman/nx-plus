@@ -1,13 +1,14 @@
 import { readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
+import { readNxTask } from '@robby-rabbitman/nx-plus-nx-util';
 import { spawnSync } from 'child_process';
 
 describe('[Integration Test] commits of Nx Plus', () => {
-  const commitlintProjectName = process.env.NX_TASK_TARGET_PROJECT as string;
+  const commitlintProject = readNxTask();
 
   function invokeCommitlint(commitMessage: string) {
     return spawnSync(
       'pnpm',
-      `nx run ${commitlintProjectName}:lint-commitlint`.split(' '),
+      `nx run ${commitlintProject.projectName}:lint-commitlint`.split(' '),
       {
         cwd: workspaceRoot,
         encoding: 'utf-8',
