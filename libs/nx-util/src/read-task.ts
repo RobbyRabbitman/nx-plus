@@ -18,7 +18,6 @@ interface NxTask {
  * - DryRun: Whether the task is running in dry-run mode.
  * - IsInteractive: Whether the task is running in interactive mode.
  *
- * @see {@link isCreatingGraph} to check if nx is creating the project graph.
  * @see {@link https://nx.dev/reference/environment-variables}
  */
 export function readNxTask(options?: { assertNxTask: true }): NxTask;
