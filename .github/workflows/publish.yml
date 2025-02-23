@@ -39,7 +39,7 @@ jobs:
 
       - run: pnpm nx report
 
-      - run: pnpm nx tools-release:exec-release-cli:ci --dry-run=${{ env.DRY_RUN }} --npm-registry=${{ env.NPM_REGISTRY }}
+      - run: pnpm nx tools-publish:exec-publish-cli --dry-run=${{ env.DRY_RUN }} --npm-registry=${{ env.NPM_REGISTRY }}
         env:
           # when it is not a tag (release) => dont publish
           DRY_RUN: ${{ github.ref_type != 'tag' || (github.event_name == 'workflow_dispatch' && inputs.dry-run) }}
