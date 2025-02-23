@@ -8,22 +8,10 @@
   ],
   "nx": {
     "name": "tools-renovate-bot",
-    "namedInputs": {
-      "targets-lint-renovate-config": [
-        {
-          "externalDependencies": [
-            "renovate"
-          ]
-        },
-        {
-          "env": "RENOVATE_CONFIG_FILE"
-        }
-      ]
-    },
     "targets": {
-      "lint-renovate-config": {
+      "lint": {
         "inputs": [
-          "targets-lint-renovate-config"
+          "{projectRoot}/src/renovate.json"
         ],
         "cache": true,
         "command": "renovate-config-validator --strict",
