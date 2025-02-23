@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [],
+  "include": [],
+  "exclude": [],
+  "references": [
+    {
+      "path": "../../tools/vitest"
+    },
+    {
+      "path": "../../tools/eslint"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

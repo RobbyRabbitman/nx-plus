@@ -1,6 +1,8 @@
 import { type Linter } from 'eslint';
 import nodeEslint from 'eslint-plugin-n';
 import globals from 'globals';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import nxPlusPackageJson from '../../../../package.json' with { type: 'json' };
 import nxPlusEslintIgnoreConfig from './ignore.js';
 import nxPlusEslintJsConfig from './javascript.js';
 import nxPlusEslintNxConfig from './nx.js';
@@ -32,6 +34,12 @@ export const nxPlusEslintNodeConfig = [
     ],
     languageOptions: {
       globals: globals.node,
+    },
+    settings: {
+      ...eslintNodeRecommendedConfig.settings,
+      node: {
+        version: nxPlusPackageJson.engines.node,
+      },
     },
     rules: {
       ...eslintNodeRecommendedConfig.rules,

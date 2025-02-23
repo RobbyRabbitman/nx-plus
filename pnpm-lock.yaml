@@ -141,6 +141,21 @@ importers:
         specifier: 17.7.2
         version: 17.7.2
 
+  e2e/web-dev-server:
+    devDependencies:
+      '@nx/devkit':
+        specifier: 20.4.6
+        version: 20.4.6(nx@20.4.6)
+      '@robby-rabbitman/nx-plus-examples-web-dev-server':
+        specifier: workspace:*
+        version: link:../../examples/web-dev-server
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../../tools/vitest
+
   e2e/web-test-runner:
     devDependencies:
       '@nx/devkit':
