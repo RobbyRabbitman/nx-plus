@@ -1,0 +1,33 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-commitlint",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@commitlint/types": "19.5.0",
+    "@nx/devkit": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-commitlint",
+    "tags": [
+      "runtime:node"
+    ],
+    "targets": {
+      "lint-commitlint": {
+        "command": "echo \"$NX_PLUS_TOOLS_COMMITLINT_TEXT\" | commitlint --config={projectRoot}/src/commitlint.ts --verbose"
+      },
+      "test-vitest": {
+        "parallelism": false
+      }
+    }
+  }
+}

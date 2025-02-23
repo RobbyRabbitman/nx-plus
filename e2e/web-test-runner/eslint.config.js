@@ -1,5 +1,5 @@
 // @ts-check
-const baseConfig = require('../../tools/eslint/src/base.config');
+import { nxPlusEslintNodeConfig } from '@robby-rabbitman/nx-plus-tools-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
-module.exports = [...baseConfig];
+export default [...nxPlusEslintNodeConfig];

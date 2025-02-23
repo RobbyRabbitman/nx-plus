@@ -1,0 +1,39 @@
+{
+  // This file is kept in sync by 'nx sync' as part of the ts setup of this repository
+  // Run 'nx sync' to update this file instead of editing it manually
+  "references": [
+    {
+      "path": "./tools/eslint"
+    },
+    {
+      "path": "./tools/verdaccio"
+    },
+    {
+      "path": "./tools/vitest"
+    },
+    {
+      "path": "./tools/eslint-nx-dependency-checks-pseudo-build-target-plugin"
+    },
+    {
+      "path": "./tools/commitlint"
+    },
+    {
+      "path": "./tools/publish"
+    },
+    {
+      "path": "./tools/release"
+    },
+    {
+      "path": "./libs/web-test-runner"
+    },
+    {
+      "path": "./e2e/web-test-runner"
+    },
+    {
+      "path": "./libs/web-dev-server"
+    },
+    {
+      "path": "./e2e/web-dev-server"
+    }
+  ]
+}

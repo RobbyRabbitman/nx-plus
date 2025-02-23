@@ -1,0 +1,42 @@
+name: lint-pr-title
+
+on:
+  pull_request:
+    types: [synchronize, edited]
+
+concurrency:
+  group: '${{ github.event.pull_request.id }} ${{ github.event.pull_request.title }}'
+  cancel-in-progress: true
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # remove global install of corepack or pin to a version
+      - run: |
+          npm i -g corepack
+          corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - run: pnpm i
+
+      - run: pnpm nx report
+
+      - run: pnpm nx run tools-commitlint:lint-commitlint
+        env:
+          NX_PLUS_TOOLS_COMMITLINT_TEXT: ${{ github.event.pull_request.title }}
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

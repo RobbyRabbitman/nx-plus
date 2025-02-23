@@ -1,0 +1,54 @@
+{
+  "name": "@robby-rabbitman/nx-plus-web-test-runner",
+  "version": "0.6.2",
+  "description": "Web Test Runner integration for Nx workspaces.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobbyRabbitman/nx-plus.git",
+    "directory": "libs/web-test-runner"
+  },
+  "keywords": [
+    "Nx",
+    "Web Test Runner",
+    "Plugin",
+    "Monorepo",
+    "Nrwl",
+    "Modern Web",
+    "Generator",
+    "Test",
+    "Web"
+  ],
+  "author": "Robby Rabbitman",
+  "homepage": "https://github.com/RobbyRabbitman/nx-plus/tree/main/libs/web-test-runner",
+  "bugs": {
+    "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@nx/devkit": "^20.0.0",
+    "@web/test-runner": "~0.20.0"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "files": [
+    "dist",
+    "generators.json",
+    "package.json"
+  ],
+  "generators": "./generators.json",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json",
+    "./plugins/web-test-runner": "./dist/plugins/web-test-runner.plugin.js"
+  },
+  "nx": {
+    "name": "web-test-runner",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}

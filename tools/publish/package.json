@@ -1,0 +1,47 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-publish",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6",
+    "yargs": "17.7.2",
+    "nx": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-publish",
+    "tags": [
+      "runtime:node"
+    ],
+    "targets": {
+      "exec-publish-cli": {
+        "command": "tsx {projectRoot}/src/cli/publish.cli.ts",
+        "options": {
+          "env": {
+            "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+          }
+        },
+        "configurations": {
+          "local": {
+            "dry-run": false,
+            "npm-registry": "http://localhost:4433",
+            "npm-tag": "local"
+          }
+        }
+      },
+      "test-vitest": {
+        "parallelism": false
+      }
+    }
+  }
+}

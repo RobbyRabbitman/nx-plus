@@ -1,0 +1,34 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-release",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6",
+    "yargs": "17.7.2",
+    "nx": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-release",
+    "targets": {
+      "exec-release-cli": {
+        "command": "tsx {projectRoot}/src/cli/release.cli.ts",
+        "options": {
+          "env": {
+            "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+          }
+        }
+      }
+    }
+  }
+}

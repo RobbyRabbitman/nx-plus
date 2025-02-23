@@ -1,49 +1,60 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Renovates this repositories",
   "extends": [
     "config:recommended",
+
+    ":configMigration",
+
     "npm:unpublishSafe",
+
+    ":separateMajorReleases",
     ":combinePatchMinorReleases",
+
+    ":automergeMinor",
+
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
-    ":semanticCommitScopeDisabled"
+    ":semanticCommitScopeDisabled",
+
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+
+    ":maintainLockFilesWeekly"
   ],
-  "configMigration": true,
+  "printConfig": true,
+
+  "labels": ["renovate"],
+
   "onboarding": false,
   "requireConfig": "ignored",
-  "dependencyDashboard": true,
-  "automerge": true,
+
   "autoApprove": true,
-  "prHourlyLimit": 0,
-  "prConcurrentLimit": 0,
+
   "enabledManagers": ["npm"],
-  "printConfig": true,
-  "labels": ["renovate"],
-  "lockFileMaintenance": { "enabled": true },
   "packageRules": [
-    { "matchUpdateTypes": ["major"], "automerge": false },
     {
-      "description": "When renovate changes packages, better have a look O_O",
-      "matchFileNames": ["packages/**/*"],
-      "automerge": false
-    },
-    {
-      "description": "ignore '@robby-rabbitman/nx-plus-*' packages, as nx release will handle it",
+      "description": "ignore '@robby-rabbitman/nx-plus-*' packages since we are using the pnpm 'workspace:*' protocol",
       "enabled": false,
-      "matchPackageNames": ["/^@robby-rabbitman/nx-plus-/"]
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@robby-rabbitman/nx-plus-*"]
     },
     {
       "description": "Groups all 'prettier' packages together. Remove me when there is a group preset",
       "groupName": "prettier",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["/^prettier$/", "/^prettier-/"]
+      "matchPackageNames": ["prettier", "prettier-*"]
     },
     {
       "description": "Groups all 'nx' packages together. Remove me when there is a group preset",
       "groupName": "nx",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["/^@nx//", "/^nx$/"]
+      "matchPackageNames": ["nx", "@nx/*"]
+    },
+    {
+      "description": "Update renovate itself once a week",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["renovate"],
+      "schedule": ["* * * * 1"]
     }
   ]
 }

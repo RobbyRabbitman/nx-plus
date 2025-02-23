@@ -1,0 +1,34 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-verdaccio",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "src/config/config.yaml",
+    "src/commands",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-verdaccio",
+    "targets": {
+      "clean": {
+        "command": "sh {projectRoot}/src/commands/clean.sh"
+      },
+      "start": {
+        "command": "sh {projectRoot}/src/commands/start.sh"
+      },
+      "stop": {
+        "command": "sh {projectRoot}/src/commands/stop.sh"
+      }
+    }
+  }
+}

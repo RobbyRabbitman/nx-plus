@@ -4,5 +4,5 @@
 
 **Extending [Nx](https://nx.dev) with Plugins, Executors and Generators.**
 
-- [Web Dev Server](packages/web-dev-server/README.md)
-- [Web Test Runner](packages/web-test-runner/README.md)
+- [Web Dev Server](libs/web-dev-server/README.md)
+- [Web Test Runner](libs/web-test-runner/README.md)

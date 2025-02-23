@@ -1,4 +1,6 @@
-/coverage
-/dist
+dist
+coverage
 pnpm-lock.yaml
+.storage
+.nx
 CHANGELOG.md

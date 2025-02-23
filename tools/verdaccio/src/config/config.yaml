@@ -1,0 +1,22 @@
+listen:
+  - http://localhost:4433
+
+storage: ../../.storage
+
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+packages:
+  '@robby-rabbitman/nx-plus-*':
+    access: $all
+    publish: $all
+    unpublish: $all
+
+  '**':
+    access: $all
+    proxy:
+      - npmjs
+
+publish:
+  allow_offline: true

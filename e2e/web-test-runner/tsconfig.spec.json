@@ -1,7 +1,9 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tools/typescript/src/configs/tsconfig.node-vitest.json",
   "compilerOptions": {
-    "types": ["vitest/globals", "node"]
+    "outDir": "dist-spec",
+    "rootDir": "src",
+    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo"
   },
-  "include": ["src/**/*.spec.ts"]
+  "include": ["src/**/*.ts"]
 }

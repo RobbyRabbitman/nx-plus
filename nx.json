@@ -1,104 +1,149 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "cli": { "packageManager": "pnpm" },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "release": {
     "releaseTagPattern": "{version}",
-    "git": { "commitMessage": "chore: release {version} 🚀 [skip ci]" },
     "version": {
       "conventionalCommits": true,
-      "generatorOptions": { "fallbackCurrentVersionResolver": "disk" }
+      "generatorOptions": {
+        "fallbackCurrentVersionResolver": "disk",
+        "preserveLocalDependencyProtocols": true
+      }
     },
     "changelog": {
       "automaticFromRef": true,
       "workspaceChangelog": {
         "createRelease": "github",
-        "renderOptions": { "authors": false }
-      }
-    },
-    "projects": ["packages/**/*"]
-  },
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"],
-    "publishable": ["{workspaceRoot}/packages/**/*"],
-    "eslintGlobals": ["{workspaceRoot}/tools/eslint/**/*"],
-    "typescriptGlobals": ["{workspaceRoot}/tsconfig.base.config"]
-  },
-  "plugins": [
-    {
-      "plugin": "@robby-rabbitman/nx-plus-tools-tsc/plugin",
-      "options": {
-        "tscTargetConfig": {
-          "inputs": [
-            "default",
-            "^default",
-            "typescriptGlobals",
-            "{workspaceRoot}/tools/tsc/**/*"
-          ]
+        "renderOptions": {
+          "authors": false
         }
       }
-    },
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "globals-shared"],
+    "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
+    "globals-eslint": [
+      "{workspaceRoot}/tools/eslint/**/*",
+      {
+        "externalDependencies": [
+          "@nx/eslint",
+          "@nx/eslint-plugin",
+          "eslint",
+          "@types/eslint",
+          "eslint-config-prettier",
+          "@types/eslint-config-prettier",
+          "typescript-eslint",
+          "eslint-plugin-n",
+          "jsonc-eslint-parser",
+          "globals"
+        ]
+      }
+    ],
+    "globals-typescript": [
+      "{workspaceRoot}/tools/typescript/**/*",
+      {
+        "externalDependencies": ["typescript", "tslib"]
+      }
+    ],
+    "globals-vite": [
+      {
+        "externalDependencies": ["@nx/vite", "vite"]
+      }
+    ],
+    "globals-vitest": [
+      "{workspaceRoot}/tools/vitest/**/*",
+      {
+        "externalDependencies": ["@vitest/coverage-v8", "@vitest/ui", "vitest"]
+      }
+    ],
+    "targets-build-tsc": ["default", "globals-typescript"],
+    "targets-test-vitest": ["default", "globals-vitest", "globals-vite"],
+    "targets-lint-eslint": ["default", "globals-eslint"],
+    "targets-test-web-test-runner": ["default"]
+  },
+  "sync": {
+    "applyChanges": true
+  },
+  "plugins": [
+    "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
     {
       "plugin": "@nx/eslint/plugin",
-      "options": { "targetName": "lint-eslint" }
+      "options": {
+        "targetName": "lint-eslint"
+      }
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck-tsc"
+        },
+        "build": {
+          "targetName": "build-tsc",
+          "configName": "tsconfig.lib.json"
+        }
+      },
+      "include": ["{tools,libs}/**/*"]
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": { "testTargetName": "test-vite" },
-      "exclude": ["e2e/**/*"]
+      "options": {
+        "testTargetName": "test-vitest"
+      }
     },
     {
-      "plugin": "@robby-rabbitman/nx-plus-libs-e2e-version-matrix/plugin",
+      "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner",
       "options": {
-        "targetName": "e2e-vite-version-matrix",
-        "targetConfiguration": {
-          "cache": true,
+        "testTargetName": "test-web-test-runner",
+        "testTargetConfig": {
           "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
-        },
-        "permutationTargetPrefix": "e2e-vite-version-matrix",
-        "permutationTargetConfiguration": {
-          "cache": true,
-          "parallelism": false,
-          "command": "vitest",
-          "options": {
-            "run": true,
-            "coverage": false,
-            "config": "{projectRoot}/vitest.config.mts"
+            "targets-test-web-test-runner",
+            "^targets-test-web-test-runner"
+          ],
+          "outputs": ["{projectRoot}/coverage"],
+          "defaultConfiguration": "local",
+          "configurations": {
+            "local": {
+              "watch": true
+            },
+            "ci": {}
           },
-          "inputs": [
-            "default",
-            "^default",
-            { "externalDependencies": ["vitest"] },
-            { "env": "CI" }
-          ]
+          "dependsOn": ["build*", "^build*"]
         }
-      },
-      "include": ["e2e/**/*"]
+      }
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server",
+      "options": {
+        "serveTargetName": "serve"
+      }
     }
   ],
   "targetDefaults": {
     "nx-release-publish": {
-      "options": { "packageRoot": "{workspaceRoot}/dist/{projectRoot}" },
-      "dependsOn": ["build"]
+      "dependsOn": ["build*"]
     },
     "lint-eslint": {
-      "inputs": ["default", "^default", "eslintGlobals"]
+      "inputs": ["targets-lint-eslint"]
     },
-    "test-vite*": {
-      "inputs": [
-        "default",
-        "^default",
-        { "externalDependencies": ["vitest"] },
-        { "env": "CI" }
-      ],
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "cache": true,
-      "configurations": { "ci": { "run": true } }
+    "build-tsc": {
+      "inputs": ["targets-build-tsc", "^targets-build-tsc"]
+    },
+    "test-vitest": {
+      "inputs": ["targets-test-vitest", "^targets-test-vitest"],
+      "outputs": ["{projectRoot}/coverage"],
+      "defaultConfiguration": "local",
+      "configurations": {
+        "ci": {
+          "run": true
+        },
+        "local": {
+          "ui": true
+        }
+      },
+      "dependsOn": ["build-deps"]
     }
   }
 }
