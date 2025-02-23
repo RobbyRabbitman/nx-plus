@@ -14,14 +14,9 @@ on:
       dry-run:
         type: boolean
         default: true
-  push:
-    branches:
-      - 'main'
 
 jobs:
   main:
-    # Kind of unnessecary because nx release will add `[skip ci]` in the commit message, but safe is safe
-    if: "${{ github.event_name == 'workflow_dispatch' || !startsWith(github.event.head_commit.message, 'chore: release') }}"
     runs-on: ubuntu-latest
     steps:
       # Observation:
@@ -64,7 +59,7 @@ jobs:
       - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.SPECIFIER }} --preid=${{ env.PREID }}
         env:
           GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
-          SPECIFIER: ${{ github.event_name == 'push' && '' || inputs.specifier }}
-          PREID: ${{ github.event_name == 'push' && '' || inputs.preid }}
+          DRY_RUN: ${{ inputs.dry-run }}
+          SPECIFIER: ${{ inputs.specifier }}
+          PREID: ${{ inputs.preid }}
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
