@@ -134,10 +134,12 @@ function extractWebTestRunnerInformation(
   webTestRunnerConfigPath: string,
   workspaceRoot: string,
 ) {
+  const configDir = dirname(webTestRunnerConfigPath);
+
   return {
     configFileName: basename(webTestRunnerConfigPath),
-    configDir: dirname(webTestRunnerConfigPath),
-    isProject: isProject(dirname(webTestRunnerConfigPath), workspaceRoot),
+    configDir,
+    isProject: isProject(configDir, workspaceRoot),
   };
 }
 
