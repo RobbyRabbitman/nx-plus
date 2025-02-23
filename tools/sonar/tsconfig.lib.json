@@ -9,9 +9,6 @@
   "exclude": ["*.config.*", "src/**/*.spec.ts"],
   "references": [
     {
-      "path": "../../libs/nx-util/tsconfig.lib.json"
-    },
-    {
       "path": "../vitest/tsconfig.lib.json"
     },
     {

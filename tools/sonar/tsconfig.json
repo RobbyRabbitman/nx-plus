@@ -7,9 +7,6 @@
   "exclude": [],
   "references": [
     {
-      "path": "../../libs/nx-util"
-    },
-    {
       "path": "../vitest"
     },
     {
