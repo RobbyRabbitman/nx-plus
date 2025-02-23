@@ -1,16 +1,13 @@
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
-import {
-  type WebDevServerPluginSchema,
-  createNodesV2,
-} from './web-dev-server.plugin.js';
+import { createNodesV2 } from './web-dev-server.plugin.js';
 
 vi.mock('fs', async () => {
   const memfs = await vi.importActual<typeof import('memfs')>('memfs');
   return memfs.fs;
 });
 
-describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server', () => {
+describe('[Unit Test] createNodesV2 - createWebDevServerTarget', () => {
   afterEach(() => {
     vol.reset();
     vi.resetModules();
@@ -24,7 +21,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
       schema,
     }: {
       directories: DirectoryJSON;
-      schema?: WebDevServerPluginSchema;
+      schema?: Parameters<typeof createNodesV2Fn>[1];
     }) => {
       const workspaceRoot = 'some-workspace-root';
 
@@ -42,7 +39,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
       );
     };
 
-    describe('with a web-dev-server config in a directory of the workspace', () => {
+    describe('a `Web Dev Server` config in a directory of the workspace', () => {
       it('should not modify the project graph by default', async () => {
         const nodes = await runCreateNodesV2({
           directories: {
@@ -56,48 +53,50 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
         ]);
       });
 
-      it('should add a web-dev-server serve target when a project is identified because a `package.json` is present', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'some/project/web-dev-server.config.js': '{}',
-            'some/project/package.json': '{}',
-          },
-        });
+      describe('should add a `Web Dev Server` serve target', () => {
+        it('when a `package.json` is present', async () => {
+          const nodes = await runCreateNodesV2({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/package.json': '{}',
+            },
+          });
 
-        expect(nodes).toContainEqual([
-          'some/project/web-dev-server.config.js',
-          expect.objectContaining({
-            projects: {
-              ['some/project']: {
-                targets: {
-                  serve: expect.anything(),
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.anything(),
+                  },
                 },
               },
-            },
-          }),
-        ]);
-      });
-
-      it('should add a web-dev-server serve target when a project is identified because a `project.json` is present', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'some/project/web-dev-server.config.js': '{}',
-            'some/project/project.json': '{}',
-          },
+            }),
+          ]);
         });
 
-        expect(nodes).toContainEqual([
-          'some/project/web-dev-server.config.js',
-          expect.objectContaining({
-            projects: {
-              ['some/project']: {
-                targets: {
-                  serve: expect.anything(),
+        it('when a `project.json` is present', async () => {
+          const nodes = await runCreateNodesV2({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.anything(),
+                  },
                 },
               },
-            },
-          }),
-        ]);
+            }),
+          ]);
+        });
       });
 
       it('should run the web-dev-server in the root of the project pointing to the inferred config', async () => {
@@ -112,15 +111,16 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
           'some/project/web-dev-server.config.js',
           expect.objectContaining({
             projects: {
-              ['some/project']: {
+              'some/project': {
                 targets: {
-                  serve: expect.objectContaining({
+                  serve: {
                     command: 'web-dev-server',
-                    options: expect.objectContaining({
-                      cwd: '{projectRoot}',
+                    options: {
+                      cwd: 'some/project',
                       config: 'web-dev-server.config.js',
-                    }),
-                  }),
+                      watch: true,
+                    },
+                  },
                 },
               },
             },
@@ -147,7 +147,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
               'some/project/web-dev-server.config.js',
               expect.objectContaining({
                 projects: {
-                  ['some/project']: {
+                  'some/project': {
                     targets: {
                       [serveTargetName]: expect.anything(),
                     },
@@ -174,7 +174,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
               'some/project/web-dev-server.config.js',
               expect.objectContaining({
                 projects: {
-                  ['some/project']: {
+                  'some/project': {
                     targets: {
                       serve: expect.anything(),
                     },
@@ -197,7 +197,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
               'some/project/web-dev-server.config.js',
               expect.objectContaining({
                 projects: {
-                  ['some/project']: {
+                  'some/project': {
                     targets: {
                       serve: expect.anything(),
                     },
@@ -222,7 +222,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
               'some/project/web-dev-server.config.js',
               expect.objectContaining({
                 projects: {
-                  ['some/project']: {
+                  'some/project': {
                     targets: {
                       serve: expect.objectContaining({
                         options: expect.objectContaining({
@@ -256,7 +256,7 @@ describe('[Unit Test] @robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-se
               'some/project/web-dev-server.config.js',
               expect.objectContaining({
                 projects: {
-                  ['some/project']: {
+                  'some/project': {
                     targets: {
                       serve: expect.objectContaining({
                         dependsOn: ['pre-serve'],
