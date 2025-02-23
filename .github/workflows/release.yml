@@ -3,9 +3,13 @@ name: release
 on:
   workflow_dispatch:
     inputs:
-      version:
+      specifier:
         type: string
         description: The version to use for the release.
+        default: ''
+      preid:
+        type: string
+        description: The preid to use for the release.
         default: ''
       dry-run:
         type: boolean
@@ -57,9 +61,10 @@ jobs:
 
       - run: pnpm nx report
 
-      - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.VERSION }}
+      - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.SPECIFIER }} --preid=${{ env.PREID }}
         env:
           GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
-          VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
+          SPECIFIER: ${{ github.event_name == 'push' && '' || inputs.specifier }}
+          PREID: ${{ github.event_name == 'push' && '' || inputs.preid }}
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
