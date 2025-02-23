@@ -76,5 +76,3 @@ Adds a _serve_ target for projects that have a [Web Dev Server config](https://m
     },
 ]
 ```
-
-`serveTargetConfig` is different from [targetDefaults](https://nx.dev/reference/nx-json#target-defaults) since it applies only to the inferred targets and not _every_ target.
