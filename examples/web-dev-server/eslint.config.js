@@ -6,9 +6,8 @@ import globals from 'globals';
 export default [
   ...nxPlusEslintJsConfig,
   {
-    files: ['src/**/*.spec.js'],
     languageOptions: {
-      globals: globals.mocha,
+      globals: globals.browser,
     },
   },
 ];

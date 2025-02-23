@@ -5,7 +5,7 @@ import {
   readNxJson,
   updateNxJson,
 } from '@nx/devkit';
-import { DEFAULT_WEB_DEV_SERVER_TARGET_NAME } from '../plugins/web-dev-server.plugin.js';
+import { DEFAULT_WEB_DEV_SERVER_TARGET_NAME } from '../plugins/web-dev-server.plugin';
 
 const WEB_DEV_SERVER_PLUGIN_PATH =
   '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server';

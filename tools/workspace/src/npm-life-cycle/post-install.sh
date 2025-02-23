@@ -8,7 +8,7 @@ for tsconfig in $(find tools -name 'tsconfig.lib.json'); do
 done
 
 echo "⚙️ Building local plugins ..."
-localPlugins="libs/web-test-runner"
+localPlugins="libs/web-test-runner libs/web-dev-server"
 for plugin in $localPlugins; do
   echo "⚙️ Building $plugin ..."
   pnpm tsc --build $plugin/tsconfig.lib.json

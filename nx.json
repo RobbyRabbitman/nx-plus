@@ -113,6 +113,12 @@
           "dependsOn": ["build*", "^build*"]
         }
       }
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server",
+      "options": {
+        "serveTargetName": "serve"
+      }
     }
   ],
   "targetDefaults": {
