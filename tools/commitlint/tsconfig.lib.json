@@ -12,6 +12,9 @@
       "path": "../vitest/tsconfig.lib.json"
     },
     {
+      "path": "../../libs/nx-util/tsconfig.lib.json"
+    },
+    {
       "path": "../eslint/tsconfig.lib.json"
     }
   ]
