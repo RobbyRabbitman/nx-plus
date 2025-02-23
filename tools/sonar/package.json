@@ -1,0 +1,25 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-sonar",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-nx-util": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-sonar",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}
