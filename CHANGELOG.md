@@ -1,3 +1,13 @@
+## 0.7.0 (2025-02-23)
+
+### 🚀 Features
+
+- align with nx major version ([#533](https://github.com/RobbyRabbitman/nx-plus/pull/533))
+
+### 🩹 Fixes
+
+- **tools-renovate-bot:** migrate config ([#103](https://github.com/RobbyRabbitman/nx-plus/pull/103))
+
 ## 0.6.2 (2024-07-21)
 
 
