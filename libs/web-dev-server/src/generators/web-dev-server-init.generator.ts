@@ -7,17 +7,17 @@ import {
 } from '@nx/devkit';
 import { DEFAULT_WEB_DEV_SERVER_TARGET_NAME } from '../plugins/web-dev-server.plugin.js';
 
-export const WEB_DEV_SERVER_PLUGIN_PATH =
+const WEB_DEV_SERVER_PLUGIN_PATH =
   '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server';
 
 /**
  * TODO: can this type be generated from the schema.json or the json imported
  * and then inferred in order to be synced?
  */
-export interface WebDevServerInitGeneratorSchema {
+interface WebDevServerInitGeneratorSchema {
   /**
-   * The name of the `web-dev-server` serve target e.g. 'serve' or
-   * 'web-dev-server'.
+   * The name of the `Web Dev Server` serve target e.g. `'serve'` or
+   * `'web-dev-server'`.
    */
   serveTargetName?: string;
 
@@ -28,7 +28,7 @@ export interface WebDevServerInitGeneratorSchema {
   skipFormat?: boolean;
 }
 
-export type WebDevServerInitGeneratorOptions =
+type WebDevServerInitGeneratorOptions =
   Required<WebDevServerInitGeneratorSchema>;
 
 /**
@@ -38,19 +38,7 @@ export type WebDevServerInitGeneratorOptions =
 export const webDevServerInitGenerator: Generator<
   WebDevServerInitGeneratorSchema
 > = async (tree, schema) => {
-  const defaultWebDevServeTargetName = DEFAULT_WEB_DEV_SERVER_TARGET_NAME;
-
-  const options = {
-    skipAddPlugin: false,
-    skipFormat: false,
-    serveTargetName: defaultWebDevServeTargetName,
-    ...schema,
-  } satisfies WebDevServerInitGeneratorOptions;
-
-  /** Make sure `serveTargetName` is not an empty string */
-  if (options.serveTargetName === '') {
-    options.serveTargetName = defaultWebDevServeTargetName;
-  }
+  const options = normalizeWebDevServerInitGeneratorOptions(schema);
 
   const { skipAddPlugin, skipFormat } = options;
 
@@ -92,3 +80,21 @@ export const webDevServerInitGenerator: Generator<
 };
 
 export default webDevServerInitGenerator;
+
+function normalizeWebDevServerInitGeneratorOptions(
+  userOptions?: WebDevServerInitGeneratorSchema,
+) {
+  const normalizedOptions = {
+    skipAddPlugin: false,
+    skipFormat: false,
+    serveTargetName: DEFAULT_WEB_DEV_SERVER_TARGET_NAME,
+    ...userOptions,
+  } satisfies WebDevServerInitGeneratorOptions;
+
+  /** Make sure `serveTargetName` is not an empty string */
+  if (normalizedOptions.serveTargetName === '') {
+    normalizedOptions.serveTargetName = DEFAULT_WEB_DEV_SERVER_TARGET_NAME;
+  }
+
+  return normalizedOptions;
+}
