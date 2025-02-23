@@ -15,7 +15,7 @@
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "nx": {
-    "name": "nx-plus-tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
+    "name": "tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
     "tags": [
       "runtime:node"
     ]

@@ -15,4 +15,4 @@ for plugin in $localPlugins; do
 done
 
 echo "⚙️ Starting verdaccio ..."
-pnpm nx run nx-plus-tools-verdaccio:start
+pnpm nx run tools-verdaccio:start

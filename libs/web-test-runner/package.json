@@ -46,7 +46,7 @@
     "./plugins/web-test-runner": "./dist/plugins/web-test-runner.plugin.js"
   },
   "nx": {
-    "name": "nx-plus-web-test-runner",
+    "name": "web-test-runner",
     "tags": [
       "runtime:node"
     ]

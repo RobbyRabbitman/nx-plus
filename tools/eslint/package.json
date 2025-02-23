@@ -18,7 +18,7 @@
     "globals": "15.15.0"
   },
   "nx": {
-    "name": "nx-plus-tools-eslint",
+    "name": "tools-eslint",
     "tags": [
       "runtime:node"
     ]
