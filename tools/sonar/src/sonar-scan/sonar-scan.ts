@@ -34,14 +34,6 @@ interface SonarScanOptions {
   projectTechnologies?: SonarScanProjectTechnology[];
 }
 
-export function defaultSonarProperties() {
-  return {
-    'sonar.verbose':
-      process.env.NX_VERBOSE_LOGGING === 'true' ? 'true' : 'false',
-    'sonar.log.level': 'INFO',
-  } satisfies SonarProperties;
-}
-
 export async function sonarScan(options: SonarScanOptions) {
   const { projectName, projectTechnologies, properties } = options;
 
@@ -57,6 +49,9 @@ export async function sonarScan(options: SonarScanOptions) {
 
   const baseProperties = {
     'sonar.scm.provider': 'git',
+    'sonar.verbose':
+      process.env.NX_VERBOSE_LOGGING === 'true' ? 'true' : 'false',
+    'sonar.log.level': 'INFO',
     'sonar.projectKey': projectName,
     'sonar.sourceEncoding': 'UTF-8',
   } satisfies SonarProperties;
