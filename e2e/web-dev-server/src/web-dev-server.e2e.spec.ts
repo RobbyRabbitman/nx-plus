@@ -39,7 +39,6 @@ describe('[e2e Test] Web Dev Server', () => {
     });
   });
 
-  /** TODO: Install e2e framework like playwright ? */
   it(
     "should run the 'Web Dev Server'",
     {
