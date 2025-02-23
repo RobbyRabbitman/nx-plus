@@ -61,7 +61,7 @@ jobs:
 
       - run: pnpm nx report
 
-      - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.SPECIFIER }} --preid=${{ env.PREID }}
+      - run: pnpm nx run tools-release:exec-release-cli:ci --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.SPECIFIER }} --preid=${{ env.PREID }}
         env:
           GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
