@@ -5,7 +5,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/RobbyRabbitman/nx-plus.git",
-    "directory": "packages/web-test-runner"
+    "directory": "libs/web-test-runner"
   },
   "keywords": [
     "Nx",
@@ -19,7 +19,7 @@
     "Web"
   ],
   "author": "Robby Rabbitman",
-  "homepage": "https://github.com/RobbyRabbitman/nx-plus/tree/main/packages/web-test-runner",
+  "homepage": "https://github.com/RobbyRabbitman/nx-plus/tree/main/libs/web-test-runner",
   "bugs": {
     "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
   },
