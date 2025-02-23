@@ -1,3 +1,9 @@
+## 0.7.1 (2025-02-23)
+
+### 🩹 Fixes
+
+- **tools-eslint:** align deps with workspace ([#540](https://github.com/RobbyRabbitman/nx-plus/pull/540))
+
 ## 0.7.0 (2025-02-23)
 
 ### 🚀 Features

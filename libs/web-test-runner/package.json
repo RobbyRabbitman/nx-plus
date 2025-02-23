@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus-web-test-runner",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Web Test Runner integration for Nx workspaces.",
   "repository": {
     "type": "git",
