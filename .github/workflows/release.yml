@@ -1,0 +1,65 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: The version to use for the release.
+        default: ''
+      dry-run:
+        type: boolean
+        default: true
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  main:
+    # Kind of unnessecary because nx release will add `[skip ci]` in the commit message, but safe is safe
+    if: "${{ github.event_name == 'workflow_dispatch' || !startsWith(github.event.head_commit.message, 'chore: release') }}"
+    runs-on: ubuntu-latest
+    steps:
+      # Observation:
+      # We cannot use `GITHHUB_TOKEN` since it cannot bypass protected branches.
+      # Rule definition: https://github.com/RobbyRabbitman/nx-plus/settings/rules/1073339
+      #
+      # Solution:
+      # So we installed a Github App which requests permissions to 'contents' of this repo
+      # The App is listed in the bypass list
+      - uses: actions/create-github-app-token@v1
+        id: create-release-app-token
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.create-release-app-token.outputs.token }}
+          fetch-depth: 0
+
+      - run: |
+          git config user.email "robby.rabbitman+nx-plus@gmail.com"
+          git config user.name "release"
+
+      # remove global install of corepack or pin to a version
+      - run: |
+          npm i -g corepack
+          corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - run: pnpm i
+
+      - run: pnpm nx report
+
+      - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ steps.create-release-app-token.outputs.token }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
+          VERSION: ${{ github.event_name == 'push' && '' || inputs.version }}
+          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
