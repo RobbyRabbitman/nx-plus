@@ -1,28 +1,26 @@
 import {
   logger,
   readCachedProjectGraph,
-  workspaceRoot,
   type ProjectConfiguration,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { scan } from 'sonarqube-scanner';
 
-type SonarProperties = Record<string, string>;
+export const SONAR_SCAN_PROJECT_TECHNOLOGIES = ['js'] as const;
 
-const SONAR_SCAN_PROJECT_TECHNOLOGIES = ['js'] as const;
+type SonarProperties = Record<string, string>;
 
 type SonarScanProjectTechnology =
   (typeof SONAR_SCAN_PROJECT_TECHNOLOGIES)[number];
 
-/** @see {@link sonarScan} options. */
 interface SonarScanOptions {
   /** The name of the project to scan. */
   projectName: string;
 
   /**
    * `sonar.*` properties to pass to the sonar scan. They take precedence over
-   * inferred and base properties.
+   * {@link SonarScanOptions.projectTechnologies projectTechnologies}
    */
   properties?: SonarProperties;
 
@@ -35,7 +33,14 @@ interface SonarScanOptions {
 }
 
 export async function sonarScan(options: SonarScanOptions) {
-  const { projectName, projectTechnologies, properties } = options;
+  const {
+    projectName,
+    projectTechnologies,
+    properties: userProperties,
+  } = {
+    projectTechnologies: [],
+    ...options,
+  };
 
   logger.verbose('[sonarScan] options', options);
 
@@ -56,60 +61,51 @@ export async function sonarScan(options: SonarScanOptions) {
     'sonar.sourceEncoding': 'UTF-8',
   } satisfies SonarProperties;
 
-  const technologyBasedProperties = buildTechnologySonarProperties({
-    projectTechnologies: projectTechnologies ?? [],
+  const technologyProperties = await buildTechnologySonarProperties({
+    projectTechnologies,
     project,
   });
 
-  /**
-   * Priority order: base properties < technology specific properties < scan
-   * properties passed to the function.
-   */
-  const sonarProperties: SonarProperties = {
+  /** Priority: base properties < technology properties < user properties. */
+  const properties = {
     ...baseProperties,
-    ...technologyBasedProperties,
-    ...properties,
-  };
+    ...technologyProperties,
+    ...userProperties,
+  } satisfies SonarProperties;
 
   logger.verbose(
     '[sonarScan] invoking a sonar scan with properties:',
-    sonarProperties,
+    properties,
   );
 
   return scan({
-    options: sonarProperties,
+    options: properties,
   });
 }
 
-/**
- * Builds sonar properties for the sonar scan based on the technologies of a
- * project.
- */
-function buildTechnologySonarProperties(options: {
+async function buildTechnologySonarProperties(options: {
   projectTechnologies: SonarScanProjectTechnology[];
   project: ProjectConfiguration;
 }) {
-  const { projectTechnologies, project } = options;
+  const { projectTechnologies } = options;
 
   const technologyBuildersForSonarProperties: Record<
     SonarScanProjectTechnology,
-    () => SonarProperties
+    () => Promise<SonarProperties>
   > = {
-    js: () =>
-      buildJsSonarProperties({
-        project,
-      }),
+    js: () => buildJsSonarProperties(),
   };
 
-  const technologyProperties = Array.from(new Set(projectTechnologies)).reduce(
-    (sonarOptions, technology) => ({
-      ...sonarOptions,
-      ...technologyBuildersForSonarProperties[technology](),
-    }),
-    {} as SonarProperties,
+  const technologyProperties = await Promise.all(
+    Array.from(new Set(projectTechnologies)).map((technology) =>
+      technologyBuildersForSonarProperties[technology](),
+    ),
   );
 
-  return technologyProperties;
+  return technologyProperties.reduce(
+    (all, technologyProperties) => ({ ...all, ...technologyProperties }),
+    {},
+  );
 }
 
 /**
@@ -125,9 +121,7 @@ function buildTechnologySonarProperties(options: {
  *
  * - `coverage/execution-report.xml` The execution report file.
  */
-function buildJsSonarProperties(options: { project: ProjectConfiguration }) {
-  const { project } = options;
-
+async function buildJsSonarProperties() {
   const sourceDirectory = 'src';
 
   const coverageDirectory = 'coverage';
@@ -178,7 +172,7 @@ function buildJsSonarProperties(options: { project: ProjectConfiguration }) {
   const executionReportPath = join(coverageDirectory, 'execution-report.xml');
 
   /** Not every js project has a test execution report */
-  if (existsSync(join(workspaceRoot, project.root, executionReportPath))) {
+  if (existsSync(executionReportPath)) {
     jsSonarProperties['sonar.testExecutionReportPaths'] = executionReportPath;
   }
 
