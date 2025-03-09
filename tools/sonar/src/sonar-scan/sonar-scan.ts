@@ -1,13 +1,104 @@
 import {
   logger,
   readCachedProjectGraph,
+  workspaceRoot,
   type ProjectConfiguration,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { scan } from 'sonarqube-scanner';
+import { sonarApi } from '../api/sonar-api.js';
 
 export const SONAR_SCAN_PROJECT_TECHNOLOGIES = ['js'] as const;
+
+export async function sonarScan(options: SonarScanOptions) {
+  const { projectTechnologies, userProperties, baseProperties, project } =
+    normalizeSonarScanOptions(options);
+
+  const technologyProperties = await buildTechnologySonarProperties({
+    projectTechnologies,
+    project,
+  });
+
+  /** Priority: base properties < technology properties < user properties. */
+  const properties = {
+    ...baseProperties,
+    ...technologyProperties,
+    ...userProperties,
+  } satisfies SonarProperties;
+
+  await prepareScan({
+    projectName: project.name,
+    sonarProperties: properties,
+  });
+
+  logger.verbose(
+    '[sonarScan] invoking a sonar scan with properties:',
+    properties,
+  );
+
+  return scan({
+    options: properties,
+  });
+}
+
+/**
+ * Creates a project, sets the main branch and new code definition to
+ * `previous_version` before the first scan - is a no-op if the project already
+ * exists.
+ *
+ * TODO: remove me when there is a `sonar.*` property to set the main branch
+ * upon project creation on the first scan
+ */
+async function prepareScan(options: {
+  projectName: string;
+  sonarProperties: {
+    'sonar.token': string;
+    'sonar.organization': string;
+    'sonar.projectKey': string;
+  };
+}) {
+  const { projectName, sonarProperties } = options;
+
+  const projectKey = sonarProperties['sonar.projectKey'];
+  const organization = sonarProperties['sonar.organization'];
+  const token = sonarProperties['sonar.token'];
+
+  const sonarProjects = await sonarApi.projects.search({
+    token,
+    params: {
+      organization,
+      projects: [projectKey],
+    },
+  });
+
+  if (sonarProjects.paging.total > 0) {
+    logger.verbose(
+      `[sonarScan] Project with key '${projectKey}' already exists - skipping project creation.`,
+    );
+    return;
+  }
+
+  await sonarApi.projects.create({
+    token,
+    params: {
+      name: projectName,
+      project: projectKey,
+      visibility: 'public',
+      newCodeDefinitionType: 'previous_version',
+      newCodeDefinitionValue: 'previous_version',
+      organization,
+    },
+  });
+
+  await sonarApi.project_branches.rename({
+    token,
+    params: {
+      project: projectKey,
+      name: 'main',
+    },
+  });
+}
 
 type SonarProperties = Record<string, string>;
 
@@ -32,7 +123,7 @@ interface SonarScanOptions {
   projectTechnologies?: SonarScanProjectTechnology[];
 }
 
-export async function sonarScan(options: SonarScanOptions) {
+function normalizeSonarScanOptions(options: SonarScanOptions) {
   const {
     projectName,
     projectTechnologies,
@@ -52,35 +143,43 @@ export async function sonarScan(options: SonarScanOptions) {
     );
   }
 
+  const organization = userProperties?.['sonar.organization'];
+  if (!organization) {
+    throw new Error(
+      `[sonarScan] No 'sonar.organization' property found in the sonar properties.`,
+    );
+  }
+
+  const token = userProperties?.['sonar.token'];
+  if (!token) {
+    throw new Error(
+      `[sonarScan] No 'sonar.token' property found in the sonar properties.`,
+    );
+  }
+
+  const projectRoot = join(workspaceRoot, project.root);
+
   const baseProperties = {
     'sonar.scm.provider': 'git',
+    'sonar.projectBaseDir': projectRoot,
+    'sonar.organization': organization,
+    'sonar.projectKey': `${organization}--${projectName.replaceAll('@', '').replaceAll('/', '--')}`,
+    'sonar.token': token,
+    'sonar.sourceEncoding': 'UTF-8',
+    'sonar.log.level': 'INFO',
     'sonar.verbose':
       process.env.NX_VERBOSE_LOGGING === 'true' ? 'true' : 'false',
-    'sonar.log.level': 'INFO',
-    'sonar.projectKey': projectName,
-    'sonar.sourceEncoding': 'UTF-8',
   } satisfies SonarProperties;
 
-  const technologyProperties = await buildTechnologySonarProperties({
+  return {
+    project: {
+      name: projectName,
+      ...project,
+    },
     projectTechnologies,
-    project,
-  });
-
-  /** Priority: base properties < technology properties < user properties. */
-  const properties = {
-    ...baseProperties,
-    ...technologyProperties,
-    ...userProperties,
-  } satisfies SonarProperties;
-
-  logger.verbose(
-    '[sonarScan] invoking a sonar scan with properties:',
-    properties,
-  );
-
-  return scan({
-    options: properties,
-  });
+    userProperties,
+    baseProperties,
+  };
 }
 
 async function buildTechnologySonarProperties(options: {
