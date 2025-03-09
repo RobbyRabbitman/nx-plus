@@ -43,3 +43,14 @@ jobs:
           pnpm nx affected -t test test-vitest test-web-test-runner -c ci
         env:
           NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+
+      # OBSERVATION: Running the sonar scan in parallel errors with 'Checksum verification failed for /home/runner/work/nx-plus/nx-plus/.sonar/cache/...' which is the sonars home directory
+      # TODO: remove parallel 1 when https://community.sonarsource.com/t/after-upgrade-to-sonar-to-10-6-error-checksum-verification-failed-for-jre/129056/24 is fixed
+      - run: >
+          pnpm nx affected -t sonar-scan -c ci
+          --parallel 1
+          --option sonar.organization=robby-rabbitman-cv
+          --option sonar.token=${{ secrets.SONAR_TOKEN }}
+          --option sonar.userHome=${{ github.workspace }}/.sonar
+          --option sonar.scanner.skipJreProvisioning=true
+        if: github.event_name == 'push' && github.ref_name == 'main'
