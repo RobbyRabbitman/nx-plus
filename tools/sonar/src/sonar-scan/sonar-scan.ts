@@ -7,10 +7,15 @@ import {
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { scan } from 'sonarqube-scanner';
-import { sonarApi } from '../api/sonar-api.js';
+import { SONAR_CLOUD_API, sonarApi } from '../api/sonar-api.js';
 
+/**
+ * The technologies that when passed to {@link sonarScan} will add technology
+ * specific properties to the sonar scan options.
+ */
 export const SONAR_SCAN_PROJECT_TECHNOLOGIES = ['js'] as const;
 
+/** Invokes a sonar scan for the given project. */
 export async function sonarScan(options: SonarScanOptions) {
   const { projectTechnologies, userProperties, baseProperties, project } =
     normalizeSonarScanOptions(options);
@@ -161,14 +166,15 @@ function normalizeSonarScanOptions(options: SonarScanOptions) {
 
   const baseProperties = {
     'sonar.scm.provider': 'git',
+    'sonar.verbose':
+      process.env.NX_VERBOSE_LOGGING === 'true' ? 'true' : 'false',
+    'sonar.host.url': SONAR_CLOUD_API,
+    'sonar.log.level': 'INFO',
+    'sonar.sourceEncoding': 'UTF-8',
     'sonar.projectBaseDir': projectRoot,
     'sonar.organization': organization,
     'sonar.projectKey': `${organization}--${projectName.replaceAll('@', '').replaceAll('/', '--')}`,
     'sonar.token': token,
-    'sonar.sourceEncoding': 'UTF-8',
-    'sonar.log.level': 'INFO',
-    'sonar.verbose':
-      process.env.NX_VERBOSE_LOGGING === 'true' ? 'true' : 'false',
   } satisfies SonarProperties;
 
   return {

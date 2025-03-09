@@ -3,7 +3,7 @@
  * generate the api client.
  */
 
-const SONAR_CLOUD_API = 'https://sonarcloud.io';
+export const SONAR_CLOUD_API = 'https://sonarcloud.io';
 
 const sonarAuthHeader = (token?: string) => ({
   Authorization: `Bearer ${token ?? process.env.NX_PLUS_TOOLS_SONAR_TOKEN}`,
