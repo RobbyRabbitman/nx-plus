@@ -9,9 +9,6 @@
   "exclude": ["*.config.*", "src/**/*.spec.ts"],
   "references": [
     {
-      "path": "../vitest/tsconfig.lib.json"
-    },
-    {
       "path": "../eslint/tsconfig.lib.json"
     }
   ]
