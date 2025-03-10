@@ -72,19 +72,11 @@ const createSonarScanTarget: CreateNodesFunction<
 
 function normalizeSonarScanTargetOptions(
   options: SonarScanPluginSchema | undefined,
-): SonarScanPluginOptions {
-  const defaultOptions = {
-    sonarScanTargetName: 'sonar-scan',
+) {
+  return {
+    sonarScanTargetName: options?.sonarScanTargetName || 'sonar-scan',
     sonarScanTargetConfiguration: {
       command: SONAR_SCAN_COMMAND,
-    },
-  } satisfies Partial<SonarScanPluginOptions>;
-
-  return {
-    sonarScanTargetName:
-      options?.sonarScanTargetName || defaultOptions.sonarScanTargetName,
-    sonarScanTargetConfiguration: {
-      ...defaultOptions.sonarScanTargetConfiguration,
       ...options?.sonarScanTargetConfiguration,
     },
   } satisfies SonarScanPluginOptions;

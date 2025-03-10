@@ -105,4 +105,124 @@ describe('[Unit Test] createSonarScanTarget', () => {
       ]);
     });
   });
+
+  describe('schema', () => {
+    describe('sonarScanTargetName', () => {
+      it('should use the provided value', async () => {
+        const sonarScanTargetName = 'my-sonar-scan';
+
+        const nodes = await runCreateNodes({
+          directories: {
+            'sonar-project.properties': '',
+          },
+          schema: {
+            sonarScanTargetName,
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'sonar-project.properties',
+            {
+              projects: {
+                '.': {
+                  targets: {
+                    [sonarScanTargetName]: expect.anything(),
+                  },
+                },
+              },
+            },
+          ],
+        ]);
+      });
+
+      it('should fall back to `sonar-scan` when the provided value is an empty string', async () => {
+        const sonarScanTargetName = '';
+
+        const nodes = await runCreateNodes({
+          directories: {
+            'sonar-project.properties': '',
+          },
+          schema: {
+            sonarScanTargetName,
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'sonar-project.properties',
+            {
+              projects: {
+                '.': {
+                  targets: {
+                    'sonar-scan': expect.anything(),
+                  },
+                },
+              },
+            },
+          ],
+        ]);
+      });
+
+      it('should fall back to `sonar-scan` when the value is not provided', async () => {
+        const sonarScanTargetName = '';
+
+        const nodes = await runCreateNodes({
+          directories: {
+            'sonar-project.properties': '',
+          },
+          schema: {
+            sonarScanTargetName,
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'sonar-project.properties',
+            {
+              projects: {
+                '.': {
+                  targets: {
+                    'sonar-scan': expect.anything(),
+                  },
+                },
+              },
+            },
+          ],
+        ]);
+      });
+    });
+
+    describe('sonarScanTargetConfiguration', () => {
+      it('should allow to override the default target configuration', async () => {
+        const nodes = await runCreateNodes({
+          directories: {
+            'sonar-project.properties': '',
+          },
+          schema: {
+            sonarScanTargetConfiguration: {
+              command: 'my-custom-command',
+            },
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'sonar-project.properties',
+            {
+              projects: {
+                '.': {
+                  targets: {
+                    'sonar-scan': {
+                      command: 'my-custom-command',
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        ]);
+      });
+    });
+  });
 });
