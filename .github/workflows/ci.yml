@@ -49,8 +49,8 @@ jobs:
       - run: >
           pnpm nx affected -t sonar-scan -c ci
           --parallel 1
-          --option sonar.organization=robby-rabbitman-cv
+          --option sonar.qualitygate.wait=true
+          --option sonar.organization=robby-rabbitman-nx-plus
           --option sonar.token=${{ secrets.SONAR_TOKEN }}
           --option sonar.userHome=${{ github.workspace }}/.sonar
           --option sonar.scanner.skipJreProvisioning=true
-        if: github.event_name == 'push' && github.ref_name == 'main'
