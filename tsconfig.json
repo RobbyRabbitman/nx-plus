@@ -40,6 +40,9 @@
     },
     {
       "path": "./tools/sonar"
+    },
+    {
+      "path": "./tools/sonar-scan-plugin"
     }
   ]
 }

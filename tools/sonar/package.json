@@ -21,6 +21,16 @@
     "name": "tools-sonar",
     "tags": [
       "runtime:node"
-    ]
+    ],
+    "targets": {
+      "exec-sonar-scan-cli": {
+        "command": "tsx {projectRoot}/src/sonar-scan/sonar-scan.cli.ts",
+        "options": {
+          "env": {
+            "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+          }
+        }
+      }
+    }
   }
 }

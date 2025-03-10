@@ -1,0 +1,108 @@
+import { type CreateNodesContextV2, type CreateNodesResult } from '@nx/devkit';
+import { type DirectoryJSON, vol } from 'memfs';
+import { minimatch } from 'minimatch';
+import { createNodesV2, type SonarScanPluginSchema } from './plugin.js';
+
+vi.mock('fs', async () => {
+  const memfs = await vi.importActual<typeof import('memfs')>('memfs');
+
+  return memfs.fs;
+});
+
+describe('[Unit Test] createSonarScanTarget', () => {
+  async function runCreateNodes(options: {
+    directories: DirectoryJSON;
+    context?: CreateNodesContextV2;
+    schema?: SonarScanPluginSchema;
+  }) {
+    const [createNodesGlob, createNodesFn] = createNodesV2;
+
+    const { directories, schema } = options;
+
+    const context = {
+      nxJsonConfiguration: {},
+      workspaceRoot: '',
+      ...options.context,
+    } satisfies CreateNodesContextV2;
+
+    vol.fromJSON(directories, context.workspaceRoot);
+
+    return createNodesFn(
+      Object.keys(directories).filter((file) =>
+        minimatch(file, createNodesGlob, { dot: true }),
+      ),
+      schema,
+      context,
+    );
+  }
+
+  afterEach(() => {
+    vol.reset();
+  });
+
+  it('should infer "sonar-project.properties" files', async () => {
+    const nodes = await runCreateNodes({
+      directories: {
+        'sonar-project.properties': '',
+        'project-1/sonar-project.properties': '',
+        'nested/project-2/sonar-project.properties': '',
+      },
+    });
+
+    expect(nodes).toEqual([
+      ['sonar-project.properties', expect.anything()],
+      ['project-1/sonar-project.properties', expect.anything()],
+      ['nested/project-2/sonar-project.properties', expect.anything()],
+    ]);
+  });
+
+  it('should add a target in the directory of the "sonar-project.properties" file', async () => {
+    const nodes = await runCreateNodes({
+      directories: {
+        'sonar-project.properties': '',
+      },
+    });
+
+    expect(nodes).toEqual([
+      [
+        'sonar-project.properties',
+        {
+          projects: {
+            '.': expect.objectContaining({
+              targets: expect.objectContaining({
+                'sonar-scan': expect.anything(),
+              }),
+            }),
+          },
+        } satisfies CreateNodesResult,
+      ],
+    ]);
+  });
+
+  describe('the created nodes', () => {
+    it('should have a sonar scan target', async () => {
+      const nodes = await runCreateNodes({
+        directories: {
+          'sonar-project.properties': '',
+        },
+      });
+
+      expect(nodes).toEqual([
+        [
+          'sonar-project.properties',
+          {
+            projects: {
+              '.': {
+                targets: {
+                  'sonar-scan': {
+                    command: 'pnpm exec nx run tools-sonar:exec-sonar-scan-cli',
+                  },
+                },
+              },
+            },
+          } satisfies CreateNodesResult,
+        ],
+      ]);
+    });
+  });
+});

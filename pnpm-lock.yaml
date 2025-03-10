@@ -347,6 +347,25 @@ importers:
       sonarqube-scanner:
         specifier: 4.2.7
         version: 4.2.7
+      yargs:
+        specifier: 17.7.2
+        version: 17.7.2
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-eslint':
+        specifier: workspace:*
+        version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../vitest
+
+  tools/sonar-scan-plugin:
+    dependencies:
+      '@nx/devkit':
+        specifier: 20.4.6
+        version: 20.4.6(nx@20.4.6)
+      '@robby-rabbitman/nx-plus-tools-sonar':
+        specifier: workspace:*
+        version: link:../sonar
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
