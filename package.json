@@ -7,10 +7,10 @@
     "sync-dependencies": "echo 'Need to build every project and reset project graph before syncing dependencies ...' && nx run-many -t build build-tsc && nx reset && nx run-many -t lint-eslint --fix --rule '@nx/dependency-checks:error'"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.7.1",
-    "@commitlint/config-conventional": "19.7.1",
-    "@commitlint/config-nx-scopes": "19.7.1",
-    "@commitlint/types": "19.5.0",
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
+    "@commitlint/config-nx-scopes": "19.8.0",
+    "@commitlint/types": "19.8.0",
     "@eslint/js": "9.21.0",
     "@nx/devkit": "20.4.6",
     "@nx/eslint": "20.4.6",
