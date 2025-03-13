@@ -96,6 +96,10 @@ describe('[Unit Test] createSonarScanTarget', () => {
                 targets: {
                   'sonar-scan': {
                     command: 'pnpm exec nx run tools-sonar:exec-sonar-scan-cli',
+                    options: {
+                      projectName: '{projectName}',
+                      projectTechnology: '',
+                    },
                   },
                 },
               },
@@ -215,6 +219,10 @@ describe('[Unit Test] createSonarScanTarget', () => {
                   targets: {
                     'sonar-scan': {
                       command: 'my-custom-command',
+                      options: {
+                        projectName: '{projectName}',
+                        projectTechnology: '',
+                      },
                     },
                   },
                 },

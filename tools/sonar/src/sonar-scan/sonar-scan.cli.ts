@@ -1,7 +1,11 @@
 import { logger, workspaceRoot } from '@nx/devkit';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { SONAR_SCAN_PROJECT_TECHNOLOGIES, sonarScan } from './sonar-scan.js';
+import {
+  SONAR_SCAN_PROJECT_TECHNOLOGIES,
+  sonarScan,
+  type SonarScanProjectTechnology,
+} from './sonar-scan.js';
 
 await sonarScanCli();
 
@@ -31,7 +35,9 @@ export async function sonarScanCli() {
     const normalizedOptions = {
       workspaceRoot,
       projectName: options.projectName,
-      projectTechnologies: options.projectTechnology,
+      projectTechnologies: (options.projectTechnology ?? []).flatMap(
+        (projectTechnology) => projectTechnology.split(','),
+      ) as SonarScanProjectTechnology[],
       properties: Object.fromEntries(
         (options.option ?? []).map((option) => option.split('=')),
       ),

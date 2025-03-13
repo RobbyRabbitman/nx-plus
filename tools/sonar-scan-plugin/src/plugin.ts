@@ -5,8 +5,10 @@ import {
   createNodesFromFiles,
   getPackageManagerCommand,
 } from '@nx/devkit';
+import { SonarScanProjectTechnology } from '@robby-rabbitman/nx-plus-tools-sonar';
 import sonarScanPackageJson from '@robby-rabbitman/nx-plus-tools-sonar/package.json';
-import { dirname } from 'path';
+import { existsSync } from 'fs';
+import { dirname, join } from 'path';
 
 type SonarScanTargetConfiguration = TargetConfiguration;
 
@@ -47,10 +49,10 @@ export const createNodesV2 = [
 const createSonarScanTarget: CreateNodesFunction<
   SonarScanPluginSchema | undefined
 > = (sonarScanConfigPath, options) => {
-  const { sonarScanTargetName, sonarScanTargetConfiguration } =
-    normalizeSonarScanTargetOptions(options);
+  const projectRoot = dirname(sonarScanConfigPath);
 
-  const sonarScanProjectRoot = dirname(sonarScanConfigPath);
+  const { sonarScanTargetName, sonarScanTargetConfiguration } =
+    normalizeSonarScanTargetOptions(projectRoot, options);
 
   return {
     projects: {
@@ -61,7 +63,7 @@ const createSonarScanTarget: CreateNodesFunction<
        * NOTE: this forces the `sonar-project.properties` to be present next to
        * the `package.json` file or _the_ root of a project.
        */
-      [sonarScanProjectRoot]: {
+      [projectRoot]: {
         targets: {
           [sonarScanTargetName]: sonarScanTargetConfiguration,
         },
@@ -71,6 +73,7 @@ const createSonarScanTarget: CreateNodesFunction<
 };
 
 function normalizeSonarScanTargetOptions(
+  projectRoot: string,
   options: SonarScanPluginSchema | undefined,
 ) {
   return {
@@ -78,6 +81,25 @@ function normalizeSonarScanTargetOptions(
     sonarScanTargetConfiguration: {
       command: SONAR_SCAN_COMMAND,
       ...options?.sonarScanTargetConfiguration,
+      options: {
+        projectName: '{projectName}',
+        projectTechnology: inferProjectTechnologies(projectRoot).join(','),
+        ...options?.sonarScanTargetConfiguration?.options,
+      },
     },
   } satisfies SonarScanPluginOptions;
+}
+
+function inferProjectTechnologies(projectRoot: string) {
+  const technologyIdentifiers = {
+    js: () => isJsProject(projectRoot),
+  } satisfies Record<SonarScanProjectTechnology, () => boolean>;
+
+  return Object.keys(technologyIdentifiers).filter((technology) =>
+    technologyIdentifiers[technology as keyof typeof technologyIdentifiers](),
+  );
+}
+
+function isJsProject(projectRoot: string) {
+  return existsSync(join(projectRoot, 'package.json'));
 }

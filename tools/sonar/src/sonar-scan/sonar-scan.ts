@@ -15,6 +15,9 @@ import { SONAR_CLOUD_API, sonarApi } from '../api/sonar-api.js';
  */
 export const SONAR_SCAN_PROJECT_TECHNOLOGIES = ['js'] as const;
 
+export type SonarScanProjectTechnology =
+  (typeof SONAR_SCAN_PROJECT_TECHNOLOGIES)[number];
+
 /** Invokes a sonar scan for the given project. */
 export async function sonarScan(options: SonarScanOptions) {
   const { projectTechnologies, userProperties, baseProperties, project } =
@@ -106,9 +109,6 @@ async function prepareScan(options: {
 }
 
 type SonarProperties = Record<string, string>;
-
-type SonarScanProjectTechnology =
-  (typeof SONAR_SCAN_PROJECT_TECHNOLOGIES)[number];
 
 interface SonarScanOptions {
   /** The name of the project to scan. */
