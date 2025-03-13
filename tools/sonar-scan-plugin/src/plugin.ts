@@ -76,18 +76,26 @@ function normalizeSonarScanTargetOptions(
   projectRoot: string,
   options: SonarScanPluginSchema | undefined,
 ) {
-  return {
+  const normalizedOptions = {
     sonarScanTargetName: options?.sonarScanTargetName || 'sonar-scan',
     sonarScanTargetConfiguration: {
       command: SONAR_SCAN_COMMAND,
       ...options?.sonarScanTargetConfiguration,
       options: {
         projectName: '{projectName}',
-        projectTechnology: inferProjectTechnologies(projectRoot).join(','),
         ...options?.sonarScanTargetConfiguration?.options,
       },
     },
   } satisfies SonarScanPluginOptions;
+
+  const inferredTechnologies = inferProjectTechnologies(projectRoot);
+
+  if (inferredTechnologies.length > 0) {
+    normalizedOptions.sonarScanTargetConfiguration.options.projectTechnology =
+      inferredTechnologies.join(',');
+  }
+
+  return normalizedOptions;
 }
 
 function inferProjectTechnologies(projectRoot: string) {

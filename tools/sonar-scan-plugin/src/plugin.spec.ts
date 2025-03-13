@@ -79,34 +79,69 @@ describe('[Unit Test] createSonarScanTarget', () => {
     ]);
   });
 
-  describe('the created nodes', () => {
-    it('should have a sonar scan target', async () => {
-      const nodes = await runCreateNodes({
-        directories: {
-          'sonar-project.properties': '',
-        },
-      });
+  describe('the created nodes of the inferred "sonar-project.properties" file', () => {
+    describe('should have a sonar scan target', () => {
+      it('', async () => {
+        const nodes = await runCreateNodes({
+          directories: {
+            'sonar-project.properties': '',
+          },
+        });
 
-      expect(nodes).toEqual([
-        [
-          'sonar-project.properties',
-          {
-            projects: {
-              '.': {
-                targets: {
-                  'sonar-scan': {
-                    command: 'pnpm exec nx run tools-sonar:exec-sonar-scan-cli',
-                    options: {
-                      projectName: '{projectName}',
-                      projectTechnology: '',
+        expect(nodes).toEqual([
+          [
+            'sonar-project.properties',
+            {
+              projects: {
+                '.': {
+                  targets: {
+                    'sonar-scan': {
+                      command:
+                        'pnpm exec nx run tools-sonar:exec-sonar-scan-cli',
+                      options: {
+                        projectName: '{projectName}',
+                      },
                     },
                   },
                 },
               },
+            } satisfies CreateNodesResult,
+          ],
+        ]);
+      });
+
+      describe('when it is a npm project', () => {
+        it('should pass "js" as a project technology to the sonar scan target', async () => {
+          const nodes = await runCreateNodes({
+            directories: {
+              'package.json': '',
+              'sonar-project.properties': '',
             },
-          } satisfies CreateNodesResult,
-        ],
-      ]);
+          });
+
+          expect(nodes).toEqual([
+            [
+              'sonar-project.properties',
+              {
+                projects: {
+                  '.': {
+                    targets: {
+                      'sonar-scan': {
+                        command:
+                          'pnpm exec nx run tools-sonar:exec-sonar-scan-cli',
+                        options: {
+                          projectName: '{projectName}',
+                          projectTechnology: 'js',
+                        },
+                      },
+                    },
+                  },
+                },
+              } satisfies CreateNodesResult,
+            ],
+          ]);
+        });
+      });
     });
   });
 
@@ -221,7 +256,6 @@ describe('[Unit Test] createSonarScanTarget', () => {
                       command: 'my-custom-command',
                       options: {
                         projectName: '{projectName}',
-                        projectTechnology: '',
                       },
                     },
                   },
