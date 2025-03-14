@@ -15,7 +15,7 @@
     "eslint": "9.22.0",
     "eslint-plugin-n": "17.16.2",
     "jsonc-eslint-parser": "2.4.0",
-    "typescript-eslint": "8.26.0",
+    "typescript-eslint": "8.26.1",
     "globals": "16.0.0"
   },
   "nx": {
