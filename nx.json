@@ -58,10 +58,17 @@
         "externalDependencies": ["@vitest/coverage-v8", "@vitest/ui", "vitest"]
       }
     ],
+    "globals-sonar": [
+      "{workspaceRoot}/tools/sonar/**/*",
+      {
+        "externalDependencies": ["sonarqube-scanner"]
+      }
+    ],
     "targets-build-tsc": ["default", "globals-typescript"],
     "targets-test-vitest": ["default", "globals-vitest", "globals-vite"],
     "targets-lint-eslint": ["default", "globals-eslint"],
-    "targets-test-web-test-runner": ["default"]
+    "targets-test-web-test-runner": ["default"],
+    "targets-sonar-scan": ["default", "globals-sonar"]
   },
   "sync": {
     "applyChanges": true
@@ -118,6 +125,16 @@
       "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server",
       "options": {
         "serveTargetName": "serve"
+      }
+    },
+    {
+      "plugin": "@robby-rabbitman/nx-plus-tools-sonar-scan-plugin",
+      "options": {
+        "sonarScanTargetConfiguration": {
+          "cache": true,
+          "inputs": ["targets-sonar-scan"],
+          "dependsOn": ["build*", "test*"]
+        }
       }
     }
   ],

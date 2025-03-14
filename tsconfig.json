@@ -37,6 +37,12 @@
     },
     {
       "path": "./libs/nx-util"
+    },
+    {
+      "path": "./tools/sonar"
+    },
+    {
+      "path": "./tools/sonar-scan-plugin"
     }
   ]
 }

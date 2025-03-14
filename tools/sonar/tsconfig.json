@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [],
+  "include": [],
+  "exclude": [],
+  "references": [
+    {
+      "path": "../eslint"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}
