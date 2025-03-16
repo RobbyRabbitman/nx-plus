@@ -41,10 +41,12 @@ jobs:
           git config user.email 'robby.rabbitman+nx-plus@gmail.com'
           git config user.name 'release'
 
-      # remove global install of corepack or pin to a version
       - run: |
-          npm i -g corepack
+          npm i -g corepack@${{ env.NX_PLUS_COREPACK_VERSION }}
           corepack enable
+        env:
+          # renovate: datasource=npm depName=corepack
+          NX_PLUS_COREPACK_VERSION: '0.32.0'
 
       - uses: actions/setup-node@v4
         with:
