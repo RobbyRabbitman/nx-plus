@@ -354,6 +354,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-vitest':
+        specifier: workspace:*
+        version: link:../vitest
 
   tools/sonar-scan-plugin:
     dependencies:

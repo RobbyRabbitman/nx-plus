@@ -14,7 +14,8 @@
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
   },
   "nx": {
     "name": "tools-sonar",
@@ -28,6 +29,11 @@
           "env": {
             "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
           }
+        }
+      },
+      "sonar-scan": {
+        "options": {
+          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/api/sonar-api.ts,src/sonar-scan/sonar-scan.ts,src/sonar-scan/sonar-scan.cli.ts"
         }
       }
     }

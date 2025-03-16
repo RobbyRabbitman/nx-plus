@@ -22,11 +22,13 @@ export async function sonarScanCli() {
         type: 'string',
         array: true,
         choices: SONAR_SCAN_PROJECT_TECHNOLOGIES,
+        default: [],
         description: 'The technology of the project to scan.',
       })
       .option('option', {
         type: 'string',
         array: true,
+        default: [],
         description:
           'e.g. --option sonar.token=my-token - see https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/analysis-parameters/',
       })
@@ -35,11 +37,11 @@ export async function sonarScanCli() {
     const normalizedOptions = {
       workspaceRoot,
       projectName: options.projectName,
-      projectTechnologies: (options.projectTechnology ?? []).flatMap(
+      projectTechnologies: options.projectTechnology.flatMap(
         (projectTechnology) => projectTechnology.split(','),
       ) as SonarScanProjectTechnology[],
       properties: Object.fromEntries(
-        (options.option ?? []).map((option) => option.split('=')),
+        options.option.map((option) => option.split('=')),
       ),
     };
 
