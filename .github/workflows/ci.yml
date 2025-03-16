@@ -10,15 +10,17 @@ concurrency:
 jobs:
   main:
     runs-on: ubuntu-latest
+
     permissions:
       actions: read
       contents: read
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # remove global install of corepack or pin to a version
+      # TODO: pin corepack version
       - run: |
           npm i -g corepack
           corepack enable
@@ -33,16 +35,29 @@ jobs:
 
       - run: pnpm i
 
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
       - run: pnpm nx report
 
-      - run: |
-          pnpm nx sync:check
-          pnpm nx format:check
-          pnpm nx affected -t lint lint-eslint -c ci
-          pnpm nx affected -t build build-tsc -c ci
-          pnpm nx affected -t test test-vitest test-web-test-runner -c ci
-        env:
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
+      - run: pnpm nx sync:check
+
+      - run: pnpm nx format:check
+
+      - run: >
+          pnpm nx affected -c ci -t
+          lint
+          lint-eslint
+
+      - run: >
+          pnpm nx affected -c ci -t
+          build
+          build-tsc
+
+      - run: >
+          pnpm nx affected -c ci -t
+          test
+          test-vitest
+          test-web-test-runner
 
       - run: >
           pnpm nx affected -t sonar-scan -c ci

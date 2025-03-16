@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus-web-dev-server",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Web Dev Server plugin for Nx workspaces.",
   "repository": {
     "type": "git",

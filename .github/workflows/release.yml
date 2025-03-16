@@ -41,7 +41,7 @@ jobs:
           git config user.email 'robby.rabbitman+nx-plus@gmail.com'
           git config user.name 'release'
 
-      # remove global install of corepack or pin to a version
+      # TODO: pin corepack version
       - run: |
           npm i -g corepack
           corepack enable
@@ -54,6 +54,8 @@ jobs:
 
       - run: pnpm i
 
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
       - run: pnpm nx report
 
       - run: pnpm nx run tools-release:exec-release-cli --dry-run=${{ env.DRY_RUN }} --specifier=${{ env.SPECIFIER }} --preid=${{ env.PREID }}
@@ -62,4 +64,3 @@ jobs:
           DRY_RUN: ${{ inputs.dry-run }}
           SPECIFIER: ${{ inputs.specifier }}
           PREID: ${{ inputs.preid }}
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
