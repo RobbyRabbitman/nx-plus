@@ -1,0 +1,41 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-sonar",
+  "version": "0.6.2",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6",
+    "sonarqube-scanner": "4.2.7",
+    "yargs": "17.7.2"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-sonar",
+    "tags": [
+      "runtime:node"
+    ],
+    "targets": {
+      "exec-sonar-scan-cli": {
+        "command": "tsx {projectRoot}/src/sonar-scan/sonar-scan.cli.ts",
+        "options": {
+          "env": {
+            "TSX_TSCONFIG_PATH": "{projectRoot}/tsconfig.lib.json"
+          }
+        }
+      },
+      "sonar-scan": {
+        "options": {
+          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/api/sonar-api.ts"
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,14 @@ export function nodeTypescript() {
     test: {
       globals: true,
       environment: 'node',
-      reporters: ['default', 'hanging-process'],
+      reporters: [
+        'default',
+        'hanging-process',
+        [
+          'vitest-sonar-reporter',
+          { outputFile: 'coverage/execution-report.xml', silent: true },
+        ],
+      ],
       typecheck: {
         enabled: true,
         tsconfig: 'tsconfig.spec.json',
