@@ -54,3 +54,5 @@ jobs:
           --option sonar.token=${{ secrets.SONAR_TOKEN }}
           --option sonar.userHome=${{ github.workspace }}/.sonar
           --option sonar.scanner.skipJreProvisioning=true
+        env:
+          NX_PLUS_TOOLS_SONAR_HOST: https://sonarcloud.io
