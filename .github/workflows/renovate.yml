@@ -54,6 +54,8 @@ jobs:
 
       - run: pnpm i
 
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
       - run: pnpm nx report
 
       - run: pnpm nx run tools-renovate-bot:renovate:ci

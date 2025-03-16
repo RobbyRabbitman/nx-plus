@@ -36,9 +36,10 @@ jobs:
 
       - run: pnpm i
 
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
       - run: pnpm nx report
 
       - run: pnpm nx run tools-commitlint:lint-commitlint
         env:
           NX_PLUS_TOOLS_COMMITLINT_TEXT: ${{ github.event.pull_request.title }}
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}

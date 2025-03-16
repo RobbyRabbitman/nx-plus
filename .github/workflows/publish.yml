@@ -39,6 +39,8 @@ jobs:
 
       - run: pnpm i
 
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
       - run: pnpm nx report
 
       - run: pnpm nx run tools-publish:exec-publish-cli --dry-run=${{ env.DRY_RUN }} --npm-registry=${{ env.NPM_REGISTRY }}
@@ -48,4 +50,3 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
           NPM_REGISTRY: https://registry.npmjs.org
-          NX_VERBOSE_LOGGING: ${{ runner.debug && true || false }}
