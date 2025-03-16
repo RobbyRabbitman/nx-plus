@@ -12,7 +12,7 @@ on:
 
 # Or can you cancel the previous run anyway because nx affected makes sure changes from the last successful run are included, so that any changes of cancelled runs are included in the next run?
 # concurrency:
-#   cancel-in-progress: false
+#   cancel-in-progress: true
 #   group: ${{ github.head_ref }}
 
 jobs:
