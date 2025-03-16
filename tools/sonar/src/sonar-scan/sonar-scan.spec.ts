@@ -25,23 +25,31 @@ describe('[Unit Test] sonarScan', () => {
     });
   }
 
-  function stubSonarApi() {
-    vi.spyOn(sonarApi.projects, 'search').mockResolvedValue({
-      paging: {
-        total: 0,
-        pageIndex: 0,
-        pageSize: 0,
+  function stubSonarApi(responses?: {
+    search?: Awaited<ReturnType<typeof sonarApi.projects.search>>;
+    create?: Awaited<ReturnType<typeof sonarApi.projects.create>>;
+    rename?: Awaited<ReturnType<typeof sonarApi.project_branches.rename>>;
+  }) {
+    vi.spyOn(sonarApi.projects, 'search').mockResolvedValue(
+      responses?.search ?? {
+        paging: {
+          total: 0,
+          pageIndex: 0,
+          pageSize: 10,
+        },
+        components: [],
       },
-      components: [],
-    });
+    );
 
-    vi.spyOn(sonarApi.projects, 'create').mockResolvedValue({
-      project: {
-        key: 'some-project',
-        name: 'some-project',
-        qualifier: 'TRK',
+    vi.spyOn(sonarApi.projects, 'create').mockResolvedValue(
+      responses?.create ?? {
+        project: {
+          key: 'some-project',
+          name: 'some-project',
+          qualifier: 'TRK',
+        },
       },
-    });
+    );
 
     vi.spyOn(sonarApi.project_branches, 'rename').mockResolvedValue();
   }
@@ -195,6 +203,71 @@ describe('[Unit Test] sonarScan', () => {
             'sonar.testExecutionReportPaths': 'coverage/execution-report.xml',
           },
         });
+      });
+    });
+  });
+
+  describe('preparing', () => {
+    it('should not create the project if it exists already', async () => {
+      stubSonarApi({
+        search: {
+          paging: {
+            total: 1,
+            pageIndex: 1,
+            pageSize: 10,
+          },
+          components: [
+            {
+              key: 'some-project',
+              name: 'some-project',
+              qualifier: 'TRK',
+              lastAnalysisDate: '2021-09-01T00:00:00+0000',
+              organization: 'my-org',
+              revision: '123456',
+              visibility: 'public',
+            },
+          ],
+        },
+      });
+
+      await sonarScan({
+        projectName: 'some-project',
+        properties: {
+          'sonar.organization': 'my-org',
+          'sonar.token': 'my-token',
+        },
+      });
+
+      expect(sonarApi.projects.create).not.toHaveBeenCalled();
+    });
+
+    it("should create a project if it doesn't exist", async () => {
+      await sonarScan({
+        projectName: 'some-project',
+        properties: {
+          'sonar.organization': 'my-org',
+          'sonar.token': 'my-token',
+        },
+      });
+
+      expect(sonarApi.projects.create).toHaveBeenCalledWith({
+        params: {
+          name: 'some-project',
+          organization: 'my-org',
+          project: 'my-org--some-project',
+          visibility: 'public',
+          newCodeDefinitionType: 'previous_version',
+          newCodeDefinitionValue: 'previous_version',
+        },
+        token: 'my-token',
+      });
+
+      expect(sonarApi.project_branches.rename).toHaveBeenCalledWith({
+        params: {
+          name: 'main',
+          project: 'my-org--some-project',
+        },
+        token: 'my-token',
       });
     });
   });
