@@ -11,7 +11,7 @@ export function nodeTypescript() {
         'hanging-process',
         [
           'vitest-sonar-reporter',
-          { outputFile: 'coverage/execution-report.xml' },
+          { outputFile: 'coverage/execution-report.xml', silent: true },
         ],
       ],
       typecheck: {
