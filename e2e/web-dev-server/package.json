@@ -1,7 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-e2e-web-dev-server",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "files": [
     "package.json"

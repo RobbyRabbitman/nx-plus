@@ -1,7 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-commitlint",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "files": [
     "dist",
     "package.json"

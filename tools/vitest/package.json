@@ -1,6 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-vitest",
-  "private": true,"version": "0.0.0",
+  "version": "0.0.0",
+  "private": true,
   "files": [
     "dist",
     "package.json"
