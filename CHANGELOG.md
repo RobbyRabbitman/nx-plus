@@ -1,3 +1,9 @@
+## 0.7.2 (2025-03-16)
+
+### 🩹 Fixes
+
+- add schema files to dist folder ([#571](https://github.com/RobbyRabbitman/nx-plus/pull/571))
+
 ## 0.7.1 (2025-02-23)
 
 ### 🩹 Fixes
