@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus-examples-web-dev-server",
-  "version": "0.6.2",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "files": [
