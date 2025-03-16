@@ -33,7 +33,7 @@
       },
       "sonar-scan": {
         "options": {
-          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/api/sonar-api.ts,src/sonar-scan/sonar-scan.ts,src/sonar-scan/sonar-scan.cli.ts"
+          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/api/sonar-api.ts"
         }
       }
     }
