@@ -204,14 +204,9 @@ describe('[Unit Test] createSonarScanTarget', () => {
       });
 
       it('should fall back to `sonar-scan` when the value is not provided', async () => {
-        const sonarScanTargetName = '';
-
         const nodes = await runCreateNodes({
           directories: {
             'sonar-project.properties': '',
-          },
-          schema: {
-            sonarScanTargetName,
           },
         });
 
