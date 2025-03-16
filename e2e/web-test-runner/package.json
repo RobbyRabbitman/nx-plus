@@ -1,6 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-e2e-web-test-runner",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "files": [
     "package.json"

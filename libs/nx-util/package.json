@@ -1,6 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-nx-util",
   "private": true,
+  "version": "0.0.0",
   "files": [
     "dist",
     "package.json"

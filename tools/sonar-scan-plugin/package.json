@@ -1,6 +1,7 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-sonar-scan-plugin",
   "private": true,
+  "version": "0.0.0",
   "files": [
     "dist",
     "package.json"
