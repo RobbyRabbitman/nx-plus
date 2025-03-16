@@ -1,6 +1,5 @@
 {
   "name": "@robby-rabbitman/nx-plus-tools-typescript",
-  "version": "0.6.2",
   "private": true,
   "files": [
     "src/configs",

@@ -1,6 +1,5 @@
 {
   "name": "@robby-rabbitman/nx-plus-examples-web-test-runner",
-  "version": "0.6.2",
   "private": true,
   "type": "module",
   "files": [
