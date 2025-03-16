@@ -58,7 +58,7 @@ describe('[Unit Test] sonarScan', () => {
     stubHasExecutionReport();
   });
 
-  it("should throw if no project is found with the provided 'projectName'", async () => {
+  it('should throw if the provided project does not exist', async () => {
     await expect(
       sonarScan({
         projectName: 'non-existent-project',
