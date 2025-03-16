@@ -5,15 +5,10 @@ on:
     branches:
       - main
 
-# TODO: Do you have to run sonar on every single main branch commit sequentially?
-# concurrency:
-#   cancel-in-progress: false
-#   group: sonar-main-branch-analysis
-
-# Or can you cancel the previous run anyway because nx affected makes sure changes from the last successful run are included, so that any changes of cancelled runs are included in the next run?
-# concurrency:
-#   cancel-in-progress: true
-#   group: ${{ github.head_ref }}
+# Cancel any previous workflow runs since nrwl/nx-set-shas@v4 makes sure to include all changes from the last successful workflow run
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.ref }}
 
 jobs:
   main:
