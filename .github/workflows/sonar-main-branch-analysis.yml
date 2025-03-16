@@ -6,10 +6,14 @@ on:
       - main
 
 # TODO: Do you have to run sonar on every single main branch commit sequentially?
-# Or can you cancel the previous run anyway because nx affected makes sure changes from the last successful run are included, so that any changes of cancelled runs are included in the next run?
 # concurrency:
 #   cancel-in-progress: false
 #   group: sonar-main-branch-analysis
+
+# Or can you cancel the previous run anyway because nx affected makes sure changes from the last successful run are included, so that any changes of cancelled runs are included in the next run?
+# concurrency:
+#   cancel-in-progress: false
+#   group: ${{ github.head_ref }}
 
 jobs:
   main:
