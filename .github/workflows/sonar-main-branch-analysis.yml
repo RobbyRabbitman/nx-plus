@@ -1,0 +1,59 @@
+name: sonar-main-branch-analysis
+
+on:
+  push:
+    branches:
+      - main
+
+# TODO: Do you have to run sonar on every single main branch commit sequentially?
+# concurrency:
+#   cancel-in-progress: false
+#   group: sonar-main-branch-analysis
+
+# Or can you cancel the previous run anyway because nx affected makes sure changes from the last successful run are included, so that any changes of cancelled runs are included in the next run?
+# concurrency:
+#   cancel-in-progress: true
+#   group: ${{ github.head_ref }}
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - run: |
+          npm i -g corepack@${{ env.NX_PLUS_COREPACK_VERSION }}
+          corepack enable
+        env:
+          # renovate: datasource=npm depName=corepack
+          NX_PLUS_COREPACK_VERSION: '0.32.0'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - run: pnpm i
+
+      - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
+
+      - run: pnpm nx report
+
+      - run: >
+          pnpm nx affected -t sonar-scan -c ci
+          --option sonar.organization=robby-rabbitman-nx-plus
+          --option sonar.token=${{ secrets.SONAR_TOKEN }}
+          --option sonar.userHome=${{ github.workspace }}/.sonar
+          --option sonar.scanner.skipJreProvisioning=true
+        env:
+          NX_PLUS_TOOLS_SONAR_HOST: https://sonarcloud.io
