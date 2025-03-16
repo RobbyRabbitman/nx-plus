@@ -63,5 +63,18 @@
       "matchPackageNames": ["renovate"],
       "schedule": ["* * * * 1"]
     }
+  ],
+  "customManagers": [
+    {
+      "description": "https://docs.renovatebot.com/presets-customManagers/#custommanagersgithubactionsversions",
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
+        "(^|/)action\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
+      ]
+    }
   ]
 }
