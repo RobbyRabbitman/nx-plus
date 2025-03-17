@@ -117,8 +117,8 @@ importers:
         specifier: 39.190.1
         version: 39.190.1(encoding@0.1.13)(typanion@3.14.0)
       sonarqube-scanner:
-        specifier: 4.2.7
-        version: 4.2.7
+        specifier: 4.2.8
+        version: 4.2.8
       tslib:
         specifier: 2.8.1
         version: 2.8.1
@@ -348,8 +348,8 @@ importers:
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
       sonarqube-scanner:
-        specifier: 4.2.7
-        version: 4.2.7
+        specifier: 4.2.8
+        version: 4.2.8
       yargs:
         specifier: 17.7.2
         version: 17.7.2
@@ -6694,8 +6694,8 @@ packages:
     resolution: {integrity: sha512-D3YaD0aRxR3mEcqnidIs7ReYJFVzWdd6fXJYUM8ixcQcJRGTka/b3saV0KflYhyVJXKhb947GndU35SxYNResQ==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
-  sonarqube-scanner@4.2.7:
-    resolution: {integrity: sha512-Alpi6OTcxb0B8nFgo7y7cQV+8O1eSXaahB7dBnOxFU0hPFWrVZZkGEtdlQprx9zxhG/JReFh28uuXrdA3cWz/g==}
+  sonarqube-scanner@4.2.8:
+    resolution: {integrity: sha512-4x6M1om7jGPaKaY934AgAZqkv9GvQmoPAx4Q8oq6d2ulIZ3MzLwwQID7cWkuq2hC6Kkhe0LPdu/n9oL9aonwJg==}
     hasBin: true
 
   sonic-boom@3.8.1:
@@ -13983,7 +13983,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.6.3
+      semver: 7.7.1
 
   jsprim@2.0.2:
     dependencies:
@@ -15831,7 +15831,7 @@ snapshots:
       ip-address: 9.0.5
       smart-buffer: 4.2.0
 
-  sonarqube-scanner@4.2.7:
+  sonarqube-scanner@4.2.8:
     dependencies:
       adm-zip: 0.5.12
       axios: 1.7.7
