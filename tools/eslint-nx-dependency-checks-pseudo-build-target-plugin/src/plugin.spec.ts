@@ -35,7 +35,7 @@ describe('[Unit Test] createNxDependencyChecksPseudoBuildTarget', () => {
     );
   }
 
-  beforeEach(() => {
+  afterEach(() => {
     vol.reset();
   });
 

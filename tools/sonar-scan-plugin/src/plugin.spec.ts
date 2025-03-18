@@ -36,7 +36,7 @@ describe('[Unit Test] createSonarScanTarget', () => {
     );
   }
 
-  beforeEach(() => {
+  afterEach(() => {
     vol.reset();
   });
 

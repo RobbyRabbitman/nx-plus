@@ -35,7 +35,7 @@ describe('[Unit Test] createWebDevServerTarget', () => {
     );
   }
 
-  beforeEach(() => {
+  afterEach(() => {
     vol.reset();
   });
 

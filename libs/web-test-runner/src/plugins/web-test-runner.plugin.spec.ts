@@ -36,7 +36,7 @@ describe('[Unit Test] createWebTestRunnerTarget', () => {
     );
   }
 
-  beforeEach(() => {
+  afterEach(() => {
     vol.reset();
   });
 
