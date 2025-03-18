@@ -5,7 +5,10 @@ import {
 } from '@nx/devkit';
 import { dirname } from 'path';
 
-/** TODO: remove this plugin when https://github.com/nrwl/nx/issues/9748 is fixed */
+/**
+ * TODO: remove this plugin when https://github.com/nrwl/nx/issues/9748 is
+ * fixed.
+ */
 
 /**
  * Represents a glob pattern to find all projects in the workspace so that every
@@ -16,11 +19,11 @@ export const ALL_PROJECTS_GLOB = '**/package.json';
 /** https://nx.dev/extending-nx/recipes/project-graph-plugins */
 export const createNodesV2 = [
   ALL_PROJECTS_GLOB,
-  (packageJsonPaths, schema, context) =>
+  (packageJsonPaths, options, context) =>
     createNodesFromFiles(
       createNxDependencyChecksPseudoBuildTarget,
       packageJsonPaths,
-      schema,
+      options,
       context,
     ),
 ] satisfies CreateNodesV2;
