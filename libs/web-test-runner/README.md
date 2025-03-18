@@ -2,6 +2,7 @@
 [![NPM version](https://img.shields.io/npm/v/%40robby-rabbitman%2Fnx-plus-web-test-runner?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-test-runner)
 [![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/peer/%40nx%2Fdevkit?logo=nx&label=nx)](https://nx.dev)
 [![@web/test-runner peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-test-runner/peer/%40web%2Ftest-runner?label=%40web%2Ftest-runner)](https://modern-web.dev/docs/test-runner/overview)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=robby-rabbitman-nx-plus--web-test-runner&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=robby-rabbitman-nx-plus--web-test-runner)
 
 # nx-plus-web-test-runner
 

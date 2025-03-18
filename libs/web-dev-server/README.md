@@ -2,6 +2,7 @@
 [![NPM version](https://img.shields.io/npm/v/%40robby-rabbitman%2Fnx-plus-web-dev-server?logo=npm)](https://www.npmjs.com/package/@robby-rabbitman/nx-plus-web-dev-server)
 [![Nx peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-dev-server/peer/%40nx%2Fdevkit?logo=nx&label=nx)](https://nx.dev)
 [![@web/dev-server peer dependency version](https://img.shields.io/npm/dependency-version/%40robby-rabbitman%2Fnx-plus-web-dev-server/peer/%40web%2Fdev-server?label=%40web%2Fdev-server)](https://modern-web.dev/docs/dev-server/overview)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=robby-rabbitman-nx-plus--web-dev-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=robby-rabbitman-nx-plus--web-dev-server)
 
 # nx-plus-web-dev-server
 
