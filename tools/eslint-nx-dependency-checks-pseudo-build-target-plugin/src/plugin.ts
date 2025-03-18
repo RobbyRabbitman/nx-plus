@@ -26,7 +26,7 @@ export const createNodesV2 = [
       options,
       context,
     ),
-] satisfies CreateNodesV2;
+] satisfies CreateNodesV2<void>;
 
 export const PSEUDO_BUILD_TARGET_NAME =
   'eslint-nx-dependency-checks-pseudo-build';
@@ -41,7 +41,7 @@ export const PSEUDO_BUILD_TARGET_NAME =
  *
  * https://github.com/nrwl/nx/blob/19b0828d278b5fa8e3d9f8fc537b317c7f442848/packages/eslint-plugin/src/rules/dependency-checks.ts#L145C7-L145C96
  */
-const createNxDependencyChecksPseudoBuildTarget: CreateNodesFunction = (
+const createNxDependencyChecksPseudoBuildTarget: CreateNodesFunction<void> = (
   packageJsonPath,
 ) => {
   const packageJson = dirname(packageJsonPath);

@@ -30,12 +30,12 @@ describe('[Unit Test] createNxDependencyChecksPseudoBuildTarget', () => {
       Object.keys(directories).filter((file) =>
         minimatch(file, createNodesGlob, { dot: true }),
       ),
-      null,
+      undefined,
       context,
     );
   }
 
-  afterEach(() => {
+  beforeEach(() => {
     vol.reset();
   });
 
