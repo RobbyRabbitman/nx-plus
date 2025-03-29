@@ -2,25 +2,22 @@
   "$schema": "https://json-schema.org/draft-07/schema",
   "cli": "nx",
   "$id": "RobbyRabbitmanNxPlusWebDevServerInit",
-  "title": "Initializes '@robby-rabbitman/nx-plus-web-dev-server' in a nx workspace.",
+  "title": "Web Dev Server Init Generator Options",
   "description": "Registers '@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server' in the 'nx.json'.",
   "type": "object",
   "properties": {
     "serveTargetName": {
       "description": "The name of the Web Dev Server serve target.",
       "examples": ["serve", "web-dev-server"],
-      "type": "string",
-      "default": "serve"
+      "type": "string"
     },
     "skipFormat": {
       "description": "Whether to skip formatting the updated files.",
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     },
     "skipAddPlugin": {
       "description": "Whether to skip adding the plugin.",
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     }
   }
 }
