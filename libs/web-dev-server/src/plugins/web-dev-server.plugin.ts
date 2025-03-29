@@ -25,7 +25,7 @@ const WEB_DEV_SERVER_COMMAND = 'web-dev-server';
  */
 type WebDevServerTargetConfiguration = TargetConfiguration;
 
-interface WebDevServerPluginSchema {
+interface WebDevServerPluginOptions {
   /**
    * The name of the `Web Dev Server` serve target e.g. `'serve'` or
    * `'web-dev-server'`.
@@ -34,7 +34,7 @@ interface WebDevServerPluginSchema {
 
   /**
    * The configuration of the `Web Dev Server` _serve_ target target identified
-   * by {@link WebDevServerPluginSchema.serveTargetName serveTargetName}.
+   * by {@link WebDevServerPluginOptions.serveTargetName serveTargetName}.
    *
    * @example
    *   {
@@ -46,8 +46,6 @@ interface WebDevServerPluginSchema {
   serveTargetConfig?: WebDevServerTargetConfiguration;
 }
 
-type WebDevServerPluginOptions = Required<WebDevServerPluginSchema>;
-
 export const createNodesV2 = [
   WEB_DEV_SERVER_CONFIG_FILE_NAME_GLOB,
   (webDevServerConfigPaths, options, context) => {
@@ -58,12 +56,12 @@ export const createNodesV2 = [
       context,
     );
   },
-] satisfies CreateNodesV2<WebDevServerPluginSchema>;
+] satisfies CreateNodesV2<WebDevServerPluginOptions>;
 
 export const DEFAULT_WEB_DEV_SERVER_TARGET_NAME = 'serve';
 
 const createWebDevServerTarget: CreateNodesFunction<
-  WebDevServerPluginSchema | undefined
+  WebDevServerPluginOptions | undefined
 > = (webDevServerConfigPath, userOptions, context) => {
   const options = normalizeWebDevServerOptions(userOptions);
 
@@ -110,7 +108,7 @@ const createWebDevServerTarget: CreateNodesFunction<
   };
 };
 
-function normalizeWebDevServerOptions(userOptions?: WebDevServerPluginSchema) {
+function normalizeWebDevServerOptions(userOptions?: WebDevServerPluginOptions) {
   const normalizedOptions = {
     serveTargetName: DEFAULT_WEB_DEV_SERVER_TARGET_NAME,
     serveTargetConfig: {},

@@ -1,7 +1,7 @@
 import { type CreateNodesContextV2, type CreateNodesResult } from '@nx/devkit';
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
-import { createNodesV2, type SonarScanPluginSchema } from './plugin.js';
+import { createNodesV2 } from './plugin.js';
 
 vi.mock('fs', async () => {
   const memfs = await vi.importActual<typeof import('memfs')>('memfs');
@@ -10,19 +10,19 @@ vi.mock('fs', async () => {
 });
 
 describe('[Unit Test] createSonarScanTarget', () => {
-  async function runCreateNodes(options: {
+  const [createNodesGlob, createNodesFn] = createNodesV2;
+
+  async function runCreateNodes(args: {
     directories: DirectoryJSON;
     context?: CreateNodesContextV2;
-    schema?: SonarScanPluginSchema;
+    options?: Parameters<typeof createNodesFn>[1];
   }) {
-    const [createNodesGlob, createNodesFn] = createNodesV2;
-
-    const { directories, schema } = options;
+    const { directories, options } = args;
 
     const context = {
       nxJsonConfiguration: {},
       workspaceRoot: '',
-      ...options.context,
+      ...args.context,
     } satisfies CreateNodesContextV2;
 
     vol.fromJSON(directories, context.workspaceRoot);
@@ -31,7 +31,7 @@ describe('[Unit Test] createSonarScanTarget', () => {
       Object.keys(directories).filter((file) =>
         minimatch(file, createNodesGlob, { dot: true }),
       ),
-      schema,
+      options,
       context,
     );
   }
@@ -154,7 +154,7 @@ describe('[Unit Test] createSonarScanTarget', () => {
           directories: {
             'sonar-project.properties': '',
           },
-          schema: {
+          options: {
             sonarScanTargetName,
           },
         });
@@ -182,7 +182,7 @@ describe('[Unit Test] createSonarScanTarget', () => {
           directories: {
             'sonar-project.properties': '',
           },
-          schema: {
+          options: {
             sonarScanTargetName,
           },
         });
@@ -233,7 +233,7 @@ describe('[Unit Test] createSonarScanTarget', () => {
           directories: {
             'sonar-project.properties': '',
           },
-          schema: {
+          options: {
             sonarScanTargetConfiguration: {
               command: 'my-custom-command',
             },

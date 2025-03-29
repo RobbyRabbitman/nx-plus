@@ -146,7 +146,11 @@
       "inputs": ["targets-lint-eslint"]
     },
     "build-tsc": {
-      "inputs": ["targets-build-tsc", "^targets-build-tsc"]
+      "inputs": ["targets-build-tsc", "^targets-build-tsc"],
+      "dependsOn": ["^build*", "pre-build*"]
+    },
+    "build*": {
+      "dependsOn": ["pre-build*"]
     },
     "test-vitest": {
       "inputs": ["targets-test-vitest", "^targets-test-vitest"],

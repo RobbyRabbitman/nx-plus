@@ -26,6 +26,19 @@ export const nxPlusEslintTsConfig = [
       '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
+
+  /**
+   * The generated ts interfaces by 'json-schema-to-typescript' disable eslint
+   * via the 'eslint-disable' directive which is in generel desired because its
+   * generated code, however in cases with no violations eslint warns about the
+   * unnessecary 'eslint-disable' directive => don't report that warning.
+   */
+  {
+    files: ['**/*.schema.ts'],
+    linterOptions: {
+      reportUnusedDisableDirectives: 'off',
+    },
+  },
 ] satisfies Linter.Config[];
 
 export default nxPlusEslintTsConfig;

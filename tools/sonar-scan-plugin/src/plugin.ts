@@ -12,15 +12,13 @@ import { dirname, join } from 'path';
 
 type SonarScanTargetConfiguration = TargetConfiguration;
 
-export interface SonarScanPluginSchema {
+export interface SonarScanPluginOptions {
   /** The name of the target to run the sonar scan e.g `sonar-scan` */
   sonarScanTargetName?: string;
 
   /** The configuration for the sonar scan target. */
   sonarScanTargetConfiguration?: SonarScanTargetConfiguration;
 }
-
-type SonarScanPluginOptions = Required<SonarScanPluginSchema>;
 
 /** The glob pattern representing projects that have a sonar scan. */
 const SONAR_PROJECT_PROPERTIES_GLOB = '**/sonar-project.properties';
@@ -37,7 +35,7 @@ export const createNodesV2 = [
       options,
       context,
     ),
-] satisfies CreateNodesV2<SonarScanPluginSchema>;
+] satisfies CreateNodesV2<SonarScanPluginOptions>;
 
 /**
  * Adds a sonar scan target in the project node where the
@@ -47,7 +45,7 @@ export const createNodesV2 = [
  * - The target can be configured by setting the `sonarScanTargetConfiguration`
  */
 const createSonarScanTarget: CreateNodesFunction<
-  SonarScanPluginSchema | undefined
+  SonarScanPluginOptions | undefined
 > = (sonarScanConfigPath, options) => {
   const projectRoot = dirname(sonarScanConfigPath);
 
@@ -74,7 +72,7 @@ const createSonarScanTarget: CreateNodesFunction<
 
 function normalizeSonarScanTargetOptions(
   projectRoot: string,
-  options: SonarScanPluginSchema | undefined,
+  options: SonarScanPluginOptions | undefined,
 ) {
   const normalizedOptions = {
     sonarScanTargetName: options?.sonarScanTargetName || 'sonar-scan',

@@ -1,3 +1,4 @@
+import type { CreateNodesContextV2 } from '@nx/devkit';
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import { createNodesV2 } from './web-test-runner.plugin.js';
@@ -8,35 +9,36 @@ vi.mock('fs', async () => {
   return memfs.fs;
 });
 
-describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
-  beforeEach(() => {
-    vol.reset();
-  });
+describe('[Unit Test] createWebTestRunnerTarget', () => {
+  const [createNodesGlob, createNodesFn] = createNodesV2;
 
-  const [createNodesV2Glob, createNodesV2Fn] = createNodesV2;
-
-  async function inferWebTestRunnerTarget({
-    directories,
-    schema,
-  }: {
+  async function runCreateNodes(args: {
     directories: DirectoryJSON;
-    schema?: Parameters<typeof createNodesV2Fn>[1];
+    context?: CreateNodesContextV2;
+    options?: Parameters<typeof createNodesFn>[1];
   }) {
-    const workspaceRoot = 'some-workspace-root';
+    const { directories, options } = args;
 
-    vol.fromJSON(directories, workspaceRoot);
+    const context = {
+      nxJsonConfiguration: {},
+      workspaceRoot: '',
+      ...args.context,
+    } satisfies CreateNodesContextV2;
 
-    return createNodesV2Fn(
+    vol.fromJSON(directories, context.workspaceRoot);
+
+    return createNodesFn(
       Object.keys(directories).filter((file) =>
-        minimatch(file, createNodesV2Glob, { dot: true }),
+        minimatch(file, createNodesGlob, { dot: true }),
       ),
-      schema,
-      {
-        workspaceRoot,
-        nxJsonConfiguration: {},
-      },
+      options,
+      context,
     );
   }
+
+  afterEach(() => {
+    vol.reset();
+  });
 
   describe('a `Web Test Runner` config in a directory of the workspace', () => {
     it('should not modify the project graph by default', async () => {
@@ -45,7 +47,7 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
        * graph. It should be present in a _project root_.
        */
 
-      const nodes = await inferWebTestRunnerTarget({
+      const nodes = await runCreateNodes({
         directories: {
           'some/directory/web-test-runner.config.js': '{}',
         },
@@ -59,7 +61,7 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
 
     describe('should add a `Web Test Runner` target', () => {
       it('when a `package.json` is present', async () => {
-        const nodes = await inferWebTestRunnerTarget({
+        const nodes = await runCreateNodes({
           directories: {
             'some/project/web-test-runner.config.js': '{}',
             'some/project/package.json': '{}',
@@ -81,7 +83,7 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
       });
 
       it('when a `project.json` is present', async () => {
-        const nodes = await inferWebTestRunnerTarget({
+        const nodes = await runCreateNodes({
           directories: {
             'some/project/web-test-runner.config.js': '{}',
             'some/project/project.json': '{}',
@@ -104,7 +106,7 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
     });
 
     it('should run the `Web Test Runner` in the root of the project pointing to the inferred config', async () => {
-      const nodes = await inferWebTestRunnerTarget({
+      const nodes = await runCreateNodes({
         directories: {
           'some/project/web-test-runner.config.js': '{}',
           'some/project/package.json': '{}',
@@ -136,12 +138,12 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
         it('should use the provided value', async () => {
           const testTargetName = 'web-test-runner';
 
-          const nodes = await inferWebTestRunnerTarget({
+          const nodes = await runCreateNodes({
             directories: {
               'some/project/web-test-runner.config.js': '{}',
               'some/project/project.json': '{}',
             },
-            schema: {
+            options: {
               testTargetName,
             },
           });
@@ -163,12 +165,12 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
         it('should fall back to `test` when the provided value is an empty string', async () => {
           const testTargetName = '';
 
-          const nodes = await inferWebTestRunnerTarget({
+          const nodes = await runCreateNodes({
             directories: {
               'some/project/web-test-runner.config.js': '{}',
               'some/project/project.json': '{}',
             },
-            schema: {
+            options: {
               testTargetName,
             },
           });
@@ -188,12 +190,12 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
         });
 
         it('should fall back to `test` when the value is not provided', async () => {
-          const nodes = await inferWebTestRunnerTarget({
+          const nodes = await runCreateNodes({
             directories: {
               'some/project/web-test-runner.config.js': '{}',
               'some/project/project.json': '{}',
             },
-            schema: {},
+            options: {},
           });
 
           expect(nodes).toContainEqual([
@@ -213,12 +215,12 @@ describe('[Unit Test] createNodesV2 - createWebTestRunnerTarget', () => {
 
       describe('testTargetConfig', () => {
         it('should set the default target configuration', async () => {
-          const nodes = await inferWebTestRunnerTarget({
+          const nodes = await runCreateNodes({
             directories: {
               'some/project/web-test-runner.config.js': '{}',
               'some/project/package.json': '{}',
             },
-            schema: {
+            options: {
               testTargetConfig: {
                 dependsOn: ['pre-test'],
               },

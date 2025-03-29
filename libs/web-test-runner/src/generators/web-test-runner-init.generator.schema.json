@@ -1,25 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
   "cli": "nx",
-  "title": "Initializes '@robby-rabbitman/nx-plus-web-test-runner' in a nx workspace.",
+  "title": "Web Test Runner Init Generator Options",
   "description": "Registers '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner' in the 'nx.json'.",
   "type": "object",
   "properties": {
     "testTargetName": {
       "description": "The name of the Web Test Runner test target.",
       "examples": ["test", "web-test-runner"],
-      "type": "string",
-      "default": "test"
+      "type": "string"
     },
     "skipFormat": {
       "description": "Whether to skip formatting the updated files.",
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     },
     "skipAddPlugin": {
       "description": "Whether to skip adding the plugin.",
-      "type": "boolean",
-      "default": false
+      "type": "boolean"
     }
   }
 }
