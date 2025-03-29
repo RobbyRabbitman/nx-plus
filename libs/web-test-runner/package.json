@@ -52,7 +52,7 @@
     ],
     "targets": {
       "pre-build": {
-        "command": "json-schema-to-typescript",
+        "command": "json2ts",
         "cache": true,
         "inputs": [
           "{projectRoot}/src/generators/web-test-runner-init.generator.schema.json"
