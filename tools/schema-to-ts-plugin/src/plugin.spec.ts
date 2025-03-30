@@ -190,7 +190,7 @@ describe('[Unit Test] createSchemaToTsTarget', () => {
         ]);
       });
 
-      it('should fall back to `test` when the value is not provided', async () => {
+      it('should fall back to `pre-build` when the value is not provided', async () => {
         const nodes = await runCreateNodes({
           directories: {
             'some/project/src/lib/my.schema.json': '{}',
