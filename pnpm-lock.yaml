@@ -348,8 +348,8 @@ importers:
   tools/schema-to-ts-plugin:
     dependencies:
       '@nx/devkit':
-        specifier: 20.4.6
-        version: 20.4.6(nx@20.6.4)
+        specifier: 20.6.4
+        version: 20.6.4(nx@20.6.4)
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
@@ -411,8 +411,8 @@ importers:
   tools/vitest:
     dependencies:
       '@nx/devkit':
-        specifier: 20.4.6
-        version: 20.4.6(nx@20.6.4)
+        specifier: 20.6.4
+        version: 20.6.4(nx@20.6.4)
       vitest:
         specifier: 3.0.9
         version: 3.0.9(@types/debug@4.1.12)(@types/node@22.13.13)(@vitest/ui@3.0.9)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.0)
