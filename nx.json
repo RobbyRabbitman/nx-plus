@@ -151,7 +151,7 @@
       "dependsOn": ["^build*", "pre-build*"]
     },
     "build*": {
-      "dependsOn": ["pre-build*"]
+      "dependsOn": ["^build*", "pre-build*"]
     },
     "test-vitest": {
       "inputs": ["targets-test-vitest", "^targets-test-vitest"],
@@ -165,7 +165,7 @@
           "ui": true
         }
       },
-      "dependsOn": ["build*", "^build*"]
+      "dependsOn": ["build*"]
     }
   }
 }
