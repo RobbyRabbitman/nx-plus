@@ -10,9 +10,6 @@
       "path": "../vitest"
     },
     {
-      "path": "../sonar"
-    },
-    {
       "path": "../eslint"
     },
     {
