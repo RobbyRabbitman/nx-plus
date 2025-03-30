@@ -6,37 +6,17 @@ import {
   updateNxJson,
 } from '@nx/devkit';
 import { DEFAULT_WEB_TEST_RUNNER_TARGET_NAME } from '../plugins/web-test-runner.plugin';
+import { WebTestRunnerInitGeneratorOptions } from './web-test-runner-init.generator.schema';
 
 const WEB_TEST_RUNNER_PLUGIN_PATH =
   '@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner';
-
-/**
- * TODO: can this type be generated from the schema.json or the json imported
- * and then inferred in order to be synced?
- */
-interface WebTestRunnerInitGeneratorSchema {
-  /**
-   * The name of the `Web Test Runner` test target e.g. 'test' or
-   * 'web-test-runner'.
-   */
-  testTargetName?: string;
-
-  /** Whether to skip adding the plugin. */
-  skipAddPlugin?: boolean;
-
-  /** Whether to skip formatting the updated files. */
-  skipFormat?: boolean;
-}
-
-type WebTestRunnerInitGeneratorOptions =
-  Required<WebTestRunnerInitGeneratorSchema>;
 
 /**
  * Adds the `@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner`
  * plugin to the `nx.json` file.
  */
 export const webTestRunnerInitGenerator: Generator<
-  WebTestRunnerInitGeneratorSchema
+  WebTestRunnerInitGeneratorOptions
 > = async (tree, userOptions) => {
   const options = normalizeWebTestRunnerInitGeneratorOptions(userOptions);
 
@@ -70,7 +50,7 @@ export const webTestRunnerInitGenerator: Generator<
       options: {
         testTargetName: options.testTargetName,
       },
-    } satisfies ExpandedPluginConfiguration<WebTestRunnerInitGeneratorSchema>);
+    } satisfies ExpandedPluginConfiguration<WebTestRunnerInitGeneratorOptions>);
 
     updateNxJson(tree, nxJson);
   }
@@ -83,7 +63,7 @@ export const webTestRunnerInitGenerator: Generator<
 export default webTestRunnerInitGenerator;
 
 function normalizeWebTestRunnerInitGeneratorOptions(
-  userOptions?: WebTestRunnerInitGeneratorSchema,
+  userOptions?: WebTestRunnerInitGeneratorOptions,
 ) {
   const normalizedOptions = {
     skipAddPlugin: false,

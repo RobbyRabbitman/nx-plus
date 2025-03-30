@@ -136,7 +136,8 @@
           "dependsOn": ["build*", "test*"]
         }
       }
-    }
+    },
+    "@robby-rabbitman/nx-plus-tools-schema-to-ts-plugin"
   ],
   "targetDefaults": {
     "nx-release-publish": {
@@ -146,7 +147,11 @@
       "inputs": ["targets-lint-eslint"]
     },
     "build-tsc": {
-      "inputs": ["targets-build-tsc", "^targets-build-tsc"]
+      "inputs": ["targets-build-tsc", "^targets-build-tsc"],
+      "dependsOn": ["^build*", "pre-build*"]
+    },
+    "build*": {
+      "dependsOn": ["^build*", "pre-build*"]
     },
     "test-vitest": {
       "inputs": ["targets-test-vitest", "^targets-test-vitest"],
@@ -160,7 +165,7 @@
           "ui": true
         }
       },
-      "dependsOn": ["build*", "^build*"]
+      "dependsOn": ["build*"]
     }
   }
 }
