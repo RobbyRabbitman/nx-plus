@@ -49,7 +49,7 @@ const createSchemaToTsTarget: CreateNodesFunction<
     ext: '.ts',
   });
 
-  const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input}`;
+  const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input.replaceAll('/', '_')}`;
   const schemaToTsTargetConfiguration = {
     ...options.schemaToTsTargetConfiguration,
     cache: true,
