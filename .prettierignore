@@ -4,4 +4,5 @@ pnpm-lock.yaml
 .storage
 .nx
 CHANGELOG.md
+# ignore the generated ts files from the 'json-schema-to-typescript' cli
 **/src/**/*.schema.ts
