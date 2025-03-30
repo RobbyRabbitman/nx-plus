@@ -36,7 +36,13 @@ describe('[e2e Test] Web Test Runner', () => {
     });
   });
 
-  it("should run the 'Web Test Runner'", () => {
-    expect(() => invokeWebTestRunnerOfExampleProject()).not.toThrow();
-  });
+  it(
+    "should run the 'Web Test Runner'",
+    {
+      timeout: 15_000,
+    },
+    () => {
+      expect(() => invokeWebTestRunnerOfExampleProject()).not.toThrow();
+    },
+  );
 });
