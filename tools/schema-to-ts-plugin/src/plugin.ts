@@ -31,11 +31,7 @@ export const createNodesV2 = [
     ),
 ] satisfies CreateNodesV2<SchemaToTsPluginOptions>;
 
-/**
- * Adds a 'schema to ts' target in the project for each schema file. In
- * addition, a composite target is created, that executes all the 'schema to ts'
- * targets.
- */
+/** Adds a 'schema to ts' target in the project for each schema file. */
 const createSchemaToTsTarget: CreateNodesFunction<
   SchemaToTsPluginOptions | undefined
 > = (schemaToTsConfigPath, userOptions) => {
