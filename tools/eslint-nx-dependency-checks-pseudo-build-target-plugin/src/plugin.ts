@@ -5,7 +5,10 @@ import {
 } from '@nx/devkit';
 import { dirname } from 'path';
 
-/** TODO: remove this plugin when https://github.com/nrwl/nx/issues/9748 is fixed */
+/**
+ * TODO: remove this plugin when https://github.com/nrwl/nx/issues/9748 is
+ * fixed.
+ */
 
 /**
  * Represents a glob pattern to find all projects in the workspace so that every
@@ -16,14 +19,14 @@ export const ALL_PROJECTS_GLOB = '**/package.json';
 /** https://nx.dev/extending-nx/recipes/project-graph-plugins */
 export const createNodesV2 = [
   ALL_PROJECTS_GLOB,
-  (packageJsonPaths, schema, context) =>
+  (packageJsonPaths, options, context) =>
     createNodesFromFiles(
       createNxDependencyChecksPseudoBuildTarget,
       packageJsonPaths,
-      schema,
+      options,
       context,
     ),
-] satisfies CreateNodesV2;
+] satisfies CreateNodesV2<void>;
 
 export const PSEUDO_BUILD_TARGET_NAME =
   'eslint-nx-dependency-checks-pseudo-build';
@@ -38,7 +41,7 @@ export const PSEUDO_BUILD_TARGET_NAME =
  *
  * https://github.com/nrwl/nx/blob/19b0828d278b5fa8e3d9f8fc537b317c7f442848/packages/eslint-plugin/src/rules/dependency-checks.ts#L145C7-L145C96
  */
-const createNxDependencyChecksPseudoBuildTarget: CreateNodesFunction = (
+const createNxDependencyChecksPseudoBuildTarget: CreateNodesFunction<void> = (
   packageJsonPath,
 ) => {
   const packageJson = dirname(packageJsonPath);
