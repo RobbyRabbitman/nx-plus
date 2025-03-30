@@ -49,23 +49,6 @@
     "name": "web-test-runner",
     "tags": [
       "runtime:node"
-    ],
-    "targets": {
-      "pre-build": {
-        "command": "json2ts",
-        "cache": true,
-        "inputs": [
-          "{projectRoot}/src/generators/web-test-runner-init.generator.schema.json"
-        ],
-        "outputs": [
-          "{projectRoot}/src/generators/web-test-runner-init.generator.schema.ts"
-        ],
-        "options": {
-          "cwd": "{projectRoot}",
-          "input": "src/generators/web-test-runner-init.generator.schema.json",
-          "output": "src/generators/web-test-runner-init.generator.schema.ts"
-        }
-      }
-    }
+    ]
   }
 }

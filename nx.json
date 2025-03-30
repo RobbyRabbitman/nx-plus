@@ -137,9 +137,7 @@
         }
       }
     },
-    {
-      "plugin": "@robby-rabbitman/nx-plus-tools-schema-to-ts-plugin"
-    }
+    "@robby-rabbitman/nx-plus-tools-schema-to-ts-plugin"
   ],
   "targetDefaults": {
     "nx-release-publish": {
