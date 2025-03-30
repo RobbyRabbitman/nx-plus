@@ -349,7 +349,7 @@ importers:
     dependencies:
       '@nx/devkit':
         specifier: 20.4.6
-        version: 20.4.6(nx@20.4.6)
+        version: 20.4.6(nx@20.6.4)
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
