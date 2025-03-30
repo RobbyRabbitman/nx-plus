@@ -55,14 +55,15 @@ const createSchemaToTsTarget: CreateNodesFunction<
 
   const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input.replaceAll('/', '__')}`;
   const schemaToTsTargetConfiguration = {
-    ...options.schemaToTsTargetConfiguration,
     cache: true,
     inputs: [join('{projectRoot}', input)],
     outputs: [join('{projectRoot}', output)],
+    ...options.schemaToTsTargetConfiguration,
     options: {
       cwd: '{projectRoot}',
       input,
       output,
+      ...options.schemaToTsTargetConfiguration.options,
     },
   };
 
@@ -85,6 +86,7 @@ function normalizeSchemaToTsTargetOptions(
     schemaToTsTargetConfiguration: {
       command: SCHEMA_TO_TS_COMMAND,
       ...options?.schemaToTsTargetConfiguration,
+      options: options?.schemaToTsTargetConfiguration?.options ?? {},
     },
   } satisfies SchemaToTsPluginOptions;
 

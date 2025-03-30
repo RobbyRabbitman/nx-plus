@@ -128,4 +128,144 @@ describe('[Unit Test] createSchemaToTsTarget', () => {
       ]);
     });
   });
+
+  describe('schema', () => {
+    describe('schemaToTsTargetName', () => {
+      it('should use the provided value', async () => {
+        const schemaToTsTargetName = 'my-custom-target-name';
+
+        const nodes = await runCreateNodes({
+          directories: {
+            'some/project/src/lib/my.schema.json': '{}',
+            'some/project/package.json': '{}',
+          },
+          options: {
+            schemaToTsTargetName,
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'some/project/src/lib/my.schema.json',
+            {
+              projects: {
+                'some/project': {
+                  targets: {
+                    'my-custom-target-name--src__lib__my.schema.json':
+                      expect.anything(),
+                  },
+                },
+              },
+            } satisfies CreateNodesResult,
+          ],
+        ]);
+      });
+
+      it('should fall back to `pre-build` when the provided value is an empty string', async () => {
+        const schemaToTsTargetName = '';
+
+        const nodes = await runCreateNodes({
+          directories: {
+            'some/project/src/lib/my.schema.json': '{}',
+            'some/project/package.json': '{}',
+          },
+          options: {
+            schemaToTsTargetName,
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'some/project/src/lib/my.schema.json',
+            {
+              projects: {
+                'some/project': {
+                  targets: {
+                    'pre-build--src__lib__my.schema.json': expect.anything(),
+                  },
+                },
+              },
+            } satisfies CreateNodesResult,
+          ],
+        ]);
+      });
+
+      it('should fall back to `test` when the value is not provided', async () => {
+        const nodes = await runCreateNodes({
+          directories: {
+            'some/project/src/lib/my.schema.json': '{}',
+            'some/project/package.json': '{}',
+          },
+          options: {},
+        });
+
+        expect(nodes).toEqual([
+          [
+            'some/project/src/lib/my.schema.json',
+            {
+              projects: {
+                'some/project': {
+                  targets: {
+                    'pre-build--src__lib__my.schema.json': expect.anything(),
+                  },
+                },
+              },
+            } satisfies CreateNodesResult,
+          ],
+        ]);
+      });
+    });
+
+    describe('schemaToTsTargetConfiguration', () => {
+      it('should set the default target configuration', async () => {
+        const nodes = await runCreateNodes({
+          directories: {
+            'some/project/src/lib/my.schema.json': '{}',
+            'some/project/package.json': '{}',
+          },
+          options: {
+            schemaToTsTargetConfiguration: {
+              /**
+               * Make sure options are merged, user provided options should have
+               * priority over default options.
+               */
+              options: {
+                input: 'some/input',
+                someNewOption: 'some-new-option',
+              },
+              /** Make sure new options are added. */
+              dependsOn: ['some-target'],
+            },
+          },
+        });
+
+        expect(nodes).toEqual([
+          [
+            'some/project/src/lib/my.schema.json',
+            {
+              projects: {
+                'some/project': {
+                  targets: {
+                    'pre-build--src__lib__my.schema.json': {
+                      cache: true,
+                      command: 'json2ts',
+                      inputs: ['{projectRoot}/src/lib/my.schema.json'],
+                      options: {
+                        cwd: '{projectRoot}',
+                        input: 'some/input',
+                        output: 'src/lib/my.schema.ts',
+                        someNewOption: 'some-new-option',
+                      },
+                      outputs: ['{projectRoot}/src/lib/my.schema.ts'],
+                      dependsOn: ['some-target'],
+                    },
+                  },
+                },
+              },
+            } satisfies CreateNodesResult,
+          ],
+        ]);
+      });
+    });
+  });
 });
