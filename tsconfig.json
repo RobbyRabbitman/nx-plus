@@ -43,6 +43,9 @@
     },
     {
       "path": "./tools/sonar-scan-plugin"
+    },
+    {
+      "path": "./tools/schema-to-ts-plugin"
     }
   ]
 }

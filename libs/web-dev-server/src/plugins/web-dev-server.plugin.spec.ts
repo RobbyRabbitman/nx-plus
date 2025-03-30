@@ -1,3 +1,4 @@
+import type { CreateNodesContextV2 } from '@nx/devkit';
 import { type DirectoryJSON, vol } from 'memfs';
 import { minimatch } from 'minimatch';
 import { createNodesV2 } from './web-dev-server.plugin.js';
@@ -7,100 +8,54 @@ vi.mock('fs', async () => {
   return memfs.fs;
 });
 
-describe('[Unit Test] createNodesV2 - createWebDevServerTarget', () => {
+describe('[Unit Test] createWebDevServerTarget', () => {
+  const [createNodesGlob, createNodesFn] = createNodesV2;
+
+  async function runCreateNodes(args: {
+    directories: DirectoryJSON;
+    context?: CreateNodesContextV2;
+    options?: Parameters<typeof createNodesFn>[1];
+  }) {
+    const { directories, options } = args;
+
+    const context = {
+      nxJsonConfiguration: {},
+      workspaceRoot: '',
+      ...args.context,
+    } satisfies CreateNodesContextV2;
+
+    vol.fromJSON(directories, context.workspaceRoot);
+
+    return createNodesFn(
+      Object.keys(directories).filter((file) =>
+        minimatch(file, createNodesGlob, { dot: true }),
+      ),
+      options,
+      context,
+    );
+  }
+
   afterEach(() => {
     vol.reset();
-    vi.resetModules();
   });
 
-  describe('createNodesV2', () => {
-    const [createNodesV2Glob, createNodesV2Fn] = createNodesV2;
-
-    const runCreateNodesV2 = async ({
-      directories,
-      schema,
-    }: {
-      directories: DirectoryJSON;
-      schema?: Parameters<typeof createNodesV2Fn>[1];
-    }) => {
-      const workspaceRoot = 'some-workspace-root';
-
-      vol.fromJSON(directories, workspaceRoot);
-
-      return createNodesV2Fn(
-        Object.keys(directories).filter((file) =>
-          minimatch(file, createNodesV2Glob, { dot: true }),
-        ),
-        schema,
-        {
-          workspaceRoot,
-          nxJsonConfiguration: {},
+  describe('a `Web Dev Server` config in a directory of the workspace', () => {
+    it('should not modify the project graph by default', async () => {
+      const nodes = await runCreateNodes({
+        directories: {
+          'some/directory/web-dev-server.config.js': '{}',
         },
-      );
-    };
-
-    describe('a `Web Dev Server` config in a directory of the workspace', () => {
-      it('should not modify the project graph by default', async () => {
-        const nodes = await runCreateNodesV2({
-          directories: {
-            'some/directory/web-dev-server.config.js': '{}',
-          },
-        });
-
-        expect(nodes).toContainEqual([
-          'some/directory/web-dev-server.config.js',
-          {},
-        ]);
       });
 
-      describe('should add a `Web Dev Server` serve target', () => {
-        it('when a `package.json` is present', async () => {
-          const nodes = await runCreateNodesV2({
-            directories: {
-              'some/project/web-dev-server.config.js': '{}',
-              'some/project/package.json': '{}',
-            },
-          });
+      expect(nodes).toContainEqual([
+        'some/directory/web-dev-server.config.js',
+        {},
+      ]);
+    });
 
-          expect(nodes).toContainEqual([
-            'some/project/web-dev-server.config.js',
-            expect.objectContaining({
-              projects: {
-                'some/project': {
-                  targets: {
-                    serve: expect.anything(),
-                  },
-                },
-              },
-            }),
-          ]);
-        });
-
-        it('when a `project.json` is present', async () => {
-          const nodes = await runCreateNodesV2({
-            directories: {
-              'some/project/web-dev-server.config.js': '{}',
-              'some/project/project.json': '{}',
-            },
-          });
-
-          expect(nodes).toContainEqual([
-            'some/project/web-dev-server.config.js',
-            expect.objectContaining({
-              projects: {
-                'some/project': {
-                  targets: {
-                    serve: expect.anything(),
-                  },
-                },
-              },
-            }),
-          ]);
-        });
-      });
-
-      it('should run the web-dev-server in the root of the project pointing to the inferred config', async () => {
-        const nodes = await runCreateNodesV2({
+    describe('should add a `Web Dev Server` serve target', () => {
+      it('when a `package.json` is present', async () => {
+        const nodes = await runCreateNodes({
           directories: {
             'some/project/web-dev-server.config.js': '{}',
             'some/project/package.json': '{}',
@@ -113,14 +68,7 @@ describe('[Unit Test] createNodesV2 - createWebDevServerTarget', () => {
             projects: {
               'some/project': {
                 targets: {
-                  serve: {
-                    command: 'web-dev-server',
-                    options: {
-                      cwd: 'some/project',
-                      config: 'web-dev-server.config.js',
-                      watch: true,
-                    },
-                  },
+                  serve: expect.anything(),
                 },
               },
             },
@@ -128,148 +76,199 @@ describe('[Unit Test] createNodesV2 - createWebDevServerTarget', () => {
         ]);
       });
 
-      describe('schema', () => {
-        describe('serveTargetName', () => {
-          it('should use the provided value', async () => {
-            const serveTargetName = 'web-dev-server';
-
-            const nodes = await runCreateNodesV2({
-              directories: {
-                'some/project/web-dev-server.config.js': '{}',
-                'some/project/project.json': '{}',
-              },
-              schema: {
-                serveTargetName,
-              },
-            });
-
-            expect(nodes).toContainEqual([
-              'some/project/web-dev-server.config.js',
-              expect.objectContaining({
-                projects: {
-                  'some/project': {
-                    targets: {
-                      [serveTargetName]: expect.anything(),
-                    },
-                  },
-                },
-              }),
-            ]);
-          });
-
-          it('should fall back to `serve` when the provided value is an empty string', async () => {
-            const serveTargetName = '';
-
-            const nodes = await runCreateNodesV2({
-              directories: {
-                'some/project/web-dev-server.config.js': '{}',
-                'some/project/project.json': '{}',
-              },
-              schema: {
-                serveTargetName,
-              },
-            });
-
-            expect(nodes).toContainEqual([
-              'some/project/web-dev-server.config.js',
-              expect.objectContaining({
-                projects: {
-                  'some/project': {
-                    targets: {
-                      serve: expect.anything(),
-                    },
-                  },
-                },
-              }),
-            ]);
-          });
-
-          it('should fall back to `serve` when the value is not provided', async () => {
-            const nodes = await runCreateNodesV2({
-              directories: {
-                'some/project/web-dev-server.config.js': '{}',
-                'some/project/project.json': '{}',
-              },
-              schema: {},
-            });
-
-            expect(nodes).toContainEqual([
-              'some/project/web-dev-server.config.js',
-              expect.objectContaining({
-                projects: {
-                  'some/project': {
-                    targets: {
-                      serve: expect.anything(),
-                    },
-                  },
-                },
-              }),
-            ]);
-          });
+      it('when a `project.json` is present', async () => {
+        const nodes = await runCreateNodes({
+          directories: {
+            'some/project/web-dev-server.config.js': '{}',
+            'some/project/project.json': '{}',
+          },
         });
 
-        describe('serveTargetConfig', () => {
-          it('should serve in watch mode when not overriden', async () => {
-            const nodes = await runCreateNodesV2({
-              directories: {
-                'some/project/web-dev-server.config.js': '{}',
-                'some/project/project.json': '{}',
-              },
-              schema: {},
-            });
-
-            expect(nodes).toContainEqual([
-              'some/project/web-dev-server.config.js',
-              expect.objectContaining({
-                projects: {
-                  'some/project': {
-                    targets: {
-                      serve: expect.objectContaining({
-                        options: expect.objectContaining({
-                          watch: true,
-                        }),
-                      }),
-                    },
-                  },
+        expect(nodes).toContainEqual([
+          'some/project/web-dev-server.config.js',
+          expect.objectContaining({
+            projects: {
+              'some/project': {
+                targets: {
+                  serve: expect.anything(),
                 },
-              }),
-            ]);
-          });
-
-          it('should allow to override the default target configuration', async () => {
-            const nodes = await runCreateNodesV2({
-              directories: {
-                'some/project/web-dev-server.config.js': '{}',
-                'some/project/package.json': '{}',
               },
-              schema: {
-                serveTargetConfig: {
-                  dependsOn: ['pre-serve'], // add dependsOn property
+            },
+          }),
+        ]);
+      });
+    });
+
+    it('should run the web-dev-server in the root of the project pointing to the inferred config', async () => {
+      const nodes = await runCreateNodes({
+        directories: {
+          'some/project/web-dev-server.config.js': '{}',
+          'some/project/package.json': '{}',
+        },
+      });
+
+      expect(nodes).toContainEqual([
+        'some/project/web-dev-server.config.js',
+        expect.objectContaining({
+          projects: {
+            'some/project': {
+              targets: {
+                serve: {
+                  command: 'web-dev-server',
                   options: {
-                    watch: false, // override default watch value
+                    cwd: 'some/project',
+                    config: 'web-dev-server.config.js',
+                    watch: true,
                   },
                 },
               },
-            });
+            },
+          },
+        }),
+      ]);
+    });
 
-            expect(nodes).toContainEqual([
-              'some/project/web-dev-server.config.js',
-              expect.objectContaining({
-                projects: {
-                  'some/project': {
-                    targets: {
-                      serve: expect.objectContaining({
-                        dependsOn: ['pre-serve'],
-                        options: expect.objectContaining({
-                          watch: false,
-                        }),
-                      }),
-                    },
+    describe('schema', () => {
+      describe('serveTargetName', () => {
+        it('should use the provided value', async () => {
+          const serveTargetName = 'web-dev-server';
+
+          const nodes = await runCreateNodes({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+            options: {
+              serveTargetName,
+            },
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    [serveTargetName]: expect.anything(),
                   },
                 },
-              }),
-            ]);
+              },
+            }),
+          ]);
+        });
+
+        it('should fall back to `serve` when the provided value is an empty string', async () => {
+          const serveTargetName = '';
+
+          const nodes = await runCreateNodes({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+            options: {
+              serveTargetName,
+            },
           });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.anything(),
+                  },
+                },
+              },
+            }),
+          ]);
+        });
+
+        it('should fall back to `serve` when the value is not provided', async () => {
+          const nodes = await runCreateNodes({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+            options: {},
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.anything(),
+                  },
+                },
+              },
+            }),
+          ]);
+        });
+      });
+
+      describe('serveTargetConfig', () => {
+        it('should serve in watch mode when not overriden', async () => {
+          const nodes = await runCreateNodes({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/project.json': '{}',
+            },
+            options: {},
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.objectContaining({
+                      options: expect.objectContaining({
+                        watch: true,
+                      }),
+                    }),
+                  },
+                },
+              },
+            }),
+          ]);
+        });
+
+        it('should allow to override the default target configuration', async () => {
+          const nodes = await runCreateNodes({
+            directories: {
+              'some/project/web-dev-server.config.js': '{}',
+              'some/project/package.json': '{}',
+            },
+            options: {
+              serveTargetConfig: {
+                dependsOn: ['pre-serve'], // add dependsOn property
+                options: {
+                  watch: false, // override default watch value
+                },
+              },
+            },
+          });
+
+          expect(nodes).toContainEqual([
+            'some/project/web-dev-server.config.js',
+            expect.objectContaining({
+              projects: {
+                'some/project': {
+                  targets: {
+                    serve: expect.objectContaining({
+                      dependsOn: ['pre-serve'],
+                      options: expect.objectContaining({
+                        watch: false,
+                      }),
+                    }),
+                  },
+                },
+              },
+            }),
+          ]);
         });
       });
     });
