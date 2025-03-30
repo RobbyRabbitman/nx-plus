@@ -26,7 +26,7 @@ export const createNodesV2 = [
     createNodesFromFiles(
       createSchemaToTsTarget,
       schemaToTsConfigPaths,
-      options,
+      options ?? {},
       context,
     ),
 ] satisfies CreateNodesV2<SchemaToTsPluginOptions>;

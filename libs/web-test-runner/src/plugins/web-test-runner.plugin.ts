@@ -55,11 +55,11 @@ interface WebTestRunnerPluginOptions {
 
 export const createNodesV2 = [
   WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB,
-  (webTestRunnerConfigPaths, schema, context) =>
+  (webTestRunnerConfigPaths, options, context) =>
     createNodesFromFiles(
       createWebTestRunnerTarget,
       webTestRunnerConfigPaths,
-      schema,
+      options ?? {},
       context,
     ),
 ] satisfies CreateNodesV2<WebTestRunnerPluginOptions>;

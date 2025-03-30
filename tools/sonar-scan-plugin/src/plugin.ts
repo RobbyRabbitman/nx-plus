@@ -32,7 +32,7 @@ export const createNodesV2 = [
     createNodesFromFiles(
       createSonarScanTarget,
       sonarScanConfigPaths,
-      options,
+      options ?? {},
       context,
     ),
 ] satisfies CreateNodesV2<SonarScanPluginOptions>;
