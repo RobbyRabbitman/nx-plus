@@ -350,9 +350,6 @@ importers:
       '@nx/devkit':
         specifier: 20.4.6
         version: 20.4.6(nx@20.4.6)
-      '@robby-rabbitman/nx-plus-tools-sonar':
-        specifier: workspace:*
-        version: link:../sonar
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
