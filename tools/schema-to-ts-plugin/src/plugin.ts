@@ -49,6 +49,14 @@ const createSchemaToTsTarget: CreateNodesFunction<
     ext: '.ts',
   });
 
+  /**
+   * OBSERVATION: Glob pattern in dependsOn of a target configuration does not
+   * work when `'/'` is included in the target name => `'/'` is replaced with
+   * `'__'`.
+   *
+   * E.g. `{ "dependsOn": ["pre-build*"] }` will not work, if the target name
+   * contains `'/'`.
+   */
   const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input.replaceAll('/', '__')}`;
   const schemaToTsTargetConfiguration = {
     cache: true,
