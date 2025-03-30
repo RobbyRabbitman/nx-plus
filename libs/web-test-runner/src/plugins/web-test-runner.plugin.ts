@@ -32,7 +32,7 @@ export const DEFAULT_WEB_TEST_RUNNER_TARGET_NAME = 'test';
  */
 type WebTestRunnerTargetConfiguration = TargetConfiguration;
 
-interface WebTestRunnerPluginSchema {
+interface WebTestRunnerPluginOptions {
   /**
    * The name of the `Web Test Runner` test target e.g. `'test'` or
    * `'web-test-runner'`.
@@ -41,7 +41,7 @@ interface WebTestRunnerPluginSchema {
 
   /**
    * The configuration of the `Web Test Runner` target identified by
-   * {@link WebTestRunnerPluginSchema.testTargetName testTargetName}.
+   * {@link WebTestRunnerPluginOptions.testTargetName testTargetName}.
    *
    * @example
    *   {
@@ -53,21 +53,19 @@ interface WebTestRunnerPluginSchema {
   testTargetConfig?: WebTestRunnerTargetConfiguration;
 }
 
-type WebTestRunnerPluginOptions = Required<WebTestRunnerPluginSchema>;
-
 export const createNodesV2 = [
   WEB_TEST_RUNNER_CONFIG_FILE_NAME_GLOB,
-  (webTestRunnerConfigPaths, schema, context) =>
+  (webTestRunnerConfigPaths, options, context) =>
     createNodesFromFiles(
       createWebTestRunnerTarget,
       webTestRunnerConfigPaths,
-      schema,
+      options ?? {},
       context,
     ),
-] satisfies CreateNodesV2<WebTestRunnerPluginSchema>;
+] satisfies CreateNodesV2<WebTestRunnerPluginOptions>;
 
 const createWebTestRunnerTarget: CreateNodesFunction<
-  WebTestRunnerPluginSchema | undefined
+  WebTestRunnerPluginOptions | undefined
 > = (webTestRunnerConfigPath, userOptions, context) => {
   const options = normalizeWebTestRunnerOptions(userOptions);
 
@@ -114,7 +112,7 @@ const createWebTestRunnerTarget: CreateNodesFunction<
 };
 
 function normalizeWebTestRunnerOptions(
-  userOptions?: WebTestRunnerPluginSchema,
+  userOptions?: WebTestRunnerPluginOptions,
 ) {
   const normalizedOptions = {
     testTargetName: DEFAULT_WEB_TEST_RUNNER_TARGET_NAME,
