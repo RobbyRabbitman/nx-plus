@@ -1,0 +1,25 @@
+{
+  "name": "@robby-rabbitman/nx-plus-tools-schema-to-ts-plugin",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "commonjs",
+  "main": "./dist/plugin.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.4.6",
+    "@robby-rabbitman/nx-plus-tools-sonar": "workspace:*"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "nx": {
+    "name": "tools-schema-to-ts-plugin",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}
