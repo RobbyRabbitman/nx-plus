@@ -52,7 +52,7 @@ export const createNodesV2 = [
     return createNodesFromFiles(
       createWebDevServerTarget,
       webDevServerConfigPaths,
-      options,
+      options ?? {},
       context,
     );
   },
