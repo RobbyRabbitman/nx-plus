@@ -86,6 +86,10 @@ function normalizeSchemaToTsTargetOptions(
   options: SchemaToTsPluginOptions | undefined,
 ) {
   const normalizedOptions = {
+    /**
+     * Use || so that the empty string is filtered in addtion to null and
+     * undefined.
+     */
     schemaToTsTargetName: options?.schemaToTsTargetName || 'pre-build',
     schemaToTsTargetConfiguration: {
       command: SCHEMA_TO_TS_COMMAND,
