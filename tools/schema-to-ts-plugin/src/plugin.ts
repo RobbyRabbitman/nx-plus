@@ -9,7 +9,7 @@ import { format, join, parse, relative } from 'path';
 
 type SchemaToTsTargetConfiguration = TargetConfiguration;
 
-export interface SchemaToTsPluginOptions {
+interface SchemaToTsPluginOptions {
   schemaToTsTargetName?: string;
 
   schemaToTsTargetConfiguration?: SchemaToTsTargetConfiguration;
@@ -42,6 +42,10 @@ const createSchemaToTsTarget: CreateNodesFunction<
   const options = normalizeSchemaToTsTargetOptions(userOptions);
   const projectRoot = closestProject(schemaToTsConfigPath);
 
+  if (!projectRoot) {
+    return {};
+  }
+
   const input = relative(projectRoot, schemaToTsConfigPath);
   const output = format({
     ...parse(input),
@@ -49,7 +53,7 @@ const createSchemaToTsTarget: CreateNodesFunction<
     ext: '.ts',
   });
 
-  const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input.replaceAll('/', '_')}`;
+  const schemaToTsTargetName = `${options.schemaToTsTargetName}--${input.replaceAll('/', '__')}`;
   const schemaToTsTargetConfiguration = {
     ...options.schemaToTsTargetConfiguration,
     cache: true,
@@ -104,7 +108,5 @@ function closestProject(schemaToTsConfigPath: string) {
     pathParts.pop();
   }
 
-  throw new Error(
-    `[SchemaToTsPlugin] Could not find project for ${schemaToTsConfigPath}. Please make sure the schema file is inside a project with a package.json file.`,
-  );
+  return null;
 }
