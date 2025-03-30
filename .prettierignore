@@ -4,4 +4,4 @@ pnpm-lock.yaml
 .storage
 .nx
 CHANGELOG.md
-**/src/**/*.schema.json
+**/src/**/*.schema.ts
