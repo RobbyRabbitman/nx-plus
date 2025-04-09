@@ -114,8 +114,8 @@ importers:
         specifier: 1.3.2
         version: 1.3.2(prettier@3.5.3)
       prettier-plugin-sh:
-        specifier: 0.16.0
-        version: 0.16.0(prettier@3.5.3)
+        specifier: 0.16.1
+        version: 0.16.1(prettier@3.5.3)
       renovate:
         specifier: 39.233.3
         version: 39.233.3(encoding@0.1.13)(typanion@3.14.0)
@@ -6053,8 +6053,8 @@ packages:
     peerDependencies:
       prettier: ^3.0.0
 
-  prettier-plugin-sh@0.16.0:
-    resolution: {integrity: sha512-QaVH0X56IUy9niNczUQ0TxqVezcGzACz9XObbyxyAZ6NU/VCKnR9RUAcETyzCiPgcHKq/tjerCsqxn5nL3yo/w==}
+  prettier-plugin-sh@0.16.1:
+    resolution: {integrity: sha512-6V7VKG5nyQ/nuXGyhr0+rKJ/1BejRk3fccYKWabatl0MEMqxA/0GGZrOHoqPUIfjzwegmAbOLeVGG0K+oBAJSg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       prettier: ^3.0.3
@@ -14903,7 +14903,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  prettier-plugin-sh@0.16.0(prettier@3.5.3):
+  prettier-plugin-sh@0.16.1(prettier@3.5.3):
     dependencies:
       mvdan-sh: 0.10.1
       prettier: 3.5.3
