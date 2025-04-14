@@ -72,8 +72,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6
       '@web/test-runner':
-        specifier: 0.20.0
-        version: 0.20.0
+        specifier: 0.20.1
+        version: 0.20.1
       chai:
         specifier: 5.2.0
         version: 5.2.0
@@ -2853,6 +2853,10 @@ packages:
     resolution: {integrity: sha512-EkB70HtHwY36pIbgn9HzqtKAv+i53qa0/UBrs+H0m8j24TxIEH9oWIdF9O/RFxjYpla7fIvZMhOFOjejgrRU5g==}
     engines: {node: '>=18.0.0'}
 
+  '@web/test-runner-chrome@0.18.1':
+    resolution: {integrity: sha512-eO6ctCaqSguGM6G3cFobGHnrEs9wlv9Juj/Akyr4XLjeEMTheNULdvOXw9Bygi+QC/ir/0snMmt+/YKnfy8rYA==}
+    engines: {node: '>=18.0.0'}
+
   '@web/test-runner-commands@0.9.0':
     resolution: {integrity: sha512-zeLI6QdH0jzzJMDV5O42Pd8WLJtYqovgdt0JdytgHc0d1EpzXDsc7NTCJSImboc2NcayIsWAvvGGeRF69SMMYg==}
     engines: {node: '>=18.0.0'}
@@ -2871,6 +2875,11 @@ packages:
 
   '@web/test-runner@0.20.0':
     resolution: {integrity: sha512-xN+4wgEm5xh0VSiC08eUYXW0QDt/NuzZyey4s7Nnjyjs9NkuJHd1jG9aNzfgL1edpJJ/RldHc0KiM2to1h2kxQ==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
+  '@web/test-runner@0.20.1':
+    resolution: {integrity: sha512-MTN8D1WCeCdkUWJIeG9yauUbRkk9g0zGFnBbI5smtPE91NpXFMfRd8nShIvxQnHx9fNTmK+OCYKnOSlq5DLLVA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -11116,6 +11125,18 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@web/test-runner-chrome@0.18.1':
+    dependencies:
+      '@web/test-runner-core': 0.13.4
+      '@web/test-runner-coverage-v8': 0.8.0
+      chrome-launcher: 0.15.2
+      puppeteer-core: 24.6.1
+    transitivePeerDependencies:
+      - bare-buffer
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   '@web/test-runner-commands@0.9.0':
     dependencies:
       '@web/test-runner-core': 0.13.4
@@ -11184,6 +11205,30 @@ snapshots:
       '@web/config-loader': 0.3.3
       '@web/dev-server': 0.4.6
       '@web/test-runner-chrome': 0.18.0
+      '@web/test-runner-commands': 0.9.0
+      '@web/test-runner-core': 0.13.4
+      '@web/test-runner-mocha': 0.9.0
+      camelcase: 6.3.0
+      command-line-args: 5.2.1
+      command-line-usage: 7.0.3
+      convert-source-map: 2.0.0
+      diff: 5.2.0
+      globby: 11.1.0
+      nanocolors: 0.2.13
+      portfinder: 1.0.35
+      source-map: 0.7.4
+    transitivePeerDependencies:
+      - bare-buffer
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
+  '@web/test-runner@0.20.1':
+    dependencies:
+      '@web/browser-logs': 0.4.1
+      '@web/config-loader': 0.3.3
+      '@web/dev-server': 0.4.6
+      '@web/test-runner-chrome': 0.18.1
       '@web/test-runner-commands': 0.9.0
       '@web/test-runner-core': 0.13.4
       '@web/test-runner-mocha': 0.9.0
