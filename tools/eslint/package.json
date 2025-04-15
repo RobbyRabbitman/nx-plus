@@ -10,8 +10,8 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@eslint/js": "9.24.0",
-    "@nx/eslint-plugin": "20.7.2",
-    "eslint-config-prettier": "9.1.0",
+    "@nx/eslint-plugin": "20.8.0",
+    "eslint-config-prettier": "10.1.2",
     "eslint": "9.24.0",
     "eslint-plugin-n": "17.17.0",
     "jsonc-eslint-parser": "2.4.0",
