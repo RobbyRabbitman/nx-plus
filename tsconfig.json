@@ -46,6 +46,9 @@
     },
     {
       "path": "./tools/schema-to-ts-plugin"
+    },
+    {
+      "path": "./libs/nx-http-cache"
     }
   ]
 }
