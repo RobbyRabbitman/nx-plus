@@ -133,7 +133,8 @@ export function nxHttpCacheHandler(
 
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not Found');
-    } catch {
+    } catch (error) {
+      console.log(error);
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('Internal Server Error');
     }

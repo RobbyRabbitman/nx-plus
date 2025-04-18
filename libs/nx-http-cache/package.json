@@ -9,7 +9,6 @@
   "type": "module",
   "main": "./dist/index.js",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "2.19.1",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
   },

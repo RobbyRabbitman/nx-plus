@@ -26,22 +26,33 @@ export class NxCacheAzureBlobStorage implements NxCache {
 }
 
 export async function nxHttpCacheHandlerForAzureBlobStorage(
-  azure: {
-    account: string;
-    blobStorageContainer: string;
-  },
   options: {
     readAccessToken: string;
     writeAccessToken: string;
   },
+  azure: {
+    container: string;
+    client?: BlobServiceClient;
+  },
 ) {
-  return nxHttpCacheHandler(
-    new NxCacheAzureBlobStorage(
-      new BlobServiceClient(
-        `https://${azure.account}.blob.core.windows.net`,
-        new DefaultAzureCredential(),
-      ).getContainerClient(azure.blobStorageContainer),
-    ),
-    options,
-  );
+  const client = azure.client ?? createNxCacheBlobStorageContainerClient();
+  const container = client.getContainerClient(azure.container);
+
+  if (!(await container.exists())) {
+    throw new Error(
+      `Container ${container} does not exist. Please create it first.`,
+    );
+  }
+
+  return nxHttpCacheHandler(new NxCacheAzureBlobStorage(container), options);
+}
+
+export function createNxCacheBlobStorageContainerClient(url?: string) {
+  url ??= process.env.NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_URL;
+
+  if (!url) {
+    throw new Error('NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_URL missing.');
+  }
+
+  return new BlobServiceClient(url, new DefaultAzureCredential());
 }

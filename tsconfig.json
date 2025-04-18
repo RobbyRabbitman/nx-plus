@@ -52,6 +52,9 @@
     },
     {
       "path": "./libs/nx-http-cache-azure-blob-storage"
+    },
+    {
+      "path": "./examples/nx-http-cache-azurite"
     }
   ]
 }

@@ -92,7 +92,7 @@
           "configName": "tsconfig.lib.json"
         }
       },
-      "include": ["{tools,libs}/**/*"]
+      "include": ["{tools,libs}/**/*", "examples/nx-http-cache-azurite/**/*"]
     },
     {
       "plugin": "@nx/vite/plugin",
