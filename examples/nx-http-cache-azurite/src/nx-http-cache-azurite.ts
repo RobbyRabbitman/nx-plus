@@ -33,9 +33,8 @@ await client.getContainerClient('nx-cache').createIfNotExists();
 createServer(
   await nxHttpCacheHandlerForAzureBlobStorage(
     {
-      readAccessToken: '123',
-      writeAccessToken: process.env
-        .NX_SELF_HOSTED_REMOTE_CACHE_ACCESS_TOKEN as string,
+      readAccessToken: '1',
+      writeAccessToken: '2',
     },
     {
       container: 'nx-cache',
