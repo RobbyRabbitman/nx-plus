@@ -74,7 +74,7 @@ export function nxHttpCacheHandler(
       if (req.method === 'PUT' && req.url.startsWith('/v1/cache')) {
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
           res.writeHead(401, { 'Content-Type': 'text/plain' });
-          res.end('Missing or invalid authentication token.');
+          res.end('Missing authentication token.');
 
           return;
         }
