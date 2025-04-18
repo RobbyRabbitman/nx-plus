@@ -1,0 +1,28 @@
+{
+  "name": "@robby-rabbitman/nx-plus-nx-http-cache-azure-blob-storage",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "azurite-blob": "azurite blob --location .azurite --debug .azurite/debug.log"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@nx/devkit": "20.8.0"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "2.19.1",
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
+  },
+  "nx": {
+    "name": "nx-http-cache-azure-blob-storage",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}
