@@ -48,7 +48,7 @@ export function nxHttpCacheHandler(
 
         if (!hash) {
           res.writeHead(400, { 'Content-Type': 'text/plain' });
-          res.end('Missing hash query parameter');
+          res.end('Missing hash path parameter');
 
           return;
         }
@@ -92,7 +92,7 @@ export function nxHttpCacheHandler(
 
         if (!hash) {
           res.writeHead(400, { 'Content-Type': 'text/plain' });
-          res.end('Missing hash query parameter');
+          res.end('Missing hash path parameter');
 
           return;
         }
