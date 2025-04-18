@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "azurite-blob": "azurite blob --location .azurite --debug .azurite/debug.log"
+    "azurite-blob": "azurite-blob --location .azurite --debug .azurite/debug.log"
   },
   "files": [
     "dist",
@@ -12,7 +12,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@nx/devkit": "20.8.0"
+    "@robby-rabbitman/nx-plus-nx-http-cache": "workspace:*"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.19.1",

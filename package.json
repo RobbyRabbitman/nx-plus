@@ -8,6 +8,8 @@
     "sync-dependencies": "echo 'Need to build every project and reset project graph before syncing dependencies ...' && nx run-many -t build build-tsc && nx reset && nx run-many -t lint-eslint --fix --rule '@nx/dependency-checks:error'"
   },
   "devDependencies": {
+    "@azure/identity": "4.9.0",
+    "@azure/storage-blob": "12.27.0",
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
     "@commitlint/config-nx-scopes": "19.8.0",

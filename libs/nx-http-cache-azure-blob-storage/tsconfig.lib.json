@@ -12,6 +12,9 @@
       "path": "../../tools/vitest/tsconfig.lib.json"
     },
     {
+      "path": "../nx-http-cache/tsconfig.lib.json"
+    },
+    {
       "path": "../../tools/eslint/tsconfig.lib.json"
     }
   ]

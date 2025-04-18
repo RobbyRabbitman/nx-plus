@@ -49,6 +49,9 @@
     },
     {
       "path": "./libs/nx-http-cache"
+    },
+    {
+      "path": "./libs/nx-http-cache-azure-blob-storage"
     }
   ]
 }

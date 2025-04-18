@@ -1,5 +1,11 @@
 import { type RequestListener } from 'http';
 
+export interface NxCache {
+  get: (hash: string) => Promise<Buffer>;
+  has: (hash: string) => Promise<boolean>;
+  set: (hash: string, data: Buffer) => Promise<void>;
+}
+
 /**
  * TODO: how to integrate logging?
  *
@@ -8,11 +14,7 @@ import { type RequestListener } from 'http';
  */
 
 export function nxHttpCacheHandler(
-  cache: {
-    get: (hash: string) => Promise<Buffer>;
-    has: (hash: string) => Promise<boolean>;
-    set: (hash: string, data: Buffer) => Promise<void>;
-  },
+  cache: NxCache,
   options: {
     readAccessToken: string;
     writeAccessToken: string;
