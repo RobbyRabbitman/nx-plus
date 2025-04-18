@@ -11,7 +11,7 @@ import { createServer } from 'http';
  *
  * ```sh
  * NX_SELF_HOSTED_REMOTE_CACHE_SERVER=http://localhost:3000
- * NX_SELF_HOSTED_REMOTE_CACHE_ACCESS_TOKEN=dummy-token
+ * NX_SELF_HOSTED_REMOTE_CACHE_ACCESS_TOKEN=write
  * ```
  */
 
@@ -33,8 +33,8 @@ await client.getContainerClient('nx-cache').createIfNotExists();
 createServer(
   await nxHttpCacheHandlerForAzureBlobStorage(
     {
-      readAccessToken: '1',
-      writeAccessToken: '2',
+      readAccessToken: 'read',
+      writeAccessToken: 'write',
     },
     {
       container: 'nx-cache',
