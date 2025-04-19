@@ -1,5 +1,12 @@
+import { constants } from 'buffer';
 import { type RequestListener } from 'http';
 import type { NxCache } from './nx-cache.js';
+
+/**
+ * TODO: Are buffers the correct solution - is 'backpressure' a problem
+ * here? Should the `NxCache` interface be changed to use streams or in
+ * addition can handle streams?
+ */
 
 /**
  * Creates a http handler that implements the
@@ -50,9 +57,23 @@ export function nxHttpCacheHandler(
     readAccessToken: string;
     writeAccessToken: string;
   },
-): RequestListener {
-  return async (req, res) => {
+) {
+  return (async (req, res) => {
     try {
+      req.on('error', (error) => {
+        console.error(error);
+
+        if (!res.headersSent) {
+          res.writeHead(400, { 'Content-Type': 'text/plain' });
+        }
+
+        res.end();
+      });
+
+      res.on('error', (error) => {
+        console.error(error);
+      });
+
       if (!req.url) {
         res.writeHead(400, { 'Content-Type': 'text/plain' });
         res.end('Missing URL');
@@ -117,8 +138,6 @@ export function nxHttpCacheHandler(
           return;
         }
 
-        const bufferSize = parseInt(req.headers['content-length'] || '0');
-
         const hash = req.url.match(/^\/v1\/cache\/([^\/]+)$/)?.[1];
 
         if (!hash) {
@@ -137,21 +156,23 @@ export function nxHttpCacheHandler(
           return;
         }
 
-        const data = await new Promise<Buffer>((resolve) => {
-          const data = Buffer.allocUnsafe(bufferSize);
-          let offset = 0;
+        const data = await new Promise<Buffer>((resolve, reject) => {
+          const chunks: Buffer[] = [];
+          let received = 0;
 
-          req.on('data', (chunk: Buffer) => {
-            const bytesToCopy = Math.min(chunk.length, bufferSize - offset);
-            chunk.copy(data, offset, 0, bytesToCopy);
-            offset += bytesToCopy;
+          req.on('data', (chunk) => {
+            received += chunk.length;
 
-            if (offset > bufferSize) {
+            if (received > constants.MAX_LENGTH) {
               req.destroy();
+              reject();
             }
+
+            chunks.push(chunk);
           });
 
-          req.on('end', () => resolve(data.subarray(0, offset)));
+          req.on('end', () => resolve(Buffer.concat(chunks)));
+          req.on('error', reject);
         });
 
         await cache.set(hash, data);
@@ -165,9 +186,9 @@ export function nxHttpCacheHandler(
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not Found');
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.writeHead(500, { 'Content-Type': 'text/plain' });
       res.end('Internal Server Error');
     }
-  };
+  }) satisfies RequestListener;
 }
