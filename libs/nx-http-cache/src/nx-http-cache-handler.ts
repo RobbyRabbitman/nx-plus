@@ -1,18 +1,49 @@
 import { type RequestListener } from 'http';
-
-export interface NxCache {
-  get: (hash: string) => Promise<Buffer>;
-  has: (hash: string) => Promise<boolean>;
-  set: (hash: string, data: Buffer) => Promise<void>;
-}
+import type { NxCache } from './nx-cache.js';
 
 /**
- * TODO: how to integrate logging?
+ * Creates a http handler that implements the
+ * {@link https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification Nx Remote Caching OpenAPI}
+ * for connecting a {@link NxCache custom cache solution}.
  *
- * TODO: two simple tokens suitable or introduce a more complex (in a better
- * sense) auth system?
+ * ## Example
+ *
+ * A simple (not secure) http server for demonstration purposes:
+ *
+ * ```ts
+ * import { createServer } from 'http';
+ * import {
+ *   nxHttpCacheHandler,
+ *   NxCache,
+ * } from '@robby-rabbitman/nx-plus-nx-http-cache';
+ *
+ * // TODO: make sure to implement your caching solution
+ * class MyCache implements NxCache {
+ *   get: (hash: string) => Promise<Buffer>;
+ *   has: (hash: string) => Promise<boolean>;
+ *   set: (hash: string, data: Buffer) => Promise<void>;
+ * }
+ *
+ * const server = createServer(
+ *   nxHttpCacheHandler(new MyCache(), {
+ *     // TODO: make sure to provide tokens in a secure way
+ *     readAccessToken: 'my-read-access-token',
+ *     writeAccessToken: 'my-write-access-token',
+ *   }),
+ * );
+ *
+ * server.listen(3000);
+ * ```
+ *
+ * Then
+ * {@link https://nx.dev/recipes/running-tasks/self-hosted-caching#usage-notes configure your nx workspace to use a remote cache}
+ * by setting the following environment variables for the nx cli:
+ *
+ * ```sh
+ * NX_SELF_HOSTED_REMOTE_CACHE_SERVER=http://localhost:3000
+ * NX_SELF_HOSTED_REMOTE_CACHE_ACCESS_TOKEN=my-read-access-token
+ * ```
  */
-
 export function nxHttpCacheHandler(
   cache: NxCache,
   options: {
