@@ -4,12 +4,13 @@ import { createNxCacheAzureBlobStorageClient } from './create-nx-cache-azure-blo
 import { NxCacheAzureBlobStorage } from './nx-cache-azure-blob-storage.js';
 
 /**
- * Creates a http handler that implements the Nx Remote Caching OpenAPI for
- * connecting to a azure blob storage.
+ * Creates a http handler that implements the
+ * {@link https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification Nx Remote Caching OpenAPI}
+ * for connecting to an azure blob storage.
  *
  * ## Example
  *
- * A simple (not secure) http server for demonstration purposes:
+ * A simple http server for demonstration purposes:
  *
  * ```ts
  * import { createServer } from 'http';
@@ -22,13 +23,22 @@ import { NxCacheAzureBlobStorage } from './nx-cache-azure-blob-storage.js';
  *     writeAccessToken: 'my-write-access-token',
  *   }),
  *   {
+ *     // or set NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_CONTAINER env var
  *     container: 'my-container-name',
+ *     // or set NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_BLOB_STORAGE_URL env var
+ *     // or provide a BlobServiceClient instance
+ *     clientOrUrl: 'https://my-account.blob.core.windows.net',
  *   },
  * );
  *
  * server.listen(3000);
  * ```
+ *
+ * @see {@link createNxCacheAzureBlobStorageClient}
+ * @see {@link nxHttpCacheHandler}
+ * @see {@link NxCacheAzureBlobStorage}
  */
+
 export async function nxHttpCacheHandlerForAzureBlobStorage(
   options: {
     readAccessToken: string;

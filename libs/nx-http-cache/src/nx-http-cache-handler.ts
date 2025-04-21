@@ -15,7 +15,7 @@ import type { NxCache } from './nx-cache.js';
  *
  * ## Example
  *
- * A simple (not secure) http server for demonstration purposes:
+ * A simple http server for demonstration purposes:
  *
  * ```ts
  * import { createServer } from 'http';
