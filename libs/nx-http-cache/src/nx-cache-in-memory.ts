@@ -1,8 +1,8 @@
 import type { NxCache } from './nx-cache.js';
 
 /**
- * An implementation of the `NxCache` interface for testing purposes. It stores
- * the data in memory.
+ * A memory-based implementation of the `NxCache` interface, designed for
+ * testing purposes.
  */
 export class NxCacheInMemory implements NxCache {
   protected readonly data = new Map<string, Buffer>();
