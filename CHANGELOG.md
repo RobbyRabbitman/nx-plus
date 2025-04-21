@@ -1,3 +1,7 @@
+## 0.8.1 (2025-04-21)
+
+This was a version bump only, there were no code changes.
+
 ## 0.8.0 (2025-04-21)
 
 ### 🚀 Features
