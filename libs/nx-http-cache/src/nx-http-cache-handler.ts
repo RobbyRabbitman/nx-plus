@@ -11,7 +11,7 @@ import type { NxCache } from './nx-cache.js';
 /**
  * Creates a http handler that implements the
  * {@link https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification Nx Remote Caching OpenAPI}
- * for connecting a {@link NxCache custom cache solution}.
+ * for integrating a {@link NxCache custom cache solution}.
  *
  * ## Example
  *

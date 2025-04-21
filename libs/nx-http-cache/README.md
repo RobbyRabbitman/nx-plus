@@ -1,6 +1,6 @@
 # @robby-rabbitman/nx-plus-nx-http-cache
 
-A http handler that implements the [Nx Remote Caching OpenAPI](https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification) for connecting a custom cache solution.
+A http handler that implements the [Nx Remote Caching OpenAPI](https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification) for integrating a custom cache solution.
 
 ## Example
 
