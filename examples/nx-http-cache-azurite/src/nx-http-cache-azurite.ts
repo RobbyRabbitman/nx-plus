@@ -5,28 +5,6 @@ import {
 import { nxHttpCacheHandlerForAzureBlobStorage } from '@robby-rabbitman/nx-plus-nx-http-cache-azure-blob-storage';
 import { createServer } from 'http';
 
-/**
- * 1.
- *
- * ```sh
- * nx run examples-nx-http-cache-azurite:azurite-blob
- * ```
- *
- * 2.
- *
- * ```sh
- * nx run examples-nx-http-cache-azurite:serve
- * ```
- *
- * 3. Configure custom cache in nx workspace nx by adding a `.env` file in the root
- *    of the workspace
- *
- * ```sh
- *    NX_SELF_HOSTED_REMOTE_CACHE_SERVER=http://localhost:3000
- *    NX_SELF_HOSTED_REMOTE_CACHE_ACCESS_TOKEN=write
- * ```
- */
-
 const client = new BlobServiceClient(
   'https://127.0.0.1:10000/devstoreaccount1',
   /**
