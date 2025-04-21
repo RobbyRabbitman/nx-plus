@@ -1,3 +1,13 @@
+## 0.8.0 (2025-04-21)
+
+### 🚀 Features
+
+- introduce nx custom cache http handler for node with azure adapter ([#631](https://github.com/RobbyRabbitman/nx-plus/pull/631))
+
+### 🩹 Fixes
+
+- downgrade to compatible ts version 5.7.x ([#587](https://github.com/RobbyRabbitman/nx-plus/pull/587))
+
 ## 0.7.2 (2025-03-16)
 
 ### 🩹 Fixes
