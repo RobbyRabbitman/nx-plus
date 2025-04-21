@@ -1,1 +1,1 @@
-export * from './nx-http-cache-azure-blob-storage.js';
+export * from './nx-http-cache-handler-for-azure-blob-storage.js';

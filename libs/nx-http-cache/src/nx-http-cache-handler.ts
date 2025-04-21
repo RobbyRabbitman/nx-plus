@@ -3,9 +3,9 @@ import { type RequestListener } from 'http';
 import type { NxCache } from './nx-cache.js';
 
 /**
- * TODO: Are buffers the correct solution - is 'backpressure' a problem
- * here? Should the `NxCache` interface be changed to use streams or in
- * addition can handle streams?
+ * TODO: Buffering the entire request in memory might not scale well with high
+ * concurrency or large payloads. Consider updating the NxCache interface to
+ * support streaming, which allows backpressure and more efficient memory use.
  */
 
 /**

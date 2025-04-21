@@ -38,7 +38,7 @@ createServer(
     },
     {
       container: 'nx-cache',
-      client,
+      clientOrUrl: client,
     },
   ),
 ).listen(3000, () => {

@@ -243,6 +243,12 @@ importers:
 
   libs/nx-http-cache-azure-blob-storage:
     dependencies:
+      '@azure/identity':
+        specifier: 4.9.0
+        version: 4.9.0
+      '@azure/storage-blob':
+        specifier: 12.27.0
+        version: 12.27.0
       '@robby-rabbitman/nx-plus-nx-http-cache':
         specifier: workspace:*
         version: link:../nx-http-cache
