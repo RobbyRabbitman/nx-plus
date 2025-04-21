@@ -10,6 +10,22 @@ vi.mock('@azure/storage-blob', () =>
 vi.mock('@robby-rabbitman/nx-plus-nx-http-cache');
 
 describe('[Unit Test] nxHttpCacheHandlerForAzureBlobStorage', () => {
+  it('should throw if no container name is set', async () => {
+    await expect(
+      nxHttpCacheHandlerForAzureBlobStorage(
+        {
+          readAccessToken: 'read-token',
+          writeAccessToken: 'write-token',
+        },
+        {
+          clientOrUrl: 'some-azure-url',
+        },
+      ),
+    ).rejects.toThrowError(
+      'No container name provided. Please provide a container name or set the NX_CACHE_AZURE_BLOB_STORAGE_CONTAINER environment variable.',
+    );
+  });
+
   it("should throw if container doesn't exist", async () => {
     const client = new BlobServiceClient('some-azure-url');
 
