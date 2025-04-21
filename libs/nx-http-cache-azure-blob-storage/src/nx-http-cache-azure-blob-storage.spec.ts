@@ -10,11 +10,6 @@ vi.mock('@azure/storage-blob', () =>
 vi.mock('@robby-rabbitman/nx-plus-nx-http-cache');
 
 describe('[Unit Test] nxHttpCacheHandlerForAzureBlobStorage', () => {
-  afterEach(() => {
-    vi.unstubAllEnvs();
-    vi.clearAllMocks();
-  });
-
   it("should throw if container doesn't exist", async () => {
     const client = new BlobServiceClient('some-azure-url');
 

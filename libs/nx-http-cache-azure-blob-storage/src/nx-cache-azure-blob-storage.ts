@@ -5,6 +5,10 @@ export class NxCacheAzureBlobStorage implements NxCache {
   constructor(protected readonly container: ContainerClient) {}
 
   async get(hash: string) {
+    if (!(await this.has(hash))) {
+      throw new Error(`Blob with hash "${hash}" does not exist.`);
+    }
+
     return this.container.getBlockBlobClient(hash).downloadToBuffer();
   }
 
