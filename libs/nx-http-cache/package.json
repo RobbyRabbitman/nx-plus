@@ -1,6 +1,9 @@
 {
   "name": "@robby-rabbitman/nx-plus-nx-http-cache",
   "version": "0.8.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "description": "HTTP handler for integrating custom cache solutions in Nx workspaces.",
   "repository": {
