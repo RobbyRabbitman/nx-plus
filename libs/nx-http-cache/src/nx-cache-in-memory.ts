@@ -1,7 +1,7 @@
 import type { NxCache } from './nx-cache.js';
 
 /**
- * A memory-based implementation of the `NxCache` interface, e.g. usable in test
+ * A memory-based implementation of the `NxCache` interface, e.g. for testing
  * scenarios.
  */
 export class NxCacheInMemory implements NxCache {
