@@ -22,7 +22,7 @@ describe('[Unit Test] nxHttpCacheHandlerForAzureBlobStorage', () => {
         },
       ),
     ).rejects.toThrowError(
-      'No container name provided. Please provide a container name or set the NX_CACHE_AZURE_BLOB_STORAGE_CONTAINER environment variable.',
+      'No container name provided. Please provide a container name or set the NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_CONTAINER environment variable.',
     );
   });
 
