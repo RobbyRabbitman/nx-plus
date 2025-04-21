@@ -1,5 +1,5 @@
 import { createServer, type Server } from 'http';
-import { NxCacheStub } from './nx-cache.spec';
+import { NxCacheInMemory } from './nx-cache-in-memory';
 import { nxHttpCacheHandler } from './nx-http-cache-handler';
 
 describe(
@@ -8,10 +8,10 @@ describe(
   () => {
     let server: Server;
     let url: string;
-    let cache: NxCacheStub;
+    let cache: NxCacheInMemory;
 
     beforeAll(async () => {
-      cache = new NxCacheStub();
+      cache = new NxCacheInMemory();
 
       server = createServer(
         nxHttpCacheHandler(cache, {
