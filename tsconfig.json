@@ -46,6 +46,15 @@
     },
     {
       "path": "./tools/schema-to-ts-plugin"
+    },
+    {
+      "path": "./libs/nx-http-cache"
+    },
+    {
+      "path": "./libs/nx-http-cache-azure-blob-storage"
+    },
+    {
+      "path": "./examples/nx-http-cache-azurite"
     }
   ]
 }

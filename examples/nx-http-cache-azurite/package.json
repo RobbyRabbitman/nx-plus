@@ -1,0 +1,56 @@
+{
+  "name": "@robby-rabbitman/nx-plus-examples-nx-http-cache-azurite",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/nx-http-cache-azurite.js",
+  "peerDependencies": {
+    "@robby-rabbitman/nx-plus-nx-http-cache-azure-blob-storage": "workspace:*",
+    "@azure/storage-blob": "12.27.0"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
+  },
+  "nx": {
+    "name": "examples-nx-http-cache-azurite",
+    "tags": [
+      "runtime:node"
+    ],
+    "targets": {
+      "serve": {
+        "command": "NODE_TLS_REJECT_UNAUTHORIZED='0' node dist/nx-http-cache-azurite.js",
+        "dependsOn": [
+          "build*"
+        ],
+        "options": {
+          "cwd": "{projectRoot}"
+        }
+      },
+      "azurite-blob": {
+        "command": "azurite-blob --location .azurite --debug .azurite/debug.log --oauth basic --cert .azurite/dummy.pem --key .azurite/dummy-key.pem",
+        "dependsOn": [
+          "build*",
+          "generate-dummy-cert"
+        ],
+        "options": {
+          "cwd": "{projectRoot}"
+        }
+      },
+      "generate-dummy-cert": {
+        "command": "mkdir -p .azurite && openssl req -x509 -newkey rsa:2048 -keyout .azurite/dummy-key.pem -out .azurite/dummy.pem -days 365 -nodes -subj \"/CN=localhost\"",
+        "options": {
+          "cwd": "{projectRoot}"
+        }
+      },
+      "sonar-scan": {
+        "options": {
+          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/nx-http-cache-azurite.ts"
+        }
+      }
+    }
+  }
+}

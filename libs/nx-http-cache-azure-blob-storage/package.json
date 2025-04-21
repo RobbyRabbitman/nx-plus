@@ -1,0 +1,26 @@
+{
+  "name": "@robby-rabbitman/nx-plus-nx-http-cache-azure-blob-storage",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "peerDependencies": {
+    "@robby-rabbitman/nx-plus-nx-http-cache": "workspace:*",
+    "@azure/identity": "4.9.0",
+    "@azure/storage-blob": "12.27.0"
+  },
+  "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
+    "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
+  },
+  "nx": {
+    "name": "nx-http-cache-azure-blob-storage",
+    "tags": [
+      "runtime:node"
+    ]
+  }
+}
