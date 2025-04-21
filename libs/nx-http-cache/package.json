@@ -1,7 +1,24 @@
 {
   "name": "@robby-rabbitman/nx-plus-nx-http-cache",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.7.2",
+  "license": "MIT",
+  "description": "HTTP handler for integrating custom cache solutions in Nx workspaces.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RobbyRabbitman/nx-plus.git",
+    "directory": "libs/nx-http-cache"
+  },
+  "keywords": [
+    "Nx",
+    "Custom Cache",
+    "Self-Hosted",
+    "Remote Cache"
+  ],
+  "author": "Robby Rabbitman",
+  "homepage": "https://github.com/RobbyRabbitman/nx-plus/tree/main/libs/nx-http-cache",
+  "bugs": {
+    "url": "https://github.com/RobbyRabbitman/nx-plus/issues"
+  },
   "files": [
     "dist",
     "package.json"
