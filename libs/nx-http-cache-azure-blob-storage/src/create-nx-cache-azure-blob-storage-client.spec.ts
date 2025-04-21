@@ -24,7 +24,7 @@ describe('[Unit Test] createNxCacheAzureBlobStorageClient', () => {
 
   it('should throw if no url is set', () => {
     expect(() => createNxCacheAzureBlobStorageClient()).toThrowError(
-      'NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_URL missing.',
+      'Pleas provide a url or set the NX_PLUS_SELF_HOSTED_REMOTE_CACHE_AZURE_URL environment variable.',
     );
   });
 });
