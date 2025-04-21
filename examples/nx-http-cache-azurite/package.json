@@ -45,6 +45,11 @@
         "options": {
           "cwd": "{projectRoot}"
         }
+      },
+      "sonar-scan": {
+        "options": {
+          "args": "--option sonar.coverage.exclusions=src/**/*.spec.ts,src/nx-http-cache-azurite.ts"
+        }
       }
     }
   }
