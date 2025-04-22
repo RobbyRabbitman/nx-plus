@@ -10,3 +10,4 @@
 
 - [Web Dev Server](libs/web-dev-server/README.md)
 - [Web Test Runner](libs/web-test-runner/README.md)
+- [Connect a Custom Nx Cache](libs/nx-http-cache/README.md)

@@ -1,12 +1,14 @@
 # @robby-rabbitman/nx-plus-examples-nx-http-cache-azurite
 
+This example project uses [azurite](https://github.com/Azure/Azurite) as a nx custom cache solution. It implements the [Nx Remote Caching OpenAPI](https://nx.dev/recipes/running-tasks/self-hosted-caching#open-api-specification) with the help of a [node http server](../../libs/nx-http-cache/README.md).
+
 1. Start azurite
 
    ```sh
    nx run examples-nx-http-cache-azurite:azurite-blob
    ```
 
-2. Serve the http cache server
+2. Start the server
 
    ```sh
    nx run examples-nx-http-cache-azurite:serve
