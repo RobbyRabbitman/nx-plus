@@ -141,8 +141,8 @@ importers:
         specifier: 0.17.2
         version: 0.17.2(prettier@3.5.3)
       renovate:
-        specifier: 39.251.0
-        version: 39.251.0(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 39.259.0
+        version: 39.259.0(encoding@0.1.13)(typanion@3.14.0)
       sonarqube-scanner:
         specifier: 4.3.0
         version: 4.3.0
@@ -1421,8 +1421,8 @@ packages:
     resolution: {integrity: sha512-EVMD0SgJtOuFeg0lAVbCwa+qeTKILb87jqvLyUtQswGD9+ce2nB52Y5zbTF1Hc0MDFfbydcMcxb47jSdhikVHA==}
     engines: {node: '>= 10'}
 
-  '@cdktf/hcl2json@0.20.11':
-    resolution: {integrity: sha512-k4CJkbUPyI+k9KOQjJ6qu2dIrpqSkXukt9R+kDaizWVM4yc8HDMLHnelC0X2oWsfeQNE8wSAm20SXkGlPLoFmw==}
+  '@cdktf/hcl2json@0.20.12':
+    resolution: {integrity: sha512-0kisly/cb4UK/cFhMAWMMEq+/FNFwPmDVoZ9ZphvDlXH62eytQcY5gaCxUrztKhncj2EYKovsTPbRq9C8GlRwg==}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -3120,8 +3120,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@yarnpkg/core@4.4.0':
-    resolution: {integrity: sha512-ZT+dPniRDJEyH+z0oOXS+nNkrssJ2jsmqoKDP5y8wQpbHlG+bxqEq8Ri1uDQGLh+43LkEh1Brih9QMs9p3f5/A==}
+  '@yarnpkg/core@4.4.1':
+    resolution: {integrity: sha512-iWCcc7BVN2SPZahM55FoOL36NvfOnw8j90G5PqOyjBwfCJngj7jTeT16cj27fFfHYlq+gwuu4I/tkHYzZ2mplQ==}
     engines: {node: '>=18.12.0'}
 
   '@yarnpkg/fslib@3.1.2':
@@ -6711,8 +6711,8 @@ packages:
   properties-file@3.5.4:
     resolution: {integrity: sha512-OGQPWZ4j9ENDKBl+wUHqNtzayGF5sLlVcmjcqEMUUHeCbUSggDndii+kjcBDPj3GQvqYB9sUEc4siX36wx4glw==}
 
-  protobufjs@7.4.0:
-    resolution: {integrity: sha512-mRUWCc3KUU4w1jU8sGxICXH/gNS94DvI1gxqDvBzhj1JpcsimQkYiOJfwsPUykUI5ZaspFbSgmBLER8IrQ3tqw==}
+  protobufjs@7.5.0:
+    resolution: {integrity: sha512-Z2E/kOY1QjoMlCytmexzYfDm/w5fKAiRwpSzGtdnXW1zC88Z2yXazHHrOtwCzn+7wSxyE8PYM4rvVcMphF9sOA==}
     engines: {node: '>=12.0.0'}
 
   protocols@2.0.2:
@@ -6889,8 +6889,8 @@ packages:
   remark@13.0.0:
     resolution: {integrity: sha512-HDz1+IKGtOyWN+QgBiAT0kn+2s6ovOxHyPAFGKVE81VSzJ+mq7RwHFledEvB5F1p4iJvOah/LOKdFuzvRnNLCA==}
 
-  renovate@39.251.0:
-    resolution: {integrity: sha512-asGsgBQlvK1Q3DBbzdrez28azpcynlNIRXUGggBKmH4/3tTgxX18UKv8mj5iu8BdYtd1Z3y53j4KmnE4376xMw==}
+  renovate@39.259.0:
+    resolution: {integrity: sha512-HgVB4GaCjm20Pj9NgV0OMhmry9MPpGz5EL1lGCQt2KvdHVR8ZLQy+Ymu3rlUWT9BVRL4SNIp8DpLt4129+0OlQ==}
     engines: {node: ^20.15.1 || ^22.11.0, pnpm: ^10.0.0}
     hasBin: true
 
@@ -8204,9 +8204,6 @@ packages:
   yocto-queue@1.2.1:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
-
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
   zod@3.24.3:
     resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
@@ -10033,9 +10030,9 @@ snapshots:
 
   '@breejs/later@4.2.0': {}
 
-  '@cdktf/hcl2json@0.20.11':
+  '@cdktf/hcl2json@0.20.12':
     dependencies:
-      fs-extra: 11.2.0
+      fs-extra: 11.3.0
 
   '@colors/colors@1.6.0': {}
 
@@ -10877,7 +10874,7 @@ snapshots:
       '@opentelemetry/sdk-logs': 0.200.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-metrics': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-base': 2.0.0(@opentelemetry/api@1.9.0)
-      protobufjs: 7.4.0
+      protobufjs: 7.5.0
 
   '@opentelemetry/resource-detector-aws@2.0.0(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -12317,7 +12314,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@yarnpkg/core@4.4.0(typanion@3.14.0)':
+  '@yarnpkg/core@4.4.1(typanion@3.14.0)':
     dependencies:
       '@arcanis/slice-ansi': 1.1.1
       '@types/semver': 7.7.0
@@ -16567,7 +16564,7 @@ snapshots:
 
   properties-file@3.5.4: {}
 
-  protobufjs@7.4.0:
+  protobufjs@7.5.0:
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/base64': 1.1.2
@@ -16829,7 +16826,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@39.251.0(encoding@0.1.13)(typanion@3.14.0):
+  renovate@39.259.0(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.777.0
       '@aws-sdk/client-ec2': 3.779.0
@@ -16840,7 +16837,7 @@ snapshots:
       '@aws-sdk/credential-providers': 3.778.0
       '@baszalmstra/rattler': 0.2.1
       '@breejs/later': 4.2.0
-      '@cdktf/hcl2json': 0.20.11
+      '@cdktf/hcl2json': 0.20.12
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/context-async-hooks': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/exporter-trace-otlp-http': 0.200.0(@opentelemetry/api@1.9.0)
@@ -16863,7 +16860,7 @@ snapshots:
       '@renovatebot/pep440': 4.1.0
       '@renovatebot/ruby-semver': 4.0.0
       '@sindresorhus/is': 4.6.0
-      '@yarnpkg/core': 4.4.0(typanion@3.14.0)
+      '@yarnpkg/core': 4.4.1(typanion@3.14.0)
       '@yarnpkg/parsers': 3.0.3
       agentkeepalive: 4.6.0
       aggregate-error: 3.1.0
@@ -16925,7 +16922,7 @@ snapshots:
       p-throttle: 4.1.1
       parse-link-header: 2.0.0
       prettier: 3.5.3
-      protobufjs: 7.4.0
+      protobufjs: 7.5.0
       punycode: 2.3.1
       redis: 4.7.0
       remark: 13.0.0
@@ -16946,7 +16943,7 @@ snapshots:
       vuln-vects: 1.1.0
       xmldoc: 1.3.0
       yaml: 2.7.1
-      zod: 3.24.2
+      zod: 3.24.3
     optionalDependencies:
       better-sqlite3: 11.9.1
       openpgp: 6.1.0
@@ -18376,8 +18373,6 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.2.1: {}
-
-  zod@3.24.2: {}
 
   zod@3.24.3: {}
 
