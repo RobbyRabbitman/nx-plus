@@ -63,7 +63,7 @@
     "vitest-sonar-reporter": "2.0.0",
     "yargs": "17.7.2"
   },
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.10.0",
   "engines": {
     "node": "22.15.0"
   },
