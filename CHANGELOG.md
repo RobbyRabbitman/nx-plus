@@ -1,3 +1,9 @@
+## 0.9.1 (2025-05-18)
+
+### 🩹 Fixes
+
+- include generators json schema ([#691](https://github.com/RobbyRabbitman/nx-plus/pull/691))
+
 ## 0.9.0 (2025-05-18)
 
 ### 🚀 Features
