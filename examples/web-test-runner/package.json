@@ -11,6 +11,7 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
     "chai": "5.2.0",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },

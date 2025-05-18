@@ -13,6 +13,7 @@
     "@robby-rabbitman/nx-plus-tools-sonar": "workspace:*"
   },
   "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },

@@ -32,6 +32,7 @@
     "@web/test-runner": "~0.20.0"
   },
   "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },

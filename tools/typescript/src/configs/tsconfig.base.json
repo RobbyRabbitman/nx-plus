@@ -4,6 +4,8 @@
     // per default the tsc should use incremental builds
     "composite": true,
     "incremental": true,
+    // all projects have their sources in the src folder
+    "rootDir": "${configDir}/src",
 
     // esm
     "target": "ESNext",

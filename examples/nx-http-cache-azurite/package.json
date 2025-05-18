@@ -13,6 +13,7 @@
     "@azure/storage-blob": "12.27.0"
   },
   "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*"
   },
   "nx": {

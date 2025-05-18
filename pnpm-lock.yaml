@@ -185,6 +185,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -200,6 +203,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -216,18 +222,27 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
 
   examples/web-dev-server:
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
 
   examples/web-test-runner:
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       chai:
         specifier: 5.2.0
         version: 5.2.0
@@ -237,6 +252,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -256,6 +274,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -269,6 +290,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -285,6 +309,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -301,6 +328,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../../tools/eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../../tools/typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../../tools/vitest
@@ -320,6 +350,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -350,6 +383,10 @@ importers:
       typescript-eslint:
         specifier: 8.32.1
         version: 8.32.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.7.3)
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
 
   tools/eslint-nx-dependency-checks-pseudo-build-target-plugin:
     dependencies:
@@ -360,6 +397,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -379,6 +419,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-verdaccio':
         specifier: workspace:*
         version: link:../verdaccio
@@ -401,6 +444,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-verdaccio':
         specifier: workspace:*
         version: link:../verdaccio
@@ -419,6 +465,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -438,6 +487,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -454,6 +506,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -469,6 +524,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
       '@robby-rabbitman/nx-plus-tools-vitest':
         specifier: workspace:*
         version: link:../vitest
@@ -485,6 +543,9 @@ importers:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
         version: link:../eslint
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
 
   tools/workspace: {}
 

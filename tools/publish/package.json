@@ -14,6 +14,7 @@
     "nx": "21.0.3"
   },
   "devDependencies": {
+    "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-verdaccio": "workspace:*"

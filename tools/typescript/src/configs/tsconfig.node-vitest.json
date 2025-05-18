@@ -2,6 +2,8 @@
   // the base tsconfig for all ts projects of this repository that test in node with vitest
   "extends": "./tsconfig.node.json",
   "compilerOptions": {
+    "outDir": "${configDir}/dist-spec",
+    "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsBuildInfo/tsconfig.spec.tsbuildinfo",
     "moduleResolution": "bundler",
     "module": "ESNext",
     "types": [
@@ -11,5 +13,7 @@
       "vite/client",
       "vitest"
     ]
-  }
+  },
+  "include": ["${configDir}/src/**/*"],
+  "exclude": ["${configDir}/*.config.*"]
 }
