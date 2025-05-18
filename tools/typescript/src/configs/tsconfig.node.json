@@ -9,5 +9,5 @@
     "moduleResolution": "nodenext"
   },
   "include": ["${configDir}/src/**/*"],
-  "exclude": ["${configDir}/*.config.*", "${configDir}/src/**/*.spec.ts"]
+  "exclude": ["${configDir}/*.config.*", "${configDir}/src/**/*.spec.*"]
 }
