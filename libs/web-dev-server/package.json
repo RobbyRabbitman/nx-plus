@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@nx/devkit": "^20.0.0 || ^21.0.0",
+    "@nx/devkit": "^19.0.0 || ^20.0.0 || ^21.0.0",
     "@web/dev-server": "~0.4.6"
   },
   "devDependencies": {
