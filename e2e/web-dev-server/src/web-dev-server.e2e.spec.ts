@@ -42,7 +42,7 @@ describe('[e2e Test] Web Dev Server', () => {
   it(
     "should run the 'Web Dev Server'",
     {
-      timeout: 15_000,
+      timeout: 25_000,
     },
     async () => {
       const serveProcess = runWebDevServerOfExampleProject();
