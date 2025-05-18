@@ -1,4 +1,3 @@
 {
-  "extends": "../../tools/typescript/src/configs/tsconfig.node-vitest.json",
-  "include": ["src/**/*.ts"]
+  "extends": "../../tools/typescript/src/configs/tsconfig.node-vitest.json"
 }
