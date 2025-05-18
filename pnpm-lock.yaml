@@ -276,7 +276,7 @@ importers:
   libs/web-dev-server:
     dependencies:
       '@nx/devkit':
-        specifier: ^20.0.0 || ^21.0.0
+        specifier: ^19.0.0 || ^20.0.0 || ^21.0.0
         version: 21.0.3(nx@21.0.3)
       '@web/dev-server':
         specifier: ~0.4.6
@@ -292,7 +292,7 @@ importers:
   libs/web-test-runner:
     dependencies:
       '@nx/devkit':
-        specifier: ^20.0.0 || ^21.0.0
+        specifier: ^19.0.0 || ^20.0.0 || ^21.0.0
         version: 21.0.3(nx@21.0.3)
       '@web/test-runner':
         specifier: ~0.20.0
