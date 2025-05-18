@@ -2,8 +2,12 @@
   // the base tsconfig for all ts projects of this repository that run in node
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "outDir": "${configDir}/dist",
+    "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo",
     "types": ["node"],
     "module": "NodeNext",
     "moduleResolution": "nodenext"
-  }
+  },
+  "include": ["${configDir}/src/**/*"],
+  "exclude": ["${configDir}/*.config.*", "${configDir}/src/**/*.spec.ts"]
 }
