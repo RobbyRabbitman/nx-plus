@@ -383,6 +383,10 @@ importers:
       typescript-eslint:
         specifier: 8.32.1
         version: 8.32.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.7.3)
+    devDependencies:
+      '@robby-rabbitman/nx-plus-tools-typescript':
+        specifier: workspace:*
+        version: link:../typescript
 
   tools/eslint-nx-dependency-checks-pseudo-build-target-plugin:
     dependencies:
