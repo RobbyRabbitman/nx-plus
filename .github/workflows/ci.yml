@@ -62,7 +62,7 @@ jobs:
           test-web-test-runner
 
       - run: >
-          pnpm nx affected -t sonar-scan -c ci
+          .github/scripts/nx-affected-sonar-scan.sh
           --option sonar.qualitygate.wait=true
           --option sonar.organization=robby-rabbitman-nx-plus
           --option sonar.token=${{ secrets.SONAR_TOKEN }}
