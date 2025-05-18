@@ -1,3 +1,9 @@
+## 0.9.0 (2025-05-18)
+
+### 🚀 Features
+
+- nx 21 with alignment nx devkit peer dep create nodes v2 ([#668](https://github.com/RobbyRabbitman/nx-plus/pull/668))
+
 ## 0.8.1 (2025-04-21)
 
 This was a version bump only, there were no code changes.
