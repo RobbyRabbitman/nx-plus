@@ -10,15 +10,12 @@ import { NxCacheAzureBlobStorage } from './nx-cache-azure-blob-storage.js';
  *
  * ## Example
  *
- * A simple http server for demonstration purposes:
- *
  * ```ts
  * import { createServer } from 'http';
  * import { nxHttpCacheHandlerForAzureBlobStorage } from '@robby-rabbitman/nx-plus-nx-http-cache-azure-blob-storage';
  *
  * const server = createServer(
  *   nxHttpCacheHandlerForAzureBlobStorage({
- *     // TODO: make sure to provide tokens in a secure way
  *     readAccessToken: 'my-read-access-token',
  *     writeAccessToken: 'my-write-access-token',
  *   }),
