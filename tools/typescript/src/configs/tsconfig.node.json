@@ -8,6 +8,6 @@
     "module": "NodeNext",
     "moduleResolution": "nodenext"
   },
-  "include": ["${configDir}/src/**/*"],
+  "include": ["${configDir}/src/**/*", "${configDir}/src/**/*.json"],
   "exclude": ["${configDir}/*.config.*", "${configDir}/src/**/*.spec.*"]
 }
