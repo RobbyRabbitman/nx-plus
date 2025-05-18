@@ -1,5 +1,5 @@
 {
-  "extends": "../../tools/typescript/src/configs/tsconfig.node-cjs.json",
+  "extends": "./node_modules/@robby-rabbitman/nx-plus-tools-typescript/src/configs/tsconfig.node-cjs.json",
   "references": [
     {
       "path": "../../tools/vitest/tsconfig.lib.json"
