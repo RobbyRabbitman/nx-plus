@@ -5,6 +5,10 @@
     "composite": true,
     "incremental": true,
 
+    // default output and source directory
+    "rootDir": "${configDir}/src",
+    "outDir": "${configDir}/dist",
+
     // esm
     "target": "ESNext",
     "lib": ["ESNext"],
