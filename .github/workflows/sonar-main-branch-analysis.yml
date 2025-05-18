@@ -45,7 +45,7 @@ jobs:
       - run: pnpm nx report
 
       - run: >
-          pnpm nx affected -t sonar-scan -c ci
+          .github/scripts/nx-affected-sonar-scan.sh
           --option sonar.organization=robby-rabbitman-nx-plus
           --option sonar.token=${{ secrets.SONAR_TOKEN }}
           --option sonar.userHome=${{ github.workspace }}/.sonar
