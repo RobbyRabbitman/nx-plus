@@ -9,7 +9,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@nx/devkit": "20.8.1"
+    "@nx/devkit": "21.0.3"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
