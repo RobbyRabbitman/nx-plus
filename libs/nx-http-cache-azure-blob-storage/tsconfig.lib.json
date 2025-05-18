@@ -1,12 +1,5 @@
 {
-  "extends": "../../tools/typescript/src/configs/tsconfig.node.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "rootDir": "src",
-    "tsBuildInfoFile": "node_modules/.cache/tsBuildInfo/tsconfig.lib.tsbuildinfo"
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["*.config.*", "src/**/*.spec.ts"],
+  "extends": "./node_modules/@robby-rabbitman/nx-plus-tools-typescript/src/configs/tsconfig.node.json",
   "references": [
     {
       "path": "../../tools/vitest/tsconfig.lib.json"
