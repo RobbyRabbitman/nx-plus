@@ -15,8 +15,6 @@ import type { NxCache } from './nx-cache.js';
  *
  * ## Example
  *
- * A simple http server for demonstration purposes:
- *
  * ```ts
  * import { createServer } from 'http';
  * import {
@@ -33,7 +31,6 @@ import type { NxCache } from './nx-cache.js';
  *
  * const server = createServer(
  *   nxHttpCacheHandler(new MyCache(), {
- *     // TODO: make sure to provide tokens in a secure way
  *     readAccessToken: 'my-read-access-token',
  *     writeAccessToken: 'my-write-access-token',
  *   }),
