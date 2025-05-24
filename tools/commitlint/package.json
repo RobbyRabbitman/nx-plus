@@ -10,7 +10,7 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@commitlint/types": "19.8.1",
-    "@nx/devkit": "21.0.3"
+    "@nx/devkit": "21.1.0"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
