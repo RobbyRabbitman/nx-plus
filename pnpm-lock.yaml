@@ -93,8 +93,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6
       '@web/test-runner':
-        specifier: 0.20.1
-        version: 0.20.1
+        specifier: 0.20.2
+        version: 0.20.2
       azurite:
         specifier: 3.34.0
         version: 3.34.0
@@ -323,7 +323,7 @@ importers:
         version: 21.1.0(nx@21.1.0)
       '@web/test-runner':
         specifier: ~0.20.0
-        version: 0.20.1
+        version: 0.20.2
     devDependencies:
       '@robby-rabbitman/nx-plus-tools-eslint':
         specifier: workspace:*
@@ -3185,8 +3185,8 @@ packages:
     resolution: {integrity: sha512-ZL9F6FXd0DBQvo/h/+mSfzFTSRVxzV9st/AHhpgABtUtV/AIpVE9to6+xdkpu6827kwjezdpuadPfg+PlrBWqQ==}
     engines: {node: '>=18.0.0'}
 
-  '@web/test-runner@0.20.1':
-    resolution: {integrity: sha512-MTN8D1WCeCdkUWJIeG9yauUbRkk9g0zGFnBbI5smtPE91NpXFMfRd8nShIvxQnHx9fNTmK+OCYKnOSlq5DLLVA==}
+  '@web/test-runner@0.20.2':
+    resolution: {integrity: sha512-zfEGYEDnS0EI8qgoWFjmtkIXhqP15W40NW3dCaKtbxj5eU0a7E53f3GV/tZGD0GlZKF8d4Fyw+AFrwOJU9Z4GA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -12366,7 +12366,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@web/test-runner@0.20.1':
+  '@web/test-runner@0.20.2':
     dependencies:
       '@web/browser-logs': 0.4.1
       '@web/config-loader': 0.3.3

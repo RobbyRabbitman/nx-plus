@@ -34,7 +34,7 @@
     "@vitest/coverage-v8": "3.1.4",
     "@vitest/ui": "3.1.4",
     "@web/dev-server": "0.4.6",
-    "@web/test-runner": "0.20.1",
+    "@web/test-runner": "0.20.2",
     "azurite": "3.34.0",
     "chai": "5.2.0",
     "eslint": "9.27.0",
