@@ -10,7 +10,7 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@nx/devkit": "21.1.2",
-    "vitest": "3.1.4"
+    "vitest": "3.2.1"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
