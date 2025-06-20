@@ -15,7 +15,7 @@
     "eslint": "9.29.0",
     "eslint-plugin-n": "17.20.0",
     "jsonc-eslint-parser": "2.4.0",
-    "typescript-eslint": "8.34.0",
+    "typescript-eslint": "8.34.1",
     "globals": "16.2.0"
   },
   "devDependencies": {
