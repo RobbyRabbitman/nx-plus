@@ -132,14 +132,14 @@ importers:
         specifier: 21.1.2
         version: 21.1.2
       prettier:
-        specifier: 3.5.3
-        version: 3.5.3
+        specifier: 3.6.0
+        version: 3.6.0
       prettier-plugin-jsdoc:
         specifier: 1.3.2
-        version: 1.3.2(prettier@3.5.3)
+        version: 1.3.2(prettier@3.6.0)
       prettier-plugin-sh:
         specifier: 0.17.4
-        version: 0.17.4(prettier@3.5.3)
+        version: 0.17.4(prettier@3.6.0)
       renovate:
         specifier: 41.1.3
         version: 41.1.3(encoding@0.1.13)(typanion@3.14.0)
@@ -6742,6 +6742,11 @@ packages:
 
   prettier@3.5.3:
     resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  prettier@3.6.0:
+    resolution: {integrity: sha512-ujSB9uXHJKzM/2GBuE0hBOUgC77CN3Bnpqa+g80bkv3T3A93wL/xlzDATHhnhkzifz/UE2SNOvmbTz5hSkDlHw==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -15285,7 +15290,7 @@ snapshots:
       js-yaml: 4.1.0
       lodash: 4.17.21
       minimist: 1.2.8
-      prettier: 3.5.3
+      prettier: 3.6.0
       tinyglobby: 0.2.14
 
   json-schema-traverse@0.4.1: {}
@@ -16554,22 +16559,24 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-jsdoc@1.3.2(prettier@3.5.3):
+  prettier-plugin-jsdoc@1.3.2(prettier@3.6.0):
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.1
       mdast-util-from-markdown: 2.0.2
-      prettier: 3.5.3
+      prettier: 3.6.0
     transitivePeerDependencies:
       - supports-color
 
-  prettier-plugin-sh@0.17.4(prettier@3.5.3):
+  prettier-plugin-sh@0.17.4(prettier@3.6.0):
     dependencies:
       '@reteps/dockerfmt': 0.3.6
-      prettier: 3.5.3
+      prettier: 3.6.0
       sh-syntax: 0.5.8
 
   prettier@3.5.3: {}
+
+  prettier@3.6.0: {}
 
   pretty-format@29.7.0:
     dependencies:
