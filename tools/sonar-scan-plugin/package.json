@@ -9,7 +9,7 @@
   "type": "commonjs",
   "main": "./dist/plugin.js",
   "peerDependencies": {
-    "@nx/devkit": "21.1.2",
+    "@nx/devkit": "21.2.1",
     "@robby-rabbitman/nx-plus-tools-sonar": "workspace:*"
   },
   "devDependencies": {
