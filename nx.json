@@ -1,7 +1,5 @@
 {
-  "cli": {
-    "packageManager": "pnpm"
-  },
+  "cli": { "packageManager": "pnpm" },
   "release": {
     "releaseTagPattern": "{version}",
     "version": {
@@ -15,9 +13,7 @@
       "automaticFromRef": true,
       "workspaceChangelog": {
         "createRelease": "github",
-        "renderOptions": {
-          "authors": false
-        }
+        "renderOptions": { "authors": false }
       }
     }
   },
@@ -43,15 +39,9 @@
     ],
     "globals-typescript": [
       "{workspaceRoot}/tools/typescript/**/*",
-      {
-        "externalDependencies": ["typescript", "tslib"]
-      }
+      { "externalDependencies": ["typescript", "tslib"] }
     ],
-    "globals-vite": [
-      {
-        "externalDependencies": ["@nx/vite", "vite"]
-      }
-    ],
+    "globals-vite": [{ "externalDependencies": ["@nx/vite", "vite"] }],
     "globals-vitest": [
       "{workspaceRoot}/tools/vitest/**/*",
       {
@@ -60,9 +50,7 @@
     ],
     "globals-sonar": [
       "{workspaceRoot}/tools/sonar/**/*",
-      {
-        "externalDependencies": ["sonarqube-scanner"]
-      }
+      { "externalDependencies": ["sonarqube-scanner"] }
     ],
     "targets-build-tsc": ["default", "globals-typescript"],
     "targets-test-vitest": ["default", "globals-vitest", "globals-vite"],
@@ -70,23 +58,17 @@
     "targets-test-web-test-runner": ["default"],
     "targets-sonar-scan": ["default", "globals-sonar"]
   },
-  "sync": {
-    "applyChanges": true
-  },
+  "sync": { "applyChanges": true },
   "plugins": [
     "@robby-rabbitman/nx-plus-tools-eslint-nx-dependency-checks-pseudo-build-target-plugin",
     {
       "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint-eslint"
-      }
+      "options": { "targetName": "lint-eslint" }
     },
     {
       "plugin": "@nx/js/typescript",
       "options": {
-        "typecheck": {
-          "targetName": "typecheck-tsc"
-        },
+        "typecheck": { "targetName": "typecheck-tsc" },
         "build": {
           "targetName": "build-tsc",
           "configName": "tsconfig.lib.json"
@@ -96,9 +78,7 @@
     },
     {
       "plugin": "@nx/vite/plugin",
-      "options": {
-        "testTargetName": "test-vitest"
-      }
+      "options": { "testTargetName": "test-vitest" }
     },
     {
       "plugin": "@robby-rabbitman/nx-plus-web-test-runner/plugins/web-test-runner",
@@ -111,21 +91,14 @@
           ],
           "outputs": ["{projectRoot}/coverage"],
           "defaultConfiguration": "local",
-          "configurations": {
-            "local": {
-              "watch": true
-            },
-            "ci": {}
-          },
+          "configurations": { "local": { "watch": true }, "ci": {} },
           "dependsOn": ["build*", "^build*"]
         }
       }
     },
     {
       "plugin": "@robby-rabbitman/nx-plus-web-dev-server/plugins/web-dev-server",
-      "options": {
-        "serveTargetName": "serve"
-      }
+      "options": { "serveTargetName": "serve" }
     },
     {
       "plugin": "@robby-rabbitman/nx-plus-tools-sonar-scan-plugin",
@@ -140,32 +113,20 @@
     "@robby-rabbitman/nx-plus-tools-schema-to-ts-plugin"
   ],
   "targetDefaults": {
-    "nx-release-publish": {
-      "dependsOn": ["build*"]
-    },
-    "lint-eslint": {
-      "inputs": ["targets-lint-eslint"]
-    },
+    "nx-release-publish": { "dependsOn": ["build*"] },
+    "lint-eslint": { "inputs": ["targets-lint-eslint"] },
     "build-tsc": {
       "inputs": ["targets-build-tsc", "^targets-build-tsc"],
       "dependsOn": ["^build*", "pre-build*"]
     },
-    "build*": {
-      "dependsOn": ["^build*", "pre-build*"]
-    },
+    "build*": { "dependsOn": ["^build*", "pre-build*"] },
     "test-vitest": {
       "inputs": ["targets-test-vitest", "^targets-test-vitest"],
       "outputs": ["{projectRoot}/coverage"],
       "defaultConfiguration": "local",
-      "configurations": {
-        "ci": {
-          "run": true
-        },
-        "local": {
-          "ui": true
-        }
-      },
+      "configurations": { "ci": { "run": true }, "local": { "ui": true } },
       "dependsOn": ["build*"]
     }
-  }
+  },
+  "nxCloudId": "66b140219e7b830b36749aaf"
 }
