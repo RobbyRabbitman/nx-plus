@@ -68,7 +68,8 @@
   },
   "pnpm": {
     "overrides": {
-      "verdaccio": "$verdaccio"
+      "verdaccio": "$verdaccio",
+      "@nx/devkit": "$@nx/devkit"
     }
   }
 }
