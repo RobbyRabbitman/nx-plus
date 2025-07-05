@@ -16,7 +16,7 @@
     "eslint-plugin-n": "17.20.0",
     "jsonc-eslint-parser": "2.4.0",
     "typescript-eslint": "8.35.1",
-    "globals": "16.2.0"
+    "globals": "16.3.0"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*"
