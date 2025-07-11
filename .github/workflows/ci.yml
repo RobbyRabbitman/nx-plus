@@ -35,6 +35,19 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
+      - run: |
+          nxReport=$(pnpx nx report 2>&1)
+          exit_code=$?
+
+          echo "$nxReport"
+
+          if echo "$nxReport" | grep -qi "This Nx Cloud organization has been disabled due to exceeding the FREE plan."; then
+              echo "NX_DISABLE_REMOTE_CACHE=true" >> "$GITHUB_ENV"
+              exit 0
+          else
+              exit exit_code
+          fi
+
       - run: pnpm i
 
       - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
