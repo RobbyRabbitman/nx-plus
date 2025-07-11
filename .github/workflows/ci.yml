@@ -45,7 +45,7 @@ jobs:
               echo "NX_DISABLE_REMOTE_CACHE=true" >> "$GITHUB_ENV"
               exit 0
           else
-              exit exit_code
+              exit $exit_code
           fi
 
       - run: pnpm i
