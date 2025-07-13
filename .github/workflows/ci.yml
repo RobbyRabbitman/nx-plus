@@ -42,7 +42,8 @@ jobs:
           echo "$nxReport"
 
           if echo "$nxReport" | grep -qi "This Nx Cloud organization has been disabled due to exceeding the FREE plan."; then
-              echo "NX_DISABLE_REMOTE_CACHE=true" >> "$GITHUB_ENV"
+              echo "Nx Cloud organization has been disabled, disabling Nx Cloud for this run."
+              echo "NX_NO_CLOUD=true" >> "$GITHUB_ENV"
               exit 0
           else
               exit $exit_code
