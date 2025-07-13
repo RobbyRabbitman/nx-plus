@@ -14,7 +14,6 @@ if [ $exit_code -ne 0 ] && echo "$installLog" | grep -qi "$NX_CLOUD_DISABLED_MSG
   echo "NX_NO_CLOUD=true" >>"$GITHUB_ENV"
   # trigger postinstall scripts again, because they might have been errored due to the Nx Cloud error
   pnpm i
-  exit 0
 else
   exit $exit_code
 fi
