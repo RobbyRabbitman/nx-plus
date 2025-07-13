@@ -1,6 +1,6 @@
 #!/bin/sh
 
-installLog=$(pnpm i 2>&1 || true)
+installLog=$(npx nx report 2>&1 || true)
 
 echo "$installLog"
 
