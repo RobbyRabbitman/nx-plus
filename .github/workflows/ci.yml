@@ -36,14 +36,13 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - run: |
-          set +e
-          nxReport=$(pnpm i)
-          set -e
-          exit_code=$?
+          installLogs=$(pnpm i 2>&1 || true)
 
-          echo "$nxReport"
+          echo "$installLogs"
 
-          if echo "$nxReport" | grep -qi "This Nx Cloud organization has been disabled due to exceeding the FREE plan."; then
+          NX_CLOUD_DISABLED_MSG="This Nx Cloud organization has been disabled due to exceeding the FREE plan."
+
+          if echo "$installLogs" | grep -qi "$NX_CLOUD_DISABLED_MSG"; then
               echo "Nx Cloud organization has been disabled, disabling Nx Cloud for this run."
               echo "NX_NO_CLOUD=true" >> "$GITHUB_ENV"
               exit 0
