@@ -34,7 +34,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm i
+      - run: .github/scripts/install-deps.sh
 
       - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
 

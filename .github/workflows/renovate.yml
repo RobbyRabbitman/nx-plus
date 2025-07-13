@@ -52,7 +52,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
-      - run: pnpm i
+      - run: .github/scripts/install-deps.sh
 
       - run: echo "NX_VERBOSE_LOGGING=${{ runner.debug && true || false }}" >> "$GITHUB_ENV"
 
