@@ -19,7 +19,10 @@
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "globals-shared"],
-    "globals-shared": ["{workspaceRoot}/.github/workflows/ci.yml"],
+    "globals-shared": [
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/.github/scripts/install-deps.sh"
+    ],
     "globals-eslint": [
       "{workspaceRoot}/tools/eslint/**/*",
       {
@@ -49,6 +52,8 @@
       }
     ],
     "globals-sonar": [
+      "{workspaceRoot}/.github/scripts/nx-affected-sonar-scan.sh",
+      "{workspaceRoot}/.github/workflows/sonar-main-branch-analysis.yml",
       "{workspaceRoot}/tools/sonar/**/*",
       { "externalDependencies": ["sonarqube-scanner"] }
     ],
