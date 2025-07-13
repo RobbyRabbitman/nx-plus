@@ -36,6 +36,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - run: |
+          set +e
           nxReport=$(pnpm i)
           exit_code=$?
 
