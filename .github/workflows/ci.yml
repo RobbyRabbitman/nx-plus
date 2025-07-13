@@ -38,6 +38,7 @@ jobs:
       - run: |
           set +e
           nxReport=$(pnpm i)
+          set -e
           exit_code=$?
 
           echo "$nxReport"
