@@ -1,6 +1,6 @@
 #!/bin/sh
 
-installLog=$(npx nx report 2>&1 || true)
+installLog=$(pnpm i 2>&1 || true)
 
 echo "$installLog"
 
@@ -9,6 +9,8 @@ NX_CLOUD_DISABLED_MSG="This Nx Cloud organization has been disabled due to excee
 if echo "$installLog" | grep -qi "$NX_CLOUD_DISABLED_MSG"; then
   echo "Nx Cloud organization has been disabled, disabling Nx Cloud for this run."
   echo "NX_NO_CLOUD=true" >>"$GITHUB_ENV"
+  # trigger postinstall scripts again, because they might have been errored due to the Nx Cloud error
+  pnpm i
   exit 0
 else
   exit $exit_code
