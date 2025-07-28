@@ -142,8 +142,8 @@ importers:
         specifier: 0.18.0
         version: 0.18.0(prettier@3.6.2)
       renovate:
-        specifier: 41.38.1
-        version: 41.38.1(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 41.43.2
+        version: 41.43.2(encoding@0.1.13)(typanion@3.14.0)
       sonarqube-scanner:
         specifier: 4.3.0
         version: 4.3.0
@@ -6627,8 +6627,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openpgp@6.1.1:
-    resolution: {integrity: sha512-V/DXZ5AGCz3q4X8psUSc3q4SxnH/bfICaTSpNcla7wvBFhrxa9/ajm31rtMwZ1qj7Fu2oMpfX6ZcxKmTBlb6Yg==}
+  openpgp@6.2.0:
+    resolution: {integrity: sha512-zKbgazxMeGrTqUEWicKufbdcjv2E0om3YVxw+I3hRykp8ODp+yQOJIDqIr1UXJjP8vR2fky3bNQwYoQXyFkYMA==}
     engines: {node: '>= 18.0.0'}
 
   optionator@0.9.4:
@@ -7100,8 +7100,8 @@ packages:
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
 
-  renovate@41.38.1:
-    resolution: {integrity: sha512-eCSks/wmAfRlS8Ni4Sg6GFnFolkpbuHK/FUbTnDt/B465F9w100z87o4n30QL309J/rXkHxDgZ6PSlVzt/rIUg==}
+  renovate@41.43.2:
+    resolution: {integrity: sha512-D2tczyVsj320EJ4+95z/nOlrhl2nqHLQ0fyU67Vv0ZyjI8qYN8XpMFdynnHRcLNt1ZLT0q/oefZboP2w2bfMDw==}
     engines: {node: ^22.13.0, pnpm: ^10.0.0}
     hasBin: true
 
@@ -16722,7 +16722,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openpgp@6.1.1:
+  openpgp@6.2.0:
     optional: true
 
   optionator@0.9.4:
@@ -17288,7 +17288,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  renovate@41.38.1(encoding@0.1.13)(typanion@3.14.0):
+  renovate@41.43.2(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@aws-sdk/client-codecommit': 3.840.0
       '@aws-sdk/client-ec2': 3.840.0
@@ -17409,7 +17409,7 @@ snapshots:
       zod: 3.25.76
     optionalDependencies:
       better-sqlite3: 12.2.0
-      openpgp: 6.1.1
+      openpgp: 6.2.0
       re2: 1.22.1
     transitivePeerDependencies:
       - aws-crt
