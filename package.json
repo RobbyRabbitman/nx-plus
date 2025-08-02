@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@azure/identity": "4.10.2",
-    "@azure/storage-blob": "12.27.0",
+    "@azure/storage-blob": "12.28.0",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@commitlint/config-nx-scopes": "19.8.1",
