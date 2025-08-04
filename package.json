@@ -35,7 +35,7 @@
     "@vitest/ui": "3.2.4",
     "@web/dev-server": "0.4.6",
     "@web/test-runner": "0.20.2",
-    "azurite": "3.34.0",
+    "azurite": "3.35.0",
     "chai": "5.2.1",
     "eslint": "9.31.0",
     "eslint-config-prettier": "10.1.8",
