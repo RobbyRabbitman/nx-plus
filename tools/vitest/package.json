@@ -9,7 +9,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@nx/devkit": "21.3.9",
+    "@nx/devkit": "21.3.10",
     "vitest": "3.2.4"
   },
   "devDependencies": {
