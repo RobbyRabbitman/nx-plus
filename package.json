@@ -59,7 +59,7 @@
     "verdaccio": "6.1.6",
     "vite": "6.3.5",
     "vitest": "3.2.4",
-    "vitest-sonar-reporter": "2.0.1",
+    "vitest-sonar-reporter": "2.0.4",
     "yargs": "17.7.2"
   },
   "packageManager": "pnpm@10.14.0",
