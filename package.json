@@ -43,7 +43,7 @@
     "globals": "16.3.0",
     "json-schema-to-typescript": "15.0.4",
     "jsonc-eslint-parser": "2.4.0",
-    "memfs": "4.36.0",
+    "memfs": "4.36.3",
     "minimatch": "10.0.3",
     "mocha": "11.7.1",
     "nx": "21.4.0",
