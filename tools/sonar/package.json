@@ -9,7 +9,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@nx/devkit": "21.4.0",
+    "@nx/devkit": "21.4.1",
     "sonarqube-scanner": "4.3.0",
     "yargs": "17.7.2"
   },
