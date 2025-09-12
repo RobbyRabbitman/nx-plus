@@ -8,7 +8,7 @@
   ],
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
-    "@nx/devkit": "21.4.1",
+    "@nx/devkit": "21.5.1",
     "@robby-rabbitman/nx-plus-examples-web-test-runner": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-eslint": "workspace:*",
     "@robby-rabbitman/nx-plus-tools-vitest": "workspace:*"
