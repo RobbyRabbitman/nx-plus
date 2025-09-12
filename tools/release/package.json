@@ -9,9 +9,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@nx/devkit": "21.4.1",
+    "@nx/devkit": "21.5.1",
     "yargs": "17.7.2",
-    "nx": "21.4.1"
+    "nx": "21.5.1"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
