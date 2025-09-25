@@ -42,7 +42,7 @@
     "eslint-plugin-n": "17.23.1",
     "globals": "16.4.0",
     "json-schema-to-typescript": "15.0.4",
-    "jsonc-eslint-parser": "2.4.0",
+    "jsonc-eslint-parser": "2.4.1",
     "memfs": "4.43.0",
     "minimatch": "10.0.3",
     "mocha": "11.7.2",
