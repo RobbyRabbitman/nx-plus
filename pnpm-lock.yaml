@@ -145,8 +145,8 @@ importers:
         specifier: 41.118.0
         version: 41.118.0(encoding@0.1.13)(typanion@3.14.0)
       sonarqube-scanner:
-        specifier: 4.3.1
-        version: 4.3.1
+        specifier: 4.3.2
+        version: 4.3.2
       tslib:
         specifier: 2.8.1
         version: 2.8.1
@@ -479,8 +479,8 @@ importers:
         specifier: 21.5.3
         version: 21.5.3(nx@21.5.3)
       sonarqube-scanner:
-        specifier: 4.3.1
-        version: 4.3.1
+        specifier: 4.3.2
+        version: 4.3.2
       yargs:
         specifier: 17.7.2
         version: 17.7.2
@@ -4087,6 +4087,10 @@ packages:
     resolution: {integrity: sha512-PqMLy5+YGwhMh1wS04mVG44oqDsgyLRSKJBdOo1bnYhMKBW65gZF1dRp2OZRhiTjgUHljy99qkO7bsctLaw35Q==}
     engines: {node: '>=12.20.0'}
 
+  commander@13.1.0:
+    resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
+    engines: {node: '>=18'}
+
   commander@14.0.0:
     resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
     engines: {node: '>=20'}
@@ -5786,10 +5790,6 @@ packages:
     resolution: {integrity: sha512-4q4+6+1c8B6Cy5pGgFvjDy/Pa6VYRiGu0yQafKkJ9u6wQx4G5PqI2QR6nxTl43yy7IWsINwz6oT4o6tD12a8Dg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  jest-sonar-reporter@2.0.0:
-    resolution: {integrity: sha512-ZervDCgEX5gdUbdtWsjdipLN3bKJwpxbvhkYNXTAYvAckCihobSLr9OT/IuyNIRT1EZMDDwR6DroWtrq+IL64w==}
-    engines: {node: '>=8.0.0'}
-
   jest-util@30.0.5:
     resolution: {integrity: sha512-pvyPWssDZR0FlfMxCBoc0tvM8iUEskaRFALUtGQYzVEAqisAztmy+R8LnU14KT4XA0H/a5HMVTXat1jLne010g==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -7204,11 +7204,6 @@ packages:
     engines: {node: ^22.13.0, pnpm: ^10.0.0}
     hasBin: true
 
-  replace-in-file@8.3.0:
-    resolution: {integrity: sha512-4VhddQiMCPIuypiwHDTM+XHjZoVu9h7ngBbSCnwGRcwdHwxltjt/m//Ep3GDwqaOx1fDSrKFQ+n7uo4uVcEz9Q==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -7503,8 +7498,8 @@ packages:
     resolution: {integrity: sha512-HLpt+uLy/pxB+bum/9DzAgiKS8CX1EvbWxI4zlmgGCExImLdiad2iCwXT5Z4c9c3Eq8rP2318mPW2c+QbtjK8A==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
-  sonarqube-scanner@4.3.1:
-    resolution: {integrity: sha512-MVY6+VgY4tsngqJuBobLA1Fuwgj6wy8ji/axLmR0wHCI8ba8ut3W78DFcKCHX77/aTuskfZI3UoCf8pS6V05nA==}
+  sonarqube-scanner@4.3.2:
+    resolution: {integrity: sha512-QI3t+yahqprjh8SWBMwQOEKLzrh35p5MQGyoIS8xm3wR2Q/CaQQeK4TEWpxGsLh2mpn1L1jNSHehSYuWdCpcvw==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -8466,9 +8461,6 @@ packages:
   xml2js@0.6.2:
     resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
     engines: {node: '>=4.0.0'}
-
-  xml@1.0.1:
-    resolution: {integrity: sha512-huCv9IH9Tcf95zuYCsQraZtWnJvBtLVE0QHMOs8bWyZAFZNDcYjsPq1nEx8jKA9y+Beo9v+7OBPRisQTjinQMw==}
 
   xmlbuilder@11.0.1:
     resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
@@ -13717,6 +13709,8 @@ snapshots:
       table-layout: 4.1.1
       typical: 7.3.0
 
+  commander@13.1.0: {}
+
   commander@14.0.0: {}
 
   commander@14.0.1: {}
@@ -14103,7 +14097,7 @@ snapshots:
   editorconfig@3.0.1:
     dependencies:
       '@one-ini/wasm': 0.2.0
-      commander: 14.0.0
+      commander: 14.0.1
       minimatch: 10.0.1
       semver: 7.7.2
 
@@ -15693,10 +15687,6 @@ snapshots:
       synckit: 0.11.11
     transitivePeerDependencies:
       - supports-color
-
-  jest-sonar-reporter@2.0.0:
-    dependencies:
-      xml: 1.0.1
 
   jest-util@30.0.5:
     dependencies:
@@ -17628,12 +17618,6 @@ snapshots:
       - supports-color
       - typanion
 
-  replace-in-file@8.3.0:
-    dependencies:
-      chalk: 5.6.2
-      glob: 10.4.5
-      yargs: 17.7.2
-
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
@@ -17971,18 +17955,16 @@ snapshots:
       ip-address: 10.0.1
       smart-buffer: 4.2.0
 
-  sonarqube-scanner@4.3.1:
+  sonarqube-scanner@4.3.2:
     dependencies:
       adm-zip: 0.5.16
       axios: 1.12.2
-      commander: 14.0.1
+      commander: 13.1.0
       fs-extra: 11.3.2
       hpagent: 1.2.0
-      jest-sonar-reporter: 2.0.0
       node-forge: 1.3.1
       properties-file: 3.6.1
       proxy-from-env: 1.1.0
-      replace-in-file: 8.3.0
       semver: 7.7.2
       slugify: 1.6.6
       tar-stream: 3.1.7
@@ -19038,8 +19020,6 @@ snapshots:
     dependencies:
       sax: 1.4.1
       xmlbuilder: 11.0.1
-
-  xml@1.0.1: {}
 
   xmlbuilder@11.0.1: {}
 
