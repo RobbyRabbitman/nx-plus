@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  verdaccio: 6.1.6
+  verdaccio: 6.2.0
   '@nx/devkit': 21.5.3
 
 importers:
@@ -38,19 +38,19 @@ importers:
         version: 21.5.3(nx@21.5.3)
       '@nx/eslint':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+        version: 21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@nx/eslint-plugin':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+        version: 21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@nx/js':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+        version: 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@nx/plugin':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(@zkochan/js-yaml@0.0.7)(babel-plugin-macros@3.1.0)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+        version: 21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(@zkochan/js-yaml@0.0.7)(babel-plugin-macros@3.1.0)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@nx/vite':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))(vite@7.1.7(@types/node@22.18.8)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))(vitest@3.2.4)
+        version: 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))(vite@7.1.7(@types/node@22.18.8)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))(vitest@3.2.4)
       '@nx/workspace':
         specifier: 21.5.3
         version: 21.5.3
@@ -160,8 +160,8 @@ importers:
         specifier: 8.45.0
         version: 8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3)
       verdaccio:
-        specifier: 6.1.6
-        version: 6.1.6(encoding@0.1.13)(typanion@3.14.0)
+        specifier: 6.2.0
+        version: 6.2.0(encoding@0.1.13)(typanion@3.14.0)
       vite:
         specifier: 7.1.7
         version: 7.1.7(@types/node@22.18.8)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1)
@@ -365,7 +365,7 @@ importers:
         version: 9.36.0
       '@nx/eslint-plugin':
         specifier: 21.5.3
-        version: 21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+        version: 21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       eslint:
         specifier: 9.36.0
         version: 9.36.0(jiti@2.6.0)
@@ -2046,7 +2046,7 @@ packages:
   '@nx/js@21.5.3':
     resolution: {integrity: sha512-968PG1gNf/ba2JwQNvHkNQBm1jhHCcuknKhSqZvr4tow6IM62z+rwvuLyW/fOMgh2K6Ix61JXUVvbwrKBWyerA==}
     peerDependencies:
-      verdaccio: 6.1.6
+      verdaccio: 6.2.0
     peerDependenciesMeta:
       verdaccio:
         optional: true
@@ -3008,6 +3008,9 @@ packages:
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
+  '@types/responselike@1.0.0':
+    resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
+
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
 
@@ -3214,79 +3217,83 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@verdaccio/auth@8.0.0-next-8.19':
-    resolution: {integrity: sha512-VEWhj9Zs6qY2vzVpwY0uViPGxCPhiVo+g2WTLPNGa8avYz6sC8eiHZOJv3E22TKm/PaeSzclvSbMXiXP1bYuMA==}
+  '@verdaccio/auth@8.0.0-next-8.23':
+    resolution: {integrity: sha512-a2/ZeCxG0TiCZNhhtGI/SCO5+D060eY8UMJDHck+1dt1YtpwJprBDMmuj8L2xFsAMFMTwP6u2JmynvVUst8gjg==}
     engines: {node: '>=18'}
 
-  '@verdaccio/commons-api@10.2.0':
-    resolution: {integrity: sha512-F/YZANu4DmpcEV0jronzI7v2fGVWkQ5Mwi+bVmV+ACJ+EzR0c9Jbhtbe5QyLUuzR97t8R5E/Xe53O0cc2LukdQ==}
-    engines: {node: '>=8'}
-
-  '@verdaccio/config@8.0.0-next-8.19':
-    resolution: {integrity: sha512-08Mizx0f88A11Wxpx8EiK+mju0KroiaIRGZhV5h5+jWEKG3qucwTFNqR+29vRlPaGw1VmCEQ0+Vuaqeh03MlAA==}
+  '@verdaccio/config@8.0.0-next-8.23':
+    resolution: {integrity: sha512-xHoks1T7ZjgVqHddzYt/VHLrOWV5IvzJEGAc7HavsBo4yJ2R+ubt+I3V1ariRuSmIEaZ55FS/9AIWomxlWWyXQ==}
     engines: {node: '>=18'}
 
-  '@verdaccio/core@8.0.0-next-8.19':
-    resolution: {integrity: sha512-d/QzHToby2OTB5f4rw9koC0SidWvCkGPpvcQ/V8qh1ejoMtc/tO9OKe8lwUOxEvw31A2HaIBf0J4cFVIvrU31w==}
+  '@verdaccio/core@8.0.0-next-8.21':
+    resolution: {integrity: sha512-n3Y8cqf84cwXxUUdTTfEJc8fV55PONPKijCt2YaC0jilb5qp1ieB3d4brqTOdCdXuwkmnG2uLCiGpUd/RuSW0Q==}
+    engines: {node: '>=18'}
+
+  '@verdaccio/core@8.0.0-next-8.23':
+    resolution: {integrity: sha512-ySMz9LoRylremqSpe1ryNClExkIwtuqHrIEj82gZWhhaYsaydCPSXNf6ZIUq32S71Zq3I5IKW0UAZRaM5/uCfw==}
     engines: {node: '>=18'}
 
   '@verdaccio/file-locking@10.3.1':
     resolution: {integrity: sha512-oqYLfv3Yg3mAgw9qhASBpjD50osj2AX4IwbkUtyuhhKGyoFU9eZdrbeW6tpnqUnj6yBMtAPm2eGD4BwQuX400g==}
     engines: {node: '>=12'}
 
-  '@verdaccio/file-locking@13.0.0-next-8.4':
-    resolution: {integrity: sha512-LzW8V7O65ZGvBbeK43JfHBjoRch3vopBx/HDnOwpA++XrfDTFt/e9Omk28Gu7wY/4BSunJGHMCIrs2EzYc9IVQ==}
+  '@verdaccio/file-locking@13.0.0-next-8.6':
+    resolution: {integrity: sha512-F6xQWvsZnEyGjugrYfe+D/ChSVudXmBFWi8xuTIX6PAdp7dk9x9biOGQFW8O3GSAK8UhJ6WlRisQKJeYRa6vWQ==}
     engines: {node: '>=18'}
 
-  '@verdaccio/loaders@8.0.0-next-8.9':
-    resolution: {integrity: sha512-y0EIx+jiJGnln7to0ILUsUdAZvpsZTFPF7toJ/VPJlyRZmYYCbNE2j+VK9GLZu8jPZy+H+GdEBF89QdAv6P99A==}
+  '@verdaccio/hooks@8.0.0-next-8.23':
+    resolution: {integrity: sha512-E18AWmjys990s94COG6AmJ2clp+YCYUqx6ZticLMG2hK72BmveSKBDmvaZvl81Jci943gVPPT0j9eapK6JIu8A==}
     engines: {node: '>=18'}
 
-  '@verdaccio/local-storage-legacy@11.0.2':
-    resolution: {integrity: sha512-7AXG7qlcVFmF+Nue2oKaraprGRtaBvrQIOvc/E89+7hAe399V01KnZI6E/ET56u7U9fq0MSlp92HBcdotlpUXg==}
-    engines: {node: '>=12'}
-
-  '@verdaccio/logger-commons@8.0.0-next-8.19':
-    resolution: {integrity: sha512-4Zl5+JyPMC4Kiu9f93uzN9312vg3eh1BeOx0qGGXksJTPSebS+O8HG2530ApjamSkApOHvGs5x3GEsEKza9WOA==}
+  '@verdaccio/loaders@8.0.0-next-8.13':
+    resolution: {integrity: sha512-AXZ+A8WgLjSuRZ3tUlRhpITTWdF7B/mQDPQDZFjSmHKg4WBvOSfb04rE+IzdC49ARFQbLcCs/6uZ/jO4lkm9kA==}
     engines: {node: '>=18'}
 
-  '@verdaccio/logger-prettify@8.0.0-next-8.3':
-    resolution: {integrity: sha512-mehQMpCtUbmW5dHpUwvi6hSYBdEXZjmDzI76hGacYKEKBwJk5aVXmrdYbYVyWtYlmegaxjLRMmA/iebXDEggYA==}
+  '@verdaccio/local-storage-legacy@11.1.1':
+    resolution: {integrity: sha512-P6ahH2W6/KqfJFKP+Eid7P134FHDLNvHa+i8KVgRVBeo2/IXb6FEANpM1mCVNvPANu0LCAmNJBOXweoUKViaoA==}
     engines: {node: '>=18'}
 
-  '@verdaccio/logger@8.0.0-next-8.19':
-    resolution: {integrity: sha512-rCZ4eUYJhCytezVeihYSs5Ct17UJvhCnQ4dAyuO/+JSeKY1Fpxgl+es8F6PU+o6iIVeN5qfFh55llJ2LwZ4gjg==}
+  '@verdaccio/logger-commons@8.0.0-next-8.23':
+    resolution: {integrity: sha512-Ddcy00R7UlKfqQ0X9cZgNE7p7oKUPSCIMyuI2u8kT0ATxwFIYEBU+WXDH+1UzeqiQU2rnHoAGvYqkKGsN3vokA==}
     engines: {node: '>=18'}
 
-  '@verdaccio/middleware@8.0.0-next-8.19':
-    resolution: {integrity: sha512-KpfvMNvztaHK+6YrK3uhu6DbzwkQQnxtmNuesCwTQnMNmunwvMBCuwvNTvi1wip1GrmP8At4r3NSSz9ttPcHEQ==}
+  '@verdaccio/logger-prettify@8.0.0-next-8.4':
+    resolution: {integrity: sha512-gjI/JW29fyalutn/X1PQ0iNuGvzeVWKXRmnLa7gXVKhdi4p37l/j7YZ7n44XVbbiLIKAK0pbavEg9Yr66QrYaA==}
+    engines: {node: '>=18'}
+
+  '@verdaccio/logger@8.0.0-next-8.23':
+    resolution: {integrity: sha512-eWiv//xyWgFjDXmBIoq1cgdNMJZBuEVo9NfRmUN3vnqecFL2m6jIyERC9J9G8Z/t91LQZfOBiEL9nWG0GC3/Rw==}
+    engines: {node: '>=18'}
+
+  '@verdaccio/middleware@8.0.0-next-8.23':
+    resolution: {integrity: sha512-4N+VNaZn3F0tpZdNhljJqL8cjNaN/ver+sXv45pienaMddYquk1oiG657f4fouj6EioZDHc9OLmU44Tuk/GNEQ==}
     engines: {node: '>=18'}
 
   '@verdaccio/search-indexer@8.0.0-next-8.5':
     resolution: {integrity: sha512-0GC2tJKstbPg/W2PZl2yE+hoAxffD2ZWilEnEYSEo2e9UQpNIy2zg7KE/uMUq2P72Vf5EVfVzb8jdaH4KV4QeA==}
     engines: {node: '>=18'}
 
-  '@verdaccio/signature@8.0.0-next-8.11':
-    resolution: {integrity: sha512-mq5ZHB8a7JRMrbLATCZFVSUo0EtnsD9k7OZwEgdYEjzRYx3dQm93lY1smBAfluPfrcTeHRJY4W76Fdy/Or5JmA==}
+  '@verdaccio/signature@8.0.0-next-8.15':
+    resolution: {integrity: sha512-ZfaaptfNRjMqtTxkCJG+8eXcMD28RIRFvJHRd1FQ1vE8oKQ828ReVDezVu1baPh3hgHXXyy1faxG8GKKQZ7RSw==}
     engines: {node: '>=18'}
 
   '@verdaccio/streams@10.2.1':
     resolution: {integrity: sha512-OojIG/f7UYKxC4dYX8x5ax8QhRx1b8OYUAMz82rUottCuzrssX/4nn5QE7Ank0DUSX3C9l/HPthc4d9uKRJqJQ==}
     engines: {node: '>=12', npm: '>=5'}
 
-  '@verdaccio/tarball@13.0.0-next-8.19':
-    resolution: {integrity: sha512-BVdPcZj2EtneRY0HKqQTG02gF4q1YdxUqw+ZbOMdWRRFqNkCG/5PaaNhP/xh3UFk/VpNqmv4/OwyTv68c9186g==}
+  '@verdaccio/tarball@13.0.0-next-8.23':
+    resolution: {integrity: sha512-99pRfhj9yZMIogiMOzaJq4GTISDM2Pd29Zwycevx1pCJnnMmBKqrkgttwAuSOZMSYH+ccTqLWT7qkHUb2FBReA==}
     engines: {node: '>=18'}
 
-  '@verdaccio/ui-theme@8.0.0-next-8.19':
-    resolution: {integrity: sha512-grJ+8wqD+iE9cRHMQ9hYPj/IerW3pDELccoK6CLn1xYC+sunYVpnivkUv5HUmK6G0B64ptoYST1xFSjiiZXNKg==}
+  '@verdaccio/ui-theme@8.0.0-next-8.23':
+    resolution: {integrity: sha512-QJEWMCaYv8u5f50zP98najl8gp5CzaD7GZc4cQtGdRMGKYj/QBoK++qxs28/IiAWBpeKw3l2Wtr82c9jfj8arQ==}
 
-  '@verdaccio/url@13.0.0-next-8.19':
-    resolution: {integrity: sha512-QCtRu6gnE3FWh1CX11VdQfXDoNUYpiZm+767dUKkvo4LfEiKHrpIqq8ZeE37dOC5w9SBJdY1X6ddlIz8p4GTxA==}
+  '@verdaccio/url@13.0.0-next-8.23':
+    resolution: {integrity: sha512-dn6oha8FJZv54FVzDq0BtptrhH6brtntEzLN0IqtcuFstgSwnwUVNsZnZLl9Qg6Sw0jgekrrWMLmnetdgDUi3A==}
     engines: {node: '>=18'}
 
-  '@verdaccio/utils@8.1.0-next-8.19':
-    resolution: {integrity: sha512-mQoe1yUlYR4ujR65xVNAr4and102UNvAjlx6+IYyVPa7h3CZ0w5e8sRjlbYIXXL/qDI4RPVzfJVpquiwPkUCGg==}
+  '@verdaccio/utils@8.1.0-next-8.23':
+    resolution: {integrity: sha512-sgjJVs3BAKL0aW13gGcM1kMf2s0gLQgy2CJLbpta7D0A/CebBEnEEWgv4id2uVlTSw2XDXcEMKPUD4rPzVhKuw==}
     engines: {node: '>=18'}
 
   '@vitest/coverage-v8@3.2.4':
@@ -3606,9 +3613,6 @@ packages:
   async-mutex@0.5.0:
     resolution: {integrity: sha512-1A94B18jkJ3DYq284ohPxoXbfTA5HsQ7/Mf4DEhcyLx3Bz27Rh59iScbB6EPiP+B+joue6YCxcMXSbFC1tZKwA==}
 
-  async@3.2.4:
-    resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
-
   async@3.2.6:
     resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
 
@@ -3896,6 +3900,14 @@ packages:
   cacheable-lookup@5.0.4:
     resolution: {integrity: sha512-2/kNscPhpcxrOigMZzbiWF7dz8ilhb/nIHU3EyZiXWXpeq/au8qJ8VhdftMkty3n7Gj6HIGalQG8oiBNB3AJgA==}
     engines: {node: '>=10.6.0'}
+
+  cacheable-lookup@6.1.0:
+    resolution: {integrity: sha512-KJ/Dmo1lDDhmW2XDPMo+9oiy/CeqosPguPCrgcVzKyZrL6pM1gU2GmPY/xo6OQPTUaA/c0kwHuywB4E6nmT9ww==}
+    engines: {node: '>=10.6.0'}
+
+  cacheable-request@7.0.2:
+    resolution: {integrity: sha512-pouW8/FmiPQbuGpkXQ9BAPv/Mo5xDGANgSNXzTzJ8DrKGuXOssM4wIQRjfanNRh3Yu5cfYPvcorqbhg2KIJtew==}
+    engines: {node: '>=8'}
 
   cacheable-request@7.0.4:
     resolution: {integrity: sha512-v+p6ongsrp0yTGbJXjgxPow2+DL93DASP4kXCDKb8/bwRtt9OEF3whggkkDkGNzgcWy2XaF4a8nZglC7uElscg==}
@@ -4295,15 +4307,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
     engines: {node: '>=6.0'}
@@ -4617,8 +4620,8 @@ packages:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
     engines: {node: '>=6'}
 
-  envinfo@7.14.0:
-    resolution: {integrity: sha512-CO40UI41xDQzhLB1hWyqUKgFhs250pNcGbyGKe1l/e4FSaI/+YE4IMG76GDt0In67WLPACIITC+sOi08x4wIvg==}
+  envinfo@7.15.0:
+    resolution: {integrity: sha512-chR+t7exF6y59kelhXw5I3849nTy7KIRO+ePdLMhCD+JRP/JvmkenDWP7QSFGlsHX+kxGxdDutOPrmj5j1HR6g==}
     engines: {node: '>=4'}
     hasBin: true
 
@@ -4976,6 +4979,9 @@ packages:
   forever-agent@0.6.1:
     resolution: {integrity: sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==}
 
+  form-data-encoder@1.7.2:
+    resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
+
   form-data@2.5.5:
     resolution: {integrity: sha512-jqdObeR2rxZZbPSGL+3VckHMYtu+f9//KXBsVny6JSX/pa38Fy+bGjuG8eW/H6USNQWhLi8Num++cU2yOCNz4A==}
     engines: {node: '>= 0.12'}
@@ -5215,6 +5221,10 @@ packages:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
 
+  got-cjs@12.5.4:
+    resolution: {integrity: sha512-Uas6lAsP8bRCt5WXGMhjFf/qEHTrm4v4qxGR02rLG2kdG9qedctvlkdwXVcDJ7Cs84X+r4dPU7vdwGjCaspXug==}
+    engines: {node: '>=12'}
+
   got@11.8.6:
     resolution: {integrity: sha512-6tfZ91bOr7bOXnK7PRDCGBLa1H4U080YHNaAQ2KsMGlLEzRbk44nsZF2E1IeRc3vtJHPVbKCYgdFbaGO2ljd8g==}
     engines: {node: '>=10.19.0'}
@@ -5331,14 +5341,15 @@ packages:
     resolution: {integrity: sha512-G5akfn7eKbpDN+8nPS/cb57YeA1jLTVxjpCj7tmm3QKPdyDy7T+qSC40e9ptydSWvkwjSXw1VbkpyEm39ukeAg==}
     engines: {node: '>=0.10'}
 
-  http-status-codes@2.2.0:
-    resolution: {integrity: sha512-feERVo9iWxvnejp3SEfm/+oNG517npqL2/PIA8ORjyOZjGC7TwCRQsZylciLS64i6pJ0wRYz3rkXLRwbtFa8Ng==}
-
   http-status-codes@2.3.0:
     resolution: {integrity: sha512-RJ8XvFvpPM/Dmc5SV+dC4y5PCeOhT3x1Hq0NU3rjGeg5a/CqlhZ7uudknPwZFz4aeAXDcbAyaeP7GAo9lvngtA==}
 
   http2-wrapper@1.0.3:
     resolution: {integrity: sha512-V+23sDMr12Wnz7iTcDeJr3O6AIxlnvT/bmaAAAP/Xda35C90p9599p0F1eHR/N1KILWSoWVAiOMFjBBXaXSMxg==}
+    engines: {node: '>=10.19.0'}
+
+  http2-wrapper@2.2.1:
+    resolution: {integrity: sha512-V5nVw1PAOgfI3Lmeaj2Exmeg7fenjhRUgz1lPSezy1CuhPYbgQtbQj4jZfEAEMlaL+vupsvhjqCyjzob0yxsmQ==}
     engines: {node: '>=10.19.0'}
 
   https-proxy-agent@5.0.1:
@@ -6516,9 +6527,6 @@ packages:
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
 
-  ms@2.1.2:
-    resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
-
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
@@ -6960,17 +6968,13 @@ packages:
   pino-std-serializers@7.0.0:
     resolution: {integrity: sha512-e906FRY0+tV27iq4juKzSYPbUj2do2X2JX4EzSca1631EB2QJQUqGbDuERal7LCtOpxl6x3+nvo9NPZcmjkiFA==}
 
-  pino@9.7.0:
-    resolution: {integrity: sha512-vnMCM6xZTb1WDmLvtG2lE/2p+t9hDEIvTWJsu6FejkE62vB7gDhvzrpFR4Cw2to+9JNQxVnkAKVPA1KPB98vWg==}
+  pino@9.9.5:
+    resolution: {integrity: sha512-d1s98p8/4TfYhsJ09r/Azt30aYELRi6NNnZtEbqFw6BoGsdPVf5lKNK3kUwH8BmJJfpTLNuicjUQjaMbd93dVg==}
     hasBin: true
 
   pirates@4.0.7:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
     engines: {node: '>= 6'}
-
-  pkginfo@0.4.1:
-    resolution: {integrity: sha512-8xCNE/aT/EXKenuMDZ+xTVwkT8gsoHN2z/Q29l80u0ppGEXVvsKRzNMbtKhg8LS8k1tJLAHHylf6p4VFmP6XUQ==}
-    engines: {node: '>= 0.4.0'}
 
   portfinder@1.0.38:
     resolution: {integrity: sha512-rEwq/ZHlJIKw++XtLAO8PPuOQA/zaPJOZJ37BVuN97nLpMJeuDVLVGRwbFoBgLudgdTMP2hdRJP++H+8QOA3vg==}
@@ -8194,16 +8198,16 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  verdaccio-audit@13.0.0-next-8.19:
-    resolution: {integrity: sha512-lF/5g4CwfhGzZIySeFYBCWXaBnIRQ02Q27gQ7OSS9KTQ9qnHXHbFrXjEAml2udQSNk6Z9jieNa5TufwgjR3Nyw==}
+  verdaccio-audit@13.0.0-next-8.23:
+    resolution: {integrity: sha512-ptBX/u3adJdsPPVqJnPacvMjTv2AgV26QlMawzHVk1kJwpY8u90cbElL6EIBHXyxyMvIqjA/78a56wAjqxI8Zw==}
     engines: {node: '>=18'}
 
-  verdaccio-htpasswd@13.0.0-next-8.19:
-    resolution: {integrity: sha512-XVkkJJKfXLVXC8E+7CLklnndkagZaFWXhGbYIxFYRJ+0bCff0VgUfmyXpwWJ9ADdOnMSqvUPFwMsx4LAhGxFvg==}
+  verdaccio-htpasswd@13.0.0-next-8.23:
+    resolution: {integrity: sha512-90tWLaqamVLvrfEBmbYhMt5B5ZMQ7uFHvz70uQMw4pYSI1oIYD5qTOG9gGu0lLn9XapRACAfNaMG14kfxcfJMw==}
     engines: {node: '>=18'}
 
-  verdaccio@6.1.6:
-    resolution: {integrity: sha512-zUMMKW0hjtOaLIm1cY9AqA0bMjvuGtKJVolzXQacIW9PHTnTjcsWF2+sbNLBhVrHwo+FJ1DzdNVaTWXOBWZgiQ==}
+  verdaccio@6.2.0:
+    resolution: {integrity: sha512-meBmKwRD1CQU4oGVoAG3NnwldHC1t76rD0cx/fmwzE+R7NZnrUaB+OUvPwPZIvR7dvpdIbxrniO1svQ/IPoIug==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -10988,10 +10992,10 @@ snapshots:
       tslib: 2.8.1
       yargs-parser: 21.1.1
 
-  '@nx/eslint-plugin@21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))':
+  '@nx/eslint-plugin@21.5.3(@babel/traverse@7.28.4)(@typescript-eslint/parser@8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3))(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.0)))(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))':
     dependencies:
       '@nx/devkit': 21.5.3(nx@21.5.3)
-      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.7.3)
       '@typescript-eslint/parser': 8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3)
       '@typescript-eslint/type-utils': 8.45.0(eslint@9.36.0(jiti@2.6.0))(typescript@5.7.3)
@@ -11015,10 +11019,10 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nx/eslint@21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))':
+  '@nx/eslint@21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))':
     dependencies:
       '@nx/devkit': 21.5.3(nx@21.5.3)
-      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       eslint: 9.36.0(jiti@2.6.0)
       semver: 7.7.2
       tslib: 2.8.1
@@ -11034,12 +11038,12 @@ snapshots:
       - supports-color
       - verdaccio
 
-  '@nx/jest@21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(babel-plugin-macros@3.1.0)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))':
+  '@nx/jest@21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(babel-plugin-macros@3.1.0)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))':
     dependencies:
       '@jest/reporters': 30.2.0
       '@jest/test-result': 30.2.0
       '@nx/devkit': 21.5.3(nx@21.5.3)
-      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.7.3)
       identity-obj-proxy: 3.0.0
       jest-config: 30.2.0(@types/node@22.18.8)(babel-plugin-macros@3.1.0)
@@ -11066,7 +11070,7 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nx/js@21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))':
+  '@nx/js@21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/plugin-proposal-decorators': 7.28.0(@babel/core@7.28.4)
@@ -11098,7 +11102,7 @@ snapshots:
       tinyglobby: 0.2.15
       tslib: 2.8.1
     optionalDependencies:
-      verdaccio: 6.1.6(encoding@0.1.13)(typanion@3.14.0)
+      verdaccio: 6.2.0(encoding@0.1.13)(typanion@3.14.0)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@swc-node/register'
@@ -11137,12 +11141,12 @@ snapshots:
   '@nx/nx-win32-x64-msvc@21.5.3':
     optional: true
 
-  '@nx/plugin@21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(@zkochan/js-yaml@0.0.7)(babel-plugin-macros@3.1.0)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))':
+  '@nx/plugin@21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(@zkochan/js-yaml@0.0.7)(babel-plugin-macros@3.1.0)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))':
     dependencies:
       '@nx/devkit': 21.5.3(nx@21.5.3)
-      '@nx/eslint': 21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
-      '@nx/jest': 21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(babel-plugin-macros@3.1.0)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
-      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/eslint': 21.5.3(@babel/traverse@7.28.4)(@zkochan/js-yaml@0.0.7)(eslint@9.36.0(jiti@2.6.0))(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/jest': 21.5.3(@babel/traverse@7.28.4)(@types/node@22.18.8)(babel-plugin-macros@3.1.0)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       tslib: 2.8.1
     transitivePeerDependencies:
       - '@babel/traverse'
@@ -11161,10 +11165,10 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nx/vite@21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))(vite@7.1.7(@types/node@22.18.8)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))(vitest@3.2.4)':
+  '@nx/vite@21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(typescript@5.7.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))(vite@7.1.7(@types/node@22.18.8)(jiti@2.6.0)(tsx@4.20.6)(yaml@2.8.1))(vitest@3.2.4)':
     dependencies:
       '@nx/devkit': 21.5.3(nx@21.5.3)
-      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0))
+      '@nx/js': 21.5.3(@babel/traverse@7.28.4)(nx@21.5.3)(verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0))
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.7.3)
       ajv: 8.17.1
       enquirer: 2.3.6
@@ -12249,6 +12253,10 @@ snapshots:
 
   '@types/resolve@1.20.2': {}
 
+  '@types/responselike@1.0.0':
+    dependencies:
+      '@types/node': 22.18.8
+
   '@types/responselike@1.0.3':
     dependencies:
       '@types/node': 22.18.8
@@ -12457,39 +12465,43 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@verdaccio/auth@8.0.0-next-8.19':
+  '@verdaccio/auth@8.0.0-next-8.23':
     dependencies:
-      '@verdaccio/config': 8.0.0-next-8.19
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/loaders': 8.0.0-next-8.9
-      '@verdaccio/signature': 8.0.0-next-8.11
-      debug: 4.4.1
+      '@verdaccio/config': 8.0.0-next-8.23
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/loaders': 8.0.0-next-8.13
+      '@verdaccio/signature': 8.0.0-next-8.15
+      debug: 4.4.3(supports-color@8.1.1)
       lodash: 4.17.21
-      verdaccio-htpasswd: 13.0.0-next-8.19
+      verdaccio-htpasswd: 13.0.0-next-8.23
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/commons-api@10.2.0':
+  '@verdaccio/config@8.0.0-next-8.23':
     dependencies:
-      http-errors: 2.0.0
-      http-status-codes: 2.2.0
-
-  '@verdaccio/config@8.0.0-next-8.19':
-    dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/core': 8.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       js-yaml: 4.1.0
       lodash: 4.17.21
       minimatch: 7.4.6
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/core@8.0.0-next-8.19':
+  '@verdaccio/core@8.0.0-next-8.21':
     dependencies:
       ajv: 8.17.1
       http-errors: 2.0.0
       http-status-codes: 2.3.0
-      minimatch: 10.0.1
+      minimatch: 7.4.6
+      process-warning: 1.0.0
+      semver: 7.7.2
+
+  '@verdaccio/core@8.0.0-next-8.23':
+    dependencies:
+      ajv: 8.17.1
+      http-errors: 2.0.0
+      http-status-codes: 2.3.0
+      minimatch: 7.4.6
       process-warning: 1.0.0
       semver: 7.7.2
 
@@ -12497,41 +12509,51 @@ snapshots:
     dependencies:
       lockfile: 1.0.4
 
-  '@verdaccio/file-locking@13.0.0-next-8.4':
+  '@verdaccio/file-locking@13.0.0-next-8.6':
     dependencies:
       lockfile: 1.0.4
 
-  '@verdaccio/loaders@8.0.0-next-8.9':
+  '@verdaccio/hooks@8.0.0-next-8.23':
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/logger': 8.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
+      got-cjs: 12.5.4
+      handlebars: 4.7.8
+    transitivePeerDependencies:
+      - supports-color
+
+  '@verdaccio/loaders@8.0.0-next-8.13':
+    dependencies:
+      '@verdaccio/core': 8.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       lodash: 4.17.21
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/local-storage-legacy@11.0.2':
+  '@verdaccio/local-storage-legacy@11.1.1':
     dependencies:
-      '@verdaccio/commons-api': 10.2.0
+      '@verdaccio/core': 8.0.0-next-8.21
       '@verdaccio/file-locking': 10.3.1
       '@verdaccio/streams': 10.2.1
-      async: 3.2.4
-      debug: 4.3.4
+      async: 3.2.6
+      debug: 4.4.1
       lodash: 4.17.21
       lowdb: 1.0.0
       mkdirp: 1.0.4
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/logger-commons@8.0.0-next-8.19':
+  '@verdaccio/logger-commons@8.0.0-next-8.23':
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/logger-prettify': 8.0.0-next-8.3
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/logger-prettify': 8.0.0-next-8.4
       colorette: 2.0.20
-      debug: 4.4.1
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/logger-prettify@8.0.0-next-8.3':
+  '@verdaccio/logger-prettify@8.0.0-next-8.4':
     dependencies:
       colorette: 2.0.20
       dayjs: 1.11.13
@@ -12540,19 +12562,19 @@ snapshots:
       pino-abstract-transport: 1.2.0
       sonic-boom: 3.8.1
 
-  '@verdaccio/logger@8.0.0-next-8.19':
+  '@verdaccio/logger@8.0.0-next-8.23':
     dependencies:
-      '@verdaccio/logger-commons': 8.0.0-next-8.19
-      pino: 9.7.0
+      '@verdaccio/logger-commons': 8.0.0-next-8.23
+      pino: 9.9.5
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/middleware@8.0.0-next-8.19':
+  '@verdaccio/middleware@8.0.0-next-8.23':
     dependencies:
-      '@verdaccio/config': 8.0.0-next-8.19
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/url': 13.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/config': 8.0.0-next-8.23
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/url': 13.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       express: 4.21.2
       express-rate-limit: 5.5.1
       lodash: 4.17.21
@@ -12563,42 +12585,42 @@ snapshots:
 
   '@verdaccio/search-indexer@8.0.0-next-8.5': {}
 
-  '@verdaccio/signature@8.0.0-next-8.11':
+  '@verdaccio/signature@8.0.0-next-8.15':
     dependencies:
-      '@verdaccio/config': 8.0.0-next-8.19
-      '@verdaccio/core': 8.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/config': 8.0.0-next-8.23
+      '@verdaccio/core': 8.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       jsonwebtoken: 9.0.2
     transitivePeerDependencies:
       - supports-color
 
   '@verdaccio/streams@10.2.1': {}
 
-  '@verdaccio/tarball@13.0.0-next-8.19':
+  '@verdaccio/tarball@13.0.0-next-8.23':
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/url': 13.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/url': 13.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       gunzip-maybe: 1.4.2
       tar-stream: 3.1.7
     transitivePeerDependencies:
       - react-native-b4a
       - supports-color
 
-  '@verdaccio/ui-theme@8.0.0-next-8.19': {}
+  '@verdaccio/ui-theme@8.0.0-next-8.23': {}
 
-  '@verdaccio/url@13.0.0-next-8.19':
+  '@verdaccio/url@13.0.0-next-8.23':
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      debug: 4.4.1
+      '@verdaccio/core': 8.0.0-next-8.23
+      debug: 4.4.3(supports-color@8.1.1)
       lodash: 4.17.21
       validator: 13.12.0
     transitivePeerDependencies:
       - supports-color
 
-  '@verdaccio/utils@8.1.0-next-8.19':
+  '@verdaccio/utils@8.1.0-next-8.23':
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
+      '@verdaccio/core': 8.0.0-next-8.23
       lodash: 4.17.21
       minimatch: 7.4.6
 
@@ -13096,8 +13118,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  async@3.2.4: {}
-
   async@3.2.6: {}
 
   asynckit@0.4.0: {}
@@ -13494,6 +13514,18 @@ snapshots:
 
   cacheable-lookup@5.0.4: {}
 
+  cacheable-lookup@6.1.0: {}
+
+  cacheable-request@7.0.2:
+    dependencies:
+      clone-response: 1.0.3
+      get-stream: 5.2.0
+      http-cache-semantics: 4.2.0
+      keyv: 4.5.4
+      lowercase-keys: 2.0.0
+      normalize-url: 6.1.0
+      responselike: 2.0.1
+
   cacheable-request@7.0.4:
     dependencies:
       clone-response: 1.0.3
@@ -13883,10 +13915,6 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
-  debug@4.3.4:
-    dependencies:
-      ms: 2.1.2
-
   debug@4.4.1:
     dependencies:
       ms: 2.1.3
@@ -14151,7 +14179,7 @@ snapshots:
 
   env-paths@2.2.1: {}
 
-  envinfo@7.14.0: {}
+  envinfo@7.15.0: {}
 
   err-code@2.0.3:
     optional: true
@@ -14655,6 +14683,8 @@ snapshots:
 
   forever-agent@0.6.1: {}
 
+  form-data-encoder@1.7.2: {}
+
   form-data@2.5.5:
     dependencies:
       asynckit: 0.4.0
@@ -14963,6 +14993,21 @@ snapshots:
 
   gopd@1.2.0: {}
 
+  got-cjs@12.5.4:
+    dependencies:
+      '@sindresorhus/is': 4.6.0
+      '@szmarczak/http-timer': 4.0.6
+      '@types/responselike': 1.0.0
+      cacheable-lookup: 6.1.0
+      cacheable-request: 7.0.2
+      decompress-response: 6.0.0
+      form-data-encoder: 1.7.2
+      get-stream: 6.0.1
+      http2-wrapper: 2.2.1
+      lowercase-keys: 2.0.0
+      p-cancelable: 2.1.1
+      responselike: 2.0.1
+
   got@11.8.6:
     dependencies:
       '@sindresorhus/is': 4.6.0
@@ -15097,11 +15142,14 @@ snapshots:
       jsprim: 2.0.2
       sshpk: 1.18.0
 
-  http-status-codes@2.2.0: {}
-
   http-status-codes@2.3.0: {}
 
   http2-wrapper@1.0.3:
+    dependencies:
+      quick-lru: 5.1.1
+      resolve-alpn: 1.2.1
+
+  http2-wrapper@2.2.1:
     dependencies:
       quick-lru: 5.1.1
       resolve-alpn: 1.2.1
@@ -16645,8 +16693,6 @@ snapshots:
 
   ms@2.0.0: {}
 
-  ms@2.1.2: {}
-
   ms@2.1.3: {}
 
   multistream@2.1.1:
@@ -17116,7 +17162,7 @@ snapshots:
 
   pino-std-serializers@7.0.0: {}
 
-  pino@9.7.0:
+  pino@9.9.5:
     dependencies:
       atomic-sleep: 1.0.0
       fast-redact: 3.5.0
@@ -17131,8 +17177,6 @@ snapshots:
       thread-stream: 3.1.0
 
   pirates@4.0.7: {}
-
-  pkginfo@0.4.1: {}
 
   portfinder@1.0.38:
     dependencies:
@@ -18673,10 +18717,10 @@ snapshots:
 
   vary@1.1.2: {}
 
-  verdaccio-audit@13.0.0-next-8.19(encoding@0.1.13):
+  verdaccio-audit@13.0.0-next-8.23(encoding@0.1.13):
     dependencies:
-      '@verdaccio/config': 8.0.0-next-8.19
-      '@verdaccio/core': 8.0.0-next-8.19
+      '@verdaccio/config': 8.0.0-next-8.23
+      '@verdaccio/core': 8.0.0-next-8.23
       express: 4.21.2
       https-proxy-agent: 5.0.1
       node-fetch: 2.6.7(encoding@0.1.13)
@@ -18684,52 +18728,50 @@ snapshots:
       - encoding
       - supports-color
 
-  verdaccio-htpasswd@13.0.0-next-8.19:
+  verdaccio-htpasswd@13.0.0-next-8.23:
     dependencies:
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/file-locking': 13.0.0-next-8.4
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/file-locking': 13.0.0-next-8.6
       apache-md5: 1.1.8
       bcryptjs: 2.4.3
-      debug: 4.4.1
+      debug: 4.4.3(supports-color@8.1.1)
       http-errors: 2.0.0
       unix-crypt-td-js: 1.1.4
     transitivePeerDependencies:
       - supports-color
 
-  verdaccio@6.1.6(encoding@0.1.13)(typanion@3.14.0):
+  verdaccio@6.2.0(encoding@0.1.13)(typanion@3.14.0):
     dependencies:
       '@cypress/request': 3.0.9
-      '@verdaccio/auth': 8.0.0-next-8.19
-      '@verdaccio/config': 8.0.0-next-8.19
-      '@verdaccio/core': 8.0.0-next-8.19
-      '@verdaccio/loaders': 8.0.0-next-8.9
-      '@verdaccio/local-storage-legacy': 11.0.2
-      '@verdaccio/logger': 8.0.0-next-8.19
-      '@verdaccio/middleware': 8.0.0-next-8.19
+      '@verdaccio/auth': 8.0.0-next-8.23
+      '@verdaccio/config': 8.0.0-next-8.23
+      '@verdaccio/core': 8.0.0-next-8.23
+      '@verdaccio/hooks': 8.0.0-next-8.23
+      '@verdaccio/loaders': 8.0.0-next-8.13
+      '@verdaccio/local-storage-legacy': 11.1.1
+      '@verdaccio/logger': 8.0.0-next-8.23
+      '@verdaccio/middleware': 8.0.0-next-8.23
       '@verdaccio/search-indexer': 8.0.0-next-8.5
-      '@verdaccio/signature': 8.0.0-next-8.11
+      '@verdaccio/signature': 8.0.0-next-8.15
       '@verdaccio/streams': 10.2.1
-      '@verdaccio/tarball': 13.0.0-next-8.19
-      '@verdaccio/ui-theme': 8.0.0-next-8.19
-      '@verdaccio/url': 13.0.0-next-8.19
-      '@verdaccio/utils': 8.1.0-next-8.19
+      '@verdaccio/tarball': 13.0.0-next-8.23
+      '@verdaccio/ui-theme': 8.0.0-next-8.23
+      '@verdaccio/url': 13.0.0-next-8.23
+      '@verdaccio/utils': 8.1.0-next-8.23
       JSONStream: 1.3.5
       async: 3.2.6
       clipanion: 4.0.0-rc.4(typanion@3.14.0)
       compression: 1.8.1
       cors: 2.8.5
-      debug: 4.4.1
-      envinfo: 7.14.0
+      debug: 4.4.3(supports-color@8.1.1)
+      envinfo: 7.15.0
       express: 4.21.2
-      handlebars: 4.7.8
       lodash: 4.17.21
       lru-cache: 7.18.3
       mime: 3.0.0
-      mkdirp: 1.0.4
-      pkginfo: 0.4.1
       semver: 7.7.2
-      verdaccio-audit: 13.0.0-next-8.19(encoding@0.1.13)
-      verdaccio-htpasswd: 13.0.0-next-8.19
+      verdaccio-audit: 13.0.0-next-8.23(encoding@0.1.13)
+      verdaccio-htpasswd: 13.0.0-next-8.23
     transitivePeerDependencies:
       - encoding
       - react-native-b4a
