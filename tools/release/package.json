@@ -10,7 +10,7 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@nx/devkit": "21.6.3",
-    "yargs": "17.7.2",
+    "yargs": "18.0.0",
     "nx": "21.6.3"
   },
   "devDependencies": {
