@@ -7,8 +7,8 @@
     "postinstall": "sh tools/workspace/src/npm-life-cycle/post-install.sh"
   },
   "devDependencies": {
-    "@azure/identity": "4.10.2",
-    "@azure/storage-blob": "12.27.0",
+    "@azure/identity": "4.13.0",
+    "@azure/storage-blob": "12.29.1",
     "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
     "@commitlint/config-nx-scopes": "20.0.0",
