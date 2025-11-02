@@ -1,11 +1,12 @@
 import {
-  type CreateNodesFunction,
   type CreateNodesV2,
   type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { format, join, parse, relative } from 'path';
+
+type CreateNodesFunction<T> = Parameters<typeof createNodesFromFiles<T>>[0];
 
 type SchemaToTsTargetConfiguration = TargetConfiguration;
 
@@ -32,9 +33,10 @@ export const createNodesV2 = [
 ] satisfies CreateNodesV2<SchemaToTsPluginOptions>;
 
 /** Adds a 'schema to ts' target in the project for each schema file. */
-const createSchemaToTsTarget: CreateNodesFunction<
-  SchemaToTsPluginOptions | undefined
-> = (schemaToTsConfigPath, userOptions) => {
+const createSchemaToTsTarget: CreateNodesFunction<SchemaToTsPluginOptions> = (
+  schemaToTsConfigPath,
+  userOptions,
+) => {
   const options = normalizeSchemaToTsTargetOptions(userOptions);
   const projectRoot = closestProject(schemaToTsConfigPath);
 

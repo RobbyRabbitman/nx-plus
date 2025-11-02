@@ -1,5 +1,4 @@
 import {
-  type CreateNodesFunction,
   type CreateNodesV2,
   type TargetConfiguration,
   createNodesFromFiles,
@@ -9,6 +8,8 @@ import { SonarScanProjectTechnology } from '@robby-rabbitman/nx-plus-tools-sonar
 import sonarScanPackageJson from '@robby-rabbitman/nx-plus-tools-sonar/package.json';
 import { existsSync } from 'fs';
 import { dirname, join } from 'path';
+
+type CreateNodesFunction<T> = Parameters<typeof createNodesFromFiles<T>>[0];
 
 type SonarScanTargetConfiguration = TargetConfiguration;
 
@@ -44,9 +45,10 @@ export const createNodesV2 = [
  * - A custom target name can be provided by setting the `sonarScanTargetName`
  * - The target can be configured by setting the `sonarScanTargetConfiguration`
  */
-const createSonarScanTarget: CreateNodesFunction<
-  SonarScanPluginOptions | undefined
-> = (sonarScanConfigPath, options) => {
+const createSonarScanTarget: CreateNodesFunction<SonarScanPluginOptions> = (
+  sonarScanConfigPath,
+  options,
+) => {
   const projectRoot = dirname(sonarScanConfigPath);
 
   const { sonarScanTargetName, sonarScanTargetConfiguration } =

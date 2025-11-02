@@ -1,9 +1,7 @@
-import {
-  type CreateNodesFunction,
-  type CreateNodesV2,
-  createNodesFromFiles,
-} from '@nx/devkit';
+import { type CreateNodesV2, createNodesFromFiles } from '@nx/devkit';
 import { dirname } from 'path';
+
+type CreateNodesFunction<T> = Parameters<typeof createNodesFromFiles<T>>[0];
 
 /**
  * TODO: remove this plugin when https://github.com/nrwl/nx/issues/9748 is
