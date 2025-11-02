@@ -1,11 +1,12 @@
 import {
-  type CreateNodesFunction,
   type CreateNodesV2,
   type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { basename, dirname, join } from 'path';
+
+type CreateNodesFunction<T> = Parameters<typeof createNodesFromFiles<T>>[0];
 
 /**
  * The glob pattern to match `Web Test Runner` configuration files.
@@ -65,7 +66,7 @@ export const createNodesV2 = [
 ] satisfies CreateNodesV2<WebTestRunnerPluginOptions>;
 
 const createWebTestRunnerTarget: CreateNodesFunction<
-  WebTestRunnerPluginOptions | undefined
+  WebTestRunnerPluginOptions
 > = (webTestRunnerConfigPath, userOptions, context) => {
   const options = normalizeWebTestRunnerOptions(userOptions);
 

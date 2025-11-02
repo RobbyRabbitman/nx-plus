@@ -2,35 +2,24 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-
     ":configMigration",
-
-    "npm:unpublishSafe",
-
+    "security:minimumReleaseAgeNpm",
     ":separateMajorReleases",
     ":combinePatchMinorReleases",
-
     ":automergeMinor",
-
     ":semanticCommits",
     ":semanticCommitTypeAll(chore)",
     ":semanticCommitScopeDisabled",
-
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone",
-
     ":maintainLockFilesWeekly"
   ],
   "printConfig": true,
-
   "labels": ["renovate"],
-
   "onboarding": false,
   "requireConfig": "ignored",
-
   "autoApprove": true,
-
-  "enabledManagers": ["npm"],
+  "enabledManagers": ["npm", "custom.regex"],
   "packageRules": [
     {
       "description": "ignore '@robby-rabbitman/nx-plus-*' packages since we are using the pnpm 'workspace:*' protocol",
@@ -68,9 +57,9 @@
     {
       "description": "https://docs.renovatebot.com/presets-customManagers/#custommanagersgithubactionsversions",
       "customType": "regex",
-      "fileMatch": [
-        "(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$",
-        "(^|/)action\\.ya?ml$"
+      "managerFilePatterns": [
+        "/(^|/)(workflow-templates|\\.(?:github|gitea|forgejo)/(?:workflows|actions))/.+\\.ya?ml$/",
+        "/(^|/)action\\.ya?ml$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"

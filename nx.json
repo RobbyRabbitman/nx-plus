@@ -1,7 +1,9 @@
 {
   "cli": { "packageManager": "pnpm" },
   "release": {
-    "releaseTagPattern": "{version}",
+    "releaseTag": {
+      "pattern": "{version}"
+    },
     "version": {
       "conventionalCommits": true,
       "generatorOptions": {

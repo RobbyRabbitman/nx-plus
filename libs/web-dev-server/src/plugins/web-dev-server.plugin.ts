@@ -1,11 +1,12 @@
 import {
-  type CreateNodesFunction,
   type CreateNodesV2,
   type TargetConfiguration,
   createNodesFromFiles,
 } from '@nx/devkit';
 import { existsSync } from 'fs';
 import { basename, dirname, join } from 'path';
+
+type CreateNodesFunction<T> = Parameters<typeof createNodesFromFiles<T>>[0];
 
 /**
  * The glob pattern to match `Web Dev Server` configuration files.
@@ -61,7 +62,7 @@ export const createNodesV2 = [
 export const DEFAULT_WEB_DEV_SERVER_TARGET_NAME = 'serve';
 
 const createWebDevServerTarget: CreateNodesFunction<
-  WebDevServerPluginOptions | undefined
+  WebDevServerPluginOptions
 > = (webDevServerConfigPath, userOptions, context) => {
   const options = normalizeWebDevServerOptions(userOptions);
 
