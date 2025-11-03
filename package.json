@@ -44,7 +44,7 @@
     "json-schema-to-typescript": "15.0.4",
     "jsonc-eslint-parser": "2.4.1",
     "memfs": "4.50.0",
-    "minimatch": "10.0.3",
+    "minimatch": "10.1.1",
     "mocha": "11.7.4",
     "nx": "22.0.2",
     "prettier": "3.6.2",
