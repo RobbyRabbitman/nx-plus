@@ -1,6 +1,6 @@
 {
   "name": "@robby-rabbitman/nx-plus-nx-http-cache",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "publishConfig": {
     "access": "public"
   },
