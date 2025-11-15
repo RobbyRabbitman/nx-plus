@@ -46,7 +46,7 @@ jobs:
           corepack enable
         env:
           # renovate: datasource=npm depName=corepack
-          NX_PLUS_COREPACK_VERSION: '0.34.3'
+          NX_PLUS_COREPACK_VERSION: '0.34.4'
 
       - uses: actions/setup-node@v4
         with:
