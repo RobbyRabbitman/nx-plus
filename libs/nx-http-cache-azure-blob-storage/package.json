@@ -10,8 +10,8 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "@robby-rabbitman/nx-plus-nx-http-cache": "workspace:*",
-    "@azure/identity": "4.10.2",
-    "@azure/storage-blob": "12.27.0"
+    "@azure/identity": "4.13.0",
+    "@azure/storage-blob": "12.29.1"
   },
   "devDependencies": {
     "@robby-rabbitman/nx-plus-tools-typescript": "workspace:*",
