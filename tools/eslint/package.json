@@ -13,7 +13,7 @@
     "@nx/eslint-plugin": "22.0.2",
     "eslint-config-prettier": "10.1.8",
     "eslint": "9.37.0",
-    "eslint-plugin-n": "17.23.1",
+    "eslint-plugin-n": "17.24.0",
     "jsonc-eslint-parser": "2.4.1",
     "typescript-eslint": "8.46.3",
     "globals": "16.5.0"
