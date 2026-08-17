@@ -9,7 +9,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@commitlint/types": "20.0.0",
+    "@commitlint/types": "21.2.0",
     "@nx/devkit": "22.0.2"
   },
   "devDependencies": {
