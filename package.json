@@ -56,7 +56,7 @@
     "tsx": "4.20.6",
     "typescript": "5.7.3",
     "typescript-eslint": "8.46.3",
-    "verdaccio": "6.2.1",
+    "verdaccio": "6.10.1",
     "vite": "7.2.1",
     "vitest": "3.2.4",
     "vitest-sonar-reporter": "3.0.0",
